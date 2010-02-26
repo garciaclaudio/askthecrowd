@@ -1,0 +1,15 @@
+
+.extended_desc {
+display:none;
+}
+
+
+#new_question_form td {
+padding: 6px;
+background-color:#EEEEEE;
+}
+
+
+#tabs { width:800px; }
+#left-col { float:left; width:300px; }
+#right-col { float:right; width:300px; }

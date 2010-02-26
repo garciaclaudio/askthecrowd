@@ -1,0 +1,10 @@
+{% load i18n %}
+<p>
+{% trans "Select your language" %}:<br/>
+<form action="/" method="get">
+    <select name="cookie_django_language" onChange="submit()">
+          <option value="en" {% if language_en %}selected="selected"{% endif %}>English</option>
+          <option value="es" {% if language_es %}selected="selected"{% endif %}>Español</option>
+    </select>
+</form>
+</p>

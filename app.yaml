@@ -1,0 +1,26 @@
+application: askthecrowd
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /css
+  static_dir: css
+
+- url: /js
+  static_dir: js
+
+- url: /images
+  static_dir: images
+
+- url: /xd_receiver.htm
+  static_files: xd_receiver.htm
+  upload: xd_receiver.htm
+
+- url: /ajax.html
+  script: ajax.py
+
+- url: /.*
+  script: canvas.py
+
+

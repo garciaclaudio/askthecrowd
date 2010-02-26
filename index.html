@@ -1,0 +1,171 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> 
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>jQuery UI Example Page</title>
+
+                <link type="text/css" href="css/main.css" rel="stylesheet" />
+
+		<link type="text/css" href="css/smoothness/jquery-ui-1.7.2.custom.css" rel="stylesheet" />	
+
+		<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
+                <script type="text/javascript" src="js/jquery.form.js"></script>
+
+<!-- Load IxEdit ( You can delete these two lines after deploying. ) -->
+<!-- <script type="text/javascript" src="js/ixedit/ixedit.packed.js"></script> -->
+<!-- <link type="text/css" href="js/ixedit/ixedit.css" rel="stylesheet" /> -->
+
+		<script type="text/javascript">
+
+//var 
+//myCars[0]="Saab";    
+
+$(function(){
+
+    // Tabs
+
+    $('#tabs').tabs( { disabled: [1, 2, 3, 4] } );
+
+    // bind question form and provide a simple callback function 
+    $('#new_question').ajaxForm({
+         dataType:  'json', 
+         success: function(data) { 
+             if( data.error ) {
+                 alert( data.error );
+             } else {
+                 alert( "no errors in form submission, refresh ongoing questions, etc..." );
+             }
+         }
+    }); 
+
+    $('#start_here_link').click(function() { // bind click event to link
+        $('#tabs').tabs('select', 1); // switch to second tab
+        return false;
+    });
+
+    $(".datepicker").datepicker({ minDate:0 });
+
+
+// XXX
+//$('#tabs').tabs('select', 1); // switch to second tab
+
+			});
+
+
+		</script>
+		<style type="text/css">
+			/*demo page css*/
+			body{ font: 62.5% "Trebuchet MS", sans-serif; margin: 50px;}
+			.demoHeaders { margin-top: 2em; }
+			#dialog_link {padding: .4em 1em .4em 20px;text-decoration: none;position: relative;}
+			#dialog_link span.ui-icon {margin: 0 5px 0 0;position: absolute;left: .2em;top: 50%;margin-top: -8px;}
+			ul#icons {margin: 0; padding: 0;}
+			ul#icons li {margin: 2px; position: relative; padding: 4px 0; cursor: pointer; float: left;  list-style: none;}
+			ul#icons span.ui-icon {float: left; margin: 0 4px;}
+		</style>	
+	</head>
+	<body>
+
+            <script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+
+		<!-- Tabs -->
+		<div id="tabs">
+			<ul>
+				<li><a href="#tabs-1">Welcome</a></li>
+				<li><a href="#tabs-2">New Question</a></li>
+				<li><a href="#tabs-3">Ongoing Questions</a></li>
+				<li><a href="#tabs-4">Completed Questions</a></li>
+				<li><a href="#tabs-5">Settings</a></li>
+			</ul>
+
+			<div id="tabs-1">
+
+<div id="right-col">
+
+{% include "lang_selector.html" %}
+
+</div>
+<div id="left-col">
+    <h1>{% trans "Ask the Crowd" %}</h1>
+    <p>{% trans "Ask a question, invite your friends to provide and discuss their answers, and vote for the best!" %}</p>
+
+<p>
+
+<div id="user"> 
+
+<p>Please click on the button below to login with your facebook account (if you don't have one, you will be asked to create one):</p>
+
+      <fb:login-button onlogin="update_user_box()"></fb:login-button> 
+</div>
+
+
+
+</p>
+
+</div>    <!-- left-col div here -->
+
+
+                        </div>
+
+			<div
+
+class="ui-tabs-panel ui-widget-content ui-corner-bottom clearfix"
+
+ id="tabs-2">{{new_question_html}}</div>
+			<div id="tabs-3">Only show when there is an ongoing question.</div>
+			<div id="tabs-4">Only show when there is an past question.</div>
+			<div id="tabs-5"><h1>Settings</h1></div>
+		</div>
+
+<script type="text/javascript"> 
+
+function update_user_box( fbuid ) { 
+
+    var user_box = document.getElementById("user"); 
+
+    // add in some XFBML. note that we set useyou=false so it doesn't display "you"
+
+    user_box.innerHTML = "<p>"
+        + "<fb:profile-pic uid='loggedinuser' facebook-logo='true'></fb:profile-pic>"
+        + "Welcome, <fb:name uid='loggedinuser' useyou='false'></fb:name>. You are signed in with your Facebook account."
+        + "</p>"
+        + "<p><a href='start_here' id='start_here_link'>Create a new question</a></p>";
+
+    $('#tabs').tabs( { enabled: [1, 2, 3, 4] } );
+    // because this is XFBML, we need to tell Facebook to re-process the document
+
+
+    // load the user's ongoing, completed and Settings tabs
+    $.getJSON("ajax.html?action=init_tabs;fbuid=" + fbuid,
+        function(data){
+
+            $('#tabs-3').html( data.ongoing_html );
+        }
+    );
+				
+
+
+// ENABLE BACK WHEN DEPLOYING...
+//    FB.XFBML.Host.parseDomTree(); 
+
+
+// NOTE: I'm working on separating default from extended view, with a 
+// clear explanation of what the default options are
+
+    //... HERE I AM
+
+
+}
+
+</script> 
+
+    <script type="text/javascript">  FB_RequireFeatures(["XFBML"], function(){ FB.Facebook.init("bd0a060ac2cb439c65254a9152344289", "xd_receiver.htm", {"ifUserConnected" : update_user_box});});
+
+update_user_box(12345);
+ </script> 
+
+	</body>
+</html>
+
+
