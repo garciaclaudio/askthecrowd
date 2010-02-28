@@ -4,6 +4,16 @@ import simplejson as json
 #import re
 import time
 
+import gminifb
+
+
+_FbApiKey = "bd0a060ac2cb439c65254a9152344289"
+_FbSecret = gminifb.FacebookSecret("d1e7cf7973bfd6cba048adeb8b811dc9")
+
+_canvas_url = "http://apps.facebook.com/askthecrowd"
+_app_name = "Ask the Crowd"
+
+
 class MainPage(webapp.RequestHandler):
 
     def handle_new_question( self ):
@@ -34,8 +44,8 @@ class MainPage(webapp.RequestHandler):
         if( len( participant_emails ) > 10 ):
             error = error + ' * ' + _("Participant email addresses must be 10 or less.")
 
-        import sys
-        print >> sys.stderr, 'LEN: ' + str( len( participant_emails ) )
+#        import sys
+#        print >> sys.stderr, 'LEN: ' + str( len( participant_emails ) )
 
         extended_desc = self.request.get('extended_desc')
         closing_date = self.request.get('closing_date')
@@ -48,7 +58,6 @@ class MainPage(webapp.RequestHandler):
         public_view = self.request.get('public_view')
         public_participation = self.request.get('public_participation')
 
-
         if error:
             result = json.dumps( { 'error' : error } )
         else:
@@ -56,9 +65,23 @@ class MainPage(webapp.RequestHandler):
             result = json.dumps( { 'error' : 0 } )
 
             question = mystorage.Question();
-            question.question_text = question_text
 
-            question.put()
+#            question.owner = ???
+
+            question.question_text = question_text
+            question.ideas_last_date = ideas_last_date
+            question.extended_desc = extended_desc
+            question.closing_date = closing_date
+            question.voting_from_beginning = voting_from_beginning
+            question.show_who_votes_for_what = show_who_votes_for_what
+            question.use_aliases = use_aliases
+            question.reveal_alias_identities = reveal_alias_identities
+            question.question_prize = question_prize
+            question.users_can_invite_others = users_can_invite_others
+            question.public_view = public_view
+            question.public_participation = public_participation
+# XXX, enable
+#            question.put()
 
         return result
 
@@ -78,9 +101,17 @@ class MainPage(webapp.RequestHandler):
 
         fbuid = self.request.get('fbuid')
 
+# XXX: I AM HERE! (what's in the request???, why is validate failing???)
+
+        arguments = gminifb.validate(_FbSecret, self.request)
+        session_key = arguments["session_key"]
+        uid = arguments["user"]
+
         self.response.headers['Content-Type'] = 'text/plain'
 
-        seri = json.dumps( { 'ongoing_html' : 'ongoing html', 'completed_html' : 'completed html', 'settings_html' : 'settings html' } )
+        fooXXX = 'session: ' + session_key + ' uid: ' + uid
+        
+        seri = json.dumps( { 'ongoing_html' : 'ongoing ' + fooXXX, 'completed_html' : 'completed html', 'settings_html' : 'settings html' } )
 
         self.response.out.write(seri)
 

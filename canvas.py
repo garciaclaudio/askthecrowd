@@ -43,41 +43,45 @@ class MainPage(I18NRequestHandler):
         self.request.COOKIES['django_language'] = cookie_django_language
       self.reset_language()
 
-
+#
+# XXX: remove for deploying
+#
 #    arguments = gminifb.validate(_FbSecret, self.request)
 #
-#    usersInfo = gminifb.call("facebook.users.getInfo",
-#              _FbApiKey, _FbSecret, session_key=arguments["session_key"],
-#              call_id=True, fields="name,pic_square",
-#              uids=arguments["user"]) # uids can be comma separated list
+#    session_key = arguments["session_key"]
+#    uid = arguments["user"]
 #
+#    usersInfo = gminifb.call("facebook.users.getInfo",
+#              _FbApiKey, _FbSecret, session_key=session_key,
+#              call_id=True, fields="name,pic_square",
+#              uids=uid) # uids can be comma separated list
 
-    arguments = {
-      'user' : 518261219,
-      'added': 1,
-      'name' : "Claudio Garcia",
-      }
+##    arguments = {
+##      'user' : 518261219,
+##      'added': 1,
+##      'name' : "Claudio Garcia",
+##      }
 
-    # is user already in our DB?
-    user_query = mystorage.User.gql('where fb_id = :1', arguments["user"] );
+#    # is user already in our DB?
+#    user_query = mystorage.User.gql('where fb_id = :1', arguments["user"] );
+#
+#    user = user_query.get()
+#
+#    if user:
+#      print >> sys.stderr, "User there"
+#    else:
+#      print >> sys.stderr, "User not there, creating..."
+#      user = mystorage.User();
+#      user.fb_id = arguments["user"]
+#      user.added_app = arguments["added"]
+#      #XXX, we may not want to store the name, because every time
+#      #it comes with the FB data
+#      user.name = arguments["name"]
+#      user.put()
 
-    user = user_query.get()
-
-    if user:
-      print >> sys.stderr, "User there"
-    else:
-      print >> sys.stderr, "User not there, creating..."
-      user = mystorage.User();
-      user.fb_id = arguments["user"]
-      user.added_app = arguments["added"]
-      #XXX, we may not want to store the name, because every time
-      #it comes with the FB data
-      user.name = arguments["name"]
-      user.put()
-
-    print >> sys.stderr, user
-    print >> sys.stderr, "SYS PATH\n"
-    print >> sys.stderr, sys.path
+##    print >> sys.stderr, user
+##    print >> sys.stderr, "SYS PATH\n"
+##    print >> sys.stderr, sys.path
 
     try:
       selected_lang = self.request.COOKIES['django_language']
@@ -85,8 +89,9 @@ class MainPage(I18NRequestHandler):
       selected_lang = "en"
       
     template_values = {
-      #      'user_name': usersInfo[0]["name"],
-      'user_name': 'Claudio Garcia',
+      # XXX: remove before deploying
+#      'user_name': usersInfo[0]["name"],
+#      'user_name': 'Claudio Garcia',
 
       'language_' + selected_lang : 1
 
@@ -99,22 +104,6 @@ class MainPage(I18NRequestHandler):
     
     path = os.path.join(os.path.dirname(__file__), 'index.html')
     self.response.out.write(template.render(path, template_values))
-
-#
-#    name = usersInfo[0]["name"]
-#    photo = usersInfo[0]["pic_square"]
-#    else:
-#        session_key = 
-#        uid = arguments["user"]
-#
-#    self.response.headers['Content-Type'] = 'text/plain'
-#    self.response.out.write("Hello, webapp World!\n")
-#    self.response.out.write("REQUEST:\n")
-#    self.response.out.write(self.request)
-#    self.response.out.write("\nAND arguments:\n")
-#    self.response.out.write(arguments)
-#    self.response.out.write("\nAND usersInfo:\n")
-#    self.response.out.write(usersInfo)
 
 
 application = webapp.WSGIApplication(

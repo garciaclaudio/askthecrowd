@@ -15,10 +15,10 @@ class MainPage(webapp.RequestHandler):
 
     arguments = gminifb.validate(_FbSecret, self.request)
 
-    usersInfo = gminifb.call("facebook.users.getInfo",
-              _FbApiKey, _FbSecret, session_key=arguments["session_key"],
-              call_id=True, fields="name,pic_square",
-              uids=arguments["user"]) # uids can be comma separated list
+#    usersInfo = gminifb.call("facebook.users.getInfo",
+#              _FbApiKey, _FbSecret, session_key=arguments["session_key"],
+#              call_id=True, fields="name,pic_square",
+#              uids=arguments["user"]) # uids can be comma separated list
 
 #    name = usersInfo[0]["name"]
 #    photo = usersInfo[0]["pic_square"]
@@ -32,8 +32,8 @@ class MainPage(webapp.RequestHandler):
     self.response.out.write(self.request)
     self.response.out.write("\nAND arguments:\n")
     self.response.out.write(arguments)
-    self.response.out.write("\nAND usersInfo:\n")
-    self.response.out.write(usersInfo)
+#    self.response.out.write("\nAND usersInfo:\n")
+#    self.response.out.write(usersInfo)
 
 
 application = webapp.WSGIApplication(

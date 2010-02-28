@@ -21,7 +21,6 @@
 $(function(){
 
     // Tabs
-
     $('#tabs').tabs( { disabled: [1, 2, 3, 4] } );
 
     // bind question form and provide a simple callback function 
@@ -37,7 +36,8 @@ $(function(){
     }); 
 
     $('#start_here_link').click(function() { // bind click event to link
-        $('#tabs').tabs('select', 1); // switch to second tab
+        $('#tabs').tabs('select', 1);
+alert("switching?");
         return false;
     });
 
@@ -45,7 +45,7 @@ $(function(){
 
 
 // XXX
-$('#tabs').tabs('select', 1); // temporarily switch to second tab
+//$('#tabs').tabs('select', 1); // temporarily switch to second tab
 
 			});
 
@@ -117,6 +117,9 @@ class="ui-tabs-panel ui-widget-content ui-corner-bottom clearfix"
 
 <script type="text/javascript"> 
 
+//
+// runs when the user logs in
+//
 function update_user_box( fbuid ) { 
 
     var user_box = document.getElementById("user"); 
@@ -129,9 +132,12 @@ function update_user_box( fbuid ) {
         + "</p>"
         + "<p><a href='start_here' id='start_here_link'>Create a new question</a></p>";
 
-    $('#tabs').tabs( { enabled: [1, 2, 3, 4] } );
-    // because this is XFBML, we need to tell Facebook to re-process the document
 
+    // because this is XFBML, we need to tell Facebook to re-process the document
+    //XXX ENABLE BACK WHEN DEPLOYING...
+    FB.XFBML.Host.parseDomTree();
+
+    $('#tabs').tabs('option', 'disabled', []);
 
     // load the user's ongoing, completed and Settings tabs
     $.getJSON("ajax.html?action=init_tabs;fbuid=" + fbuid,
@@ -142,24 +148,15 @@ function update_user_box( fbuid ) {
     );
 				
 
-
-// ENABLE BACK WHEN DEPLOYING...
-//    FB.XFBML.Host.parseDomTree(); 
-
-
-// NOTE: I'm working on separating default from extended view, with a 
-// clear explanation of what the default options are
-
-    //... HERE I AM
-
-
 }
 
 </script> 
 
     <script type="text/javascript">  FB_RequireFeatures(["XFBML"], function(){ FB.Facebook.init("bd0a060ac2cb439c65254a9152344289", "xd_receiver.htm", {"ifUserConnected" : update_user_box});});
 
-update_user_box(12345);
+// XXX this is called automatically, remove before deploying
+// update_user_box(12345);
+
  </script> 
 
 	</body>

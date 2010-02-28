@@ -241,12 +241,8 @@ class FacebookSecret(object):
         a string.
         """
     def __init__(self, value):
-        print >> sys.stderr, "HELLO 1\n"
-
         #b = buffer(value)
         b = value
-
-        print >> sys.stderr, "HELLO 2\n"
         del value
         self.__call__ = lambda: str(b)
         # Odd to mask this as a builtin. It doesn't fool vars(), but
