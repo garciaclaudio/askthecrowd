@@ -4,11 +4,13 @@ import simplejson as json
 #import re
 import time
 
-import gminifb
+import facebook
+import mystorage
 
 
 _FbApiKey = "bd0a060ac2cb439c65254a9152344289"
-_FbSecret = gminifb.FacebookSecret("d1e7cf7973bfd6cba048adeb8b811dc9")
+
+_FbSecret = "d1e7cf7973bfd6cba048adeb8b811dc9"
 
 _canvas_url = "http://apps.facebook.com/askthecrowd"
 _app_name = "Ask the Crowd"
@@ -98,22 +100,60 @@ class MainPage(webapp.RequestHandler):
     def get(self):
 
         action = self.request.get('action')
-
         fbuid = self.request.get('fbuid')
+
+        if action == "init_tabs":
+
+            ongoing_html = ' REPLACE '
+            completed_html = ' REPLACE '
+            settings_html = ' REPLACE '
+            error_msg = ''
+            debug_msg = ''
+            
+            fbapi = facebook.Facebook( _FbApiKey, _FbSecret ) 
+
+            if fbapi.check_connect_session(self.request):
+
+                user_info = fbapi.users.getInfo( 
+                    [fbapi.uid], 
+                    ['uid', 'name', 'birthday'])[0]
+
+                fooXXX = 'req: ' + str(self.request) + '---------VALID' + 'name' + user_info['name'] + 'birthday' + user_info['birthday'] + 'uid' + str(user_info['uid'])
+
+                # look up user
+                user_query = mystorage.User.gql('where fb_id = :1', user_info["uid"] );
+                user = user_query.get()
+
+                if user:
+                    debug_msg = 'User is there already, deleting to test adding...'
+                    user.delete()
+                    
+                else:
+                    user = mystorage.User();
+                    user.fb_id = user_info["uid"]
+                    #XXX, we may not want to store the name, because every time
+                    #it comes with the FB data
+                    user.name = user_info["name"]
+                    user.put()
+
+                    debug_msg = 'User was not there, added...'
+
+            else:
+                # this should not happen, but if it does, we should warn the user
+                fooXXX = 'req: ' + str(self.request) + '---------INVALID!!!!'
+                error_msg = _("Could not recognize you as a facebook user, please report problem")
 
 # XXX: I AM HERE! (what's in the request???, why is validate failing???)
 
-        arguments = gminifb.validate(_FbSecret, self.request)
-        session_key = arguments["session_key"]
-        uid = arguments["user"]
+#        arguments = gminifb.validate(_FbSecret, self.request)
+#        session_key = arguments["session_key"]
+#        uid = arguments["user"]
 
-        self.response.headers['Content-Type'] = 'text/plain'
+            self.response.headers['Content-Type'] = 'text/plain'
 
-        fooXXX = 'session: ' + session_key + ' uid: ' + uid
-        
-        seri = json.dumps( { 'ongoing_html' : 'ongoing ' + fooXXX, 'completed_html' : 'completed html', 'settings_html' : 'settings html' } )
+            seri = json.dumps( { 'ongoing_html' : ongoing_html + fooXXX, 'completed_html' : completed_html, 'settings_html' : settings_html, 'error_msg' : error_msg, 'debug_msg' : debug_msg } )
 
-        self.response.out.write(seri)
+            self.response.out.write(seri)
 
 
 

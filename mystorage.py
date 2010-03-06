@@ -4,7 +4,6 @@ class User(db.Model):
     fb_id = db.IntegerProperty()
     created = db.DateTimeProperty(auto_now=True)
     email_notifs = db.BooleanProperty
-    fb_added = db.BooleanProperty
     name = db.StringProperty
     email = db.EmailProperty
 

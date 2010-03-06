@@ -64,7 +64,6 @@ class MainPage(I18NRequestHandler):
 
 #    # is user already in our DB?
 #    user_query = mystorage.User.gql('where fb_id = :1', arguments["user"] );
-#
 #    user = user_query.get()
 #
 #    if user:

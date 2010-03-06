@@ -137,13 +137,28 @@ function update_user_box( fbuid ) {
     //XXX ENABLE BACK WHEN DEPLOYING...
     FB.XFBML.Host.parseDomTree();
 
-    $('#tabs').tabs('option', 'disabled', []);
-
     // load the user's ongoing, completed and Settings tabs
     $.getJSON("ajax.html?action=init_tabs;fbuid=" + fbuid,
         function(data){
 
-            $('#tabs-3').html( data.ongoing_html );
+            if( data.debug_msg ) {
+
+                alert( data.debug_msg );
+            }
+
+            if( data.error_msg ) {
+
+                alert( data.error_msg );
+
+            } else {
+
+                // enable tabs
+
+                $('#tabs').tabs('option', 'disabled', []);
+
+                // load tabs
+                $('#tabs-3').html( data.ongoing_html );
+            }
         }
     );
 				
