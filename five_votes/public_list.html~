@@ -1,0 +1,450 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> 
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>{% trans "Open Letter To..." %}</title>
+
+                <link type="text/css" href="css/main.css" rel="stylesheet" />
+
+		<link type="text/css" href="css/flick/jquery-ui-1.7.2.custom.css" rel="stylesheet" />	
+
+		<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
+                <script type="text/javascript" src="js/jquery.form.js"></script>
+
+                <script type="text/javascript" src="js/main.js"></script>
+
+                <link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection" />
+                <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print" />
+
+                <!-- Import fancy-type plugin. -->
+                <link rel="stylesheet" href="css/blueprint/plugins/fancy-type/screen.css" type="text/css" media="screen, projection" />
+
+
+                <!--[if IE]><link rel="stylesheet" href="blueprint/ie.css" type="text/css" media="screen, projection" /><![endif]-->
+
+
+
+<!-- Load IxEdit ( You can delete these two lines after deploying. ) -->
+<!-- <script type="text/javascript" src="js/ixedit/ixedit.packed.js"></script> -->
+<!-- <link type="text/css" href="js/ixedit/ixedit.css" rel="stylesheet" /> -->
+
+
+<script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+function showLoading() {
+  $("#loading").show();
+}
+
+function hideLoading() {
+  $("#loading").hide();
+}
+
+function delete_sig(sig_key) {
+
+//    alert( 'deleting ' + sig_key );
+
+//                 $('#' + sig_key).hide();
+
+    // load any existing letters
+    $.getJSON("ajax.html?action=del_sig;sig_key=" + sig_key,
+
+       function(data) {
+
+            if( data.sig_deleted == 1 ) {
+
+                 $('#' + sig_key).hide();
+
+            } else {
+
+                 alert( '{% trans "cannot delete signature" %}' );
+            }
+
+            //XXXDEPLOY ENABLE WHEN DEPLOYING (ONLY IF FB TAGS ARE ADDED TO DOC)
+//            FB.XFBML.Host.parseDomTree();
+       }
+    );
+
+    return false;
+
+}
+
+function show_manage_sigs_dialog( letter_key ) {
+
+    // load any existing letters
+    $.getJSON("ajax.html?action=manage_sigs_html;letter_key=" + letter_key,
+
+       function(data){
+
+            if( data.no_signers_yet == 1 ) {
+
+                 alert( "{% trans "Letter has no signers, try again when signers are present." %}" );
+
+            } else if( data.manage_sigs_html != "" ) {
+
+                $('#manage_sigs_div').html( data.manage_sigs_html );
+
+
+                $("#manage_sigs_div").dialog({
+			autoOpen: false,
+			height: ( $(window).height() - 20 ),
+			width: 700,
+			modal: true,
+                        title: "{% trans "Manage signatures" %}",
+                      });
+
+                $("#manage_sigs_div").dialog( 'open' );
+
+            } else {
+
+                 alert( "{% trans "cannot load signers" %}" );
+            }
+
+            //XXXDEPLOY ENABLE WHEN DEPLOYING (ONLY IF FB TAGS ARE ADDED TO DOC)
+//            FB.XFBML.Host.parseDomTree();
+       }
+    );
+
+    return false;
+}
+
+
+
+function show_edit_dialog( letter_key ) {
+
+    // load any existing letters
+    $.getJSON("ajax.html?action=edit_letter_html;letter_key=" + letter_key,
+
+       function(data){
+
+            if( data.error ) {
+
+               alert( data.error );
+            } else if( data.edit_letter_html != "" ) {
+
+                $('#edit_letter_div').html( data.edit_letter_html );
+
+
+                $('#edit_letter_form').ajaxForm({
+                    dataType:  'json', 
+                    success: function(data) { 
+                        if( data.error ) {
+                           alert( data.error );
+                        } else {
+
+                            $("#edit_letter_div").dialog('close');
+
+                            $('#existing_letters_section').html( data.user_letters );
+
+                        }
+                    }
+                } );
+
+
+                $("#edit_letter_div").dialog({
+			autoOpen: false,
+			height: ( $(window).height() - 20 ),
+			width: 700,
+			modal: true,
+                        title: "{% trans "Edit letter" %}",
+                      });
+
+                $("#edit_letter_div").dialog( 'open' );
+
+            } else {
+
+                 alert( " cannot load letter " );
+            }
+
+            //XXXDEPLOY ENABLE WHEN DEPLOYING (ONLY IF FB TAGS ARE ADDED TO DOC)
+//            FB.XFBML.Host.parseDomTree();
+       }
+    );
+
+    return false;
+}
+
+
+
+
+function show_letter_trans_dialog( letter_key, action ) {
+
+    // load any existing letters
+    $.getJSON("ajax.html?action=" + action + ";letter_key=" + letter_key,
+
+       function(data){
+
+            if( data.error ) {
+
+               alert( data.error );
+
+            } else if( data.letter_trans_html != "" ) {
+
+                $('#letter_trans_div').html( data.letter_trans_html );
+
+                $('#letter_trans_form').ajaxForm({
+                    dataType:  'json', 
+                    success: function(data) { 
+                        if( data.error ) {
+                           alert( data.error );
+                        } else {
+
+                            $("#letter_trans_div").dialog('close');
+
+                            $('#existing_letters_section').html( data.user_letters );
+                        }
+                    }
+                } );
+
+                dialog_title = "{% trans "Edit translation" %}";
+                if( action == "add_trans" ) {
+                    dialog_title = "{% trans "Create translation" %}";
+                }
+
+                $("#letter_trans_div").dialog({
+			autoOpen: false,
+			height: ( $(window).height() - 20 ),
+			width: 700,
+			modal: true,
+                        title: dialog_title,
+                      });
+
+                $("#letter_trans_div").dialog( 'open' );
+
+            } else {
+
+                 alert( " cannot load letter " );
+            }
+
+            //XXXDEPLOY ENABLE WHEN DEPLOYING (ONLY IF FB TAGS ARE ADDED TO DOC)
+//            FB.XFBML.Host.parseDomTree();
+       }
+    );
+
+    return false;
+}
+
+
+
+
+
+function show_del_dialog( letter_key ) {
+    // load any existing letters
+    $.getJSON("ajax.html?action=del_letter_data;letter_key=" + letter_key,
+       function(data){
+            if( data.title != "" ) {
+                $('#del_letter_key').val(letter_key);
+                $('#del_letter_title').html(data.title);
+                $('#del_letter_num_signers').html(data.num_signers);
+
+                $('#del_letter_form').ajaxForm({
+                    dataType:  'json', 
+                    success: function(data) { 
+                        if( data.error ) {
+                           alert( data.error );
+                        } else {
+
+                            $('#existing_letters_section').html( data.user_letters );
+
+                            $("#del_letter_div").dialog('close');
+                        }
+                    }
+                } );
+
+                $("#del_letter_div").dialog({
+			autoOpen: false,
+			height: 400,
+			width: 400,
+			modal: true,
+                        title: "{% trans "Delete letter" %}",
+                      });
+                $("#del_letter_div").dialog( 'open' );
+            } else {
+                 alert( " cannot load letter " );
+            }
+            //XXXDEPLOY ENABLE WHEN DEPLOYING (ONLY IF FB TAGS ARE ADDED TO DOC)
+//            FB.XFBML.Host.parseDomTree();
+       }
+    );
+
+    return false;
+}
+
+
+
+function show_del_trans_dialog( letter_key, trans_lang ) {
+
+    // load any existing letters
+    $.getJSON("ajax.html?action=del_trans_data;letter_key=" + letter_key + ';lang=' + trans_lang,
+       function(data){
+            if( data.title != "" ) {
+                $('#del_trans_letter_key').val(letter_key);
+                $('#del_trans_lang').val( trans_lang );
+                $('#del_trans_title').html(data.title);
+                $('#del_trans_num_signers').html(data.num_signers);
+
+                $('#del_trans_form').ajaxForm({
+                    dataType:  'json', 
+                    success: function(data) { 
+                        if( data.error ) {
+                           alert( data.error );
+                        } else {
+
+                            $('#existing_letters_section').html( data.user_letters );
+
+                            $("#del_trans_div").dialog('close');
+                        }
+                    }
+                } );
+
+                $("#del_trans_div").dialog({
+			autoOpen: false,
+			height: 400,
+			width: 400,
+			modal: true,
+                        title: "{% trans "Delete letter translation" %}",
+                      });
+                $("#del_trans_div").dialog( 'open' );
+            } else {
+                 alert( " cannot load translation " );
+            }
+            //XXXDEPLOY ENABLE WHEN DEPLOYING (ONLY IF FB TAGS ARE ADDED TO DOC)
+//            FB.XFBML.Host.parseDomTree();
+       }
+    );
+
+    return false;
+}
+
+
+
+
+$(function(){
+
+    $("#loading").centerInClient(); 
+
+    $("#loading").ajaxStart(function(){
+         $(this).show();
+      }).ajaxStop(function(){
+         $(this).hide();
+    });
+
+    $('#create_letter_link').click(function() { // bind click event to link
+
+        $("#create_letter_div").dialog('open');
+
+        return false;
+    });
+
+
+$("#create_letter_div").dialog({
+			autoOpen: false,
+			height: ( $(window).height() - 20 ),
+			width: 700,
+			modal: true,
+                        title: "{% trans "Create new letter" %}",
+                      });
+
+
+$("#letter_created_div").dialog({
+			autoOpen: false,
+			height: ( $(window).height() - 20 ),
+			width: 700,
+			modal: true,
+                        title: "{% trans "Letter created" %}",
+                      });
+
+
+});
+
+
+</script>
+
+
+</head>
+
+<body>
+
+
+{% load i18n %}
+
+<div class="container">
+<br />
+<div class="span-6 colborder">
+
+    <div>&nbsp</div>
+</div>
+
+<div class="span-10 colborder">
+
+<hr class="space" />
+
+<h1>{% trans "Open Letter To" %}</h1>
+
+
+</div>  <!-- span-10 -->
+
+<div class="span-6 last">
+
+    <div>&nbsp</div>
+
+</div>   <!-- span-8 last -->
+
+
+<hr />
+
+<div class="span-24 last">
+<h2>{% trans "Public letter list" %}</h2>
+
+</div>
+
+<hr />
+
+<div class="span-24 last">
+
+{% if letters %}
+
+<div id="letters">
+
+    <div class="span-7 colborder">
+        {% for lll in letters_1 %}
+
+<nobr><a id="new_letter_link" target="_blank" href="../{{ lll.url_name }}">{{ lll.title }}</a></nobr>&nbsp; &nbsp; {{lll.summary}}<hr />
+
+        {% endfor %}
+    </div>  <!-- span-7 -->
+
+    <div class="span-7 colborder">
+        {% for lll in letters_2 %}
+
+<nobr><a id="new_letter_link" target="_blank" href="../{{ lll.url_name }}">{{ lll.title }}</a></nobr>&nbsp; &nbsp; {{lll.summary}}<hr />
+
+        {% endfor %}
+    </div>  <!-- span-7 -->
+
+    <div class="span-7 last">
+        {% for lll in letters_3 %}
+
+<nobr><a id="new_letter_link" target="_blank" href="../{{ lll.url_name }}">{{ lll.title }}</a></nobr>&nbsp; &nbsp; {{lll.summary}}<hr />
+
+        {% endfor %}
+    </div>  <!-- span-7 -->
+
+</div> <!-- letters -->
+
+{% else %}
+
+No letters found
+
+{% endif %}
+
+</div> <!-- span-24 -->
+
+
+</body>
+
+</html>
+
+

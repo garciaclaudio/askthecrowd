@@ -1,0 +1,12 @@
+{% load i18n %}
+<h4>
+{% trans "Select your language" %}:<br/>
+</h4>
+<form action="/" method="get">
+    <select name="lang" onChange="submit()">
+          <option value="en" {% if language_en %}selected="selected"{% endif %}>{% lang2name "en" %}
+</option>
+          <option value="es" {% if language_es %}selected="selected"{% endif %}>{% lang2name "es" %}</option>
+    </select>
+</form>
+

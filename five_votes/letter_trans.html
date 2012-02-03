@@ -1,0 +1,40 @@
+{% load i18n %}
+
+    <form id="letter_trans_form" action="ajax.html" method="post"> 
+<br \>
+        <input type="hidden" name="action" value="{{action}}" />
+
+        <input type="hidden" name="letter_key" value="{{ letter_key }}" />
+
+        <h2>{% trans "Translation for" %}: {{src_letter_title}}</h2>
+
+        <input id="fb_uid_input" type="hidden" name="fb_uid" value="{{ letter_owner_fb_id }}" />
+                <label>{% trans "Translation language" %}</label><br \>
+
+                <select name="lang">
+                  <option value="en" {% if language_en %}selected="selected"{% endif %}>English</option>
+                  <option value="es" {% if language_es %}selected="selected"{% endif %}>Español</option>
+                </select>
+<br />
+<br />
+                <label>{% trans "Letter title" %}</label><br \>
+                <input class="span-9-FOO" type=text name="letter_title" maxlength=128 width=40 value="{{letter_title }}">
+<br />
+<br />
+
+<label>{% trans "Summary of the letter" %}</label>
+<br \>
+                <textarea class="span-13" style="height:40px;" name="letter_summary" id="letter_summary">{{ letter_summary }}</textarea>
+<br \>
+<div class="quiet" style="clear:both;">{% trans "A short paragraph explaining the letter and why readers should consider signing it. This will be displayed on users facebook profiles when they sign, for their friends to read." %}</div>
+<br />
+<label>{% trans "Letter text" %}</label>
+<br \>
+                <textarea class="span-13" style="height:120px;" name="letter_text" id="letter_text">{{ letter_body }}</textarea>
+<br \>
+<div class="quiet" style="clear:both;">{% trans "Bold and italic text in the displayed letter can be obtained by surrounding it with <strong>strong</strong> and <em>em</em> html tags. Example: &lt;strong&gt;Joe&lt;/strong&gt; will be shown as <strong>Joe</strong>." %}</div>
+<br />
+
+                <p><input type="submit" value="{% trans "Save" %}" /></p>
+        </form>
+

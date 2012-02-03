@@ -1,0 +1,227 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> 
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>{{ letter.title }}</title>
+
+                <link type="text/css" href="css/main.css" rel="stylesheet" />
+
+		<link type="text/css" href="css/flick/jquery-ui-1.7.2.custom.css" rel="stylesheet" />	
+
+		<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
+                <script type="text/javascript" src="js/jquery.form.js"></script>
+
+                <script type="text/javascript" src="js/main.js"></script>
+
+                <link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection" />
+                <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print" />
+
+                <!-- Import fancy-type plugin. -->
+                <link rel="stylesheet" href="css/blueprint/plugins/fancy-type/screen.css" type="text/css" media="screen, projection" />
+
+
+                <!--[if IE]><link rel="stylesheet" href="blueprint/ie.css" type="text/css" media="screen, projection" /><![endif]-->
+
+
+
+<!-- Load IxEdit ( You can delete these two lines after deploying. ) -->
+<!-- <script type="text/javascript" src="js/ixedit/ixedit.packed.js"></script> -->
+<!-- <link type="text/css" href="js/ixedit/ixedit.css" rel="stylesheet" /> -->
+
+
+<script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+
+
+<!-- See http://wiki.developers.facebook.com/index.php/Connect/Setting_Up_Your_Site to localize FB connect dialogs -->
+
+
+<script type="text/javascript">
+
+function showLoading() {
+  $("#loading").show();
+}
+
+function hideLoading() {
+  $("#loading").hide();
+}
+
+
+function bind_forms_and_stuff() {
+
+    $('#show_simple_form_link').click( function() {
+
+        // indicate that the submit has not fb id
+        $('#simple_form_submit').val( 1 );
+        $('#user').hide();    
+        $('#signature_div').show();
+        $('#simple_form_addons').show();
+        $('#show_in_wall_cb').hide();
+        return false;
+    } ); 
+
+    // bind question form and provide a simple callback function 
+    $('#signature_form').ajaxForm({
+         dataType:  'json', 
+         beforeSubmit: showLoading,
+         success: function(data) { 
+
+            hideLoading();
+
+            if( data.debug_msg ) {
+
+                alert( data.debug_msg );
+            }
+
+             if( data.error_msg ) {
+                 alert( data.error_msg );
+             } else {
+
+//                 alert( "no errors in form submission, refresh ongoing questions, etc..." );
+
+   var attachment = {
+     'name':'{% trans "Urgent: Save La Pastora" %}',
+     'href':'http://save-la-pastora.appspot.com',
+     'caption': '{*actor*} ' + '{% trans " has signed a letter against construction of the Rayados Stadium in Park La Pastora, by Heineken and Femsa." %}',
+     'media':[{
+       'type':'image',
+       'src':'http://save-la-pastora.appspot.com/images/no_image.jpg',
+       'href':'http://save-la-pastora.appspot.com'
+     }]};
+    
+   var action_links = [{'text':'{% trans "More info" %}','href':'http://save-la-pastora.appspot.com'}];
+
+
+if( $('#show_in_wall_input').is(':checked') && ! data.simple_form_submit ) {
+
+    //XXXDEPLOY enable when deploying
+   FB.Connect.streamPublish('', attachment, action_links);
+}
+
+                $('#signature_div').hide();
+
+                $('#thanks_for_signing_div').show();
+
+
+                new_sig_html = '<p>';
+
+                if( data.pic_url ) {
+                    new_sig_html = new_sig_html + '<img class="signer_pic" src="' + data.pic_url + '"></img>';
+
+                }
+
+                new_sig_html = new_sig_html + '<strong>' + data.name + '</strong>';
+
+                if( data.location ) {
+                    new_sig_html = new_sig_html + ' &nbsp;<em>' + data.location + '</em>';
+                }
+
+                if( data.comment ) {
+                    new_sig_html = new_sig_html + ' &mdash; ' + data.comment;
+                }
+
+                new_sig_html = new_sig_html + '</p><hr />';
+
+                $('#new_signature').html( new_sig_html );
+
+                $('#num_signers').html( data.num_signers_count );
+
+                $('#signatures').show();
+             }
+         }
+    }); 
+
+}   // bind_forms_and_stuff
+
+
+$(function(){
+
+    $("#loading").centerInClient(); 
+
+    $("#loading").ajaxStart(function(){
+         $(this).show();
+      }).ajaxStop(function(){
+         $(this).hide();
+    });
+    bind_forms_and_stuff();
+});
+
+
+function load_tabs() {
+
+//    alert('load tabs does nothing' );
+}
+
+
+var cached_fb_uid = 0;
+
+function check_connect_status( fbuid ) { 
+
+    if( fbuid == null ) {
+
+       showLoading();
+
+       window.location.reload();
+       return;
+    }
+
+    hideLoading();
+
+    cached_fb_uid = fbuid;
+
+    load_tabs();
+}
+
+// XXXDEPLOY uncomment for deploy
+FB_RequireFeatures( ["XFBML"], function(){ FB.Facebook.init("6100e1f7e8b4634841774ade65f546ab", "xd_receiver.htm", {"ifUserConnected" : check_connect_status, "ifUserNotConnected" : load_tabs }); });
+
+// XXXDEPLOY this is called automatically, comment before deploying
+//check_connect_status(1234);
+
+// XXXDEPLOY only enable this to test simple form submit locally
+//load_tabs();
+
+
+//
+// runs when the user logs in
+//
+function update_user_box( fbuid ) { 
+
+    cached_fb_uid = fbuid;
+
+    var user_box = document.getElementById("user"); 
+
+    // add in some XFBML. note that we set useyou=false so it doesn't display "you"
+
+    user_box.innerHTML = "<p>"
+                   + "<div style='margin: 0em 1em 1em 0.5em; float: left;'><fb:profile-pic uid='loggedinuser' facebook-logo='true'></fb:profile-pic></div>"
+                   + "{% trans "Welcome," %} <fb:name uid='loggedinuser' useyou='false'></fb:name>. {% trans "You are connected with your Facebook account." %}"
+                   + "</p>"
+                   + "";
+
+}
+
+//XXXDEPLOY ENABLE WHEN DEPLOYING...
+//FB.XFBML.Host.parseDomTree();
+
+
+</script>
+
+
+</head>
+
+<body>
+
+<div id="loading" style="display:none;z-index:100000">
+  <p><img src="images/please_wait.gif" /></p>
+</div>
+
+<br />
+
+{{tab_content}}
+
+</body>
+
+</html>
+
+

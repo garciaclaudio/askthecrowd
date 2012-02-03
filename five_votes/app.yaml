@@ -1,0 +1,31 @@
+application: five-votes
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /css
+  static_dir: css
+
+- url: /js
+  static_dir: js
+
+- url: /images
+  static_dir: images
+
+- url: /channel.html
+  static_files: channel.html
+  upload: channel.html
+  expiration: "400d"
+
+- url: /test_fb.html
+  static_files: test_fb.html
+  upload: test_fb.html
+
+- url: /ajax.html
+  script: ajax.py
+
+- url: /.*
+  script: canvas3.py
+
+

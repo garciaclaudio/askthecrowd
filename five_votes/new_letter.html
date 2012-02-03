@@ -1,0 +1,60 @@
+<div id="new_letter_form">
+
+<h1>Create Letter</h1>
+
+<form id="new_letter" action="ajax.html" method="post"> 
+
+<input type="hidden" name="form_name" value="new_letter" />
+
+<table>
+
+<tr>
+   <td>Letter Title:<br \>
+   <input type=text name=letter_title size=40 maxlength=40>
+   </td>
+</tr>
+<tr>
+   <td>Letter URL name (only dashes, underscores and lower case latters allowed):<br \>
+   http://open-letter-to.appspot.com/<input type=text name=letter_url_name size=20 maxlength=40>
+   </td>
+</tr>
+
+<tr>
+    <td>Signatures to collect before signer names are revealed. Use this option if you prefer identities of the first signers to be kept anonymous. Identities will only be revealed until the selected number of signatures is reached. Before this, only the number of signatures will be shown.<br />
+<select name="signatures_before_display">
+<option value="0" selected="selected">Show immediately</option>
+<option value="5">5</option>
+<option value="10">10</option>
+<option value="20">20</option>
+<option value="20">50</option>
+<option value="20">100</option>
+<option value="20">1000</option>
+</select>
+    </td>
+</tr>
+
+<tr>
+    <td>Summary of the letter (a short paragraph explaining the letter and why readers should consider signing it. This will be displayed on users facebook profiles when they sign, for their friends to read):<br />
+    <textarea name="letter_summary" rows="2" cols="70"></textarea>
+    </td>
+</tr>
+
+<tr>
+    <td>Letter text: <br />
+Bold and italic text in the displayed letter can be obtained by surrounding it with <strong>strong</strong> and <em>em</em> html tags. Example: &lt;strong&gt;Joe&lt;/strong&gt; will be shown as <strong>Joe</strong>.
+
+    <textarea name="letter_text" rows="12" cols="70"></textarea>
+    </td>
+</tr>
+
+<tr>
+<td colspan=1 align="center"><input type="submit" value="Create" /> 
+</tr>
+
+</table>
+
+</form>
+
+</div> <!-- id="new_letter_form" -->
+
+

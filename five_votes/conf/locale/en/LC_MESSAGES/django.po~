@@ -1,0 +1,169 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-07-08 00:12+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: index.html:5
+msgid "Save La Pastora"
+msgstr ""
+
+#: index.html:71 tab_content.html:18
+#, fuzzy
+msgid ""
+"Press the connect button to log in with your Facebook account (if you don't "
+"have a Facebook account, you will get the option to register)."
+msgstr ""
+"To sign this letter with your Facebook account, press the Connect button (if "
+"you don't have a Facebook account, you will get the option to register):"
+
+#: index.html:82
+msgid "Open Letter To"
+msgstr ""
+
+#: index.html:86
+msgid "Create a letter for anyone to read and sign."
+msgstr ""
+
+#: index.html:109
+msgid "Create new letter"
+msgstr ""
+
+#: index.html:111
+msgid "Letter Title:"
+msgstr ""
+
+#: index.html:116
+msgid "Letter URL name"
+msgstr ""
+
+#: index.html:119
+msgid "Only dashes, underscores and lower case letters allowed."
+msgstr ""
+
+#: index.html:122
+msgid "Signatures to collect before signer names are revealed"
+msgstr ""
+
+#: index.html:133
+msgid ""
+"Use this option if you prefer identities of the first signers to be kept "
+"anonymous. Identities will only be revealed until the selected number of "
+"signatures is reached. Before this, only the number of signatures will be "
+"shown."
+msgstr ""
+
+#: index.html:137
+msgid "Summary of the letter"
+msgstr ""
+
+#: index.html:141
+msgid ""
+"A short paragraph explaining the letter and why readers should consider "
+"signing it. This will be displayed on users facebook profiles when they "
+"sign, for their friends to read."
+msgstr ""
+
+#: index.html:143
+msgid "Letter text"
+msgstr ""
+
+#: index.html:147
+msgid ""
+"Bold and italic text in the displayed letter can be obtained by surrounding "
+"it with <strong>strong</strong> and <em>em</em> html tags. Example: &lt;"
+"strong&gt;Joe&lt;/strong&gt; will be shown as <strong>Joe</strong>."
+msgstr ""
+
+#: index.html:150
+msgid "Create Letter"
+msgstr ""
+
+#: index.html:205 tab_content.html:58
+msgid "Welcome,"
+msgstr ""
+
+#: index.html:205 tab_content.html:58
+msgid "You are connected with your Facebook account."
+msgstr ""
+
+#: lang_selector.html:3
+msgid "Select your language"
+msgstr ""
+
+#: ajax.py:113
+msgid "Name cannot be empty or shorter than 5 characters."
+msgstr ""
+
+#: ajax.py:117
+msgid "City and country cannot be empty or shorter than 5 characters."
+msgstr ""
+
+#: ajax.py:143
+msgid "Signer already there. Should not happen."
+msgstr ""
+
+#: ajax.py:149
+msgid "Could not recognize you as a facebook user, please report problem"
+msgstr ""
+
+#: conf/settings_foo.py:6 conf/settings.py:6
+msgid "English"
+msgstr ""
+
+#: conf/settings_foo.py:7 conf/settings.py:7
+msgid "Spanish"
+msgstr ""
+
+#~ msgid "This letter has been visited "
+#~ msgstr "This letter has been viewed "
+
+#~ msgid ""
+#~ "persons have declared that if the stadium is built in La Pastora, they "
+#~ "will stop shopping at Oxxo."
+#~ msgstr ""
+#~ "persons have declared that if the stadium is built in La Pastora, they "
+#~ "would stop shopping at Oxxo."
+
+#~ msgid ", that they will stop drinking Heineken and Femsa brand beers."
+#~ msgstr ", that they would stop drinking Heineken and Femsa brand beers."
+
+#~ msgid ", that they will stop drinking soft drinks bottled by Femsa."
+#~ msgstr ", that they would stop drinking soft drinks bottled by Femsa."
+
+#~ msgid ", that they will stop supporting the Rayados team."
+#~ msgstr ", that they would stop supporting the Rayados team."
+
+#~ msgid ", that they will never visit that stadium."
+#~ msgstr ", that they would never visit that stadium."
+
+#~ msgid "I will stop shopping at Oxxo."
+#~ msgstr "I would stop shopping at Oxxo."
+
+#~ msgid "I will not drink Heineken and Femsa beers."
+#~ msgstr "I would not drink Heineken and Femsa beers."
+
+#~ msgid "I will not drink soft drinks bottled by Femsa."
+#~ msgstr "I would not drink soft drinks bottled by Femsa."
+
+#~ msgid "I will stop supporting Rayados, and will not watch their matches."
+#~ msgstr "I would stop supporting Rayados, and watching their matches."
+
+#~ msgid "I will never visit that stadium."
+#~ msgstr "I would never visit that stadium."
+
+#, fuzzy
+#~ msgid "Email my comment to Heineken and Femsa"
+#~ msgstr "I would not drink Heineken and Femsa beers."

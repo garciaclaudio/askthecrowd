@@ -1,0 +1,150 @@
+<div id="right-col">
+<h2>How it works</h2>
+<p>
+En email invitation will be sent to participants. Then, after logging-in with their facebook accounts, they will be assigned and alias, and immediately they will be able to provide and discuss answers under this alias. They can submit answers until the last date for answers, and after that they will be able to cast 10 votes for the best answers.
+</p>
+
+<p>
+The rules of the system are:
+</p>
+
+<ul>
+<li>users participate under an alias</li>
+
+<li>users can vote only after the last date for answers, and voting is closed 3 days after</li>
+
+<li>vote counts are shown only after voting is closed</li>
+
+<li>votes are kept secret (no one is informed of who voted for what)</li>
+
+<li>real identities are revealed at the end (so that the authors of the answers can be known)</li>
+
+<li>participants can invite others to participate</li>
+
+<li>question is open for public view, but only invited friends can participate</li>
+</ul>
+
+<p>These rules can be changed using the advanced-view questionnaire.</p>
+
+</div>
+
+<div id="left-col">
+
+<div id="new_letter_form">
+
+<h1>Create Letter</h1>
+
+<form id="new_letter" action="ajax.html" method="post"> 
+
+<input type="hidden" name="form_name" value="new_letter" />
+
+<table>
+
+<tr>
+   <td>Letter Title:<br \>
+   <input type=text name=letter_title size=40 maxlength=40>
+   </td>
+</tr>
+<tr>
+   <td>Letter URL name (only dashes, underscores and lower case latters allowed):<br \>
+   http://open-letter-to.appspot.com/<input type=text name=letter_url_name size=20 maxlength=40>
+   </td>
+</tr>
+
+<tr>
+    <td>Summary of the letter (a short paragraph explaining the letter and why readers should consider signing it. This will be displayed on users facebook profiles when they sign, for their friends to read):<br />
+    <textarea name="letter_summary" rows="3" cols="50"></textarea>
+    </td>
+</tr>
+
+<tr class="extended_desc">
+    <td>Voting closing date:<br />
+
+<input type="radio" name="closing_date" value="1" /> 1 day after last last date for answers.
+<input checked="checked" type="radio" name="closing_date" value="3" /> 3 days after last last date for answers.
+<input type="radio" name="closing_date" value="5" /> 5 days after last last date for answers.
+
+    </td>
+</tr>
+
+<tr class="extended_desc">
+    <td>Voting can happen:<br />
+    <input checked="checked" type="radio" name="voting_from_beginning" value="0" /> After last date for answers
+    <input type="radio" name="voting_from_beginning" value="1" /> From the beginning
+    </td>
+</tr>
+
+<tr  class="extended_desc">
+    <td>Display vote counts:<br />
+    <input checked="checked" type="radio" name="show_votes_as_they_happen" value="0" /> After voting is closed
+    <input type="radio" name="show_votes_as_they_happen" value="1" /> As votes happen
+    </td>
+</tr>
+
+
+<tr class="extended_desc">
+    <td>Display who votes for what:<br />
+    <input checked="checked" type="radio" name="show_who_votes_for_what" value="0" /> No (votes are kept secret)
+    <input type="radio" name="show_who_votes_for_what" value="1" /> Yes
+    </td>
+</tr>
+
+<tr class="extended_desc">
+    <td>Use aliases:<br />
+    <input checked="checked" type="radio" name="use_aliases" value="1" /> Yes (users participate under a nickname)
+    <input type="radio" name="use_aliases" value="0" /> No (real names are shown)
+    </td>
+</tr>
+
+<tr class="extended_desc">
+    <td>Reveal alias identities:<br />
+    <input checked="checked" type="radio" name="reveal_alias_identities" value="1" /> Yes (user names are revealed at the end)
+    <input type="radio" name="reveal_alias_identities" value="0" /> No (all answers and votes remain anonymous)
+    </td>
+</tr>
+
+<tr>
+    <td>Prize for best answer (optional):<br />
+    <input name="question_prize" size=50></input></td>
+</tr>
+
+<tr class="extended_desc">
+    <td>Users can invite others:<br />
+    <input checked="checked" type="radio" name="users_can_invite_others" value="1" /> Yes (user can invite others to participate)
+    <input type="radio" name="users_can_invite_others" value="0" /> No (only the friends you invite can participate)
+    </td>
+</tr>
+
+
+<tr class="extended_desc">
+    <td>Public view:<br />
+    <input checked="checked" type="radio" name="public_view" value="1" /> Yes (question is open for public view)
+    <input type="radio" name="public_view" value="0" /> No (only invited persons can see the question)
+    </td>
+</tr>
+
+<tr class="extended_desc">
+    <td>Public participation:<br />
+    <input type="radio"  checked="checked" name="public_participation" value="0" /> No (only invited persons can submit answers and votes)
+    <input type="radio" name="public_participation" value="1" /> Yes (question is open for anyone to participate)
+    </td>
+</tr>
+
+<tr>
+    <td>Participants to Invite (a list of their email addresses separated by commas, up to 100):<br />
+    <textarea name="participants" rows="2" cols="50"></textarea>
+    </td>
+</tr>
+
+<tr>
+<td colspan=1 align="center"><input type="submit" value="Create" /> 
+</tr>
+
+</table>
+
+</form>
+
+</div> <!-- id="new_letter_form" -->
+
+</div>  <!-- id="left-col" -->
+

@@ -1,0 +1,12 @@
+{% load i18n %}
+
+{% if language_en %}
+{% else %}
+<a href="?lang=en">{% lang2name "en" %}</a>
+{% endif %}
+
+{% if language_es %}
+{% else %}
+<a href="?lang=es">{% lang2name "es" %}</a>
+{% endif %}
+

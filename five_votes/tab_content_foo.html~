@@ -1,0 +1,184 @@
+{% load i18n %}
+
+<div class="container">
+
+<div class="span-15 colborder">
+
+<hr class="space" />
+
+{{ letter_content }}
+
+<hr>
+
+<p>Esta carta ha sido vista {{num_visitors}} veces; y firmada por <strong><span id="num_signers">{{num_signers}}</span></strong> personas. <span id="no_oxxo">{{no_oxxo_count}}</span> personas han declarado que si ese estadio se construye, no comprarán más en Oxxo. <span id="no_cerveza">{{no_cerveza_count}}</span>, que no tomarán mas cerveza de las marcas de Heineken y Femsa. <span id="no_refrescos">{{no_refrescos_count}}</span>, que no tomarán refrescos embotellados por Femsa. <span id="no_rayados">{{no_rayados_count}}</span>, que no apoyarán más a los Rayados. <span id="no_estadio">{{no_estadio_count}}</span>, que nunca visitarán ese estadio.
+</p>
+
+
+</div>  <!-- span-15 -->
+
+<div class="span-8 last">
+
+    <div>&nbsp</div>
+
+    <div id="user"> 
+        <p>Para firmar la carta con tu cuenta de Facebook, presiona el botón "Facebook" (si no tienes cuenta de Facebook, podrás darte de alta ahí mismo):</p><fb:login-button onlogin="update_user_box()"></fb:login-button>
+    </div> <!-- user -->
+
+    <div id="thanks_for_signing_div" style="display:none;">Gracias por firmar!</div>
+
+    <div id="signature_div" style="display:none;">
+
+        <form id="signature_form" action="ajax.html" method="post"> 
+            <input type="hidden" name="action" value="sign_letter" />
+            <input id="fb_uid_input" type="hidden" name="fb_uid" value="FOO BAR" />
+
+            <fieldset class="span-7">
+
+                <legend>Join the protest</legend>
+
+                <p><label>Únete al boicot marcando las acciones que llevarías a cabo si ese estadio se construye en La Pastora (opcional):</label><br /></p>
+
+                <input type="checkbox" name="no_oxxo">No compraré más en las tiendas Oxxo, propieded de Femsa.<br />
+                <input type="checkbox" name="no_cerveza">No tomaré cervezas producidas por Heineken y Femsa.<br />
+                <input type="checkbox" name="no_refrescos">No tomaré refrescos embotellados por Femsa.<br />
+                <input type="checkbox" name="no_rayados">No apoyaré más a los Rayados, ni veré sus partidos.<br />
+                <input type="checkbox" name="no_estadio">No visitaré nunca ese estadio.<br />
+                <br />
+
+                <p><label for="user_comment">Comentario (opcional):</label><br>
+                <textarea class="span-7" style="height:100px;" name="user_comment" id="user_comment" rows="4" cols="20"></textarea></p>
+
+                <p>{% trans "Show on my Facebook Wall" %}<input type="checkbox" id="show_in_wall_input" name="show_in_wall" checked="yes" /><br>&nbsp;</p>
+
+                <p><input type="submit" value="Firmar la Carta" /></p>
+
+            </fieldset>
+        </form>
+    </div> <!-- signature_div -->
+</div>   <!-- span-8 last -->
+
+<div class="span-24 last">
+
+<hr />
+
+{% if signers %}
+
+<div id="signatures">
+
+    <h2>Firmantes de la Carta</h2>
+
+    <div class="span-7 colborder">
+        <div id="new_signature"></div>
+        {% for signer in signers_1 %}
+    <p>
+        <img class="signer_pic" src="{{signer.pic_url}}" /> <strong>{{ signer.name|escape }}</strong> {% if signer.comment %} &mdash; {{ signer.comment|escape }} {% endif %}
+    </p>
+
+<hr />
+        {% endfor %}
+    </div>  <!-- span-7 -->
+
+
+    <div class="span-7 colborder">
+        {% for signer in signers_2 %}
+    <p>
+        <img class="signer_pic" src="{{signer.pic_url}}" /> <strong>{{ signer.name|escape }}</strong> {% if signer.comment %} &mdash; {{ signer.comment|escape }} {% endif %}
+    </p>
+
+<hr />
+        {% endfor %}
+    </div>  <!-- span-7 -->
+
+    <div class="span-7 last">
+        {% for signer in signers_3 %}
+    <p>
+        <img class="signer_pic" src="{{signer.pic_url}}" /> <strong>{{ signer.name|escape }}</strong> {% if signer.comment %} &mdash; {{ signer.comment|escape }} {% endif %}
+    </p>
+
+<hr />
+        {% endfor %}
+    </div>  <!-- span-7 -->
+
+</div> <!-- signatures -->
+
+{% else %}
+<div id="signatures" style="display:none;">
+    <h2>Firmantes de la Carta</h2>
+    <div id="new_signature"></div>
+</div>
+{% endif %}
+
+</div> <!-- span-24 -->
+
+
+</div>  <!-- container -->
+
+
+<!-- ONLY SCRIPT PAST HERE -->
+
+
+<script type="text/javascript"> 
+
+//
+// runs when the user logs in
+//
+function update_user_box( fbuid ) { 
+
+    cached_fb_uid = fbuid;
+
+    var user_box = document.getElementById("user"); 
+
+    // add in some XFBML. note that we set useyou=false so it doesn't display "you"
+
+    // check if user has already signed
+    $.getJSON("ajax.html?action=check_if_already_signed;fb_uid=" + fbuid,
+
+       function(data){
+
+            if( data.already_signed_letter == 1 ) {
+
+                // hide form (some glitch makes it appear 
+                // for already signed users)
+//                $('#signature_div').hide();
+
+                user_box.innerHTML = "<p>"
+                   + "<fb:profile-pic uid='loggedinuser' facebook-logo='true'></fb:profile-pic>"
+                   + "Bienvenido, <fb:name uid='loggedinuser' useyou='false'></fb:name>. Estás conectado con tu cuenta de Facebook y ya has firmado esta carta."
+                   + "</p>"
+                   + "";
+
+            } else {
+
+                user_box.innerHTML = "<p>"
+                   + "<fb:profile-pic uid='loggedinuser' facebook-logo='true'></fb:profile-pic>"
+                   + "Bienvenido, <fb:name uid='loggedinuser' useyou='false'></fb:name>. Estás conectado con tu cuenta de Facebook. Para firmar, presiona el botón."
+                   + "</p>"
+                   + "";
+
+                // show hidden form
+                $('#signature_div').show();
+
+                // save fbuid in sign form hidden field
+                $('#fb_uid_input').val( fbuid );
+            }
+
+            //XXXDEPLOY ENABLE WHEN DEPLOYING...
+//            FB.XFBML.Host.parseDomTree();
+       }
+    );
+
+}
+
+// XXXDEPLOY uncomment for deploy
+//FB_RequireFeatures(["XFBML"], function(){ FB.Facebook.init("0c4f23883f33d6f40dd8dc71038be8c0", "xd_receiver.htm", {"ifUserConnected" : update_user_box});});
+
+
+if( cached_fb_uid > 0 ) {
+
+    update_user_box( cached_fb_uid );
+}
+
+
+// XXXDEPLOY this is called automatically, comment before deploying
+update_user_box(1234);
+</script> 

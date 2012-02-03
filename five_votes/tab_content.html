@@ -1,0 +1,210 @@
+{% load i18n %}
+
+<div class="container">
+<div class="span-15 colborder">
+
+<hr class="space" />
+
+<h2>{{ selected_trans.title }}</h2>
+
+{{ letter_body }}
+
+<br />
+
+</div>  <!-- span-15 -->
+
+<div class="span-7 last">
+
+<div>&nbsp</div>
+
+<div id="powered_by">
+<em>{% trans "Powered by " %}<a href=".">{% trans "Open Letter To..." %}</a> {% trans "Easily create letters like this." %}</em>
+<br />
+<br />
+</div>
+
+    <div id="user_msg1" style="display:none;"> 
+{% trans "To sign the letter with your Facebook account, press the Connect button (if you don't have a Facebook account, you will get the option to register):" %}
+<br />
+<br />
+<fb:login-button onlogin="update_user_box()"></fb:login-button>
+<br />
+<br />
+{% if letter.only_fb_signers %}
+{% else %}
+{% trans "To sign by entering your name and location, " %}<a href="" id="show_simple_form_link">{% trans "click here" %}</a>.
+<br />
+{% endif %}
+    </div> <!-- user_msg1 -->
+
+    <div id="user_msg2" style="display:none;"> 
+          <div style='margin: 0em 1em 1em 0.5em; float: left;'><fb:profile-pic uid='loggedinuser' facebook-logo='true'></fb:profile-pic></div> 
+        {% trans "Welcome," %} <fb:name uid='loggedinuser' useyou='false'></fb:name>. {% trans "You are connected with your Facebook account and you have already signed this letter." %}
+<br />
+<br />
+    </div>  <!-- user_msg2 -->
+
+    <div id="user_msg3" style="display:none;"> 
+          <div style='margin: 0em 1em 1em 0.5em; float: left;'><fb:profile-pic uid='loggedinuser' facebook-logo='true'></fb:profile-pic></div>
+                   {% trans "Welcome," %} <fb:name uid='loggedinuser' useyou='false'></fb:name>. {% trans "You are logged in with your Facebook account. To sign this letter, press the sign button below."%}
+<br />
+<br />
+    </div>  <!-- user_msg3 -->
+
+    <div id="thanks_for_signing_div" style="display:none;"><strong>{% trans "Thanks for signing!" %}</strong>
+<br />
+</div>
+
+    <div id="signature_div" style="display:none;clear:both;">
+
+        <form id="signature_form" action="ajax.html" method="post"> 
+            <input type="hidden" name="action" value="sign_letter" />
+            <input id="fb_uid_input" type="hidden" name="fb_uid" value="FOO BAR" />
+
+            <input type="hidden" name="letter_key" value="{{ letter_key }}" />
+            <input type="hidden" name="letter_lang" value="{{ selected_trans.lang }}" />
+
+            <input id="simple_form_submit" type="hidden" name="simple_form_submit" value="0" />
+
+            <fieldset class="span-7">
+
+                <legend>{% trans "Sign this letter" %}</legend>
+
+<div id="simple_form_addons" style="display:none;">
+
+                <p><label for="signer_name">{% trans "Name:" %}</label><br \>
+                <input class="span-7" type=text name="signer_name" maxlength=80>
+                </p>
+<br />
+                <p><label for="signer_location">{% trans "City and country:" %}</label><br \>
+                <input class="span-7" type=text name="signer_location" maxlength=80>
+                </p>
+<br />
+</div>
+                <p><label for="user_comment">{% trans "Comment (optional):" %}</label><br />
+                <textarea class="span-7" style="height:100px;" name="user_comment" id="user_comment" rows="4" cols="20"></textarea></p>
+
+<div id="show_in_wall_cb">
+                {% trans "Show on my Facebook Wall" %}<input type="checkbox" id="show_in_wall_input" name="show_in_wall" checked="yes" />
+</div>
+
+&nbsp;<br />
+
+                <p><input type="submit" value="{% trans "Sign the Letter" %}" /></p>
+
+            </fieldset>
+        </form>
+    </div> <!-- signature_div -->
+</div>   <!-- span-8 last -->
+
+<div class="span-24 last">
+
+<hr />
+
+{% if hide_letters %} 
+
+{% trans "Signers of this letter will be disclosed after " %} {{letter.signatures_before_display}} {% trans "signatures are entered." %}
+
+{% else %}
+
+    {% if signers %}
+
+<div id="signatures">
+
+    <h2>{% trans "Signers" %} (<span id="num_signers">{{letter.num_signers}}</span>)</h2>
+
+    <div class="span-7 colborder">
+        <div id="new_signature"></div>
+        {% for signer in signers_1 %}
+    <p>
+       {% if signer.pic_url %}<img class="signer_pic" src="{{signer.pic_url}}" />{% endif %}<strong>{{ signer.name|escape }}</strong>
+
+{% if num_trans %} 
+({% lang2name signer.lang %})
+{% endif %}
+
+       {% if signer.location %} &nbsp; <em>{{ signer.location|escape }}</em> {% endif %}
+
+       {% if signer.comment %} &mdash; {{ signer.comment|escape }} {% endif %}
+    </p>
+
+<hr />
+        {% endfor %}
+    </div>  <!-- span-7 -->
+
+
+    <div class="span-7 colborder">
+        {% for signer in signers_2 %}
+    <p>
+       {% if signer.pic_url %}<img class="signer_pic" src="{{signer.pic_url}}" />{% endif %}<strong>{{ signer.name|escape }}</strong>
+
+{% if num_trans %} 
+({% lang2name signer.lang %})
+{% endif %}
+
+       {% if signer.location %} &nbsp; <em>{{ signer.location|escape }}</em> {% endif %}
+
+       {% if signer.comment %} &mdash; {{ signer.comment|escape }} {% endif %}
+    </p>
+
+<hr />
+        {% endfor %}
+    </div>  <!-- span-7 -->
+
+    <div class="span-7 last">
+        {% for signer in signers_3 %}
+    <p>
+       {% if signer.pic_url %}<img class="signer_pic" src="{{signer.pic_url}}" />{% endif %}<strong>{{ signer.name|escape }}</strong>
+
+{% if num_trans %} 
+({% lang2name signer.lang %})
+{% endif %}
+
+       {% if signer.location %} &nbsp; <em>{{ signer.location|escape }}</em> {% endif %}
+
+       {% if signer.comment %} &mdash; {{ signer.comment|escape }} {% endif %}
+    </p>
+
+<hr />
+        {% endfor %}
+    </div>  <!-- span-7 -->
+
+</div> <!-- signatures -->
+
+
+    {% else %}
+<div id="signatures" style="display:none;">
+    <h2>{% trans "Signers" %}</h2>
+    <div id="new_signature"></div>
+</div>
+    {% endif %}
+
+{% endif %}
+
+<br />
+
+<div id="counter_div" style="clear:both;">
+{% trans "This letter has been visited " %} {{letter.num_viewers}} {% trans "times, and signed by " %} <strong><span id="num_signers">{{letter.num_signers}}</span></strong> {% trans "persons" %}.
+<br />
+<br />
+</div>
+
+</div> <!-- span-24 -->
+
+</div>  <!-- container -->
+
+
+<script type="text/javascript">
+   var fb_attachment = {
+     'name':'{% trans "Open Letter To..." %} {{selected_trans.title}}',
+     'href':'http://open-letter-to.appspot.com/{{ letter.url_name }}',
+     'caption': '{*actor*} ' + '{% trans " has signed an open letter:" %} {{selected_trans.summary}}',
+     'media':[{
+       'type':'image',
+       'src':'http://open-letter-to.appspot.com/images/open_letter.jpg',
+       'href':'http://open-letter-to.appspot.com/{{ letter.url_name }}',
+     }]};
+    
+   var fb_action_links = [{'text':'{% trans "More info" %}','href':'http://open-letter-to.appspot.com/{{ letter.url_name }}'}];
+
+</script>

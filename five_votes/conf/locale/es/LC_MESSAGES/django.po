@@ -1,0 +1,593 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-02-01 23:09+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: manage_sigs.html:15 letter_links.html:19 letter_links.html.py:30
+msgid "Delete"
+msgstr "Eliminar"
+
+#: index.html:5 index.html.py:375 tab_content.html:24 tab_content.html.py:195
+#: public_list.html:5
+msgid "Open Letter To..."
+msgstr "Carta Abierta Para..."
+
+#: index.html:62 public_list.html:62
+msgid "cannot delete signature"
+msgstr "no es posible borrar firma"
+
+#: index.html:80 index.html.py:655 public_list.html:80
+msgid "Letter has no signers, try again when signers are present."
+msgstr "Esta carta no tiene firmantes. Trate de vuelta en cuanto los tenga."
+
+#: index.html:92 index.html.py:573 public_list.html:92 letter_links.html:17
+msgid "Manage signatures"
+msgstr "Administrar firmas"
+
+#: index.html:99 public_list.html:99
+msgid "cannot load signers"
+msgstr "no fue posible cargar los firmantes"
+
+#: index.html:145 index.html.py:569 public_list.html:145
+msgid "Edit letter"
+msgstr "Editar carta"
+
+#: index.html:192 public_list.html:192
+msgid "Edit translation"
+msgstr "Editar traducción"
+
+#: index.html:194 public_list.html:194
+msgid "Create translation"
+msgstr "Crear traducción"
+
+#: index.html:249 public_list.html:249
+msgid "Delete letter"
+msgstr "Eliminar carta"
+
+#: index.html:293 public_list.html:293
+msgid "Delete letter translation"
+msgstr "Eliminar traducción de carta"
+
+#: index.html:319
+msgid "Please login first with the Connect button."
+msgstr "Por favor ingresa con el botón Connect primero."
+
+#: index.html:330 index.html.py:395 public_list.html:331
+msgid "Create new letter"
+msgstr "Crear nueva carta"
+
+#: index.html:339 public_list.html:340
+msgid "Letter created"
+msgstr "Su carta ha sido creada"
+
+#: index.html:364
+msgid "Press the connect button to log in with your Facebook account"
+msgstr "Presiona el botón Connect para ingresar con tu cuenta de Facebook"
+
+#: index.html:364
+msgid ""
+"if you don't have a Facebook account, you will get the option to register"
+msgstr "si no tienes cuenta de Facebook, recibirás la opción de registrarte"
+
+#: index.html:379
+msgid "Create a letter for anyone to read and sign."
+msgstr "Crea una carta que todos puedan ver y firmar."
+
+#: index.html:410
+msgid ""
+"To create a letter, login with your Facebook account, click on the link "
+"above, and fill out the form."
+msgstr ""
+"Para crear una carta, ingresa tu cuenta de Facebook, haz click en el enlace "
+"arriba y llena la forma."
+
+#: index.html:410
+msgid "Your letter will get its own URL that you can distribute to signers."
+msgstr ""
+"Tu carta recibirá su propia dirección de web que podrás enviar a los "
+"firmantes."
+
+#: index.html:410
+msgid "Letters can  be about any subject. Here are some samples:"
+msgstr "Tu carta puede ser para cualquier propósito. Ejemplos:"
+
+#: index.html:412
+msgid "Binational conference agreement"
+msgstr "Acuerdos de conferencia binacional"
+
+#: index.html:412 index.html.py:413 index.html.py:417 conf/settings_foo.py:6
+#: conf/settings.py:6
+msgid "English"
+msgstr "Inglés"
+
+#: index.html:412 index.html.py:415 index.html.py:417 conf/settings_foo.py:7
+#: conf/settings.py:7
+msgid "Spanish"
+msgstr "Español"
+
+#: index.html:413
+msgid "neighborhood protest"
+msgstr "protesta de barrio"
+
+#: index.html:415
+msgid "thank-you letter"
+msgstr "carta de agradecimiento"
+
+#: index.html:417
+msgid "school reunion agreement"
+msgstr "acuerdo para reunión escolar"
+
+#: index.html:417
+msgid "setup to only accept Facebook signatures"
+msgstr "configurada para sólo aceptar firmas de Facebook"
+
+#: index.html:417
+msgid "Feel free to test signing the sample letters."
+msgstr "Puedes probar firmar estas cartas ejemplo."
+
+#: index.html:420
+msgid "Users can choose to have their letters listed in our"
+msgstr "Si lo deseas, tu carta podrá aparecer en nuestro"
+
+#: index.html:420
+msgid "public letter list"
+msgstr "directorio público"
+
+#: index.html:423
+msgid ""
+"Open-letter-to is free to use by anyone and is provided with no guarantees."
+msgstr ""
+"Carta-abierta-para es un servicio gratuito que se provee sin ninguna "
+"garantía."
+
+#: index.html:423
+msgid ""
+"It is hosted at the Google Appengine server cloud (appspot), so it should be "
+"very reliable."
+msgstr ""
+"Está alojado en la nube de servidores de Google Appengine (appspot), lo que "
+"lo hace ser muy confiable."
+
+#: index.html:423
+msgid ""
+"We are not responsible from any content added by our users and reserve the "
+"right to remove abusive letters."
+msgstr ""
+"No nos hacemos responsables del contenido agregado por nuestros usuarios y "
+"nos reservamos el derecho de remover cartas abusivas."
+
+#: index.html:423
+msgid ""
+"If you have questions or suggestions, or would like to help us translate "
+"this website to a new language, please write to:"
+msgstr ""
+"Para preguntas o sugerencias, o para ayudarnos a traducir este sitio  a "
+"otros idiomas, por favor escribe a:"
+
+#: index.html:442 edit_letter.html:11 letter_trans.html:20
+msgid "Letter title"
+msgstr "Título de la carta"
+
+#: index.html:447 edit_letter.html:16
+msgid "Letter language"
+msgstr "Idioma de la carta"
+
+#: index.html:456 edit_letter.html:25
+msgid "Letter URL name"
+msgstr "Nombre para URL de la carta"
+
+#: index.html:459
+msgid ""
+"Only dashes, underscores and lower case letters allowed. This is the URL "
+"your letter will have."
+msgstr ""
+"Solo admite guíones, guíones bajos y letras minúsculas de la a la z. Esta es "
+"la dirección de web que tu carta tendrá."
+
+#: index.html:463 edit_letter.html:31 letter_trans.html:25
+msgid "Summary of the letter"
+msgstr "Resumen de la carta"
+
+#: index.html:467 edit_letter.html:35 letter_trans.html:29
+msgid ""
+"A short paragraph explaining the letter and why readers should consider "
+"signing it. This will be displayed on users facebook profiles when they "
+"sign, for their friends to read."
+msgstr ""
+"Un pequeño párrafo explicando la carta y porqué los lectores deben "
+"considerar firmarla. Este texto se mostrará en el perfil de facebook de los "
+"usuarios al firmar, para ser visto por sus amigos."
+
+#: index.html:469 edit_letter.html:37 letter_trans.html:31
+msgid "Letter text"
+msgstr "Texto de la carta"
+
+#: index.html:473 edit_letter.html:41 letter_trans.html:35
+msgid ""
+"Bold and italic text in the displayed letter can be obtained by surrounding "
+"it with <strong>strong</strong> and <em>em</em> html tags. Example: &lt;"
+"strong&gt;Joe&lt;/strong&gt; will be shown as <strong>Joe</strong>."
+msgstr ""
+"Se pueden incluir negritas e itálicas rodeando el texto con etiquetas "
+"<strong>strong</strong> y <em>em</em>. Ejemplo: &lt;strong&gt;Juan&lt;/"
+"strong&gt; se mostrará como <strong>Juan</strong>."
+
+#: index.html:476 edit_letter.html:44
+msgid "Signatures to collect before signer names are revealed"
+msgstr "Firmas a recolectar antes de mostrar los nombres de los firmantes"
+
+#: index.html:479
+msgid "reveal immediately"
+msgstr "revelar de inmediato"
+
+#: index.html:487 edit_letter.html:55
+msgid ""
+"Use this option if you prefer identities of the first signers to be kept "
+"anonymous. Identities will only be revealed until the selected number of "
+"signatures is reached. Before this, only the number of signatures will be "
+"shown."
+msgstr ""
+"Usa esta opción si prefieres que la identidad de los primeros firmantes "
+"permanezca anónima. Los nombres de los firmantes serán revelados cuando "
+"elnúmero de firmas seleccionado se alcance. Antes de esto se mostrará "
+"solamente el número de firmas recabadas."
+
+#: index.html:492 index.html.py:494 edit_letter.html:60 edit_letter.html.py:62
+msgid "Only Facebook signers"
+msgstr "Sólo firmantes de Facebook"
+
+#: index.html:496 edit_letter.html:64
+msgid ""
+"Visitors can sign the letter either with their Facebook accounts or by "
+"entering their name and location. Check this option to only allow Facebook "
+"signatures."
+msgstr ""
+"Los visitantes pueden firmar la carta ya sea con su cuenta de Facebook o "
+"ingresando su nombre y localidad. Marca esta opción para permitir sólamente "
+"firmas de Facebook."
+
+#: index.html:500 index.html.py:502 edit_letter.html:68 edit_letter.html.py:70
+msgid "Exclude from public list"
+msgstr "Excluir de directorio público"
+
+#: index.html:504 edit_letter.html:72
+msgid ""
+"Check this option if you don't want your letter to be listed in our public "
+"letters directory."
+msgstr ""
+"Marca esta opción si no deseas que tu carta aparezca en nuestro directorio "
+"de cartas público."
+
+#: index.html:508
+msgid "Create Letter"
+msgstr "Crear Carta"
+
+#: index.html:518 index.html.py:535
+msgid "Number of signers:"
+msgstr "Número de firmantes:"
+
+#: index.html:523
+msgid "Are you sure you want to delete this letter and its signers?"
+msgstr "Estás seguro que deseas eliminar esta carta y sus firmantes?"
+
+#: index.html:525
+msgid "Delete Letter"
+msgstr "Eliminar Carta"
+
+#: index.html:527 index.html.py:545
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: index.html:541
+msgid "Are you sure you want to delete this translation and its signers?"
+msgstr "Estás seguro que deseas eliminar esta traducción y sus firmantes?"
+
+#: index.html:543
+msgid "Delete Translation"
+msgstr "Eliminar Traducción"
+
+#: index.html:563
+msgid "Your letter has been created."
+msgstr "Tu carta ha sido creada."
+
+#: index.html:565
+msgid "You can see it at:"
+msgstr "Puedes verla en:"
+
+#: index.html:566
+msgid "You can distribute this URL to letter signers."
+msgstr "Puedes enviar esta dirección de web a los firmantes."
+
+#: index.html:570
+msgid "You letter can be edited while it has no signers."
+msgstr "Tu carta puede ser editada mientras no tenga firmantes."
+
+#: index.html:574
+msgid "Signatures and comments from signers can be deleted."
+msgstr "Se pueden eliminar firmas y comentarios de los firmantes."
+
+#: index.html:577
+msgid ""
+"You can embed your letter in your own website, by adding the following html "
+"code to it:"
+msgstr ""
+"Tu carta puede ser incluída en otro website, agregando el siguiente párrafo "
+"de HTML al mismo:"
+
+#: index.html:583
+msgid "Close"
+msgstr "Cerrar"
+
+#: index.html:686 tab_content.html:45 tab_content.html.py:52
+msgid "Welcome,"
+msgstr "Bienvenido,"
+
+#: index.html:686
+msgid "You are connected with your Facebook account."
+msgstr "Estás conectado con tu cuenta de Facebook."
+
+#: tab_content.html:15
+msgid "This letter has been visited "
+msgstr "Esta carta ha sido vista "
+
+#: tab_content.html:15
+msgid "times, and signed by "
+msgstr "veces, y firmada por "
+
+#: tab_content.html:15
+msgid "persons"
+msgstr "personas"
+
+#: tab_content.html:24
+msgid "Powered by "
+msgstr "Propulsado por "
+
+#: tab_content.html:24
+msgid "Easily create letters like this."
+msgstr "Crea cartas como ésta con facilidad."
+
+#: tab_content.html:30
+msgid ""
+"To sign the letter with your Facebook account, press the Connect button (if "
+"you don't have a Facebook account, you will get the option to register):"
+msgstr ""
+"Para firmar con tu cuenta de Facebook, presiona el botón Connect (si no "
+"tienes cuenta de Facebook, recibirás la opción de registrarte):"
+
+#: tab_content.html:38
+msgid "To sign by entering your name and location, "
+msgstr "Para firmar con tu nombre y localidad, "
+
+#: tab_content.html:38
+msgid "click here"
+msgstr "haz click aquí"
+
+#: tab_content.html:45
+msgid ""
+"You are connected with your Facebook account and you have already signed "
+"this letter."
+msgstr "Estás conectado con tu cuenta de Facebook y ya has firmado esta carta."
+
+#: tab_content.html:52
+msgid ""
+"You are logged in with your Facebook account. To sign this letter, press the "
+"sign button below."
+msgstr ""
+"Estás conectado con tu cuenta de Facebook. Para firmar esta carta, "
+"presiona el botón Firmar."
+
+#: tab_content.html:56
+msgid "Thanks for signing!"
+msgstr "Gracias por firmar!"
+
+#: tab_content.html:73
+msgid "Sign this letter"
+msgstr "Firma esta carta"
+
+#: tab_content.html:77
+msgid "Name:"
+msgstr "Nombre:"
+
+#: tab_content.html:81
+msgid "City and country:"
+msgstr "Ciudad y país:"
+
+#: tab_content.html:86
+msgid "Comment (optional):"
+msgstr "Comentario (opcional):"
+
+#: tab_content.html:90
+msgid "Show on my Facebook Wall"
+msgstr "Mostrar en mi muro de Facebook"
+
+#: tab_content.html:95
+msgid "Sign the Letter"
+msgstr "Firmar la Carta"
+
+#: tab_content.html:108
+msgid "Signers of this letter will be disclosed after "
+msgstr "La identidad de los firmantes sera mostrada cuando se hayan recabado "
+
+#: tab_content.html:108
+msgid "signatures are entered."
+msgstr "firmas."
+
+#: tab_content.html:116 tab_content.html.py:179
+msgid "Signers"
+msgstr "Firmantes"
+
+#: tab_content.html:197
+msgid " has signed an open letter:"
+msgstr " ha firmado una carta abierta:"
+
+#: tab_content.html:204
+msgid "More info"
+msgstr "Más información"
+
+#: public_list.html:368
+msgid "Open Letter To"
+msgstr "Carta Abierta Para"
+
+#: public_list.html:383
+msgid "Public letter list"
+msgstr "Directorio de cartas público"
+
+#: lang_selector.html:3
+msgid "Select your language"
+msgstr "Seleccionar idioma"
+
+#: letter_links.html:3
+msgid "Your letters:"
+msgstr "Tus cartas:"
+
+#: letter_links.html:13
+msgid "Edit"
+msgstr "Editar"
+
+#: letter_links.html:15
+msgid "Add translation"
+msgstr "Agregar traducción"
+
+#: letter_links.html:28
+msgid "View"
+msgstr "Ver"
+
+#: edit_letter.html:28
+msgid "Only dashes, underscores and lower case letters allowed."
+msgstr "Solo admite guíones, guíones bajos y letras minúsculas de la a la z."
+
+#: edit_letter.html:76 letter_trans.html:38
+msgid "Save"
+msgstr "Grabar"
+
+#: ajax.py:77
+msgid "not found"
+msgstr "no encontrado"
+
+#: ajax.py:88 ajax.py:409
+msgid "Letter cannot be edited anymore, because it has been signed."
+msgstr "La carta ya no puede ser editada, porque ha sido firmada."
+
+#: ajax.py:103 ajax.py:132
+msgid "cannot find letter; should not happen"
+msgstr "carta no se encuentra; no debe pasar."
+
+#: ajax.py:284
+msgid "Invalid FB UID, should not happen."
+msgstr "FB UID inválido, no debe pasar."
+
+#: ajax.py:301
+msgid "Could not create user, should not happen."
+msgstr "No se puede crear usuario, no debe pasar."
+
+#: ajax.py:309
+msgid "Letter title cannot be empty."
+msgstr "El título de la carta no debe estar en blanco."
+
+#: ajax.py:313 ajax.py:418
+msgid "Signatures before display cannot be empty. "
+msgstr "Firmas a recolectar no debe estar en blanco."
+
+#: ajax.py:316 ajax.py:421 ajax.py:514
+msgid "Strange chars in lang."
+msgstr "Caracteres extraños en idioma"
+
+#: ajax.py:323 ajax.py:427
+msgid "Letter URL name cannot be empty. "
+msgstr "El nombre para URL de la carta no debe estar en blanco."
+
+#: ajax.py:326 ajax.py:430
+msgid ""
+"Letter URL name should only contain lowercase a to z letters and underscores."
+msgstr ""
+"El nombre para URL sólo admite guíones, guíones bajos y letras minúsculas de "
+"la a la z."
+
+#: ajax.py:333 ajax.py:451
+msgid "The URL name "
+msgstr "El nombre para URL de la carta "
+
+#: ajax.py:333 ajax.py:451
+msgid " already exists. Please choose a different one."
+msgstr " ya existe. Por favor escoge uno distinto."
+
+#: ajax.py:337 ajax.py:434 ajax.py:519
+msgid "Letter summary cannot be empty. "
+msgstr "El resumen de la carta no debe estar en blanco."
+
+#: ajax.py:340 ajax.py:437 ajax.py:522
+msgid "Letter summary should be shorter than 240 characters."
+msgstr "El resumen de la carta no debe exceder 240 caracteres."
+
+#: ajax.py:344 ajax.py:441 ajax.py:526
+msgid "Letter text cannot be empty. "
+msgstr "El texto de la carta no debe estar en blanco."
+
+#: ajax.py:347 ajax.py:444 ajax.py:529
+msgid "Letter text should be shorter than 30000 characters."
+msgstr "El texto de la carta no debe exceder 3000 caracteres."
+
+#: ajax.py:398 ajax.py:498
+msgid "Could not retrieve user, should not happen."
+msgstr "No se pudo recuperar usuario, no debe pasar."
+
+#: ajax.py:405 ajax.py:505
+msgid "Could not retrieve existing letter, should not happen."
+msgstr "No se pudo recuperar carta, no debe pasar."
+
+#: ajax.py:414 ajax.py:510
+msgid "Letter title cannot be empty. "
+msgstr "El título de la carta no debe estar en blanco."
+
+#: ajax.py:547
+msgid "A translation to this language already exists."
+msgstr "Esta carta ya tiene una traducción a este lenguage."
+
+#: ajax.py:615 ajax.py:660 ajax.py:709
+msgid "Letter not found. Should not happen."
+msgstr "Carta no encontrada, no debe pasar."
+
+#: ajax.py:668
+msgid "Translation not found. Should not happen."
+msgstr "Traducción no encontrada, no debe pasar."
+
+#: ajax.py:715
+msgid "Comment should be shorter than 2000 characters."
+msgstr "Los comentarios no deben exceder 2000 caracteres. Favor de acortar."
+
+#: ajax.py:726
+msgid "Name cannot be empty or shorter than 5 characters."
+msgstr "Nombre no debe estar en blanco o tener menos de cinco letras."
+
+#: ajax.py:730
+msgid "City and country cannot be empty or shorter than 5 characters."
+msgstr "Ciudad no debe estar en blanco o tener menos de cinco letras."
+
+#: ajax.py:755
+msgid "Signer already there. Should not happen."
+msgstr "Firmante ya existe. No debe pasar."
+
+#: ajax.py:761
+msgid "Could not recognize you as a facebook user, please report problem"
+msgstr "Error en la conexión con Facebook. Favor de reportar problema."
+
+#: letter_trans.html:9
+msgid "Translation for"
+msgstr "Traducción para"
+
+#: letter_trans.html:12
+msgid "Translation language"
+msgstr "Idioma de la traducción"

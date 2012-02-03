@@ -1,0 +1,14 @@
+{% load i18n %}
+
+{% if language_en %}
+{% else %}
+{% lang2name "en" %}
+{% endif %}
+
+{% if language_es %}
+{% else %}
+{% lang2name "es" %}
+{% endif %}
+
+
+

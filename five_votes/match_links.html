@@ -1,0 +1,23 @@
+{% load i18n %}
+
+<h3>{% trans "Your Matches:" %}</h3>
+
+    <div class="span-7 colborder">
+        <div id="existing_match"></div>
+        {% for match in user_matches %}
+
+<b>{{match.title }}</b><br />
+
+<nobr><a id="new_letter_link" target="_blank" href="{{ match.url_name }}">http://open-letter-to.appspot.com/{{ match.url_name }}</a></nobr><br />
+
+[<a href='edit' id='edit_match_link' onclick="show_edit_dialog( '{{ match.match_key }}' ); return false;">{% trans "Edit" %}</a>]
+
+[<a href='delete' id='delete_match_link' onclick="show_del_dialog( '{{ match.match_key }}' ); return false;">{% trans "Delete" %}</a>]
+
+<hr />
+        {% endfor %}
+
+    </div>  <!-- span-7 -->
+
+
+</a></nobr><br />

@@ -1,0 +1,236 @@
+{% load i18n %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml"> 
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>{{ letter.title }}</title>
+
+                <link type="text/css" href="css/main.css" rel="stylesheet" />
+
+		<link type="text/css" href="css/flick/jquery-ui-1.7.2.custom.css" rel="stylesheet" />	
+
+		<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
+                <script type="text/javascript" src="js/jquery.form.js"></script>
+
+                <script type="text/javascript" src="js/jquery.tmpl.js"></script>
+
+                <script type="text/javascript" src="js/main.js"></script>
+
+                <link rel="stylesheet" href="css/blueprint/screen.css" type="text/css" media="screen, projection" />
+                <link rel="stylesheet" href="css/blueprint/print.css" type="text/css" media="print" />
+
+                <!-- Import fancy-type plugin. -->
+                <link rel="stylesheet" href="css/blueprint/plugins/fancy-type/screen.css" type="text/css" media="screen, projection" />
+
+
+                <!--[if IE]><link rel="stylesheet" href="blueprint/ie.css" type="text/css" media="screen, projection" /><![endif]-->
+
+
+
+<script src="http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php" type="text/javascript"></script>
+
+
+<!-- See http://wiki.developers.facebook.com/index.php/Connect/Setting_Up_Your_Site to localize FB connect dialogs -->
+
+
+<!-- JS TEMPLATES START -->
+
+<script id="not_rated_ideas_tmpl" type="text/html">
+    <p>{% trans "Ideas not yet rated:" %} <span id="num_ideas_for_rating"></span></p>
+    <p>{% trans "Rate this idea:" %}</p>
+    <h1>${title}</h1>
+    <p>${desc}</p>
+    <p>${extended_desc}</p>
+    <button class="rate_button bigbluebutton" rating="great">{% trans "Great" %}</button>
+    <button class="rate_button bigbluebutton" rating="good">{% trans "Good" %}</button>
+    <button class="rate_button bigbluebutton" rating="bad">{% trans "Bad" %}</button>
+</script>
+
+
+
+<script id="votes_left_tmpl" type="text/html">
+<p>{% trans "Votes left:" %} (make me beautiful) <span id="votes_left">${votes_left}</span></p>
+</script>
+
+<script id="no_ideas_left_tmpl" type="text/html">
+
+<h2>{% trans "No more ideas left for rating" %}</h2>
+
+</script>
+
+
+<script id="vote_div_close_tmpl">
+<button class="vote_div_close">{% trans "Close" %}</button>
+</script>
+
+<script id="card_tmpl" type="text/html">
+<div class="card">
+<div class="card_inset">i${num}</div> <strong>${title}</strong> <br />
+<em>${desc}</em><br />
+${extended_desc} <br />
+
+<button style="float:right;" class="bigbluebutton vote_button" vote_val="1" idea_key="${key}">{% trans "+1" %}</button>
+
+<div style="float:right;padding: .3em .9em;"><span id="idea_votes_${key}" style="font-size:150%;font-weight:bold">${num_votes}</span> votes</div>
+
+<button style="float:right;" class="bigbluebutton vote_button" vote_val="-1" idea_key="${key}">{% trans "-1" %}</button>
+
+
+</div>
+</script>
+
+
+
+<script id="all_card_tmpl" type="text/html">
+<div class="all_card">
+<div class="card_inset">i${num}</div> <strong>${title}</strong> <br />
+<em>${desc}</em><br />
+${extended_desc}
+<br />
+
+<div style="float:right;padding: .3em .9em;"><span id="idea_votes_${key}" style="font-size:150%;font-weight:bold">${num_votes}</span> votes</div>
+
+</div>
+</script>
+
+
+
+
+
+<!-- JS TEMPLATES END -->
+
+
+{% include "control.inc" %}
+
+</head>
+
+
+<body>
+
+
+<div id="vote_div">
+
+
+</div>
+
+<div id="loading" style="display:none;z-index:100000">
+  <p><img src="images/please_wait.gif" /></p>
+</div>
+
+<br />
+
+<div id="all_tabs" class="tab_container">  
+
+    <div id="tabs">
+	<ul>
+		<li><a href="#tabs-1">{% trans "Main" %}</a></li>
+		<li><a href="#tabs-2">{% trans "Add idea" %}</a></li>
+		<li><a href="#tabs-3">{% trans "Rate ideas" %}</a></li>
+		<li><a href="#tabs-4">{% trans "All ideas" %}</a></li>
+		<li><a href="#tabs-5">{% trans "Top rated" %}</a></li>
+		<li><a href="#tabs-6">{% trans "My ideas" %}</a></li>
+	</ul>
+
+	<div id="tabs-1">
+<h2>{% trans "Idea Match" %}</h2>
+
+    <div id="user_msg1" style="display:none;"> 
+{% trans "To log in with your Facebook account, press the Connect button (if you don't have a Facebook account, you will get the option to register):" %}
+<br />
+<br />
+<fb:login-button onlogin="update_user_box()"></fb:login-button>
+<br />
+    </div> <!-- user_msg1 -->
+
+
+    <div id="user_msg2" style="display:none;"> 
+          <div style='margin: 0em 1em 1em 0.5em; float: left;'><fb:profile-pic uid='loggedinuser' facebook-logo='true'></fb:profile-pic></div>
+                   {% trans "Welcome," %} <fb:name uid='loggedinuser' useyou='false'></fb:name>. {% trans "You are logged in with your Facebook account."%}
+<br />
+<br />
+    </div>  <!-- user_msg2 -->
+
+  
+<h1>{{ match_title }}</h1>
+
+<p>{{ match_desc }}</p>
+
+<p>{{ match_extended_desc }}</p>
+
+<p><b>ALSO show</b> how many ideas are pending evaluation, and how many gold coins (votes) are left.</p>
+
+<a id="add_idea_link">{% trans "add idea" %}</a>
+
+<a id="rate_ideas_link">{% trans "rate ideas" %}</a>
+
+	</div>
+
+	<div id="tabs-2">
+
+<div class="not_logged_in">
+please login to do this
+</div>
+
+<div class="logged_in">
+{% include "add_idea.inc" %}
+</div>
+
+        </div> <!-- tabs-2 -->
+
+	<div id="tabs-3">
+
+<div class="not_logged_in">
+please login to rate ideas
+</div>
+
+<div class="logged_in">
+
+<div id="rate_ideas_div">
+</div>
+
+</div>
+        </div> <!-- tabs-3 -->
+
+	<div id="tabs-4">
+
+<div class="not_logged_in">
+If match is for public view, show all ideas in chrono order
+</div>
+
+<div id="all_ideas_div" class="logged_in">
+    <div class="all_ideas_column" id="nr_ideas_div">
+       <div class="all_ideas_header">{%trans "Not rated"%}</div>
+       <div id="all_ideas_nr"></div>
+    </div>
+    <div class="all_ideas_column" id="great_ideas_div">
+       <div class="all_ideas_header">{%trans "Great"%}</div>
+       <div id="all_ideas_great"></div>
+    </div>
+    <div class="all_ideas_column" id="good_ideas_div">
+       <div class="all_ideas_header">{%trans "Good"%}</div>
+       <div id="all_ideas_good"></div>
+    </div>
+    <div class="all_ideas_column" id="bad_ideas_div">
+       <div class="all_ideas_header">{%trans "Bad"%}</div>
+       <div id="all_ideas_bad"></div>
+    </div>
+</div>
+
+</div>
+	<div id="tabs-5">same for logged-in and non-logged-in
+</div>
+
+	<div id="tabs-6">
+<div>please login to do this</div>
+</div>
+
+
+    </div> <!-- tabs -->
+
+</div>  <!-- all_tabs -->
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,7 @@
+{% load i18n %}
+
+BODY!!!!!!!!!
+<<<{{ foo }}>>>
+<<<{{ letter.body }}>>>
+<<<{{ letter_key }}>>>
+

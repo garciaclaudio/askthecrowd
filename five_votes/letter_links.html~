@@ -1,0 +1,35 @@
+{% load i18n %}
+
+<h3>{% trans "Your letters:" %}</h3>
+
+    <div class="span-7 colborder">
+        <div id="existing_letter"></div>
+        {% for letter in user_letters %}
+
+<b>{{letter.title }}</b><br />
+
+<nobr><a id="new_letter_link" target="_blank" href="{{ letter.url_name }}">http://open-letter-to.appspot.com/{{ letter.url_name }}</a></nobr><br />
+
+[<a href='edit' id='edit_letter_link' onclick="show_edit_dialog( '{{ letter.letter_key }}' ); return false;">{% trans "Edit" %}</a>]
+
+[<a href='add_trans' id='add_trans_link' onclick="show_letter_trans_dialog( '{{ letter.letter_key }}', 'add_trans' ); return false;"><nobr>{% trans "Add translation" %}</nobr></a>]
+
+[<a href='manage' id='manage_sigs_link' onclick="show_manage_sigs_dialog( '{{ letter.letter_key }}' ); return false;"><nobr>{% trans "Manage signatures" %}</nobr></a>] 
+
+[<a href='delete' id='delete_letter_link' onclick="show_del_dialog( '{{ letter.letter_key }}' ); return false;">{% trans "Delete" %}</a>]
+
+{% if letter.num_trans %}
+<br \>
+Translations: <br \>
+        {% for ttt in letter.letter_trans %}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+{% lang2name ttt.lang %}:  [<a href='edit' id='edit_letter_link' onclick="show_edit_dialog( '{{ letter.letter_key }}' ); return false;">{% trans "View" %}</a>] [<a href='delete' id='delete_letter_link' onclick="show_del_trans_dialog( '{{ letter.letter_key }}', '{{ttt.lang}}' ); return false;">{% trans "Delete" %}</a>] <br \>
+        {% endfor %}
+{% endif %}
+
+<hr />
+
+        {% endfor %}
+
+    </div>  <!-- span-7 -->
+
