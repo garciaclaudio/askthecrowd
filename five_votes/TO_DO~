@@ -1,0 +1,883 @@
+
+
+
+
+Como iniciar un nuevo proyecto, partiendo de open-letter-to.
+
+
+1. Copy new app id into index.html, tabbed_letter2.html and ajax.py
+
+2. Copy new secret into ajax.py.
+
+3. Change application name in app.yaml.
+
+
+
+
+==========================
+
+
+
+
+Esta buenísima esta página, muy completa y muy bien hecha.
+
+
+http://angel.co
+
+
+
+
+
+======================================================================
+Respuestas y votos
+
+
+
+
+======================================================================
+
+Posibilidades:
+
+
+    3. respuestas y votos, in-FB app (para implementar por ejemplo, Quién es el regiomontano mas famoso?) --like ask-the-crowd
+
+    4. I-bring-you, ant-trade a website for people to request travelers to bring them stuff from their places of origin. In-FB app. Needs: database with countries, provinces, cities > 50K people.
+
+    1. ask-the-crowd con ideas para mejorar mexico (standalone website, with my ideas).
+-- para mexicanos en el extranjero
+-- para asociaciones de exalumnos, funcionaría?
+
+    2. video blog con ideas para mejorar mexico.
+
+    5. Full ask-the-crowd.
+
+    6. Poems of the world (poetry translation website).
+
+    7. Ponzi for good. A good deed is suggested. You have to do it and convince 5 others to also do it. E.g. legalize-drugs campaign. Cross-border, for MEX, US and the whole of latin-america.
+
+    8. Best of...
+       (people can add authors/musicians and lists (with links) to their works, and vote for the best works. E.g. Best of what composer page.
+
+
+======================================================================
+
+DEPLOYING (files to change)
+
+index.html
+tabbed_letter2.html
+ajax.py
+
+
+======================================================================
+
+
+==================================================
+==== AntTrade, marketing message
+==================================================
+
+USER INTERFACE / MARKETING MSG
+
+Make someone happy. Bring them something from home.
+
+How this works:
+
+Chuma lives in Amsterdam, but grew up in Egypt. He misses sesame paste from home. 
+
+He logs in to AntTrade and requests any traveler coming from Egypt to Amsterdam to bring him two jars of his favorite brand sesame paste.  (http://imgs.tootoo.com/b8/6e/b86e15b2293ad71728fdcd2fc75f2e94.jpg)
+
+In return, he offers to pay for the cost of the paste, and a boxed gift of Dutch chocolates.
+
+Darius lives in Egypt. He travels frequently to Amsterdam on business. He logs in to AntTrade and offers to carry Chuma's sesame paste along in his next trip. They arrange that Chuma will pick up the paste at Darius' hotel in one evening of his stay.
+
+Chuma gets his yummy sesame paste. Darius is happy to help and receives a box of chocolates to take home!
+
+The world is a better place. [Smiling world image]
+
+
+On the left:
+    ----
+If you travel:
+
+1. Check if someone in your destination wants something from your location.
+2. Offer to bring what they want!
+
+[Start here!]
+
+    ----
+
+If you live far away from home:
+
+1. Enter your location, what you want and what city or country it can be brought from.
+
+2. Enter what you can give in return for the favor.
+
+[Start here!]
+
+
+==================================================
+==== UI
+==================================================
+  
+I am traveling and can bring stuff along for others.
+
+  ==> Where do you depart from? (Airport code / Country - Province/State - City)
+
+(get from http://www.maxmind.com/app/worldcities)
+
+ Select Country (doable)
+ Load / Select State (sub-country region)
+ Select City
+
+  ==> Where are you traveling to? (one or more destinations) 
+
+ Select Country (doable)
+ Load / Select State (sub-country region)
+ Select City [Add]
+
+Selecting a country loads state (if state available in Db)
+Selecting a state loads cities
+Selecting a city and clicking add adds the city into a list.
+
+[AQUI VOY]
+
+I want someone to bring something for me.
+
+
+
+AntTrade
+
+A website to:
+
+Have people request travelers to bring them stuff from their places of origin.
+
+UI:
+
+For people who need stuff, a way to express the need:
+
+   From (country - city - region), please bring me (this and that).
+
+   I will pay the value of the merchandise (in Euro) and also (X euro/USD/etc) comission for bringing it.
+
+   (an expiry date)
+
+Also, to contact travelers who have stated they're going somewhere and ask them to bring something for them.
+
+
+For travelers:
+
+A form to enter where they're departing from and where they're going to, to state that they're available to bring something along.
+
+Also, search for recipients in the city they're going to, and offer to bring their stuff to them.
+
+
+======================================================================
+
+LanguageTutor
+
+A marketplace for people to offer their services as language tutors.
+
+============================================================
+
+
+ciencia, sociedad y políticas públicas
+
+
+Gracias, David!
+
+Ya instalé el correo "contacto@sialestadioperoenotrolado.org" en la aplicación.
+
+Pueden ir a la página de "correos masivos" (http://save-la-pastora.appspot.com/correos.html) y probarla. Pongan un mensaje de prueba e ingresen sus propios correos en los destinatarios. Denle "enviar" y verán como les llegan emails con "contacto@sialestadioperoenotrolado.org" como remitente.
+
+Úsese con cuidado. No la divulgen porque cualquiera que tenga acceso a ella puede enviar correos desde "contacto@sialestadioperoenotrolado.org".
+
+También cambié el correo remitente en la página misma (http://save-la-pastora.appspot.com), de manera que también FEMSA y Heineken reciban los correos de los firmantes con contacto@sialestadioperoenotrolado.org como remitente.
+
+Lo que sigue ahora es definir el texto de la carta, y hacer pruebas con el mismo enviándolas a nostros mismos desde la herramienta.
+
+Saludos,
+
+Claudio
+
+
+
+
+
+
+
+
+
+ongoing req: GET /ajax.html?action=init_tabs;fbuid=null Accept: application/json, text/javascript, */* Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7 Accept-Language: en,es;q=0.8,pt;q=0.6,pt-br;q=0.4,en-us;q=0.2 Cookie: bd0a060ac2cb439c65254a9152344289_expires=1267463223; bd0a060ac2cb439c65254a9152344289_session_key=3.dMzv66cw4WEhSK_sSwT1fQ__.3600.1267441200-518261219; bd0a060ac2cb439c65254a9152344289_ss=0GOZvzNC4EOLmlV0PMgSdw__; bd0a060ac2cb439c65254a9152344289_user=518261219; bd0a060ac2cb439c65254a9152344289=6cf52ba7519442d6d305733a30300904 Host: askthecrowd.appspot.com Referer: http://askthecrowd.appspot.com/ User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.17) Gecko/2010010604 Ubuntu/8.10 (intrepid) Firefox/3.0.17 GTB6,gzip(gfe) X-Requested-With: XMLHttpRequest 
+
+
+
+
+	gzip,deflate
+Accept-Charset	ISO-8859-1,utf-8;q=0.7,*;q=0.7
+Keep-Alive	300
+Connection	keep-alive
+Cookie	bd0a060ac2cb439c65254a9152344289=03007b63b34f3ee273e33b4ad0d3fc7a; bd0a060ac2cb439c65254a9152344289_user=518261219; bd0a060ac2cb439c65254a9152344289_ss=EViWFcvHrMG9RnKMiAtJoA__; bd0a060ac2cb439c65254a9152344289_session_key=3.WdFFMADxQekzx2s8MSVlfQ__.3600.1267318800-518261219; bd0a060ac2cb439c65254a9152344289_expires=1267318800; django_language=es; fbsetting_bd0a060ac2cb439c65254a9152344289=%7B%22connectState%22%3A1%2C%22oneLineStorySetting%22%3A3%2C%22shortStorySetting%22%3A3%2C%22inFacebook%22%3Afalse%7D
+
+	bd0a060ac2cb439c65254a9152344289=03007b63b34f3ee273e33b4ad0d3fc7a; bd0a060ac2cb439c65254a9152344289_user=518261219; bd0a060ac2cb439c65254a9152344289_ss=EViWFcvHrMG9RnKMiAtJoA__; bd0a060ac2cb439c65254a9152344289_session_key=3.WdFFMADxQekzx2s8MSVlfQ__.3600.1267318800-518261219; bd0a060ac2cb439c65254a9152344289_expires=1267318800; django_language=es; fbsetting_bd0a060ac2cb439c65254a9152344289=%7B%22connectState%22%3A1%2C%22oneLineStorySetting%22%3A3%2C%22shortStorySetting%22%3A3%2C%22inFacebook%22%3Afalse%7D
+
+
+
+var disabled = $('.tabs').tabs('option', 'disabled');
+
+
+http://martinjansen.com/2008/10/20/django-settings-files-for-development-and-production/
+
+================================
+i18N (http://makeyjl.blogspot.com/2009/02/using-djangos-i18n-in-google-app-engine.html)
+================================
+
+cd /home/claudio/google_appengine/askthecrowd
+
+PYTHONPATH=/home/claudio/google_appengine/lib/django/ /home/claudio/google_appengine/lib/django/django/bin/make-messages.py -l en
+
+PYTHONPATH=/home/claudio/google_appengine/lib/django/ /home/claudio/google_appengine/lib/django/django/bin/make-messages.py -l es
+
+PYTHONPATH=/home/claudio/google_appengine/lib/django/ /home/claudio/google_appengine/lib/django/django/bin/compile-messages.py 
+
+================================
+
+
+
+Completed Questions
+========================================
+
+Similar to Ongoing questions, but non-editable.
+
+====================
+
+Ongoing questions
+
+(if there's more than one question taking place, show a menu)
+
+Then, for each question,
+
+We need to fit:
+
+   Link to menu (<all questions>)
+
+   (upper-left col)Question (a summarized version, when clicked, it gets loaded in idea viewer) --invite more friends link gets shown to question owner, shows a popup form. Also "edit question" is available before participation starts. 
+
+   (left col) Idea summaries - when clicked, idea is selected and loaded in the idea viewer
+
+   (right col)Idea viewer shows ideas, accepts per-idea comments, a-la-facebook.
+
+   
+
+================
+
+After submitting a new question, a message will appear:
+
+Your question is created. We have sent an email invitation to each of your friends.
+	
+You can invite more friends with the "invite more friends" link in your question's page. 
+
+You can also make changes to your question's settings before participation starts.
+
+You can now <go to your question's page> or <create another question>.
+
+A direct link to your question is: htttp://fdasdasd.
+
+
+HOW TO IMPLEMENT:
+
+   Each invitation goes to a table keyed by question_id and email, with a generated invitation_id. Invitation text contains a link with the invitation_id.
+
+When sending invitations, we do:
+
+   With question id, email, look for a record in Invitation table.
+   If there is, reuse invitation_id.
+   Else create new record.
+   Send invitation.
+
+
+
+When arriving with invitation id...
+  Wait for user to log in to FB.
+  Send FB-id, invitation id back to server.
+
+  Look up email, question id in invitation table.
+
+  Create User if needed. Update email address of user.
+
+  Create Question-User if not already there.
+
+  Return question_id, question data, remaining votes to client.
+
+
+
+
+
+===============
+
+
+<p>
+En email invitation will be sent to participants. Then, after logging-in with their facebook accounts, they will be assigned an alias, and immediately they will be able to provide and discuss answers under this alias. They can submit answers until the last date for answers, and after that they will be able to cast 10 votes for the best answers.
+</p>
+
+<p>
+The rules of the system are:
+</p>
+
+<ul>
+<li>users participate under an alias</li>
+
+<li>users can vote only after the last date for answers</li>
+
+<li>vote counts are shown only after voting is closed</li>
+
+<li>votes are kept secret (no one is informed of who voted for what)</li>
+
+<li>real identities are revealed at the end (so that the authors of the answers can be known)</li>
+
+<li>participants can invite others to participate</li>
+
+<li>question is open for public view, but only invited friends can participate</li>
+
+<p>These rules can be changed using the advanced-view questionnaire.</p>
+
+
+
+
+
+and they will immediately be able to enter answers and discuss them.
+
+participating
+
+The will be
+
+
+
+When they are not logged in, they can only see the main page, or browse public questions (public questions can be browsed via google). Tabs are grayed out until users log in.
+
+ arrive with no login, 
+
+
+Log in via facebook-connect, every time. (not google user)
+
+If a user arrives by email link, ask them to log in via FB account, and save their email address.
+
+Create users when they post their 1st idea, comment, or question.
+
+
+Next, put "connect" button in front page.
+
+
+
+
+
+"Quien es el regiomontano mas famoso?"
+
+
+Ayer llevé a Claudio al Dr. en la "bakfiets" (bici de caja). Seis kilómetros para llegar, cuatro mas para ir a la única farmacia abierta a esas altas horas de la noche (7 p.m.) y tres mas para volver a la casa... Eso sí, ningún embotellamiento.
+
+Además, tuve que enumerarle todos los síntomas tremendos de la otitis de Claudio a la sra. de la farmacia, para convencerla de que sí me vendiera el medicamento peligroso (Amoxil!!) que me había recetado el doctor.
+
+
+WHO TELLS THE LARGEST LIES
+
+THIS IS NOT MULTI-LEVEL CROWD SOURCING...
+ALSO, IT WON'T SUPPORT "start when X people agree to participate".
+
+UI IDEA: Each idea shows the FB picture of idea proponent (or a drawing corresponding to the alias).
+
+DELETE IDEA? Necessary?
+MERGE IDEAS?
+
+User: ???
+  id
+  FB id   (string)
+  created (date)
+  email_notifications
+  name    (not needed)
+  email   (not needed)
+  added_app   (yes/no)
+
+Question:
+  id
+  owner
+  question_text
+  extended_desc
+  ideas_last_date  
+  closing_date
+  voting_from_beginning  (1 = from_beginning, 0 = after_ideas_last_date)
+
+  show_votes_as_they_happen (as_they_happen vs. at_end)
+  show_who_votes_for_what (no, at_end, as_they_happen)
+
+  use_aliases
+  reveal_alias_identities 
+  question_prize
+  users_can_invite_others
+  public_view
+  public_participation
+
+Question_Users
+  question_id
+  user_id
+  votes_left : 10
+
+Question Invitations
+  question_id
+  email
+  invitation_id
+
+Idea
+  id
+  question_id
+  idea_text (one paragraph)
+  extended_description
+
+IdeaVote
+  user_id
+  idea_id
+  num_votes  
+
+IdeaComment
+  id
+  idea_id
+  comment
+
+QuestionComment
+  id
+  question_id
+  comment
+
+
+
+Me dijo Claudio: Soñé que venía un leopardo. --Y que pasó luego? Tu le echabas agua con la pistola. --Y luego que hacía? Se convertía en un príncipe!
+
+
+
+Hello, webapp World!
+REQUEST:
+GET /?fb_sig_in_iframe=1&fb_sig_iframe_key=c16a5320fa475530d9583c34fd356ef5&fb_sig_locale=en_US&fb_sig_in_new_facebook=1&fb_sig_time=1257030109.758&fb_sig_added=1&fb_sig_profile_update_time=1256245817&fb_sig_expires=1257120000&fb_sig_user=518261219&fb_sig_session_key=2.cgi4x7BA39WlwZQ_NHa8Vg__.86400.1257120000-518261219&fb_sig_ss=vDpR0lvowrDvotxUmJjDEQ__&fb_sig_ext_perms=auto_publish_recent_activity&fb_sig_api_key=bd0a060ac2cb439c65254a9152344289&fb_sig_app_id=155252522377&fb_sig=4eb758e5adb6821b61c9193a15b71ec3
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Charset: ISO-8859-1,utf-8;q=0.7,*;q=0.7
+Accept-Language: en-us,en;q=0.5
+Host: askthecrowd.appspot.com
+Referer: http://apps.facebook.com/askthecrowd/
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.0.14) Gecko/2009090216 Ubuntu/8.10 (intrepid) Firefox/3.0.14,gzip(gfe)
+
+
+AND arguments:
+{u'profile_update_time': u'1256245817', u'added': u'1', u'ss': u'vDpR0lvowrDvotxUmJjDEQ__', u'ext_perms': u'auto_publish_recent_activity', u'expires': u'1257120000', u'session_key': u'2.cgi4x7BA39WlwZQ_NHa8Vg__.86400.1257120000-518261219', u'app_id': u'
+
+155252522377
+', u'locale': u'en_US', u'user': u'518261219', u'iframe_key': u'c16a5320fa475530d9583c34fd356ef5', u'time': u'1257030109.758', u'fb_sig': u'4eb758e5adb6821b61c9193a15b71ec3', u'in_iframe': u'1', u'in_new_facebook': u'1', u'api_key': u'bd0a060ac2cb439c65254a9152344289'}
+
+
+
+
+Next steps: 1. Uploading minifb.py and testing calling FB servers. Define authorize-callbacks for when users add the application, and test retrieving authorized-only content.
+
+
+Users
+   Question
+      Idea
+
+
+
+1. Writing a Google-appengine app.
+
+My APP at Goog:
+
+https://appengine.google.com/dashboard/nonedeployed?app_id=askthecrowd
+
+Testing my app:
+
+claudio@claudio-laptop:~/google_appengine$ ./dev_appserver.py askthecrowd
+
+Updating my app:
+
+claudio@claudio-laptop:~/google_appengine$ ./appcfg.py update askthecrowd
+
+
+claudio@claudio-laptop:~/google_appengine$ ./appcfg.py update askthecrowd
+Scanning files on local disk.
+Initiating update.
+Email: claudio.garcia@stanfordalumni.org
+Password for claudio.garcia@stanfordalumni.org: oneon1
+
+
+
+(what first?)
+
+2. Writing a FB app?
+
+My APP at FB:
+
+http://www.facebook.com/developers/editapp.php?app_id=155252522377
+
+http://wiki.developers.facebook.com/index.php/Creating_your_first_application
+
+Using gappengine:
+
+   http://wiki.developers.facebook.com/index.php/Python
+   http://github.com/sciyoshi/pyfacebook/blob/master/README
+   http://www.djangosnippets.org/snippets/1498/
+   http://code.google.com/p/theslap-engine/source/browse/trunk/main.py
+
+
+What we need?
+
+  A Canvas -- where the interaction takes place
+
+  a dashboard (top nav bar or menu)
+
+  Requests --app must send request to users that will participate
+
+
+
+
+
+
+IdeaStorm FB App (super simple)
+
+Set profile:
+
+When a user generates an idea, ask if they want to publish their idea to their profile.
+
+Dashboard (or main page), has N tabs:
+
+  Tabs are ajax loaded, so users can move from one to another without losing state in the previous one ??
+
+0. Front page? promotional bit... Say, "hello User" or prompt to add/authorize this app.
+
+1. New (create) question. (a wizard?)
+
+    The Question (text field, 160 chars limit)
+        Plus extended description (optional)
+
+    Ideas can be submitted until: date-selector
+    Voting can happen until: date-selector
+        OR when all votes are cast, whichever happens firts.
+
+    Votes will be visible to all as soon as they happen.
+    VS
+    Votes will be revealed at the end, (only display number of votes cast). (radio button)
+
+    Who voted for what will not be shown, even to the question creator
+    VS
+    Who voted for what will be shown at the end, to all participants.
+    VS
+    Who votes for what will be shown as soon as votes happen (most fun)
+
+    Participants must use aliases
+       Reveal identities at the end? (yes / no)
+
+    The person who comes up with the best idea will win: XXXX [optional]
+
+    Friends can invite other friends to participate (yes | no)
+
+    Select friends to invite to participate. (selection thingy)
+    VS. Invite ALL my friends (spammy?)
+
+    SUBMIT button
+
+2. Ongoing Questions (num)
+      Shows a list of questions, if there's only one ongoing, that is shown.
+      Clicking on a question, expands it... (shows question details, expiration times, etc.)
+         They see a "remaining votes" counter
+         They see ideas
+            Users can add/remove votes to an idea (click +/-) 
+                and the remaining votes are updated.
+            Users can comment on an idea.
+         They see a text field to add new idea.
+
+3. Past Questions (show if there are), default if 0 ongoing.
+
+4. Settings (configuración)
+
+   Get email notifications when new ideas are posted, or comments are added to your ideas (also ask this on "landing page", when users first subscribe to the app.
+
+   Get email notification with results when voting finishes.
+
+
+
+What, where?
+
+
+
+We are going to discuss and decide on: X
+All participants can submit ideas.
+Each participant gets 10 votes, to select the best ideas.
+
+Ideas can be provided until: X date.
+Voting can happen until:     X date.
+
+Do you want to participate?
+
+
+
+
+
+
+http://blog.patrickcrosby.com/2008/04/20/Write-Facebook-apps-using-Google-AppEngine.html
+
+
+
+http://code.google.com/appengine/
+
+http://makeyjl.blogspot.com/2009/02/using-djangos-i18n-in-google-app-engine.html
+
+http://yjltest.appspot.com/i18n?cookie_django_language=en
+
+http://code.google.com/appengine/articles/shelftalkers.html
+
+http://dollarmani-facebook.blogspot.com/2008/09/facebook-applications.html
+
+
+http://wiki.developers.facebook.com/index.php/Python
+
+
+
+
+CREATE TABLE Translation (
+  id         int(10)         unsigned NOT NULL auto_increment,
+  language   char(2)         NOT NULL,
+  tmpl_name  char(20)        NOT NULL,
+  tag        varchar(80)    NOT NULL,
+  value        text character set utf8,
+  needs_update enum('yes','no') NOT NULL default 'no',
+  en_original  text character set utf8,
+  last_change timestamp NOT NULL default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP,
+  created     timestamp NOT NULL,
+  PRIMARY KEY  (id),
+  UNIQUE KEY translation (tmpl_name,language,tag)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+
+
+mysql -uroot -p oneon1
+
+GRANT ALL ON idea.* TO 'idea'@'localhost' IDENTIFIED BY 'oneon1';
+
+mysql -uidea -poneon1
+
+
+sudo perl -MCPAN -eshell
+sudo /etc/init.d/apache2 restart
+sudo /usr/sbin/apache2ctl restart
+
+claudio@claudio-laptop:~/pp/Idea$ ./script/idea_create.pl view HTML::Template HTML::Template
+
+
+
+Main page:
+
+1. Create hello world template.
+
+Hello world
+
+2. Create translation page (in English) to translated hello world page. (Translate page, selectors for language, and template name. Shows all tags in the template + English version.)
+
+3. Create user, inserts user in users table, sends verification email, sends user to landing "home" page.
+
+4. Add user rights. User, admin, translator. Only allow admins and translators to see the translate page.
+
+5. Develop the application.
+
+
+
+
+
+
+
+
+
+
+
+
+Catalyst
+Apache
+Modperl
+Jquery
+MySQL
+Moose
+
+
+
+
+1. define templates
+
+2. make a script to extract TMPL_VAR texts into a translation targets table. The script will extract all vars, except those that are real program variables, which will start with a certain prefix, such as "b_".
+
+   Every time new texts are added to a template, this script can be run to make the new texts available for translation.
+ 
+3. Make a tool to allow users to populate the Translations table.
+
+4. When displaying the website, retrieve translations on the fly from the database, only the ones needed for the page being retrieved.
+
+5. Merge translations and template, and voila!
+
+Templates with ==>HTML::Template
+
+scripts
+
+
+
+
+
+
+
+
+Make a really simple app and put it live on a shared hosting site, or on Jose's server.
+
+
+templating system
+
+HTML::Template ?
+
+Simple script will generate po files from the templates
+
+Simple tool will allow translating of
+
+
+
+
+
+A page where users enter their question (task):
+
+1. Log in, or create an account.
+
+   Enter your email address
+
+   Enter your name, last name (optional)
+
+   Enter captcha
+
+   Check your mail, click link to retrieve password and log in
+
+
+2. Once logged in, users see:
+
+    1. link to create new tournament
+
+    2. a list of active tournaments you're a member of
+
+    3. List of active ideas from you
+
+    4. List of upcoming tournaments.
+
+    5. List of past tournaments (five or so, with a "see more" link)
+
+
+Creating a tournament
+
+
+
+
+
+
+==================================================
+
+
+MIL PESOS PARA == CREATE VALUE FOR THE GROUP
+
+
+askyourpals ?
+
+>>> MIL MEXICANOS PROPONEN <<<
+
+
+askthecrow.appspot.com
+
+
+thecrowdisright
+
+ideas.com
+
+crowdthingy.com
+
+smartcritters.com
+
+ideacritters.com
+
+smartcritters.com
+
+critterschoice.com
+
+chocochoose.com
+
+
+
+Ask a question, invite your friends to provide and discuss ideas, and vote for the best!
+
+Start by creating a question, 
+
+1. Creating a question, invite your friends, an
+
+then
+
+
+
+Where to go, what to do, when to do it?
+
+Your friend and colleagues know better!
+
+FUN or WORK
+
+Need bright ideas?
+
+What can a group do together?
+
+ Let the group decide!
+
+
+1. Enter your question, or group of questions. E.g. a) Where do we meet? b) At what date and time?
+
+   E.g. How can we improve our product?
+
+   Enter an (optional) reward for best idea. E.g. Best idea gets a weekend in Rome.
+
+   Set time limits for putting ideas forward, and for voting for them.
+
+   Enter whether participants remain anonymous while the voting takes place, and afterwards.
+
+
+3. Invite your friends or colleagues to participate! 
+
+Each of them can add ideas and explain why they're great, and then vote for the best. Users can discuss the merits of each idea.
+
+
+Too much: Gathering date selector: A date range is defined. Each critter puts a token on those days she is available, etc.
+
+
+
+
+OTHER IDEAS:
+    Skype language lessons exchange site
+
+
+
+
+
+Er is een fout opgetreden
+U hebt reeds betaald!
+bestelling
+
+leverancier 	CONCERTGEBOUW NV
+kenmerk 	63022510
+datum 	01-02-2009
+omschrijving 	63022510
+bedrag 	EUR 	161.50
+
+
+==================================
+
+1. Add question.
+
+2. Who will participate? 
+
+   Enter email addresses of participants, or select from facebook friends list.
+
+3. 
+
+
+
+
+===== tournament, or ???
