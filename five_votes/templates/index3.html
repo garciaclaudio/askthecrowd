@@ -69,11 +69,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 </style>
 
-        <script type="text/javascript">
-//            $(function(){
-//               alert('hello from jquery');
-//            });
-        </script>
+        {% include "control.inc" %}
 
     </head>
 <body>
@@ -171,10 +167,10 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
                 <label for="question">{% trans "Your question" %}</label><br />
                 <textarea class="text" name="question" id="question" rows="2" cols="45"></textarea>
             </div>
-
-            <button class="my_button">{% trans "Create" %}</button>
+            <button id="create_question_button" class="my_button">{% trans "Create" %}</button>
         </form>
     </div>
+
     <div id="question_created" style="display:none;"> 
         <p>¡Pregunta creada! La página de tu pregunta es:</p>
         <p>http://apps.facebook.com/mipregunta/<span id="new_question_id_num"></span></p>
