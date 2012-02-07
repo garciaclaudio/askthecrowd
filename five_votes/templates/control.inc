@@ -10,16 +10,17 @@ $(function(){
              if( data.error ) {
                  alert( data.error );
              } else {
+
+alert(data.foobar);
 //	         $("#add_idea_form").hide();
 //                 $("#thanks_for_adding_div").show();
              }
          }
      });
 
-    $('#create_question_button').click(
+    $('#create_question_button').click( function() {
           $('#question_form').submit();
-    );
-
+    });
 
 });
 

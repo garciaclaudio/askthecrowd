@@ -156,8 +156,8 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 {% include "lang_selector.html" %}
 
 <div id="main_container" >
-    <div id="question_form">
-        <form id="create_question" action="/ajax" method="post">
+    <div id="question_form_div">
+        <form id="question_form" action="/ajax.html" method="get">
             <div style="display: none">
               <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
               <input type="hidden" name="action" value="create_question">

@@ -395,8 +395,24 @@ class MainPage(BaseHandler):
         else:
             self.render(u'index3')
 
+
+class AjaxHandler(I18NRequestHandler):
+
+    def get(self):
+        result_struct = { 'error' : '1' }
+        action = self.request.get('action')
+
+        if( action == 'create_question' ):
+            result_struct = { 'foobar' : 'baz' }
+
+        self.response.headers['Content-Type'] = 'application/json'
+        seri = json.dumps( result_struct )
+        self.response.out.write(seri)
+
+
 def main():
     routes = [
+        ('/ajax.html', AjaxHandler),
         (r'/', MainPage),
     ]
     application = webapp.WSGIApplication(routes,

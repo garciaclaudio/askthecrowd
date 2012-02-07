@@ -22,8 +22,8 @@ handlers:
   static_files: test_fb.html
   upload: test_fb.html
 
-- url: /ajax.html
-  script: ajax.py
+#- url: /ajax.html
+#  script: ajax.py
 
 - url: /.*
   script: canvas3.py
