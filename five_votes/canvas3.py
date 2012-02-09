@@ -38,6 +38,9 @@ from google.appengine.ext.webapp import util, template
 from google.appengine.runtime import DeadlineExceededError
 from random import randrange
 from uuid import uuid4
+from BeautifulSoup import BeautifulSoup, Comment
+
+
 import Cookie
 import base64
 import cgi
@@ -53,6 +56,28 @@ import urllib
 # bring in the lang2name tag
 template.register_template_library('templatetags.myfilters')
 
+
+
+def truncate( value ):
+    # be safe
+    return value[0:25000]
+
+#
+# http://djangosnippets.org/snippets/1655/
+#
+def sanitize_html(value):
+    valid_tags = 'em strong h1 h2 h3'.split()
+    valid_attrs = 'href src'.split()
+    soup = BeautifulSoup(value)
+    for comment in soup.findAll(
+        text=lambda text: isinstance(text, Comment)):
+        comment.extract()
+    for tag in soup.findAll(True):
+        if tag.name not in valid_tags:
+            tag.hidden = True
+        tag.attrs = [(attr, val) for attr, val in tag.attrs
+                     if attr in valid_attrs]        
+    return truncate(soup.renderContents().decode('utf8').replace('javascript:', ''))
 
 def htmlescape(text):
     """Escape text for use as HTML"""
@@ -396,14 +421,27 @@ class MainPage(BaseHandler):
             self.render(u'index3')
 
 
-class AjaxHandler(I18NRequestHandler):
+class AjaxHandler(BaseHandler):
+
+    def handle_new_question(self):
+        question_text = sanitize_html( self.request.get('question') )
+        error = ''
+        if question_text == "":
+            error = '* ' + _("Question text cannot be empty.");
+        if error:
+            result = { 'error' : error }
+        else:
+            result = { 'error' : 0,
+                       'question_text' : str(question_text),
+                       }
+        return result
 
     def get(self):
         result_struct = { 'error' : '1' }
         action = self.request.get('action')
 
         if( action == 'create_question' ):
-            result_struct = { 'foobar' : 'baz' }
+            result_struct = self.handle_new_question()
 
         self.response.headers['Content-Type'] = 'application/json'
         seri = json.dumps( result_struct )

@@ -11,16 +11,12 @@ $(function(){
                  alert( data.error );
              } else {
 
-alert(data.foobar);
+alert(data.question_text);
 //	         $("#add_idea_form").hide();
 //                 $("#thanks_for_adding_div").show();
              }
          }
      });
-
-    $('#create_question_button').click( function() {
-          $('#question_form').submit();
-    });
 
 });
 
