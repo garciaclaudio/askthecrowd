@@ -119,26 +119,25 @@ class User(db.Model):
         self.friends = [user[u'id'] for user in me[u'friends'][u'data']]
         return self.put()
 
-
-class Run(db.Model):
+class Question(db.Model):
     user_id = db.StringProperty(required=True)
-    location = db.StringProperty(required=True)
-    distance = db.FloatProperty(required=True)
-    date = db.DateProperty(required=True)
+    created = db.DateTimeProperty(auto_now=True)
+    question_text = db.StringProperty()
 
     @staticmethod
     def find_by_user_ids(user_ids, limit=50):
         if user_ids:
-            return Run.gql(u'WHERE user_id IN :1', user_ids).fetch(limit)
+            return Question.gql(u'WHERE user_id IN :1', user_ids).fetch(limit)
         else:
             return []
 
-    @property
-    def pretty_distance(self):
-        return u'%.2f' % self.distance
+#
+#    @property
+#    def pretty_distance(self):
+#        return u'%.2f' % self.distance
+#
 
-
-class RunException(Exception):
+class QuestionException(Exception):
     pass
 
 
@@ -431,8 +430,14 @@ class AjaxHandler(BaseHandler):
         if error:
             result = { 'error' : error }
         else:
+            new_question = Question(
+                user_id=self.user.user_id,
+                question_text = question_text
+            )
+            new_question.put()
             result = { 'error' : 0,
                        'question_text' : str(question_text),
+                       'question_key' : str(new_question.key())
                        }
         return result
 
