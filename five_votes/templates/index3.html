@@ -7,6 +7,7 @@
 		<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
 		<script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
                 <script type="text/javascript" src="js/jquery.form.js"></script>
+                <script type="text/javascript" src="js/jquery.tmpl.js"></script>
 
 <style type="text/css">
 
@@ -67,86 +68,15 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 	-o-transition: all 0.1s ease-in-out;
 }
 
+#add_answer_link {
+	font-size: 140%;
+}
+
 </style>
-
-        {% include "control.inc" %}
-
     </head>
 <body>
 
-   <div id="fb-root"></div>
-
-   <script>
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId      : '331909936825023',
-            channelUrl : '//five-votes.appspot.com/channel.html',
-            status     : true, 
-            cookie     : true,
-            xfbml      : true
-          });
-
-          //
-          // when the user clicks the login button, this event is fired,
-          // response contains the user data, but we prefer to reload
-          // so that a user is created
-          //
-          FB.Event.subscribe('auth.login', function(response) {
-              // Reload the entire page. Could also do an Ajax request and dynamically
-              // update the already loaded page.
-              window.location.reload(true);
-          });
-//
-//          FB.ui({ method: 'feed', 
-//                  message: 'Facebook for Websites is super-cool'});
-
-            FB.getLoginStatus(function(response) {
-
-              if (response.status === 'connected') {
-                // the user is logged in and connected to your
-                // app, and response.authResponse supplies
-                // the user's ID, a valid access token, a signed
-                // request, and the time the access token 
-                // and signed request each expire
-                var uid = response.authResponse.userID;
-                var accessToken = response.authResponse.accessToken;
-
-                $('#main_container').fadeIn('fast');
-            
-//            alert('user connected ' +  uid + ' -- ' + accessToken );
-
-// XXX poner codigo en un div, llamar FB.XFBML.Host.parseDomTree();
-// (ver index.html)
-//                   $('#login_div').html(
-//                      "<p><fb:profile-pic uid='loggedinuser' facebook-logo='true'></fb:profile-pic> Welcome, <fb:name uid='loggedinuser' useyou='false'></fb:name>. You are logged in with your Facebook account.</p>" );
-//                   FB.XFBML.parse( document.getElementById('login_div') );
-
-              } else if (response.status === 'not_authorized') {
-                // the user is logged in to Facebook, 
-                //but not connected to the app
-
-                $('#welcome_msg').show();
-
-//            alert( 'not authorized' );
-            
-              } else {
-                // the user isn't even logged in to Facebook.
-            
-            alert( 'not logged in to FB' );
-            
-              }
-            
-            });
-        };
-
-        (function(d){
-           var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-           js = d.createElement('script'); js.id = id; js.async = true;
-           js.src = "//connect.facebook.net/en_US/all.js";
-           d.getElementsByTagName('head')[0].appendChild(js);
-         }(document));
-
-    </script>
+{% include "control.inc" %}
 
 <div id="welcome_msg" style="display:none;">Welcome, in order to use this app, you must sign in with your facebook account:
 </div>
@@ -155,11 +85,33 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 {% include "lang_selector.html" %}
 
+
+
 <div id="main_container" >
+</div> <!-- main container -->
+
+
+<p>Locale is: {{locale}}</p>
+
+<p>User there is: {{user_there}}</p>
+
+<!-- JS TEMPLATES START -->
+
+<script id="question_created_tmpl" type="text/html">
+    <div id="question_created"> 
+        <p>{% trans "Question created!" %}</p>
+<h2>${question_text}</h2>
+
+<p><a href="" id="add_answer_link">{% trans "suggest initial answers" %}</a></p>
+
+    </div>    
+</script>
+
+<script id="new_question_tmpl" type="text/html">
     <div id="question_form_div">
         <form id="question_form" action="/ajax.html" method="get">
             <div style="display: none">
-              <input type="hidden" name="_csrf_token" value="{{ csrf_token }}">
+              <input type="hidden" name="_csrf_token" value="${csrf_token}">
               <input type="hidden" name="action" value="create_question">
               <input type="hidden" id="initial_answers" name="initial_answers" value="">
             </div>
@@ -170,18 +122,9 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
             <button type="submit" id="create_question_button" class="my_button">{% trans "Create" %}</button>
         </form>
     </div>
+</script>
 
-    <div id="question_created" style="display:none;"> 
-        <p>¡Pregunta creada! La página de tu pregunta es:</p>
-        <p>http://apps.facebook.com/mipregunta/<span id="new_question_id_num"></span></p>
-        <p>Puedes invitar amigos a contestarla. [Invitar amigos] [TODO]</p>
-    </div>    
 
-</div> <!-- main container -->
-
-<p>Locale is: {{locale}}</p>
-
-<p>User there is: {{user_there}}</p>
 
 </body>
 </html>

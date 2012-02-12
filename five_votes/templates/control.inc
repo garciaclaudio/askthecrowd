@@ -1,41 +1,123 @@
 {% load i18n %}
 
-<script type="text/javascript">
+<div id="fb-root"></div>
 
-$(function(){
+<script>
 
+var csrf_token = "{{csrf_token}}";
+
+
+function show_created_question(data) {
+
+    $('#main_container').fadeOut('fast');
+    $('#main_container').html( $("#question_created_tmpl").tmpl(
+       {
+         'csrf_token': csrf_token,
+         'question_text': data.question_text
+       }));
+
+    $('#add_answer_link').click( function() { // bind click event to link
+
+alert('click');
+
+       return false;
+    });
+
+    $('#main_container').fadeIn('fast');
+}
+
+function show_new_question() {
+    $('#main_container').html( $("#new_question_tmpl").tmpl({'csrf_token': csrf_token }));
+    $('#main_container').fadeIn('fast');
     $('#question_form').ajaxForm({
          dataType:  'json', 
          success: function(data) { 
              if( data.error ) {
                  alert( data.error );
              } else {
-
-alert(data.question_key);
-
-// show question with "question created" message
-// show link "suggest answers"
-//    clicking on it, makes suggest answer form appear
-//       form is just a text field and a button
-//       submitting creates the answer, gets it displayed 
-//       (with an X for deleting), and shows link "add another"
-//           shown answer includes "add picture" link
-//               clicking on it, makes upload pic form appear
-//                   submitting creates pic, gets it displayed 
-// show "Done" button
-//     clicking makes the new question appear as the "most recent" question
-//     in the question list below
-//
-//	         $("#add_idea_form").hide();
-//                 $("#thanks_for_adding_div").show();
+                 show_created_question(data);
              }
          }
      });
+}
 
+
+        window.fbAsyncInit = function() {
+          FB.init({
+            appId      : '331909936825023',
+            channelUrl : '//five-votes.appspot.com/channel.html',
+            status     : true, 
+            cookie     : true,
+            xfbml      : true
+          });
+
+          //
+          // when the user clicks the login button, this event is fired,
+          // response contains the user data, but we prefer to reload
+          // so that a user is created
+          //
+          FB.Event.subscribe('auth.login', function(response) {
+              // Reload the entire page. Could also do an Ajax request and dynamically
+              // update the already loaded page.
+              window.location.reload(true);
+          });
+//
+//          FB.ui({ method: 'feed', 
+//                  message: 'Facebook for Websites is super-cool'});
+
+            FB.getLoginStatus(function(response) {
+
+              if (response.status === 'connected') {
+                // the user is logged in and connected to your
+                // app, and response.authResponse supplies
+                // the user's ID, a valid access token, a signed
+                // request, and the time the access token 
+                // and signed request each expire
+                var uid = response.authResponse.userID;
+                var accessToken = response.authResponse.accessToken;
+
+                show_new_question();
+            
+//            alert('user connected ' +  uid + ' -- ' + accessToken );
+
+// XXX poner codigo en un div, llamar FB.XFBML.Host.parseDomTree();
+// (ver index.html)
+//                   $('#login_div').html(
+//                      "<p><fb:profile-pic uid='loggedinuser' facebook-logo='true'></fb:profile-pic> Welcome, <fb:name uid='loggedinuser' useyou='false'></fb:name>. You are logged in with your Facebook account.</p>" );
+//                   FB.XFBML.parse( document.getElementById('login_div') );
+
+              } else if (response.status === 'not_authorized') {
+                // the user is logged in to Facebook, 
+                //but not connected to the app
+
+                $('#welcome_msg').show();
+
+//            alert( 'not authorized' );
+            
+              } else {
+                // the user isn't even logged in to Facebook.
+            
+            alert( 'not logged in to FB' );
+            
+              }
+            
+            });
+        };
+
+        (function(d){
+           var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+           js = d.createElement('script'); js.id = id; js.async = true;
+           js.src = "//connect.facebook.net/en_US/all.js";
+           d.getElementsByTagName('head')[0].appendChild(js);
+         }(document));
+
+</script>
+
+<script type="text/javascript">
+
+$(function(){
 });
 
 </script>
 
-
-</script>
 
