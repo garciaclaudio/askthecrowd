@@ -9,6 +9,8 @@ var csrf_token = "{{csrf_token}}";
 
 function show_created_question(data) {
 
+    var num_answers = 0;
+
     $('#main_container').fadeOut('fast');
     $('#main_container').html( $("#question_created_tmpl").tmpl(
        {
@@ -16,10 +18,24 @@ function show_created_question(data) {
          'question_text': data.question_text
        }));
 
-    $('#add_answer_link').click( function() { // bind click event to link
+    $('#add_answer_link').click( function() {
+       $('#add_answer_div').hide();
+       num_answers+=1;
 
-alert('click');
+       $('#answers_div').append('<h2>{%trans "Answers" %}</h2>');
 
+       $('#answers_div').append( $("#add_answer_tmpl").tmpl(
+         {
+          'csrf_token': csrf_token,
+           'question_key': data.question_key,
+          'answer_num': num_answers
+         }));
+       return false;
+    });
+
+    $('#done_button').click( function() {
+
+alert('done');
        return false;
     });
 

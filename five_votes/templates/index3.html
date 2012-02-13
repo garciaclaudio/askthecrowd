@@ -97,12 +97,31 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 <!-- JS TEMPLATES START -->
 
+<script id="add_answer_tmpl" type="text/html">
+    <div id="answer_${answer_num}"> 
+        <form id="new_answer_form" action="/ajax.html" method="get">
+            <input type="hidden" name="_csrf_token" value="${csrf_token}">
+            <input type="hidden" name="question_key" value="${question_key}">
+            <input type="hidden" name="action" value="add_answer">
+
+            <input id="new_answer" name="new_answer" class="text" type="text" size=35> <button id="new_answer" type="submit">{% trans "add" %}</button>
+
+        </form>
+    </div>
+</script>
+
 <script id="question_created_tmpl" type="text/html">
     <div id="question_created"> 
         <p>{% trans "Question created!" %}</p>
 <h2>${question_text}</h2>
 
-<p><a href="" id="add_answer_link">{% trans "suggest initial answers" %}</a></p>
+<div id="answers_div">
+</div>
+
+<div id="add_answer_div">
+    <p><a href="" id="add_answer_link">{% trans "suggest initial answers" %}</a></p>
+</div>
+            <button id="done_button" class="my_button">{% trans "Done" %}</button>
 
     </div>    
 </script>
@@ -110,15 +129,11 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 <script id="new_question_tmpl" type="text/html">
     <div id="question_form_div">
         <form id="question_form" action="/ajax.html" method="get">
-            <div style="display: none">
               <input type="hidden" name="_csrf_token" value="${csrf_token}">
               <input type="hidden" name="action" value="create_question">
-              <input type="hidden" id="initial_answers" name="initial_answers" value="">
-            </div>
-            <div>
-                <label for="question">{% trans "Your question" %}</label><br />
-                <textarea class="text" name="question" id="question" rows="2" cols="45"></textarea>
-            </div>
+              <label for="question">{% trans "Your question" %}</label><br />
+<div>              <textarea class="text" name="question" id="question" rows="2" cols="45"></textarea>
+</div>
             <button type="submit" id="create_question_button" class="my_button">{% trans "Create" %}</button>
         </form>
     </div>
