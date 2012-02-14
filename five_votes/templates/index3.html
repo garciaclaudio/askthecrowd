@@ -98,7 +98,6 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 <!-- JS TEMPLATES START -->
 
 <script id="add_answer_tmpl" type="text/html">
-    <div id="answer_${answer_num}"> 
         <form id="new_answer_form" action="/ajax.html" method="get">
             <input type="hidden" name="_csrf_token" value="${csrf_token}">
             <input type="hidden" name="question_key" value="${question_key}">
@@ -107,7 +106,6 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
             <input id="new_answer" name="new_answer" class="text" type="text" size=35> <button id="new_answer" type="submit">{% trans "add" %}</button>
 
         </form>
-    </div>
 </script>
 
 <script id="question_created_tmpl" type="text/html">
@@ -116,6 +114,11 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 <h2>${question_text}</h2>
 
 <div id="answers_div">
+XXX answers go gere
+</div>
+
+<div id="answers_form_div">
+answer form goes here
 </div>
 
 <div id="add_answer_div">

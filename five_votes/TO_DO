@@ -1,5 +1,33 @@
 
 
+Use this to present the app:
+http://files.farukat.es/creations/runloop/
+
+And this to show the answers:
+http://isotope.metafizzy.co/
+
+Also nice (infinite scrolling):
+http://imakewebthings.github.com/jquery-waypoints/#examples
+
+Nice modal popups:
+http://www.zurb.com/playground/reveal-modal-plugin
+
+Cool image upload thing.
+http://valums.com/ajax-upload/
+
+Form highlighting:
+http://www.saucer.dk/formhighlighter/
+
+In-field form names (cool!)
+http://fuelyourcoding.com/scripts/infield/
+
+Nicely-aligned form labels:
+http://www.jankoatwarpspeed.com/post/2008/07/09/Justify-elements-using-jQuery-and-CSS.aspx
+
+Nice tooltip:
+http://jqueryfordesigners.com/demo/coda-bubble.html
+
+
 // show question with "question created" message
 // show link "suggest answers"
 //    clicking on it, makes suggest answer form appear

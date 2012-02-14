@@ -7,9 +7,31 @@
 var csrf_token = "{{csrf_token}}";
 
 
-function show_created_question(data) {
 
-    var num_answers = 0;
+function show_answer_form(data) {
+
+    $('#answers_form_div').html( $("#add_answer_tmpl").tmpl(
+      {
+       'csrf_token': csrf_token,
+       'question_key': data.question_key,
+      }));
+
+     // bind "add" click (form submit) XXX AQUI VOY
+//     $('#new_answer_form').ajaxForm({
+//         dataType:  'json', 
+//         success: function(data) { 
+//             if( data.error ) {
+//                 alert( data.error );
+//             } else {
+//                 show_answer(data);
+//             }
+//         }
+//      });
+
+}
+
+
+function show_created_question(data) {
 
     $('#main_container').fadeOut('fast');
     $('#main_container').html( $("#question_created_tmpl").tmpl(
@@ -19,28 +41,27 @@ function show_created_question(data) {
        }));
 
     $('#add_answer_link').click( function() {
+
        $('#add_answer_div').hide();
-       num_answers+=1;
 
        $('#answers_div').append('<h2>{%trans "Answers" %}</h2>');
 
-       $('#answers_div').append( $("#add_answer_tmpl").tmpl(
-         {
-          'csrf_token': csrf_token,
-           'question_key': data.question_key,
-          'answer_num': num_answers
-         }));
+       show_answer_form( data ); 
+
        return false;
     });
 
     $('#done_button').click( function() {
 
-alert('done');
+alert('done XXX implement');
+
        return false;
     });
 
     $('#main_container').fadeIn('fast');
 }
+
+
 
 function show_new_question() {
     $('#main_container').html( $("#new_question_tmpl").tmpl({'csrf_token': csrf_token }));
