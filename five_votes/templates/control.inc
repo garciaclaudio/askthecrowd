@@ -17,16 +17,19 @@ function show_answer_form(data) {
       }));
 
      // bind "add" click (form submit) XXX AQUI VOY
-//     $('#new_answer_form').ajaxForm({
-//         dataType:  'json', 
-//         success: function(data) { 
-//             if( data.error ) {
-//                 alert( data.error );
-//             } else {
-//                 show_answer(data);
-//             }
-//         }
-//      });
+     $('#new_answer_form').ajaxForm({
+         dataType:  'json', 
+         success: function(data) { 
+             if( data.error ) {
+                 alert( data.error );
+             } else {
+
+alert(data.answer_key + ' --- ' + data.answer_text);
+
+// XXX here I am                 show_answer(data);
+             }
+         }
+      });
 
 }
 

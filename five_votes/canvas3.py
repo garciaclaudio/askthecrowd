@@ -119,6 +119,7 @@ class User(db.Model):
         self.friends = [user[u'id'] for user in me[u'friends'][u'data']]
         return self.put()
 
+
 class Question(db.Model):
     user_id = db.StringProperty(required=True)
     created = db.DateTimeProperty(auto_now=True)
@@ -131,11 +132,12 @@ class Question(db.Model):
         else:
             return []
 
-#
-#    @property
-#    def pretty_distance(self):
-#        return u'%.2f' % self.distance
-#
+
+class Answer(db.Model):
+    question = db.ReferenceProperty(Question)
+    owner = db.ReferenceProperty(User)
+    answer_text = db.StringProperty()
+
 
 class QuestionException(Exception):
     pass
@@ -441,12 +443,42 @@ class AjaxHandler(BaseHandler):
                        }
         return result
 
+    def handle_new_answer(self):
+        answer_text = sanitize_html( self.request.get('answer_text') )
+        error = ''
+        if answer_text == "":
+            error = '* ' + _("Answer text cannot be empty.");
+
+        question = Question.get( self.request.get('question_key') );
+
+        if( question is None ): 
+            error_msg = _("Question not found. Should not happen.")
+            return { 'error_msg' : error_msg }
+
+        if error:
+            result = { 'error' : error }
+        else:
+            new_ans = Answer(
+                question=question,
+                owner=self.user,
+                answer_text = answer_text,
+            )
+            new_ans.put()
+            result = { 'error' : 0,
+                       'answer_text' : str(answer_text),
+                       'answer_key' : str(new_ans.key())
+                       }
+        return result
+
     def get(self):
         result_struct = { 'error' : '1' }
         action = self.request.get('action')
 
         if( action == 'create_question' ):
             result_struct = self.handle_new_question()
+
+        if( action == 'add_answer' ):
+            result_struct = self.handle_new_answer()
 
         self.response.headers['Content-Type'] = 'application/json'
         seri = json.dumps( result_struct )
