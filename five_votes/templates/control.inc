@@ -6,6 +6,28 @@
 
 var csrf_token = "{{csrf_token}}";
 
+function show_answer(data) {
+
+     $('#answers_div').append( $("#show_answer_tmpl").tmpl( {
+       'csrf_token': csrf_token,
+       'answer_key': data.answer_key,
+       'answer_text': data.answer_text,
+     }));
+
+     // bind "add" click (form submit)
+     $('#delete_answer_form_' + data.answer_key ).ajaxForm({
+         dataType:  'json', 
+         success: function(data) { 
+             if( data.error ) {
+                alert( data.error );
+             } else {
+
+// XXX AQUI VOY
+                $('#answer_' + data.deleted_answer_key).remove();
+             }
+         }
+     });
+}
 
 
 function show_answer_form(data) {
@@ -16,21 +38,17 @@ function show_answer_form(data) {
        'question_key': data.question_key,
       }));
 
-     // bind "add" click (form submit) XXX AQUI VOY
+     // bind "add" click (form submit)
      $('#new_answer_form').ajaxForm({
          dataType:  'json', 
          success: function(data) { 
              if( data.error ) {
                  alert( data.error );
              } else {
-
-alert(data.answer_key + ' --- ' + data.answer_text);
-
-// XXX here I am                 show_answer(data);
+                show_answer(data);
              }
          }
       });
-
 }
 
 

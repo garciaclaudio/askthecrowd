@@ -97,6 +97,17 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 <!-- JS TEMPLATES START -->
 
+<script id="show_answer_tmpl" type="text/html">
+   <div id="answer_${answer_key}">
+        <form id="delete_answer_form_${answer_key}" action="/ajax.html" method="get">
+            <input type="hidden" name="_csrf_token" value="${csrf_token}">
+            <input type="hidden" name="answer_key" value="${answer_key}">
+            <input type="hidden" name="action" value="delete_answer">
+${answer_text} <a href="#" onclick="$('#delete_answer_form_${answer_key}').submit();return false;">[X]</a>
+       </form>
+    </div>
+</script>
+
 <script id="add_answer_tmpl" type="text/html">
         <form id="new_answer_form" action="/ajax.html" method="get">
             <input type="hidden" name="_csrf_token" value="${csrf_token}">
