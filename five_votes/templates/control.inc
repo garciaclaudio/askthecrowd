@@ -4,12 +4,9 @@
 
 <script>
 
-var csrf_token = "{{csrf_token}}";
-
 function show_answer(data) {
 
      $('#answers_div').append( $("#show_answer_tmpl").tmpl( {
-       'csrf_token': csrf_token,
        'answer_key': data.answer_key,
        'answer_text': data.answer_text,
      }));
@@ -21,8 +18,6 @@ function show_answer(data) {
              if( data.error ) {
                 alert( data.error );
              } else {
-
-// XXX AQUI VOY
                 $('#answer_' + data.deleted_answer_key).remove();
              }
          }
@@ -34,7 +29,6 @@ function show_answer_form(data) {
 
     $('#answers_form_div').html( $("#add_answer_tmpl").tmpl(
       {
-       'csrf_token': csrf_token,
        'question_key': data.question_key,
       }));
 
@@ -57,7 +51,6 @@ function show_created_question(data) {
     $('#main_container').fadeOut('fast');
     $('#main_container').html( $("#question_created_tmpl").tmpl(
        {
-         'csrf_token': csrf_token,
          'question_text': data.question_text
        }));
 
@@ -85,7 +78,7 @@ alert('done XXX implement');
 
 
 function show_new_question() {
-    $('#main_container').html( $("#new_question_tmpl").tmpl({'csrf_token': csrf_token }));
+    $('#main_container').html( $("#new_question_tmpl").tmpl({}));
     $('#main_container').fadeIn('fast');
     $('#question_form').ajaxForm({
          dataType:  'json', 
@@ -174,6 +167,16 @@ function show_new_question() {
 <script type="text/javascript">
 
 $(function(){
+
+alert('doing uploadrrr');
+            var uploader = new qq.FileUploader({
+                element: document.getElementById('file-uploader-demo1'),
+                action: '/ajax.html',
+                debug: true,
+		params: {
+                        action: 'upload_picture'
+                }
+            });
 });
 
 </script>

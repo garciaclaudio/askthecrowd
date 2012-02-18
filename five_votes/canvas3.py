@@ -229,7 +229,7 @@ class CsrfException(Exception):
 class BaseHandler(I18NRequestHandler):
     facebook = None
     user = None
-    csrf_protect = True
+    csrf_protect = False
 
     def initialize(self, request, response):
         """General initialization for every request"""
@@ -470,6 +470,30 @@ class AjaxHandler(BaseHandler):
                        }
         return result
 
+    def handle_delete_answer(self):
+        error = ''
+        ans = Answer.get( self.request.get('answer_key') );
+        if( ans is None ): 
+            error_msg = _("Answer not found. Should not happen.")
+            return { 'error_msg' : error_msg }
+        if error:
+            result = { 'error' : error }
+        else:
+            ans.delete()
+            result = { 'error' : 0,
+                       'deleted_answer_key' : str(self.request.get('answer_key')),
+                       }
+        return result
+
+    def post(self):
+        result_struct = { 'error' : '1' }
+        action = self.request.get('action')
+
+        self.response.headers['Content-Type'] = 'application/json'
+        seri = json.dumps( result_struct )
+        self.response.out.write(seri)
+
+
     def get(self):
         result_struct = { 'error' : '1' }
         action = self.request.get('action')
@@ -479,6 +503,9 @@ class AjaxHandler(BaseHandler):
 
         if( action == 'add_answer' ):
             result_struct = self.handle_new_answer()
+
+        if( action == 'delete_answer' ):
+            result_struct = self.handle_delete_answer()
 
         self.response.headers['Content-Type'] = 'application/json'
         seri = json.dumps( result_struct )

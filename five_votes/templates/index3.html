@@ -8,6 +8,8 @@
 		<script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
                 <script type="text/javascript" src="js/jquery.form.js"></script>
                 <script type="text/javascript" src="js/jquery.tmpl.js"></script>
+                <script type="text/javascript" src="js/fileuploader.js"></script>
+                <link href="css/fileuploader.css" rel="stylesheet" type="text/css">	
 
 <style type="text/css">
 
@@ -90,6 +92,15 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 <div id="main_container" >
 </div> <!-- main container -->
 
+<h2>UPLOAD?</h2>
+
+	<div id="file-uploader-demo1">		
+		<noscript>			
+			<p>Please enable JavaScript to use file uploader.</p>
+			<!-- or put a simple form for upload here -->
+		</noscript>         
+	</div>
+
 
 <p>Locale is: {{locale}}</p>
 
@@ -100,7 +111,6 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 <script id="show_answer_tmpl" type="text/html">
    <div id="answer_${answer_key}">
         <form id="delete_answer_form_${answer_key}" action="/ajax.html" method="get">
-            <input type="hidden" name="_csrf_token" value="${csrf_token}">
             <input type="hidden" name="answer_key" value="${answer_key}">
             <input type="hidden" name="action" value="delete_answer">
 ${answer_text} <a href="#" onclick="$('#delete_answer_form_${answer_key}').submit();return false;">[X]</a>
@@ -110,7 +120,6 @@ ${answer_text} <a href="#" onclick="$('#delete_answer_form_${answer_key}').submi
 
 <script id="add_answer_tmpl" type="text/html">
         <form id="new_answer_form" action="/ajax.html" method="get">
-            <input type="hidden" name="_csrf_token" value="${csrf_token}">
             <input type="hidden" name="question_key" value="${question_key}">
             <input type="hidden" name="action" value="add_answer">
 
@@ -143,7 +152,6 @@ answer form goes here
 <script id="new_question_tmpl" type="text/html">
     <div id="question_form_div">
         <form id="question_form" action="/ajax.html" method="get">
-              <input type="hidden" name="_csrf_token" value="${csrf_token}">
               <input type="hidden" name="action" value="create_question">
               <label for="question">{% trans "Your question" %}</label><br />
 <div>              <textarea class="text" name="question" id="question" rows="2" cols="45"></textarea>
