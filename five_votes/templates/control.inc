@@ -28,6 +28,15 @@ function show_answer(data) {
             element: document.getElementById('file_uploader_' + data.answer_key),
             action: '/ajax.html',
             debug: true,
+            sizeLimit: 100000,
+            allowedExtensions: ['jpg', 'jpeg'],
+            onComplete: function(id, file_name, data){
+
+                $('#picture_' + data.answer_key).html( $("#show_pic_tmpl").tmpl({'answer_key': data.answer_key} ));
+
+//alert( id + '--' + file_name + ' -- ' + data.answer_key)
+
+            },
             params: {
                       action: 'upload_picture',
 		      answer_key : data.answer_key,

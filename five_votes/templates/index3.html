@@ -98,8 +98,13 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 <!-- JS TEMPLATES START -->
 
+<script id="show_pic_tmpl" type="text/html">
+<img src="image?answer_key=${answer_key}">
+</script>
+
 <script id="show_answer_tmpl" type="text/html">
    <div id="answer_${answer_key}">
+        <div id="picture_${answer_key}"></div>
         <form id="delete_answer_form_${answer_key}" action="/ajax.html" method="get">
             <input type="hidden" name="answer_key" value="${answer_key}">
             <input type="hidden" name="action" value="delete_answer">

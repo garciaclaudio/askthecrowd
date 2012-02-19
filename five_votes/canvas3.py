@@ -15,6 +15,8 @@
 # under the License.
 import os, sys
 
+from google.appengine.api import images
+
 os.environ['DJANGO_SETTINGS_MODULE'] = 'conf.settings'
 
 from google.appengine.dist import use_library
@@ -490,12 +492,16 @@ class AjaxHandler(BaseHandler):
         error = ''        
 
         ans = Answer.get( self.request.get('answer_key') );
-        ans.picture = db.Blob(self.request.body)
+
+        new_pic =  images.resize(self.request.body, 100, 100)
+        ans.picture = db.Blob(new_pic)
         ans.put();
 
         print >> sys.stderr, 'XXX ANS KEY: ' + str(self.request.get('answer_key'))
 
-        result =  {'success':'true'}
+        result =  {'success':'true',
+                   'answer_key': self.request.get('answer_key'),
+                  }
 
         return result
 
@@ -535,7 +541,6 @@ class AjaxHandler(BaseHandler):
 
 class GetImage(BaseHandler):
     def get(self):
-        print >> sys.stderr, 'XXX ANS KEY: ' + str(self.request.get('answer_key'))
         ans = Answer.get( self.request.get('answer_key') );
         if (ans and ans.picture):
             self.response.headers['Content-Type'] = 'image/jpg'
