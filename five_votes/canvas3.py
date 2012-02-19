@@ -137,7 +137,7 @@ class Answer(db.Model):
     question = db.ReferenceProperty(Question)
     owner = db.ReferenceProperty(User)
     answer_text = db.StringProperty()
-
+    picture = db.BlobProperty()
 
 class QuestionException(Exception):
     pass
@@ -233,6 +233,7 @@ class BaseHandler(I18NRequestHandler):
 
     def initialize(self, request, response):
         """General initialization for every request"""
+
         super(BaseHandler, self).initialize(request, response)
 
         try:
@@ -485,9 +486,26 @@ class AjaxHandler(BaseHandler):
                        }
         return result
 
+    def handle_upload_picture(self):
+        error = ''        
+
+        ans = Answer.get( self.request.get('answer_key') );
+        ans.picture = db.Blob(self.request.body)
+        ans.put();
+
+        print >> sys.stderr, 'XXX ANS KEY: ' + str(self.request.get('answer_key'))
+
+        result =  {'success':'true'}
+
+        return result
+
+
     def post(self):
         result_struct = { 'error' : '1' }
         action = self.request.get('action')
+
+        if( action == 'upload_picture' ):
+            result_struct = self.handle_upload_picture()
 
         self.response.headers['Content-Type'] = 'application/json'
         seri = json.dumps( result_struct )
@@ -511,9 +529,24 @@ class AjaxHandler(BaseHandler):
         seri = json.dumps( result_struct )
         self.response.out.write(seri)
 
+#
+#
+# http://localhost:8080/image?answer_key=agpmaXZlLXZvdGVzcg0LEgZBbnN3ZXIYgAEM
+
+class GetImage(BaseHandler):
+    def get(self):
+        print >> sys.stderr, 'XXX ANS KEY: ' + str(self.request.get('answer_key'))
+        ans = Answer.get( self.request.get('answer_key') );
+        if (ans and ans.picture):
+            self.response.headers['Content-Type'] = 'image/jpg'
+            self.response.out.write(ans.picture)
+        else:
+            self.error(404)
+
 
 def main():
     routes = [
+        ('/image', GetImage),
         ('/ajax.html', AjaxHandler),
         (r'/', MainPage),
     ]

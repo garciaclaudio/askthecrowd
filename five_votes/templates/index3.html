@@ -92,16 +92,6 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 <div id="main_container" >
 </div> <!-- main container -->
 
-<h2>UPLOAD?</h2>
-
-	<div id="file-uploader-demo1">		
-		<noscript>			
-			<p>Please enable JavaScript to use file uploader.</p>
-			<!-- or put a simple form for upload here -->
-		</noscript>         
-	</div>
-
-
 <p>Locale is: {{locale}}</p>
 
 <p>User there is: {{user_there}}</p>
@@ -113,7 +103,9 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
         <form id="delete_answer_form_${answer_key}" action="/ajax.html" method="get">
             <input type="hidden" name="answer_key" value="${answer_key}">
             <input type="hidden" name="action" value="delete_answer">
-${answer_text} <a href="#" onclick="$('#delete_answer_form_${answer_key}').submit();return false;">[X]</a>
+${answer_text} <a href="#" onclick="$('#delete_answer_form_${answer_key}').submit();return false;">[X]</a> <div id="file_uploader_${answer_key}">
+    <noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
+
        </form>
     </div>
 </script>

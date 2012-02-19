@@ -6,13 +6,13 @@
 
 function show_answer(data) {
 
-     $('#answers_div').append( $("#show_answer_tmpl").tmpl( {
+    $('#answers_div').append( $("#show_answer_tmpl").tmpl( {
        'answer_key': data.answer_key,
        'answer_text': data.answer_text,
-     }));
+    }));
 
      // bind "add" click (form submit)
-     $('#delete_answer_form_' + data.answer_key ).ajaxForm({
+    $('#delete_answer_form_' + data.answer_key ).ajaxForm({
          dataType:  'json', 
          success: function(data) { 
              if( data.error ) {
@@ -21,7 +21,20 @@ function show_answer(data) {
                 $('#answer_' + data.deleted_answer_key).remove();
              }
          }
-     });
+    });
+
+     // setup upload thingy
+    var uploader = new qq.FileUploader({
+            element: document.getElementById('file_uploader_' + data.answer_key),
+            action: '/ajax.html',
+            debug: true,
+            params: {
+                      action: 'upload_picture',
+		      answer_key : data.answer_key,
+            }
+    });
+
+
 }
 
 
@@ -167,16 +180,6 @@ function show_new_question() {
 <script type="text/javascript">
 
 $(function(){
-
-alert('doing uploadrrr');
-            var uploader = new qq.FileUploader({
-                element: document.getElementById('file-uploader-demo1'),
-                action: '/ajax.html',
-                debug: true,
-		params: {
-                        action: 'upload_picture'
-                }
-            });
 });
 
 </script>
