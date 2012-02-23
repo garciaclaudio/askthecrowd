@@ -18,10 +18,15 @@ div.centered_container {top: 0; left: 0; width: 100%; height: 100%; display: tab
 p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:center;}
 
 #main_container {
-    display:none;
+    padding:20px;
+    display:table;
+    background-color: #ecff49;
     text-align: center;
     margin-left:auto; 
     margin-right:auto; 
+   -moz-border-radius: 8px;
+   -webkit-border-radius: 8px;
+    border-radius: 8px;
 }
 
 .photo_card {
@@ -80,7 +85,11 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 {% include "control.inc" %}
 
-<div id="welcome_msg" style="display:none;">Welcome, in order to use this app, you must sign in with your facebook account:
+<div id="main_container" >
+</div> <!-- main container -->
+
+
+<div id="welcome_msg" style="display:none;">{% trans "Welcome, in order to use this app, you must sign in with your facebook account:" %}
 </div>
 
 <fb:login-button show-faces="true"></fb:login-button>
@@ -89,12 +98,6 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 
 
-<div id="main_container" >
-</div> <!-- main container -->
-
-<p>Locale is: {{locale}}</p>
-
-<p>User there is: {{user_there}}</p>
 
 <!-- JS TEMPLATES START -->
 
@@ -150,9 +153,10 @@ answer form goes here
     <div id="question_form_div">
         <form id="question_form" action="/ajax.html" method="get">
               <input type="hidden" name="action" value="create_question">
-              <label for="question">{% trans "Your question" %}</label><br />
+              <label for="question">{% trans "Enter your question" %}</label><br /><br />
 <div>              <textarea class="text" name="question" id="question" rows="2" cols="45"></textarea>
 </div>
+<br />
             <button type="submit" id="create_question_button" class="my_button">{% trans "Create" %}</button>
         </form>
     </div>
