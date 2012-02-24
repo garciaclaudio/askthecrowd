@@ -46,13 +46,14 @@ function show_answer(data) {
 
 }
 
+function show_created_question(data) {
 
-function show_answer_form(data) {
-
-    $('#answers_form_div').html( $("#add_answer_tmpl").tmpl(
-      {
-       'question_key': data.question_key,
-      }));
+    $('#main_container').fadeOut('fast');
+    $('#main_container').html( $("#question_created_tmpl").tmpl(
+       {
+         'question_text': data.question_text,
+         'question_key': data.question_key,
+       }));
 
      // bind "add" click (form submit)
      $('#new_answer_form').ajaxForm({
@@ -65,27 +66,6 @@ function show_answer_form(data) {
              }
          }
       });
-}
-
-
-function show_created_question(data) {
-
-    $('#main_container').fadeOut('fast');
-    $('#main_container').html( $("#question_created_tmpl").tmpl(
-       {
-         'question_text': data.question_text
-       }));
-
-    $('#add_answer_link').click( function() {
-
-       $('#add_answer_div').hide();
-
-       $('#answers_div').append('<h2>{%trans "Answers" %}</h2>');
-
-       show_answer_form( data ); 
-
-       return false;
-    });
 
     $('#done_button').click( function() {
 

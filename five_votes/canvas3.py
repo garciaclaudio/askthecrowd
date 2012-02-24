@@ -476,6 +476,7 @@ class AjaxHandler(BaseHandler):
     def handle_delete_answer(self):
         error = ''
         ans = Answer.get( self.request.get('answer_key') );
+
         if( ans is None ): 
             error_msg = _("Answer not found. Should not happen.")
             return { 'error_msg' : error_msg }
@@ -497,8 +498,6 @@ class AjaxHandler(BaseHandler):
         ans.picture = db.Blob(new_pic)
         ans.put();
 
-        print >> sys.stderr, 'XXX ANS KEY: ' + str(self.request.get('answer_key'))
-
         result =  {'success':'true',
                    'answer_key': self.request.get('answer_key'),
                   }
@@ -513,6 +512,9 @@ class AjaxHandler(BaseHandler):
         if( action == 'upload_picture' ):
             result_struct = self.handle_upload_picture()
 
+        if( action == 'delete_answer' ):
+            result_struct = self.handle_delete_answer()
+
         self.response.headers['Content-Type'] = 'application/json'
         seri = json.dumps( result_struct )
         self.response.out.write(seri)
@@ -520,16 +522,16 @@ class AjaxHandler(BaseHandler):
 
     def get(self):
         result_struct = { 'error' : '1' }
+
         action = self.request.get('action')
+
+        print >> sys.stderr, 'IN GET, ' + str(action)
 
         if( action == 'create_question' ):
             result_struct = self.handle_new_question()
 
         if( action == 'add_answer' ):
             result_struct = self.handle_new_answer()
-
-        if( action == 'delete_answer' ):
-            result_struct = self.handle_delete_answer()
 
         self.response.headers['Content-Type'] = 'application/json'
         seri = json.dumps( result_struct )

@@ -13,9 +13,21 @@
 
 <style type="text/css">
 
+body {
+    background-color: #FFFFFF;
+    color: #003580;
+    font: medium/1.2 Arial,Helvetica,sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
 div.centered_container {top: 0; left: 0; width: 100%; height: 100%; display: table}
 
 p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:center;}
+
+#app_logo {
+    text-align: center;
+}
 
 #main_container {
     padding:20px;
@@ -85,6 +97,8 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 {% include "control.inc" %}
 
+<h1 id="app_logo">{% trans "Five Votes" %}</h1>
+
 <div id="main_container" >
 </div> <!-- main container -->
 
@@ -108,7 +122,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 <script id="show_answer_tmpl" type="text/html">
    <div id="answer_${answer_key}">
         <div id="picture_${answer_key}"></div>
-        <form id="delete_answer_form_${answer_key}" action="/ajax.html" method="get">
+        <form method="get" id="delete_answer_form_${answer_key}" action="/ajax.html">
             <input type="hidden" name="answer_key" value="${answer_key}">
             <input type="hidden" name="action" value="delete_answer">
 ${answer_text} <a href="#" onclick="$('#delete_answer_form_${answer_key}').submit();return false;">[X]</a> <div id="file_uploader_${answer_key}">
@@ -118,34 +132,28 @@ ${answer_text} <a href="#" onclick="$('#delete_answer_form_${answer_key}').submi
     </div>
 </script>
 
-<script id="add_answer_tmpl" type="text/html">
-        <form id="new_answer_form" action="/ajax.html" method="get">
-            <input type="hidden" name="question_key" value="${question_key}">
-            <input type="hidden" name="action" value="add_answer">
-
-            <input id="new_answer" name="answer_text" class="text" type="text" size=35> <button id="new_answer" type="submit">{% trans "add" %}</button>
-
-        </form>
-</script>
-
 <script id="question_created_tmpl" type="text/html">
     <div id="question_created"> 
         <p>{% trans "Question created!" %}</p>
 <h2>${question_text}</h2>
 
-<div id="answers_div">
-XXX answers go gere
-</div>
-
+<p>{% trans "Suggest inital answers" %}</p>
 <div id="answers_form_div">
-answer form goes here
+     <form id="new_answer_form" action="/ajax.html" method="get">
+            <input type="hidden" name="question_key" value="${question_key}">
+            <input type="hidden" name="action" value="add_answer">
+
+            <input id="new_answer" name="answer_text" class="text" type="text" size=30>
+&nbsp;<button id="new_answer" type="submit">{% trans "add" %}</button>
+
+     </form>
 </div>
 
-<div id="add_answer_div">
-    <p><a href="" id="add_answer_link">{% trans "suggest initial answers" %}</a></p>
+<br />
+<div id="answers_div">
 </div>
+
             <button id="done_button" class="my_button">{% trans "Done" %}</button>
-
     </div>    
 </script>
 
