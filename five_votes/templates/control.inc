@@ -31,7 +31,7 @@ function show_answer(data) {
             sizeLimit: 100000,
             allowedExtensions: ['jpg', 'jpeg'],
             onComplete: function(id, file_name, data){
-
+                $('#file_uploader_' + data.answer_key).remove();
                 $('#picture_' + data.answer_key).html( $("#show_pic_tmpl").tmpl({'answer_key': data.answer_key} ));
 
 //alert( id + '--' + file_name + ' -- ' + data.answer_key)
@@ -62,6 +62,9 @@ function show_created_question(data) {
              if( data.error ) {
                  alert( data.error );
              } else {
+
+                //clean answer form
+                $('#new_answer').val('');
                 show_answer(data);
              }
          }

@@ -29,6 +29,17 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
     text-align: center;
 }
 
+
+#super_top_container {
+    text-align: center;
+    width:100%;
+}
+
+#top_container {
+   margin: 0px auto;
+   width:90%;
+}
+
 #main_container {
     padding:20px;
     display:table;
@@ -41,14 +52,14 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
     border-radius: 8px;
 }
 
-.photo_card {
+.answer_card {
   display: inline-block;
 //  float: left;
-  width: 310px;
-  height: 352px;
+  width: 140px;
+  height: 140px;
   margin: 4px;
-  background-color: #ffe5fc;
-  padding: 6px;
+  background-color: #ceebff;
+  padding: 10px;
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
@@ -99,8 +110,12 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 <h1 id="app_logo">{% trans "Five Votes" %}</h1>
 
-<div id="main_container" >
-</div> <!-- main container -->
+<div id="super_top_container" >
+  <div id="top_container" >
+    <div id="main_container" >
+    </div> <!-- main container -->
+  </div> <!-- -->
+</div> <!-- -->
 
 
 <div id="welcome_msg" style="display:none;">{% trans "Welcome, in order to use this app, you must sign in with your facebook account:" %}
@@ -120,14 +135,18 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 </script>
 
 <script id="show_answer_tmpl" type="text/html">
-   <div id="answer_${answer_key}">
+   <div class="answer_card" id="answer_${answer_key}">
+
         <div id="picture_${answer_key}"></div>
-        <form method="get" id="delete_answer_form_${answer_key}" action="/ajax.html">
+
+${answer_text} 
+
+        <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
+
+        <form method="post" id="delete_answer_form_${answer_key}" action="/ajax.html">
             <input type="hidden" name="answer_key" value="${answer_key}">
             <input type="hidden" name="action" value="delete_answer">
-${answer_text} <a href="#" onclick="$('#delete_answer_form_${answer_key}').submit();return false;">[X]</a> <div id="file_uploader_${answer_key}">
-    <noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
-
+<a href="#" onclick="$('#delete_answer_form_${answer_key}').submit();return false;">[X]</a>
        </form>
     </div>
 </script>
@@ -135,7 +154,7 @@ ${answer_text} <a href="#" onclick="$('#delete_answer_form_${answer_key}').submi
 <script id="question_created_tmpl" type="text/html">
     <div id="question_created"> 
         <p>{% trans "Question created!" %}</p>
-<h2>${question_text}</h2>
+<h1>${question_text}</h1>
 
 <p>{% trans "Suggest inital answers" %}</p>
 <div id="answers_form_div">
@@ -162,7 +181,7 @@ ${answer_text} <a href="#" onclick="$('#delete_answer_form_${answer_key}').submi
         <form id="question_form" action="/ajax.html" method="get">
               <input type="hidden" name="action" value="create_question">
               <label for="question">{% trans "Enter your question" %}</label><br /><br />
-<div>              <textarea class="text" name="question" id="question" rows="2" cols="45"></textarea>
+<div>              <input name="question" id="question" size=45 class="text" type="text">
 </div>
 <br />
             <button type="submit" id="create_question_button" class="my_button">{% trans "Create" %}</button>

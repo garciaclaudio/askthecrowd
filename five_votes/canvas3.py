@@ -17,6 +17,8 @@ import os, sys
 
 from google.appengine.api import images
 
+import time
+
 os.environ['DJANGO_SETTINGS_MODULE'] = 'conf.settings'
 
 from google.appengine.dist import use_library
@@ -492,6 +494,7 @@ class AjaxHandler(BaseHandler):
     def handle_upload_picture(self):
         error = ''        
 
+        time.sleep(3)
         ans = Answer.get( self.request.get('answer_key') );
 
         new_pic =  images.resize(self.request.body, 100, 100)
