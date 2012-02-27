@@ -240,6 +240,13 @@ class BaseHandler(I18NRequestHandler):
 
         super(BaseHandler, self).initialize(request, response)
 
+        if settings.IN_DEV_SERVER:
+            print >> sys.stderr, '[[[[ IN DEV SERVER ]]]]'
+            self.user = User.get_by_key_name('518261219')
+            self.csrf_token = '12345'
+            self.init_lang()
+            return
+
         try:
             self.init_facebook()
             self.init_csrf()
@@ -302,6 +309,10 @@ class BaseHandler(I18NRequestHandler):
 
         data[u'csrf_token'] = self.csrf_token
         data[u'canvas_name'] = settings.FACEBOOK_CANVAS_NAME
+
+        data[u'IN_DEV_SERVER'] = settings.IN_DEV_SERVER
+        data[u'NOT_IN_DEV_SERVER'] = not settings.IN_DEV_SERVER
+
         self.response.out.write(template.render(
             os.path.join(
                 os.path.dirname(__file__), 'templates', name + '.html'),
@@ -326,6 +337,7 @@ class BaseHandler(I18NRequestHandler):
 
         # try to load or create a user object
         if facebook.user_id:
+            print >> sys.stderr, 'getting user: ' + str(facebook.user_id)
             user = User.get_by_key_name(facebook.user_id)
             if user:
                 # update stored access_token
@@ -529,6 +541,9 @@ class AjaxHandler(BaseHandler):
         action = self.request.get('action')
 
         print >> sys.stderr, 'IN GET, ' + str(action)
+
+        if( action == 'delete_answer' ):
+            result_struct = self.handle_delete_answer()
 
         if( action == 'create_question' ):
             result_struct = self.handle_new_question()

@@ -70,6 +70,8 @@ function show_created_question(data) {
          }
       });
 
+      $('#new_answer').focus();
+
     $('#done_button').click( function() {
 
 alert('done XXX implement');
@@ -95,9 +97,11 @@ function show_new_question() {
              }
          }
      });
+    $('#question').focus();
 }
 
 
+{% if NOT_IN_DEV_SERVER %}
         window.fbAsyncInit = function() {
           FB.init({
             appId      : '331909936825023',
@@ -160,6 +164,8 @@ function show_new_question() {
             });
         };
 
+{% endif %}
+
         (function(d){
            var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
            js = d.createElement('script'); js.id = id; js.async = true;
@@ -172,6 +178,12 @@ function show_new_question() {
 <script type="text/javascript">
 
 $(function(){
+
+{% if IN_DEV_SERVER %}
+    show_new_question();
+{% endif %}
+
+
 });
 
 </script>

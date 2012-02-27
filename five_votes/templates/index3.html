@@ -53,8 +53,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 }
 
 .answer_card {
-  display: inline-block;
-//  float: left;
+  float: left;
   width: 140px;
   height: 140px;
   margin: 4px;
@@ -126,7 +125,13 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 {% include "lang_selector.html" %}
 
 
+<p>Locale: {{locale}}</p>
+<p>IN DEV SERVER: {{IN_DEV_SERVER}}</p>
+<p>NOT IN DEV SERVER: {{NOT_IN_DEV_SERVER}}</p>
 
+{% if IN_DEV_SERVER %}
+<h1>IN DEV</h1>
+{% endif %}
 
 <!-- JS TEMPLATES START -->
 
@@ -188,8 +193,6 @@ ${answer_text}
         </form>
     </div>
 </script>
-
-
 
 </body>
 </html>

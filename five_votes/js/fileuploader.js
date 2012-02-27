@@ -640,6 +640,7 @@ qq.extend(qq.FileUploader.prototype, {
         this._addToList(id, fileName);  
     },
     _onProgress: function(id, fileName, loaded, total){
+
         qq.FileUploaderBasic.prototype._onProgress.apply(this, arguments);
 
         var item = this._getItemByFileId(id);
@@ -670,6 +671,7 @@ qq.extend(qq.FileUploader.prototype, {
         }         
     },
     _addToList: function(id, fileName){
+
         var item = qq.toElement(this._options.fileTemplate);                
         item.qqFileId = id;
 
