@@ -142,11 +142,13 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 <script id="show_answer_tmpl" type="text/html">
    <div class="answer_card" id="answer_${answer_key}">
 
+<br />
+
         <div id="picture_${answer_key}"></div>
 
-${answer_text} 
-
         <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
+
+        <h2>${answer_text}</h2>
 
         <form method="post" id="delete_answer_form_${answer_key}" action="/ajax.html">
             <input type="hidden" name="answer_key" value="${answer_key}">
@@ -157,28 +159,31 @@ ${answer_text}
 </script>
 
 <script id="question_created_tmpl" type="text/html">
-    <div id="question_created"> 
-        <p>{% trans "Question created!" %}</p>
-<h1>${question_text}</h1>
+<div id="question_created"> 
+    <p>{% trans "Question created!" %}</p>
+    <h1>${question_text}</h1>
 
-<p>{% trans "Suggest inital answers" %}</p>
-<div id="answers_form_div">
-     <form id="new_answer_form" action="/ajax.html" method="get">
+    <p>{% trans "Suggest inital answers" %}</p>
+    <div id="answers_form_div">
+         <form id="new_answer_form" action="/ajax.html" method="get">
             <input type="hidden" name="question_key" value="${question_key}">
             <input type="hidden" name="action" value="add_answer">
 
             <input id="new_answer" name="answer_text" class="text" type="text" size=30>
 &nbsp;<button id="new_answer" type="submit">{% trans "add" %}</button>
 
-     </form>
-</div>
+         </form>
+    </div>
 
-<br />
-<div id="answers_div">
-</div>
+    <br />
 
-            <button id="done_button" class="my_button">{% trans "Done" %}</button>
-    </div>    
+    <div id="answers_div">
+    </div>
+
+    <div style="clear:both">
+        <button id="done_button" class="my_button">{% trans "Done" %}</button>
+    </div>
+</div>    
 </script>
 
 <script id="new_question_tmpl" type="text/html">

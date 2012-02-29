@@ -29,6 +29,7 @@ function show_answer(data) {
             action: '/ajax.html',
             debug: true,
             sizeLimit: 100000,
+            uploadText: '{% trans "add picture" %}',
             allowedExtensions: ['jpg', 'jpeg'],
             onComplete: function(id, file_name, data){
                 $('#file_uploader_' + data.answer_key).remove();

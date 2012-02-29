@@ -269,7 +269,8 @@ qq.FileUploaderBasic = function(o){
         // validation        
         allowedExtensions: [],
         acceptFiles: null,               
-        sizeLimit: 0,   
+        sizeLimit: 0,
+        uploadText: 'upload a file',
         minSizeLimit: 0,                             
         // events
         // return false to cancel submit
@@ -508,7 +509,7 @@ qq.FileUploader = function(o){
                 
         template: '<div class="qq-uploader">' + 
                 '<div class="qq-upload-drop-area"><span>Drop files here to upload</span></div>' +
-                '<a href="#" class="qq-upload-button">Upload a file</a>' +
+                '<a href="#" class="qq-upload-button">' + this._options.uploadText + '</a>' +
                 '<ul class="qq-upload-list"></ul>' + 
              '</div>',
 
