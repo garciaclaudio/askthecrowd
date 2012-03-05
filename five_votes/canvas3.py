@@ -505,8 +505,7 @@ class AjaxHandler(BaseHandler):
 
     def handle_upload_picture(self):
         error = ''        
-
-        time.sleep(3)
+#        time.sleep(3)
         ans = Answer.get( self.request.get('answer_key') );
 
         new_pic =  images.resize(self.request.body, 100, 100)

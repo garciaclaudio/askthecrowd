@@ -15,10 +15,14 @@
 
 body {
     background-color: #FFFFFF;
-    color: #003580;
+    color: ;
     font: medium/1.2 Arial,Helvetica,sans-serif;
     margin: 0;
     padding: 0;
+}
+
+.delete_answer_link {
+  position:absolute;top:2px;right:7px;"
 }
 
 div.centered_container {top: 0; left: 0; width: 100%; height: 100%; display: table}
@@ -26,7 +30,18 @@ div.centered_container {top: 0; left: 0; width: 100%; height: 100%; display: tab
 p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:center;}
 
 #app_logo {
+    padding:20px;
+    display:table;
+    background-color:#9dee1d;
+    color:black;
     text-align: center;
+    font-size: 350%;
+    font-weight: bold;
+    margin-left:auto; 
+    margin-right:auto; 
+   -moz-border-radius: 12px;
+   -webkit-border-radius: 12px;
+    border-radius: 12px;
 }
 
 
@@ -37,33 +52,65 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 #top_container {
    margin: 0px auto;
-   width:90%;
+   width:715px;
 }
 
 #main_container {
     padding:20px;
     display:table;
-    background-color: #ecff49;
+    background-color: yellow;
     text-align: center;
     margin-left:auto; 
     margin-right:auto; 
-   -moz-border-radius: 8px;
-   -webkit-border-radius: 8px;
-    border-radius: 8px;
+   -moz-border-radius: 12px;
+   -webkit-border-radius: 12px;
+    border-radius: 12px;
+}
+
+#question_text {
+    padding:20px;
+    display:table;
+    background-color:white;
+    color:black;
+    text-align: center;
+    font-size: 150%;
+    font-weight: bold;
+    margin-left:auto; 
+    margin-right:auto; 
+   -moz-border-radius: 12px;
+   -webkit-border-radius: 12px;
+    border-radius: 12px;
+}
+
+.answer_text {
+  font-size: 110%;
+  font-weight:bold;
 }
 
 .answer_card {
+  position: relative; 
   float: left;
   width: 140px;
-  height: 140px;
+  height: 160px;
   margin: 4px;
-  background-color: #ceebff;
+  background-color: white;
   padding: 10px;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
 }
 
+.card_inset {
+  width:140px;
+  height:160px;
+  display:table-cell;
+  vertical-align:middle;
+}
+
+
+.answer_picture {
+	border: 2px solid #000000;
+}
 
 .my_button, button.my_button {
 	/* layout */
@@ -75,9 +122,9 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 	color: #FFF;
 	/* border and roundedness */
 #	border: 4px solid #fff;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
+	-moz-border-radius: 8px;
+	-webkit-border-radius: 8px;
+	border-radius: 8px;
 	/* shadow */
 	-moz-box-shadow: 1px 1px 2px #999;
 	-webkit-box-shadow: 1px 1px 2px #999;
@@ -107,8 +154,9 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 {% include "control.inc" %}
 
-<h1 id="app_logo">{% trans "Five Votes" %}</h1>
-
+<br />
+<div id="app_logo">{% trans "Five Votes" %}</div>
+<br />
 <div id="super_top_container" >
   <div id="top_container" >
     <div id="main_container" >
@@ -136,32 +184,33 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 <!-- JS TEMPLATES START -->
 
 <script id="show_pic_tmpl" type="text/html">
-<img src="image?answer_key=${answer_key}">
+<img class="answer_picture" src="image?answer_key=${answer_key}">
 </script>
 
 <script id="show_answer_tmpl" type="text/html">
    <div class="answer_card" id="answer_${answer_key}">
 
-<br />
-
-        <div id="picture_${answer_key}"></div>
-
-        <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
-
-        <h2>${answer_text}</h2>
-
+    <div class="delete_answer_link">
         <form method="post" id="delete_answer_form_${answer_key}" action="/ajax.html">
             <input type="hidden" name="answer_key" value="${answer_key}">
             <input type="hidden" name="action" value="delete_answer">
-<a href="#" onclick="$('#delete_answer_form_${answer_key}').submit();return false;">[X]</a>
+<a href="#" onclick="$('#delete_answer_form_${answer_key}').submit();return false;"><b>x</b></a>
        </form>
-    </div>
+   </div>
+
+  <div class="card_inset">
+        <div id="picture_${answer_key}"></div>
+        <span class="answer_text">${answer_text}</span>
+        <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
+  </div>
+
+    </div> <!-- answer_card-->
 </script>
 
 <script id="question_created_tmpl" type="text/html">
 <div id="question_created"> 
     <p>{% trans "Question created!" %}</p>
-    <h1>${question_text}</h1>
+    <div id="question_text">${question_text}</div>
 
     <p>{% trans "Suggest inital answers" %}</p>
     <div id="answers_form_div">
@@ -181,7 +230,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
     </div>
 
     <div style="clear:both">
-        <button id="done_button" class="my_button">{% trans "Done" %}</button>
+        <br /><button id="done_button" class="my_button">{% trans "Done" %}</button>
     </div>
 </div>    
 </script>
