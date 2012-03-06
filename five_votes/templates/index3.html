@@ -209,7 +209,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 <script id="question_created_tmpl" type="text/html">
 <div id="question_created"> 
-    <p>{% trans "Question created!" %}</p>
+    <p>{% trans "Question created" %}</p>
     <div id="question_text">${question_text}</div>
 
     <p>{% trans "Suggest inital answers" %}</p>
@@ -247,6 +247,17 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
         </form>
     </div>
 </script>
+
+<script id="done_question_tmpl" type="text/html">
+    <p>{% trans "You're done" %}</p>
+    <div id="question_text">${question_text}</div>
+
+    <p>{% trans "Your question's URL is:" %} http://apps.facebook.com/five_votes/q/${question_key}</p>
+
+    <button type="submit" id="close_button" class="my_button">{% trans "Close" %}</button>
+</script>
+
+
 
 </body>
 </html>

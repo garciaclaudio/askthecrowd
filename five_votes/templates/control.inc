@@ -74,10 +74,12 @@ function show_created_question(data) {
       $('#new_answer').focus();
 
     $('#done_button').click( function() {
-
-alert('done XXX implement');
-
-       return false;
+        $('#main_container').fadeOut('fast');
+        $('#main_container').html( $("#done_question_tmpl").tmpl({
+             'question_text': data.question_text,
+             'question_key': data.question_key,
+           }));
+        $('#main_container').fadeIn('fast');
     });
 
     $('#main_container').fadeIn('fast');

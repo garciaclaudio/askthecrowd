@@ -123,6 +123,9 @@ class User(db.Model):
         self.friends = [user[u'id'] for user in me[u'friends'][u'data']]
         return self.put()
 
+# XXX, aqui voy, ver visitors_counter en carta_a_femsa/canvas.py
+class QuestionCounter(db.Model):
+    count = db.IntegerProperty()
 
 class Question(db.Model):
     user_id = db.StringProperty(required=True)
