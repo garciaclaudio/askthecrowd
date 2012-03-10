@@ -123,9 +123,22 @@ class User(db.Model):
         self.friends = [user[u'id'] for user in me[u'friends'][u'data']]
         return self.put()
 
-# XXX, aqui voy, ver visitors_counter en carta_a_femsa/canvas.py
-class QuestionCounter(db.Model):
+
+class Counter(db.Model):
     count = db.IntegerProperty()
+
+    @staticmethod
+    # XXX, make this use transactions
+    def get_next_question_id():
+        q_counter = Counter.get_by_key_name('question_id')
+        if q_counter is None:
+          q_counter = Counter(key_name='question_id')
+          q_counter.count = 1
+        else:
+          q_counter.count += 1 
+        q_counter.put()
+        return q_counter.count
+
 
 class Question(db.Model):
     user_id = db.StringProperty(required=True)
@@ -452,14 +465,22 @@ class AjaxHandler(BaseHandler):
         if error:
             result = { 'error' : error }
         else:
+            new_question_id = Counter.get_next_question_id()
+
+            print >> sys.stderr, '=============> Q ID, ' + str(new_question_id)
+
             new_question = Question(
+                key_name = str(new_question_id),
                 user_id=self.user.user_id,
                 question_text = question_text
             )
             new_question.put()
+
+            print >> sys.stderr, '=============> Q ID, ' + str(new_question.key().name())
+
             result = { 'error' : 0,
                        'question_text' : str(question_text),
-                       'question_key' : str(new_question.key())
+                       'question_key_name' : str(new_question.key().name())
                        }
         return result
 
@@ -469,7 +490,7 @@ class AjaxHandler(BaseHandler):
         if answer_text == "":
             error = '* ' + _("Answer text cannot be empty.");
 
-        question = Question.get( self.request.get('question_key') );
+        question = Question.get_by_key_name( self.request.get('question_key_name') );
 
         if( question is None ): 
             error_msg = _("Question not found. Should not happen.")

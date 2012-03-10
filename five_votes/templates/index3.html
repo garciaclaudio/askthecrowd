@@ -215,7 +215,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
     <p>{% trans "Suggest inital answers" %}</p>
     <div id="answers_form_div">
          <form id="new_answer_form" action="/ajax.html" method="get">
-            <input type="hidden" name="question_key" value="${question_key}">
+            <input type="hidden" name="question_key_name" value="${question_key_name}">
             <input type="hidden" name="action" value="add_answer">
 
             <input id="new_answer" name="answer_text" class="text" type="text" size=30>
@@ -252,7 +252,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
     <p>{% trans "You're done" %}</p>
     <div id="question_text">${question_text}</div>
 
-    <p>{% trans "Your question's URL is:" %} http://apps.facebook.com/five_votes/q/${question_key}</p>
+    <p>{% trans "Your question's URL is:" %} http://apps.facebook.com/five_votes/q/${question_key_name}</p>
 
     <button type="submit" id="close_button" class="my_button">{% trans "Close" %}</button>
 </script>

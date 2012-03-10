@@ -28,7 +28,7 @@ function show_answer(data) {
             element: document.getElementById('file_uploader_' + data.answer_key),
             action: '/ajax.html',
             debug: true,
-            sizeLimit: 100000,
+//            sizeLimit: 100000,
             uploadText: '{% trans "add picture" %}',
             allowedExtensions: ['jpg', 'jpeg'],
             onComplete: function(id, file_name, data){
@@ -53,7 +53,7 @@ function show_created_question(data) {
     $('#main_container').html( $("#question_created_tmpl").tmpl(
        {
          'question_text': data.question_text,
-         'question_key': data.question_key,
+         'question_key_name': data.question_key_name,
        }));
 
      // bind "add" click (form submit)
@@ -77,7 +77,7 @@ function show_created_question(data) {
         $('#main_container').fadeOut('fast');
         $('#main_container').html( $("#done_question_tmpl").tmpl({
              'question_text': data.question_text,
-             'question_key': data.question_key,
+             'question_key_name': data.question_key_name,
            }));
         $('#main_container').fadeIn('fast');
     });
