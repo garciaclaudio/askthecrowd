@@ -159,6 +159,7 @@ class Answer(db.Model):
     answer_text = db.StringProperty()
     picture = db.BlobProperty()
 
+
 class QuestionException(Exception):
     pass
 
@@ -493,7 +494,7 @@ class AjaxHandler(BaseHandler):
                 owner=self.user,
                 answer_text = answer_text,
             )
-            new_ans.put()
+            new_ans.save()
             result = { 'error' : 0,
                        'answer_text' : str(answer_text),
                        'answer_key' : str(new_ans.key())
@@ -580,12 +581,12 @@ class GetImage(BaseHandler):
 
 class QuestionHandler(BaseHandler):
     def get(self, question_key_name):
-
-        print >> sys.stderr, 'IN GET, ' + str(question_key_name)
-
         question = Question.get_by_key_name( question_key_name );
+        answers = Answer.gql( 'where question = :1', question )
+
         self.render(u'index3',
                     question=question,
+                    answers=answers,
                     )
 
     def post(self, question_key_name):

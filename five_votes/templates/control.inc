@@ -183,7 +183,20 @@ function show_new_question() {
 $(function(){
 
 {% if IN_DEV_SERVER %}
-    show_new_question();
+
+    {% if question %}
+
+alert( 'question is there' );
+
+    {% for ans in answers %}
+
+alert( 'answer: ' + '{{ ans.answer_text }}' );
+
+    {% endfor %}
+
+    {% else %}
+       show_new_question();
+    {% endif %}
 {% endif %}
 
 
