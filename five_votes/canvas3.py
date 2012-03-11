@@ -447,12 +447,7 @@ def user_required(fn):
 class MainPage(BaseHandler):
     """Show recent runs for the user and friends"""
     def get(self):
-        if self.user:
-            self.render(u'index3',
-                user_there=1,
-            )
-        else:
-            self.render(u'index3')
+        self.render(u'index3')
 
 
 class AjaxHandler(BaseHandler):
@@ -466,18 +461,12 @@ class AjaxHandler(BaseHandler):
             result = { 'error' : error }
         else:
             new_question_id = Counter.get_next_question_id()
-
-            print >> sys.stderr, '=============> Q ID, ' + str(new_question_id)
-
             new_question = Question(
                 key_name = str(new_question_id),
                 user_id=self.user.user_id,
                 question_text = question_text
             )
             new_question.put()
-
-            print >> sys.stderr, '=============> Q ID, ' + str(new_question.key().name())
-
             result = { 'error' : 0,
                        'question_text' : str(question_text),
                        'question_key_name' : str(new_question.key().name())
@@ -563,8 +552,6 @@ class AjaxHandler(BaseHandler):
 
         action = self.request.get('action')
 
-        print >> sys.stderr, 'IN GET, ' + str(action)
-
         if( action == 'delete_answer' ):
             result_struct = self.handle_delete_answer()
 
@@ -591,11 +578,25 @@ class GetImage(BaseHandler):
         else:
             self.error(404)
 
+class QuestionHandler(BaseHandler):
+    def get(self, question_key_name):
+
+        print >> sys.stderr, 'IN GET, ' + str(question_key_name)
+
+        question = Question.get_by_key_name( question_key_name );
+        self.render(u'index3',
+                    question=question,
+                    )
+
+    def post(self, question_key_name):
+        self.render(u'index3')
+
 
 def main():
     routes = [
         ('/image', GetImage),
         ('/ajax.html', AjaxHandler),
+        ('/q(.*)', QuestionHandler),
         (r'/', MainPage),
     ]
     application = webapp.WSGIApplication(routes,

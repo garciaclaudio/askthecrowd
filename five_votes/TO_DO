@@ -1,4 +1,12 @@
 
+
+---Show question and answers right away. With a big data struct.
+
+    --if user is NOT logged in, show welcome message, no voting buttons
+
+    --if user IS logged in, show voting controls
+
+
 More on CSS positioning (the tutorial):
 http://www.barelyfitz.com/screencast/html-training/css/positioning/
 
