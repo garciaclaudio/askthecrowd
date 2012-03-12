@@ -104,6 +104,30 @@ function show_new_question() {
 }
 
 
+function show_question_for_voting() {
+
+    $('#main_container').html( $("#answer_question_tmpl").tmpl({
+             'question_text': "{{question.question_text}}",
+             'question_key_name': "{{question_key_name}}",
+	     }));
+
+
+    {% for ans in answers %}
+
+    $('#answers_div').append( $("#show_answer_tmpl").tmpl( {
+       'answer_key': '{{ans.answer_key}}',
+       'answer_text': '{{ans.answer_text}}',
+    }));
+
+// alert( 'answer: ' + '{{ ans.answer_text }}' );
+
+    {% endfor %}
+
+    // add and bind new_answer_form here
+
+
+}
+
 {% if NOT_IN_DEV_SERVER %}
         window.fbAsyncInit = function() {
           FB.init({
@@ -186,13 +210,7 @@ $(function(){
 
     {% if question %}
 
-alert( 'question is there' );
-
-    {% for ans in answers %}
-
-alert( 'answer: ' + '{{ ans.answer_text }}' );
-
-    {% endfor %}
+        show_question_for_voting();
 
     {% else %}
        show_new_question();

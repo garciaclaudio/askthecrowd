@@ -258,6 +258,30 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 </script>
 
 
+<script id="answer_question_tmpl" type="text/html">
+<div> 
+    <div id="question_text">${question_text}</div>
+
+    <div id="answers_div">
+    </div>
+</div>    
+</script>
+
+
+<script id="suggest_another_answer_tmpl" type="text/html">
+    <p>{% trans "Suggest another answer" %}</p>
+
+    <div id="answers_form_div">
+         <form id="new_answer_form" action="/ajax.html" method="get">
+            <input type="hidden" name="question_key_name" value="${question_key_name}">
+            <input type="hidden" name="action" value="add_answer">
+
+            <input id="new_answer" name="answer_text" class="text" type="text" size=30>
+&nbsp;<button id="new_answer" type="submit">{% trans "add" %}</button>
+
+         </form>
+    </div>
+</script>
 
 </body>
 </html>

@@ -584,10 +584,19 @@ class QuestionHandler(BaseHandler):
         question = Question.get_by_key_name( question_key_name );
         answers = Answer.gql( 'where question = :1', question )
 
+        ans_struct = []
+        for ans in answers:
+            ans_struct.append({
+                    'answer_key' : str(ans.key()),
+                    'answer_text' : str(ans.answer_text),
+                    });
+
         self.render(u'index3',
                     question=question,
-                    answers=answers,
+                    question_key_name=str(question.key().name()),
+                    answers=ans_struct,
                     )
+
 
     def post(self, question_key_name):
         self.render(u'index3')
