@@ -261,7 +261,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 <script id="answer_question_tmpl" type="text/html">
 <div> 
     <div id="question_text">${question_text}</div>
-
+<br />
     <div id="answers_div">
     </div>
 </div>    
@@ -286,3 +286,21 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 </body>
 </html>
 
+
+<script id="show_answer_for_voting_tmpl" type="text/html">
+  <div class="answer_card" id="answer_${answer_key}">
+
+  <div class="card_inset">
+        <div id="picture_${answer_key}"></div>
+        <span class="answer_text">${answer_text}</span>
+
+<button style="float:right;" class="my_button" vote_val="1" idea_key="${key}">{% trans "+1" %}</button>
+
+<div style="float:right;padding: .3em .9em;"><span id="idea_votes_${key}" style="font-size:150%;font-weight:bold">${num_votes}</span> votes</div>
+
+<button style="float:right;" class="my_button" vote_val="-1" idea_key="${key}">{% trans "-1" %}</button>
+
+  </div>
+
+    </div> <!-- answer_card-->
+</script>

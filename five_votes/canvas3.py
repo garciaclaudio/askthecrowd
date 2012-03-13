@@ -160,6 +160,13 @@ class Answer(db.Model):
     picture = db.BlobProperty()
 
 
+class Vote(db.Model):
+    answer = db.ReferenceProperty(Answer)
+    question = db.ReferenceProperty(Question)
+    owner = db.ReferenceProperty(User)
+    num_votes = db.IntegerProperty()
+
+
 class QuestionException(Exception):
     pass
 
@@ -586,9 +593,14 @@ class QuestionHandler(BaseHandler):
 
         ans_struct = []
         for ans in answers:
+            if ans.picture:
+                has_pic = 1
+            else:
+                has_pic = 0
             ans_struct.append({
                     'answer_key' : str(ans.key()),
                     'answer_text' : str(ans.answer_text),
+                    'has_pic' : has_pic,
                     });
 
         self.render(u'index3',

@@ -114,10 +114,16 @@ function show_question_for_voting() {
 
     {% for ans in answers %}
 
-    $('#answers_div').append( $("#show_answer_tmpl").tmpl( {
-       'answer_key': '{{ans.answer_key}}',
-       'answer_text': '{{ans.answer_text}}',
-    }));
+      $('#answers_div').append( $("#show_answer_for_voting_tmpl").tmpl( {
+         'answer_key' : '{{ans.answer_key}}',
+         'answer_text' : '{{ans.answer_text}}',
+      }));
+
+      if( '{{ans.has_pic}}' == 1 ) {
+          $('#picture_' + '{{ans.answer_key}}').html( $("#show_pic_tmpl").tmpl({'answer_key': '{{ans.answer_key}}'} ));
+      }
+
+      // bind vote buttons here
 
 // alert( 'answer: ' + '{{ ans.answer_text }}' );
 
