@@ -21,9 +21,10 @@ body {
     padding: 0;
 }
 
-.delete_answer_link {
+.delete_answer_div {
   position:absolute;top:2px;right:7px;"
 }
+
 
 div.centered_container {top: 0; left: 0; width: 100%; height: 100%; display: table}
 
@@ -122,9 +123,9 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 	color: #FFF;
 	/* border and roundedness */
 #	border: 4px solid #fff;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	border-radius: 8px;
+	-moz-border-radius: 12px;
+	-webkit-border-radius: 12px;
+	border-radius: 12px;
 	/* shadow */
 	-moz-box-shadow: 1px 1px 2px #999;
 	-webkit-box-shadow: 1px 1px 2px #999;
@@ -147,6 +148,40 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 #add_answer_link {
 	font-size: 140%;
 }
+
+.vote_link {
+  font-size: 35px;
+  font-weight:bold;
+}
+
+.vote_link A:link {color:#00FF00; text-decoration:none;}      /* unvisited link */
+.vote_link A:visited {color:#00FF00;}  /* visited link */
+.vote_link A:hover {color:#0000FF;}  /* mouse over link */
+
+.minus_link A:link {color:#FF0000; text-decoration:none;}      /* unvisited link */
+.minus_link A:visited {color:#FF0000;}  /* visited link */
+.minus_link A:hover {color:#0000FF;}  /* mouse over link */
+
+
+.minus_vote_div {
+  position:absolute;bottom:4px;left:12px;"
+}
+
+.plus_vote_div {
+  position:absolute;bottom:4px;right:12px;"
+}
+
+.checkmarks_div {
+  color: #00FF00;
+  position:absolute;top:1px;right:6px;"
+}
+
+span.checkmarks_div {
+  font-size: 22px;
+  font-weight:bold;
+}
+
+
 
 </style>
     </head>
@@ -190,7 +225,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 <script id="show_answer_tmpl" type="text/html">
    <div class="answer_card" id="answer_${answer_key}">
 
-    <div class="delete_answer_link">
+    <div class="delete_answer_div">
         <form method="post" id="delete_answer_form_${answer_key}" action="/ajax.html">
             <input type="hidden" name="answer_key" value="${answer_key}">
             <input type="hidden" name="action" value="delete_answer">
@@ -294,11 +329,25 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
         <div id="picture_${answer_key}"></div>
         <span class="answer_text">${answer_text}</span>
 
-<button style="float:right;" class="my_button" vote_val="1" idea_key="${key}">{% trans "+1" %}</button>
+    <div class="checkmarks_div"><span class="checkmarks_div">&#10003;&#10003;&#10003;&#10003;</span></div>
 
-<div style="float:right;padding: .3em .9em;"><span id="idea_votes_${key}" style="font-size:150%;font-weight:bold">${num_votes}</span> votes</div>
+    <div class="plus_vote_div">
+        <form method="post" id="plus_vote_form_${answer_key}" action="/ajax.html">
+            <input type="hidden" name="answer_key" value="${answer_key}">
+            <input type="hidden" name="action" value="vote">
+            <input type="hidden" name="vote_val" value="1">
+<span class="vote_link"><a href="#" onclick="$('#plus_vote_form_${answer_key}').submit();return false;">+</a>
+       </form>
+   </div>
 
-<button style="float:right;" class="my_button" vote_val="-1" idea_key="${key}">{% trans "-1" %}</button>
+    <div class="minus_vote_div">
+        <form method="post" id="plus_vote_form_${answer_key}" action="/ajax.html">
+            <input type="hidden" name="answer_key" value="${answer_key}">
+            <input type="hidden" name="action" value="vote">
+            <input type="hidden" name="vote_val" value="1">
+<span class="vote_link minus_link"><a href="#" onclick="$('#plus_vote_form_${answer_key}').submit();return false;">-</a>
+       </form>
+   </div>
 
   </div>
 

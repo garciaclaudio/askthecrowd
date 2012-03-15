@@ -1,5 +1,7 @@
 
 
+&#10003;
+
 ---Show question and answers right away. With a big data struct.
 
     --if user is NOT logged in, show welcome message, no voting buttons
