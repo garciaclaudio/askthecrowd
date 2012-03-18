@@ -111,7 +111,6 @@ function show_question_for_voting() {
              'question_key_name': "{{question_key_name}}",
 	     }));
 
-
     {% for ans in answers %}
 
       $('#answers_div').append( $("#show_answer_for_voting_tmpl").tmpl( {
@@ -124,6 +123,17 @@ function show_question_for_voting() {
       }
 
       // bind vote buttons here
+     $('#plus_vote_form_' + '{{ans.answer_key}}' ).ajaxForm({
+         dataType:  'json', 
+         success: function(data) { 
+             if( data.error ) {
+                alert( data.error );
+             } else {
+                alert( 'new count: ' + data.new_count + ' left: ' + data.votes_left );
+             }
+         }
+     });
+
 
 // alert( 'answer: ' + '{{ ans.answer_text }}' );
 

@@ -539,6 +539,60 @@ class AjaxHandler(BaseHandler):
 
         return result
 
+    def handle_vote(self):
+
+        ans = Answer.get( self.request.get('answer_key') )
+        vote_val = self.request.get('vote_val')
+
+        import sys
+        print >> sys.stderr, 'in handle_vote, question :' + str(ans.question)
+        print >> sys.stderr, 'in handle_vote, user :' + str(self.user)
+    
+        votes_left = 0
+        all_my_voted_ideas = Vote.gql( 'where question = :1 AND owner = :2 AND num_votes>0', ans.question , self.user )
+
+        votes_cast=0
+        for vote in all_my_voted_ideas:
+            print >> sys.stderr, 'in handle_vote 2-5:' + str(vote.key())
+            votes_cast += int(vote.num_votes)
+
+        print >> sys.stderr, 'in handle_vote 3:' + str(vote_val)
+
+        import sys
+        print >> sys.stderr, 'VOTES cast :' + str(votes_cast)
+
+        votes_left = 5 - votes_cast
+
+        vote_query = Vote.gql( 'where owner = :1 and answer = :2',  self.user, ans )
+        my_vote = vote_query.get()
+
+        if my_vote:
+            print >> sys.stderr, 'Vote there, update the count'
+
+            if vote_val == "1":
+                if votes_cast < 10:
+                    my_vote.num_votes = my_vote.num_votes + 1
+                    my_vote.put()
+                    votes_left = votes_left-1
+            elif vote_val == "-1":
+                new_count = my_vote.num_votes - 1
+                if new_count >= 0:
+                    my_vote.num_votes = new_count
+                    my_vote.put()
+                    votes_left = votes_left + 1
+        else:
+            print >> sys.stderr, 'Vote not there '
+            my_vote = Vote();
+            my_vote.question = ans.question
+            my_vote.answer = ans
+            my_vote.owner = self.user
+            my_vote.num_votes = 1
+
+        my_vote.put()
+
+        result_struct = { 'all_is_fine': 1, 'new_count' : my_vote.num_votes, 'votes_left' : votes_left }
+        return result_struct
+
 
     def post(self):
         result_struct = { 'error' : '1' }
@@ -549,6 +603,9 @@ class AjaxHandler(BaseHandler):
 
         if( action == 'delete_answer' ):
             result_struct = self.handle_delete_answer()
+
+        if( action == 'vote' ):
+            result_struct = self.handle_vote()
 
         self.response.headers['Content-Type'] = 'application/json'
         seri = json.dumps( result_struct )

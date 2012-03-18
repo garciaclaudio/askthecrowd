@@ -25,3 +25,9 @@ indexes:
   - name: match
   - name: owner
   - name: num_votes
+
+- kind: Vote
+  properties:
+  - name: owner
+  - name: question
+  - name: num_votes
