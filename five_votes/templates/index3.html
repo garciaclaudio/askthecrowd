@@ -150,37 +150,46 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 }
 
 .vote_link {
-  font-size: 35px;
-  font-weight:bold;
+  font-size: 0.8em;
 }
 
-.vote_link A:link {color:#00FF00; text-decoration:none;}      /* unvisited link */
-.vote_link A:visited {color:#00FF00;}  /* visited link */
-.vote_link A:hover {color:#0000FF;}  /* mouse over link */
-
-.minus_link A:link {color:#FF0000; text-decoration:none;}      /* unvisited link */
-.minus_link A:visited {color:#FF0000;}  /* visited link */
-.minus_link A:hover {color:#0000FF;}  /* mouse over link */
+.vote_link A:link {color:#0000FF; text-decoration:none;}      /* unvisited link */
+.vote_link A:visited {color:#0000FF;}  /* visited link */
+.vote_link A:hover {text-decoration:underline;}  /* mouse over link */
 
 
 .minus_vote_div {
-  position:absolute;bottom:4px;left:12px;"
+  display:none;
+  position:absolute;bottom:7px;left:15px;"
 }
 
 .plus_vote_div {
-  position:absolute;bottom:4px;right:12px;"
+  position:absolute;bottom:7px;right:15px;"
 }
 
-.checkmarks_div {
-  color: #00FF00;
-  position:absolute;top:2px;right:2px;"
-}
-
-span.checkmarks_div {
-  font-size: 18px;
+.count_inset {
+  display:none;
+  padding:5px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  position:absolute;top:12px;right:12px;"
+  display:table-cell;
+  width:35px;
+  height:35px;
+  background-color: #00FF00;
+  font-size: 20px;
   font-weight:bold;
 }
 
+.count_text {
+  color: white;
+  position:absolute;top:11px;right:6px;"
+}
+
+.voted_answer {
+   background-color:#c5f982;
+}
 
 
 </style>
@@ -329,23 +338,23 @@ span.checkmarks_div {
         <div id="picture_${answer_key}"></div>
         <span class="answer_text">${answer_text}</span>
 
-    <div class="checkmarks_div"><span class="checkmarks_div">2&#10003;</span></div>
+    <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
 
     <div class="plus_vote_div">
         <form method="post" id="plus_vote_form_${answer_key}" action="/ajax.html">
             <input type="hidden" name="answer_key" value="${answer_key}">
             <input type="hidden" name="action" value="vote">
             <input type="hidden" name="vote_val" value="1">
-<span class="vote_link"><a href="#" onclick="$('#plus_vote_form_${answer_key}').submit();return false;">+</a>
+<span class="vote_link"><a href="#" onclick="$('#plus_vote_form_${answer_key}').submit();return false;">{% trans "vote" %}</a>
        </form>
    </div>
 
-    <div class="minus_vote_div">
-        <form method="post" id="plus_vote_form_${answer_key}" action="/ajax.html">
+    <div id="minus_vote_link_${answer_key}" class="minus_vote_div">
+        <form method="post" id="minus_vote_form_${answer_key}" action="/ajax.html">
             <input type="hidden" name="answer_key" value="${answer_key}">
             <input type="hidden" name="action" value="vote">
-            <input type="hidden" name="vote_val" value="1">
-<span class="vote_link minus_link"><a href="#" onclick="$('#plus_vote_form_${answer_key}').submit();return false;">-</a>
+            <input type="hidden" name="vote_val" value="-1">
+<span class="vote_link"><a href="#" onclick="$('#minus_vote_form_${answer_key}').submit();return false;">{% trans "unvote" %}</a>
        </form>
    </div>
 

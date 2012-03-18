@@ -540,15 +540,15 @@ class AjaxHandler(BaseHandler):
         return result
 
     def handle_vote(self):
-
-        ans = Answer.get( self.request.get('answer_key') )
+        answer_key = self.request.get('answer_key')
+        ans = Answer.get( answer_key )
         vote_val = self.request.get('vote_val')
 
         import sys
         print >> sys.stderr, 'in handle_vote, question :' + str(ans.question)
         print >> sys.stderr, 'in handle_vote, user :' + str(self.user)
+        print >> sys.stderr, 'in handle_vote, vote_val :' + str(vote_val)
     
-        votes_left = 0
         all_my_voted_ideas = Vote.gql( 'where question = :1 AND owner = :2 AND num_votes>0', ans.question , self.user )
 
         votes_cast=0
@@ -570,7 +570,7 @@ class AjaxHandler(BaseHandler):
             print >> sys.stderr, 'Vote there, update the count'
 
             if vote_val == "1":
-                if votes_cast < 10:
+                if votes_cast < 5:
                     my_vote.num_votes = my_vote.num_votes + 1
                     my_vote.put()
                     votes_left = votes_left-1
@@ -590,7 +590,7 @@ class AjaxHandler(BaseHandler):
 
         my_vote.put()
 
-        result_struct = { 'all_is_fine': 1, 'new_count' : my_vote.num_votes, 'votes_left' : votes_left }
+        result_struct = { 'answer_key': answer_key, 'new_count' : my_vote.num_votes, 'votes_left' : votes_left }
         return result_struct
 
 
@@ -648,17 +648,29 @@ class QuestionHandler(BaseHandler):
         question = Question.get_by_key_name( question_key_name );
         answers = Answer.gql( 'where question = :1', question )
 
+        # obtain votes by this user to this questions
+        all_my_voted = Vote.gql( 'where question = :1 AND owner = :2 AND num_votes>0', question , self.user )
+
+        votes_count_hash = {}
+        for vote in all_my_voted:
+            votes_count_hash[ str(vote.answer.key()) ] = vote.num_votes
+
         ans_struct = []
         for ans in answers:
             if ans.picture:
                 has_pic = 1
             else:
                 has_pic = 0
-            ans_struct.append({
-                    'answer_key' : str(ans.key()),
-                    'answer_text' : str(ans.answer_text),
-                    'has_pic' : has_pic,
-                    });
+
+            ans_data = {
+                'answer_key' : str(ans.key()),
+                'answer_text' : str(ans.answer_text),
+                'has_pic' : has_pic,
+                }
+            if votes_count_hash.has_key( str(ans.key()) ):
+                ans_data['num_votes'] = votes_count_hash[ str(ans.key()) ]
+
+            ans_struct.append( ans_data )
 
         self.render(u'index3',
                     question=question,

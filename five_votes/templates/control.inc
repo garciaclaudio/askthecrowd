@@ -122,6 +122,10 @@ function show_question_for_voting() {
           $('#picture_' + '{{ans.answer_key}}').html( $("#show_pic_tmpl").tmpl({'answer_key': '{{ans.answer_key}}'} ));
       }
 
+      if( '{{ans.num_votes}}' > 0 ) {
+          alert('num_votes' + '{{ans.num_votes}}' );
+      }
+
       // bind vote buttons here
      $('#plus_vote_form_' + '{{ans.answer_key}}' ).ajaxForm({
          dataType:  'json', 
@@ -129,10 +133,38 @@ function show_question_for_voting() {
              if( data.error ) {
                 alert( data.error );
              } else {
-                alert( 'new count: ' + data.new_count + ' left: ' + data.votes_left );
+                // change color of answer card
+                $("#answer_" + data.answer_key).addClass('voted_answer');
+                // show / update value of count_inset div
+                $("#count_inset_" + data.answer_key).show();
+                $("#count_text_" + data.answer_key).html( data.new_count + '&#10003;' );
+                // make unvote link appear
+                $("#minus_vote_link_" + data.answer_key).show();
+                // update votes left counter (the header div)
+                // if votes_left = 0, make vote links disappear, done button appear
              }
          }
      });
+
+     $('#minus_vote_form_' + '{{ans.answer_key}}' ).ajaxForm({
+         dataType:  'json', 
+         success: function(data) { 
+             if( data.error ) {
+                alert( data.error );
+             } else {
+//                alert( 'new count: ' + data.new_count + ' left: ' + data.votes_left );
+                //if new_count is 0, change color of answer card, hide inset
+                if( data.new_count == 0 ) {
+                    $("#count_inset_" + data.answer_key).hide();
+                    $("#answer_" + data.answer_key).removeClass('voted_answer');
+                    $("#minus_vote_link_" + data.answer_key).hide();
+                } else {
+                    $("#count_text_" + data.answer_key).html( data.new_count + '&#10003;' );
+                }
+             }
+         }
+     });
+
 
 
 // alert( 'answer: ' + '{{ ans.answer_text }}' );
