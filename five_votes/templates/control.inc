@@ -104,6 +104,38 @@ function show_new_question() {
 }
 
 
+function update_votes_header( votes_left ) {
+    if( votes_left == 0 ) {
+       $('#app_logo').html('{% trans "Zero Votes" %}');
+    }
+    else if( votes_left == 1 ) {
+       $('#app_logo').html('{% trans "One Vote" %}');
+    }
+    else if( votes_left == 2 ) {
+       $('#app_logo').html('{% trans "Two Votes" %}');
+    }
+    else if( votes_left == 3 ) {
+       $('#app_logo').html('{% trans "Three Votes" %}');
+    }
+     else if( votes_left == 4 ) {
+       $('#app_logo').html('{% trans "Four Votes" %}');
+    }
+     else if( votes_left == 5 ) {
+       $('#app_logo').html('{% trans "Five Votes" %}');
+    }
+}
+
+function show_votes( answer_key, num_votes ) {
+    // change color of answer card
+    $("#answer_" + answer_key).addClass('voted_answer');
+    // show / update value of count_inset div
+    $("#count_inset_" + answer_key).show();
+    $("#count_text_" + answer_key).html( num_votes + '&#10003;' );
+    // make unvote link appear
+    $("#minus_vote_link_" + answer_key).show();
+    // update votes left counter (the header div)
+}
+
 function show_question_for_voting() {
 
     $('#main_container').html( $("#answer_question_tmpl").tmpl({
@@ -118,13 +150,13 @@ function show_question_for_voting() {
          'answer_text' : '{{ans.answer_text}}',
       }));
 
-      if( '{{ans.has_pic}}' == 1 ) {
+      {% if ans.has_pic %}
           $('#picture_' + '{{ans.answer_key}}').html( $("#show_pic_tmpl").tmpl({'answer_key': '{{ans.answer_key}}'} ));
-      }
+      {% endif %}
 
-      if( '{{ans.num_votes}}' > 0 ) {
-          alert('num_votes' + '{{ans.num_votes}}' );
-      }
+      {% if ans.num_votes %}
+          show_votes( '{{ans.answer_key}}', {{ans.num_votes}} );
+      {% endif %}
 
       // bind vote buttons here
      $('#plus_vote_form_' + '{{ans.answer_key}}' ).ajaxForm({
@@ -133,15 +165,11 @@ function show_question_for_voting() {
              if( data.error ) {
                 alert( data.error );
              } else {
-                // change color of answer card
-                $("#answer_" + data.answer_key).addClass('voted_answer');
-                // show / update value of count_inset div
-                $("#count_inset_" + data.answer_key).show();
-                $("#count_text_" + data.answer_key).html( data.new_count + '&#10003;' );
-                // make unvote link appear
-                $("#minus_vote_link_" + data.answer_key).show();
-                // update votes left counter (the header div)
-                // if votes_left = 0, make vote links disappear, done button appear
+                if( data.votes_left <= 0 ) {
+                   $('.plus_vote_div').hide();
+                }
+                show_votes( data.answer_key, data.new_count );
+                update_votes_header( data.votes_left );
              }
          }
      });
@@ -152,8 +180,12 @@ function show_question_for_voting() {
              if( data.error ) {
                 alert( data.error );
              } else {
-//                alert( 'new count: ' + data.new_count + ' left: ' + data.votes_left );
-                //if new_count is 0, change color of answer card, hide inset
+
+                update_votes_header( data.votes_left );
+
+                if( data.votes_left > 0 ) {
+                   $('.plus_vote_div').show();
+                }
                 if( data.new_count == 0 ) {
                     $("#count_inset_" + data.answer_key).hide();
                     $("#answer_" + data.answer_key).removeClass('voted_answer');
@@ -165,11 +197,15 @@ function show_question_for_voting() {
          }
      });
 
-
-
 // alert( 'answer: ' + '{{ ans.answer_text }}' );
 
     {% endfor %}
+
+    update_votes_header( {{votes_left}} );
+
+    {% if votes_left <= 0 %}
+        $('.plus_vote_div').hide();
+    {% endif %}
 
     // add and bind new_answer_form here
 

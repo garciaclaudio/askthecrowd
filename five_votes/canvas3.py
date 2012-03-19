@@ -652,8 +652,10 @@ class QuestionHandler(BaseHandler):
         all_my_voted = Vote.gql( 'where question = :1 AND owner = :2 AND num_votes>0', question , self.user )
 
         votes_count_hash = {}
+        tot_votes = 0
         for vote in all_my_voted:
             votes_count_hash[ str(vote.answer.key()) ] = vote.num_votes
+            tot_votes += vote.num_votes
 
         ans_struct = []
         for ans in answers:
@@ -676,6 +678,7 @@ class QuestionHandler(BaseHandler):
                     question=question,
                     question_key_name=str(question.key().name()),
                     answers=ans_struct,
+                    votes_left= 5-tot_votes,
                     )
 
 
