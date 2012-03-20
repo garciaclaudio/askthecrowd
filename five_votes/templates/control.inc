@@ -140,6 +140,7 @@ function show_results() {
 
         $('#main_container').fadeOut('fast');
 // AQUI VOY
+//
 //        $('#main_container').html( $("#show_results_tmpl").tmpl({
 //             'question_text': data.question_text,
 //             'question_key_name': data.question_key_name,
