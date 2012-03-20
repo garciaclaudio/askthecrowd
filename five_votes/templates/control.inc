@@ -5,7 +5,6 @@
 <script>
 
 function show_answer(data) {
-
     $('#answers_div').append( $("#show_answer_tmpl").tmpl( {
        'answer_key': data.answer_key,
        'answer_text': data.answer_text,
@@ -136,12 +135,29 @@ function show_votes( answer_key, num_votes ) {
     // update votes left counter (the header div)
 }
 
+
+function show_results() {
+
+        $('#main_container').fadeOut('fast');
+// AQUI VOY
+//        $('#main_container').html( $("#show_results_tmpl").tmpl({
+//             'question_text': data.question_text,
+//             'question_key_name': data.question_key_name,
+//           }));
+        $('#main_container').fadeIn('fast');
+}
+
+
 function show_question_for_voting() {
 
     $('#main_container').html( $("#answer_question_tmpl").tmpl({
              'question_text': "{{question.question_text}}",
              'question_key_name': "{{question_key_name}}",
 	     }));
+
+    $('#see_results_button').click( function() {
+        show_results();
+    });
 
     {% for ans in answers %}
 
@@ -167,6 +183,7 @@ function show_question_for_voting() {
              } else {
                 if( data.votes_left <= 0 ) {
                    $('.plus_vote_div').hide();
+                   $('#see_results_div').show();
                 }
                 show_votes( data.answer_key, data.new_count );
                 update_votes_header( data.votes_left );
@@ -185,6 +202,7 @@ function show_question_for_voting() {
 
                 if( data.votes_left > 0 ) {
                    $('.plus_vote_div').show();
+                   $('#see_results_div').hide();
                 }
                 if( data.new_count == 0 ) {
                     $("#count_inset_" + data.answer_key).hide();
@@ -205,11 +223,10 @@ function show_question_for_voting() {
 
     {% if votes_left <= 0 %}
         $('.plus_vote_div').hide();
+        $('#see_results_div').show();
     {% endif %}
 
     // add and bind new_answer_form here
-
-
 }
 
 {% if NOT_IN_DEV_SERVER %}
