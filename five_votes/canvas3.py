@@ -594,6 +594,48 @@ class AjaxHandler(BaseHandler):
         return result_struct
 
 
+    def handle_get_results(self):
+        question = Question.get_by_key_name( self.request.get('question_key_name') );
+
+        answers = Answer.gql( 'where question = :1', question )
+
+        # obtain votes by this user to this questions
+        all_voted = Vote.gql( 'where question = :1', question )
+
+        # XXX this won't work when we have more than say, 1000 votes
+        votes_count_hash = {}
+        tot_votes = 0
+        for vote in all_voted:
+            if votes_count_hash.has_key( str(vote.answer.key()) ):
+                votes_count_hash[ str(vote.answer.key()) ] += vote.num_votes
+            else:
+                votes_count_hash[ str(vote.answer.key()) ] = vote.num_votes
+            tot_votes += vote.num_votes
+
+        ans_struct = []
+        for ans in answers:
+            if ans.picture:
+                has_pic = 1
+            else:
+                has_pic = 0
+            ans_data = {
+                'answer_key' : str(ans.key()),
+                'answer_text' : str(ans.answer_text),
+                'has_pic' : has_pic,
+                }
+            if votes_count_hash.has_key( str(ans.key()) ):
+                ans_data['num_votes'] = votes_count_hash[ str(ans.key()) ]
+
+            ans_struct.append( ans_data )
+
+        sorted_ans = sorted(ans_struct, key=lambda k: k['num_votes'], reverse=True) 
+
+        result_struct = { 'question_key_name': str(question.key().name()),
+                          'answers': sorted_ans,
+                          'total_votes': tot_votes }
+        return result_struct
+
+
     def post(self):
         result_struct = { 'error' : '1' }
         action = self.request.get('action')
@@ -625,6 +667,9 @@ class AjaxHandler(BaseHandler):
 
         if( action == 'add_answer' ):
             result_struct = self.handle_new_answer()
+
+        if( action == 'get_results' ):
+            result_struct = self.handle_get_results()
 
         self.response.headers['Content-Type'] = 'application/json'
         seri = json.dumps( result_struct )
