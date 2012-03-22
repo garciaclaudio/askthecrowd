@@ -182,6 +182,10 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
   font-weight:bold;
 }
 
+.results_inset {
+  display:inline;
+}
+
 .count_text {
   color: white;
   position:absolute;top:11px;right:6px;"
@@ -367,3 +371,34 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
     </div> <!-- answer_card-->
 </script>
+
+
+
+<script id="show_results_tmpl" type="text/html">
+<div> 
+    <div id="question_text">${question_text}</div>
+<br />
+    <div id="answers_div">
+    </div>
+<br />
+    <div id="see_results_div" style="clear:both;display:none;">
+        <br /><button id="see_results_button" class="my_button">{% trans "See results" %}</button>
+    </div>
+
+</div>    
+</script>
+
+
+<script id="show_answer_for_results_tmpl" type="text/html">
+  <div class="answer_card" id="answer_${answer_key}">
+
+  <div class="card_inset">
+        <div id="picture_${answer_key}"></div>
+        <span class="answer_text">${answer_text}</span>
+
+        <div id="count_inset_${answer_key}" class="count_inset results_inset"><div id="count_text_${answer_key}"  class="count_text">${num_votes}</div></div>
+  </div>
+
+    </div> <!-- answer_card-->
+</script>
+

@@ -631,6 +631,7 @@ class AjaxHandler(BaseHandler):
         sorted_ans = sorted(ans_struct, key=lambda k: k['num_votes'], reverse=True) 
 
         result_struct = { 'question_key_name': str(question.key().name()),
+                          'question_text': str(question.question_text),
                           'answers': sorted_ans,
                           'total_votes': tot_votes }
         return result_struct
