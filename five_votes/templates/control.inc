@@ -151,6 +151,10 @@ function show_results( data ) {
             'answer_text' : data.answers[i].answer_text,
             'num_votes' : data.answers[i].num_votes,
          }));
+
+        if( data.answers[i].has_pic ) {
+           $('#picture_' + data.answers[i].answer_key ).html( $("#show_pic_tmpl").tmpl({'answer_key': data.answers[i].answer_key}));
+        }
         
         //Do something
     }
@@ -159,6 +163,15 @@ function show_results( data ) {
 
 
 function show_question_for_voting() {
+
+     if( {{votes_left}} == 0 ) {
+        $.getJSON("ajax.html?action=get_results;question_key_name={{question_key_name}}",
+             function(data){
+                 show_results(data);
+             }
+        );
+        return;
+     }
 
     $('#main_container').html( $("#answer_question_tmpl").tmpl({
              'question_text': "{{question.question_text}}",
