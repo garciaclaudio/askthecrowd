@@ -622,6 +622,7 @@ class AjaxHandler(BaseHandler):
                 'answer_key' : str(ans.key()),
                 'answer_text' : str(ans.answer_text),
                 'has_pic' : has_pic,
+                'num_votes' : 0,
                 }
             if votes_count_hash.has_key( str(ans.key()) ):
                 ans_data['num_votes'] = votes_count_hash[ str(ans.key()) ]

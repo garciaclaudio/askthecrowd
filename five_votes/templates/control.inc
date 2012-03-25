@@ -153,7 +153,7 @@ function show_results( data ) {
          }));
 
         if( data.answers[i].has_pic ) {
-           $('#picture_' + data.answers[i].answer_key ).html( $("#show_pic_tmpl").tmpl({'answer_key': data.answers[i].answer_key}));
+           $('#picture_' + data.answers[i].answer_key ).html( $("#show_result_pic_tmpl").tmpl({'answer_key': data.answers[i].answer_key}));
         }
         
         //Do something

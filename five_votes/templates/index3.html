@@ -15,7 +15,6 @@
 
 body {
     background-color: #FFFFFF;
-    color: ;
     font: medium/1.2 Arial,Helvetica,sans-serif;
     margin: 0;
     padding: 0;
@@ -113,6 +112,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 	border: 2px solid #000000;
 }
 
+
 .my_button, button.my_button {
 	/* layout */
 	padding: .3em .9em;
@@ -182,10 +182,6 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
   font-weight:bold;
 }
 
-.results_inset {
-  display:inline;
-}
-
 .count_text {
   color: white;
   position:absolute;top:11px;right:6px;"
@@ -194,6 +190,45 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 .voted_answer {
    background-color:#c5f982;
 }
+
+
+.results_card {
+  position: relative; 
+  float: left;
+  width: 450px;
+  height: 63px;
+  margin: 4px;
+  background-color: white;
+  padding: 10px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  border-radius: 8px;
+  clear:both;
+}
+
+.results_count_text {
+  color: #00FF00;
+  position:absolute;top:29px;right:17px;
+  font-size: 25px;
+  font-weight:bold;
+}
+
+.results_text {
+  color: black;
+  float:left;
+  font-weight:bold;
+  font-size: 22px;
+  line-height:55px;
+  margin: 5px;
+
+}
+
+.results_pic {
+  float:left;
+  margin: 5px;
+}
+
+
 
 
 </style>
@@ -391,15 +426,16 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 
 <script id="show_answer_for_results_tmpl" type="text/html">
-  <div class="answer_card" id="answer_${answer_key}">
-
-  <div class="card_inset">
-        <div id="picture_${answer_key}"></div>
-        <span class="answer_text">${answer_text}</span>
-
-        <div id="count_inset_${answer_key}" class="count_inset results_inset"><div id="count_text_${answer_key}"  class="count_text">${num_votes}</div></div>
+  <div class="results_card" id="answer_${answer_key}">
+      <div class="results_pic" id="picture_${answer_key}"></div>
+      <div class="results_text">${answer_text}</div>
+      <div class="results_count_text">${num_votes} &#10003;</div>
   </div>
-
-    </div> <!-- answer_card-->
 </script>
+
+
+<script id="show_result_pic_tmpl" type="text/html">
+<img class="answer_picture" width="50" height="50" src="image?answer_key=${answer_key}">
+</script>
+
 
