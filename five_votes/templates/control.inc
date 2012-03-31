@@ -34,8 +34,6 @@ function show_answer(data) {
                 $('#file_uploader_' + data.answer_key).remove();
                 $('#picture_' + data.answer_key).html( $("#show_pic_tmpl").tmpl({'answer_key': data.answer_key} ));
 
-//alert( id + '--' + file_name + ' -- ' + data.answer_key)
-
             },
             params: {
                       action: 'upload_picture',
@@ -164,7 +162,7 @@ function show_results( data ) {
 
 function show_question_for_voting() {
 
-     if( {{votes_left}} == 0 ) {
+     if( '{{votes_left}}' == 0 ) {
         $.getJSON("ajax.html?action=get_results;question_key_name={{question_key_name}}",
              function(data){
                  show_results(data);
@@ -243,8 +241,6 @@ function show_question_for_voting() {
          }
      });
 
-// alert( 'answer: ' + '{{ ans.answer_text }}' );
-
     {% endfor %}
 
     update_votes_header( {{votes_left}} );
@@ -292,7 +288,11 @@ function show_question_for_voting() {
                 var uid = response.authResponse.userID;
                 var accessToken = response.authResponse.accessToken;
 
-                show_new_question();
+              {% if question %}
+                  show_question_for_voting();
+              {% else %}
+                  show_new_question();
+              {% endif %}
             
 //            alert('user connected ' +  uid + ' -- ' + accessToken );
 

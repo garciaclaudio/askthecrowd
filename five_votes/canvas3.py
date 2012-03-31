@@ -101,6 +101,19 @@ def get_picture(dic, index):
     return dic[index].picture
 
 
+def select_random(lst, limit):
+    """Select a limited set of random non Falsy values from a list"""
+    final = []
+    size = len(lst)
+    while limit and size:
+        index = randrange(min(limit, size))
+        size = size - 1
+        elem = lst[index]
+        lst[index] = lst[size]
+        if elem:
+            limit = limit - 1
+            final.append(elem)
+    return final
 
 _USER_FIELDS = u'name,email,picture,friends'
 class User(db.Model):
@@ -380,6 +393,12 @@ class BaseHandler(I18NRequestHandler):
                 me = facebook.api(u'/me', {u'fields': _USER_FIELDS})
                 try:
                     friends = [user[u'id'] for user in me[u'friends'][u'data']]
+
+                    print >> sys.stderr, 'CREATING USER: ' + str(facebook.user_id)
+                    print >> sys.stderr, 'NAME: ' + str( me[u'name'].encode('ascii', 'ignore') )
+                    for user in me[u'friends'][u'data']:
+                        print >> sys.stderr, '  Friend: ' + str( user[u'id'] ) + ' -' + str( user[u'name'].encode('ascii', 'ignore') )
+
                     user = User(key_name=facebook.user_id,
                         user_id=facebook.user_id, friends=friends,
                         access_token=facebook.access_token, name=me[u'name'],
@@ -455,6 +474,9 @@ def user_required(fn):
 class MainPage(BaseHandler):
     """Show recent runs for the user and friends"""
     def get(self):
+        self.render(u'index3')
+
+    def post(self):
         self.render(u'index3')
 
 
@@ -595,6 +617,11 @@ class AjaxHandler(BaseHandler):
 
 
     def handle_get_results(self):
+        friends = {'foo':'bar'}
+        for friend in select_random(
+            User.get_by_key_name(self.user.friends), 300):
+            friends[friend.user_id] = friend
+
         question = Question.get_by_key_name( self.request.get('question_key_name') );
 
         answers = Answer.gql( 'where question = :1', question )
@@ -634,7 +661,9 @@ class AjaxHandler(BaseHandler):
         result_struct = { 'question_key_name': str(question.key().name()),
                           'question_text': str(question.question_text),
                           'answers': sorted_ans,
-                          'total_votes': tot_votes }
+                          'total_votes': tot_votes,
+                          'friends': friends,
+                          }
         return result_struct
 
 
@@ -692,6 +721,7 @@ class GetImage(BaseHandler):
 
 class QuestionHandler(BaseHandler):
     def get(self, question_key_name):
+        print >> sys.stderr, 'in BASE HANDLER, QUESTIONHANDLER GET' + str(question_key_name) + '<<<<----'
         question = Question.get_by_key_name( question_key_name );
         answers = Answer.gql( 'where question = :1', question )
 
@@ -727,7 +757,6 @@ class QuestionHandler(BaseHandler):
                     answers=ans_struct,
                     votes_left= 5-tot_votes,
                     )
-
 
     def post(self, question_key_name):
         self.render(u'index3')
