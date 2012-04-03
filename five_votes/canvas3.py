@@ -396,6 +396,7 @@ class BaseHandler(I18NRequestHandler):
 
                     print >> sys.stderr, 'CREATING USER: ' + str(facebook.user_id)
                     print >> sys.stderr, 'NAME: ' + str( me[u'name'].encode('ascii', 'ignore') )
+
                     for user in me[u'friends'][u'data']:
                         print >> sys.stderr, '  Friend: ' + str( user[u'id'] ) + ' -' + str( user[u'name'].encode('ascii', 'ignore') )
 

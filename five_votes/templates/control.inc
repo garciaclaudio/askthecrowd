@@ -254,6 +254,7 @@ function show_question_for_voting() {
 }
 
 {% if NOT_IN_DEV_SERVER %}
+
         window.fbAsyncInit = function() {
           FB.init({
             appId      : '331909936825023',
@@ -270,8 +271,10 @@ function show_question_for_voting() {
           //
           FB.Event.subscribe('auth.login', function(response) {
               // Reload the entire page. Could also do an Ajax request and dynamically
-              // update the already loaded page.
-              window.location.reload(true);
+alert('reloading...');
+
+top.location = 'http://apps.facebook.com/five_votes/';
+//                    window.location.reload(true);
           });
 //
 //          FB.ui({ method: 'feed', 
@@ -294,7 +297,7 @@ function show_question_for_voting() {
                   show_new_question();
               {% endif %}
             
-//            alert('user connected ' +  uid + ' -- ' + accessToken );
+            alert('user connected ' +  uid + ' -- ' + accessToken );
 
 // XXX poner codigo en un div, llamar FB.XFBML.Host.parseDomTree();
 // (ver index.html)
@@ -308,7 +311,7 @@ function show_question_for_voting() {
 
                 $('#welcome_msg').show();
 
-//            alert( 'not authorized' );
+            alert( 'not authorized' );
             
               } else {
                 // the user isn't even logged in to Facebook.
