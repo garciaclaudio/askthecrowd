@@ -115,13 +115,14 @@ def select_random(lst, limit):
             final.append(elem)
     return final
 
-_USER_FIELDS = u'name,email,picture,friends'
+_USER_FIELDS = u'name,email,picture,friends,gender'
 class User(db.Model):
     user_id = db.StringProperty(required=True)
     access_token = db.StringProperty(required=True)
     name = db.StringProperty(required=True)
     picture = db.StringProperty(required=True)
     email = db.StringProperty()
+    gender = db.StringProperty()
     friends = db.StringListProperty()
     dirty = db.BooleanProperty()
 
@@ -396,6 +397,7 @@ class BaseHandler(I18NRequestHandler):
 
                     print >> sys.stderr, 'CREATING USER: ' + str(facebook.user_id)
                     print >> sys.stderr, 'NAME: ' + str( me[u'name'].encode('ascii', 'ignore') )
+                    print >> sys.stderr, 'GENDER: ' + str( me[u'gender'] )
 
                     for user in me[u'friends'][u'data']:
                         print >> sys.stderr, '  Friend: ' + str( user[u'id'] ) + ' -' + str( user[u'name'].encode('ascii', 'ignore') )
@@ -403,7 +405,8 @@ class BaseHandler(I18NRequestHandler):
                     user = User(key_name=facebook.user_id,
                         user_id=facebook.user_id, friends=friends,
                         access_token=facebook.access_token, name=me[u'name'],
-                        email=me.get(u'email'), picture=me[u'picture'])
+                        email=me.get(u'email'), picture=me[u'picture'],
+                        gender=me[u'gender'])
                     user.put()
                 except KeyError, ex:
                     pass # ignore if can't get the minimum fields
@@ -622,6 +625,11 @@ class AjaxHandler(BaseHandler):
         for friend in select_random(
             User.get_by_key_name(self.user.friends), 300):
             friends[friend.user_id] = friend
+
+        show_friend = self.request.get('show_friend') or ''
+        show_gender = self.request.get('show_gender') or ''
+
+        # XXX, aqui voy
 
         question = Question.get_by_key_name( self.request.get('question_key_name') );
 
