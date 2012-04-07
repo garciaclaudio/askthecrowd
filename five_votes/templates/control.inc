@@ -144,7 +144,7 @@ function show_results( data ) {
 
     for (var i = 0; i < data.answers.length; i++) {
 
-        $('#answers_div').append( $("#show_answer_for_results_tmpl").tmpl( {
+        $('#result_answers_div').append( $("#show_answer_for_results_tmpl").tmpl( {
             'answer_key' : data.answers[i].answer_key,
             'answer_text' : data.answers[i].answer_text,
             'num_votes' : data.answers[i].num_votes,
@@ -270,12 +270,10 @@ function show_question_for_voting() {
           // so that a user is created
           //
           FB.Event.subscribe('auth.login', function(response) {
-              // Reload the entire page. Could also do an Ajax request and dynamically
-alert('reloading...');
-
-top.location = 'http://apps.facebook.com/five_votes/';
-//                    window.location.reload(true);
+              // Reload the entire page
+              top.location = 'http://apps.facebook.com/five_votes/';
           });
+
 //
 //          FB.ui({ method: 'feed', 
 //                  message: 'Facebook for Websites is super-cool'});
@@ -297,7 +295,7 @@ top.location = 'http://apps.facebook.com/five_votes/';
                   show_new_question();
               {% endif %}
             
-            alert('user connected ' +  uid + ' -- ' + accessToken );
+//            alert('user connected ' +  uid + ' -- ' + accessToken );
 
 // XXX poner codigo en un div, llamar FB.XFBML.Host.parseDomTree();
 // (ver index.html)
@@ -311,7 +309,7 @@ top.location = 'http://apps.facebook.com/five_votes/';
 
                 $('#welcome_msg').show();
 
-            alert( 'not authorized' );
+//            alert( 'not authorized' );
             
               } else {
                 // the user isn't even logged in to Facebook.

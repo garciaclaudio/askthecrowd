@@ -30,7 +30,7 @@ div.centered_container {top: 0; left: 0; width: 100%; height: 100%; display: tab
 p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:center;}
 
 #app_logo {
-    padding:20px;
+    padding:10px;
     display:table;
     background-color:#9dee1d;
     color:black;
@@ -52,7 +52,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 #top_container {
    margin: 0px auto;
-   width:715px;
+   padding: 10px;
 }
 
 #main_container {
@@ -68,7 +68,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 }
 
 #question_text {
-    padding:20px;
+    padding:10px;
     display:table;
     background-color:white;
     color:black;
@@ -111,7 +111,6 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 .answer_picture {
 	border: 2px solid #000000;
 }
-
 
 .my_button, button.my_button {
 	/* layout */
@@ -220,14 +219,48 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
   font-size: 22px;
   line-height:55px;
   margin: 5px;
-
 }
+
 
 .results_pic {
   float:left;
   margin: 5px;
 }
 
+#selector_div {
+    padding:10px;
+    display:table;
+    background-color: yellow;
+    text-align: center;
+    margin-left:auto; 
+    margin-right:auto; 
+}
+
+.result_selector {
+  position: relative; 
+  float: left;
+  margin:2px;
+  padding:10px;
+  background-color:#a2f1ff;
+  color:black;
+  text-align: center;
+  font-size: 80%;
+  -moz-border-radius: 12px;
+  -webkit-border-radius: 12px;
+   border-radius: 12px;
+}
+
+.selected_result {
+  background-color:#ffa7be;
+}
+
+#result_answers_div {
+    padding:0px;
+    display:table;
+    text-align: center;
+    margin-left:auto; 
+    margin-right:auto; 
+}
 
 
 
@@ -335,7 +368,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
     <p>{% trans "You're done" %}</p>
     <div id="question_text">${question_text}</div>
 
-    <p>{% trans "Your question's URL is:" %} http://apps.facebook.com/five_votes/q/${question_key_name}</p>
+    <p>{% trans "Your question's URL is:" %} <a href="http://apps.facebook.com/five_votes/q${question_key_name}">"http://apps.facebook.com/five_votes/q${question_key_name}</a></p>
 
     <button type="submit" id="close_button" class="my_button">{% trans "Close" %}</button>
 </script>
@@ -412,14 +445,14 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 <script id="show_results_tmpl" type="text/html">
 <div> 
     <div id="question_text">${question_text}</div>
-<br />
-    <div id="answers_div">
+    <div id="selector_div">
+        <div class="result_selector">Hello</div>
+        <div class="result_selector selected_result">Foo bar baz</div>
+        <div class="result_selector">Hello</div>
+        <div class="result_selector">Foo bar baz</div>
     </div>
-<br />
-    <div id="see_results_div" style="clear:both;display:none;">
-        <br /><button id="see_results_button" class="my_button">{% trans "See results" %}</button>
+    <div id="result_answers_div">
     </div>
-
 </div>    
 </script>
 
