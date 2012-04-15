@@ -31,3 +31,9 @@ indexes:
   - name: owner
   - name: question
   - name: num_votes
+
+- kind: Vote
+  properties:
+  - name: question
+  - name: user_id
+  - name: num_votes

@@ -160,16 +160,15 @@ class Question(db.Model):
     question_text = db.StringProperty()
 
     @staticmethod
-    def find_by_user_ids(user_ids, limit=50):
+    def find_by_user_ids(question, user_ids, limit=50):
         if user_ids:
-            return Question.gql(u'WHERE user_id IN :1', user_ids).fetch(limit)
+            return Question.gql(u'WHERE question = :1 AND user_id IN :2', question, user_ids).fetch(limit)
         else:
             return []
 
-
 class Answer(db.Model):
     question = db.ReferenceProperty(Question)
-    owner = db.ReferenceProperty(User)
+    user_id = db.StringProperty(required=True)
     answer_text = db.StringProperty()
     picture = db.BlobProperty()
 
@@ -177,8 +176,21 @@ class Answer(db.Model):
 class Vote(db.Model):
     answer = db.ReferenceProperty(Answer)
     question = db.ReferenceProperty(Question)
-    owner = db.ReferenceProperty(User)
+    user_id = db.StringProperty(required=True)
     num_votes = db.IntegerProperty()
+
+    @staticmethod
+    def find_by_user_ids(user_ids, question, limit=50):
+        if user_ids:
+            return Vote.gql(u'WHERE user_id IN :1', user_ids).fetch(limit)
+        else:
+            return []
+
+class ResultsSummary(db.Model):
+    answer = db.ReferenceProperty(Answer)
+    question = db.ReferenceProperty(Question)
+    male_votes = db.IntegerProperty()
+    female_votes = db.IntegerProperty()
 
 
 class QuestionException(Exception):
@@ -524,7 +536,7 @@ class AjaxHandler(BaseHandler):
         else:
             new_ans = Answer(
                 question=question,
-                owner=self.user,
+                user_id=self.user.user_id,
                 answer_text = answer_text,
             )
             new_ans.save()
@@ -575,7 +587,7 @@ class AjaxHandler(BaseHandler):
         print >> sys.stderr, 'in handle_vote, user :' + str(self.user)
         print >> sys.stderr, 'in handle_vote, vote_val :' + str(vote_val)
     
-        all_my_voted_ideas = Vote.gql( 'where question = :1 AND owner = :2 AND num_votes>0', ans.question , self.user )
+        all_my_voted_ideas = Vote.gql( 'where question = :1 AND user_id = :2 AND num_votes>0', ans.question , self.user.user_id )
 
         votes_cast=0
         for vote in all_my_voted_ideas:
@@ -589,7 +601,7 @@ class AjaxHandler(BaseHandler):
 
         votes_left = 5 - votes_cast
 
-        vote_query = Vote.gql( 'where owner = :1 and answer = :2',  self.user, ans )
+        vote_query = Vote.gql( 'where user_id = :1 and answer = :2',  self.user.user_id, ans )
         my_vote = vote_query.get()
 
         if my_vote:
@@ -608,12 +620,10 @@ class AjaxHandler(BaseHandler):
                     votes_left = votes_left + 1
         else:
             print >> sys.stderr, 'Vote not there '
-            my_vote = Vote();
+            my_vote = Vote(user_id = self.user.user_id);
             my_vote.question = ans.question
             my_vote.answer = ans
-            my_vote.owner = self.user
             my_vote.num_votes = 1
-
         my_vote.put()
 
         result_struct = { 'answer_key': answer_key, 'new_count' : my_vote.num_votes, 'votes_left' : votes_left }
@@ -735,7 +745,7 @@ class QuestionHandler(BaseHandler):
         answers = Answer.gql( 'where question = :1', question )
 
         # obtain votes by this user to this questions
-        all_my_voted = Vote.gql( 'where question = :1 AND owner = :2 AND num_votes>0', question , self.user )
+        all_my_voted = Vote.gql( 'where question = :1 AND user_id = :2 AND num_votes>0', question , self.user.user_id )
 
         votes_count_hash = {}
         tot_votes = 0

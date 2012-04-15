@@ -1,7 +1,30 @@
 
 
+Next: populate ResultsSummary
+
+user_id = db.StringProperty(required=True)
+
 [All][Men][Women][You][Friend 1][Friend 2]...
 
+
+
+
+
+Have a table called: Question results, with a summary per answer / gender.
+
+
+For friend results: Have a find_by_user_ids method in Vote (takes friends list as parameter, and question id). 
+
+
+
+
+Get results,
+
+   returns friends list when 
+      filter_by="all"
+   filter_by = [all, men, women, friend]
+   friend_id
+      a second call not needed, send all data in one go?
 
 Admin console!
 http://localhost:8080/_ah/admin/datastore
