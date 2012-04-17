@@ -604,6 +604,15 @@ class AjaxHandler(BaseHandler):
         vote_query = Vote.gql( 'where user_id = :1 and answer = :2',  self.user.user_id, ans )
         my_vote = vote_query.get()
 
+        results_query = ResultsSummary.gql( 'where question = :1 and answer = :2', ans.question , ans )
+        results_summary = results_query.get()
+
+        if results_summary is None:
+            results_summary = ResultsSummary( question = ans.question,
+                                              answer = ans,
+                                              male_votes = 0,
+                                              female_votes = 0, )
+
         if my_vote:
             print >> sys.stderr, 'Vote there, update the count'
 
@@ -612,19 +621,34 @@ class AjaxHandler(BaseHandler):
                     my_vote.num_votes = my_vote.num_votes + 1
                     my_vote.put()
                     votes_left = votes_left-1
+                    if self.user.gender == 'male':
+                        results_summary.male_votes = results_summary.male_votes + 1
+                    else:
+                        results_summary.female_votes = results_summary.female_votes + 1
+                    results_summary.put()
             elif vote_val == "-1":
                 new_count = my_vote.num_votes - 1
                 if new_count >= 0:
                     my_vote.num_votes = new_count
                     my_vote.put()
                     votes_left = votes_left + 1
+                    if self.user.gender == 'male':
+                        results_summary.male_votes = results_summary.male_votes - 1
+                    else:
+                        results_summary.female_votes = results_summary.female_votes - 1
+                    results_summary.put()
         else:
             print >> sys.stderr, 'Vote not there '
-            my_vote = Vote(user_id = self.user.user_id);
+            my_vote = Vote(user_id = self.user.user_id)
             my_vote.question = ans.question
             my_vote.answer = ans
             my_vote.num_votes = 1
-        my_vote.put()
+            my_vote.put()
+            if self.user.gender == 'male':
+                results_summary.male_votes = results_summary.male_votes + 1
+            else:
+                results_summary.female_votes = results_summary.female_votes + 1
+            results_summary.put()
 
         result_struct = { 'answer_key': answer_key, 'new_count' : my_vote.num_votes, 'votes_left' : votes_left }
         return result_struct
@@ -636,27 +660,19 @@ class AjaxHandler(BaseHandler):
             User.get_by_key_name(self.user.friends), 300):
             friends[friend.user_id] = friend
 
-        show_friend = self.request.get('show_friend') or ''
-        show_gender = self.request.get('show_gender') or ''
-
-        # XXX, aqui voy
-
         question = Question.get_by_key_name( self.request.get('question_key_name') );
 
-        answers = Answer.gql( 'where question = :1', question )
+        summaries = ResultsSummary.gql( 'where question = :1', question )
 
-        # obtain votes by this user to this questions
-        all_voted = Vote.gql( 'where question = :1', question )
-
-        # XXX this won't work when we have more than say, 1000 votes
         votes_count_hash = {}
         tot_votes = 0
-        for vote in all_voted:
-            if votes_count_hash.has_key( str(vote.answer.key()) ):
-                votes_count_hash[ str(vote.answer.key()) ] += vote.num_votes
-            else:
-                votes_count_hash[ str(vote.answer.key()) ] = vote.num_votes
-            tot_votes += vote.num_votes
+
+        for summary in summaries:
+            votes_count_hash[ str(summary.answer.key()) ] = { 'male_votes' : summary.male_votes, 'female_votes' : summary.female_votes }
+
+            tot_votes += (summary.male_votes + summary.female_votes)
+
+        answers = Answer.gql( 'where question = :1', question )
 
         ans_struct = []
         for ans in answers:
@@ -671,7 +687,9 @@ class AjaxHandler(BaseHandler):
                 'num_votes' : 0,
                 }
             if votes_count_hash.has_key( str(ans.key()) ):
-                ans_data['num_votes'] = votes_count_hash[ str(ans.key()) ]
+                ans_data['num_votes'] = votes_count_hash[ str(ans.key()) ]['male_votes'] + votes_count_hash[ str(ans.key()) ]['female_votes']
+                ans_data['male_votes'] = votes_count_hash[ str(ans.key()) ]['male_votes']
+                ans_data['female_votes'] = votes_count_hash[ str(ans.key()) ]['female_votes']
 
             ans_struct.append( ans_data )
 
