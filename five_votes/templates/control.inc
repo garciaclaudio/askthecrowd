@@ -137,6 +137,18 @@ function show_votes( answer_key, num_votes ) {
 function show_results( data ) {
     $('#main_container').fadeOut('fast');
 
+    $('#main_container').html( $("#show_results_tmpl").tmpl({
+            'question_text': data.question_text,
+            'question_key_name': data.question_key_name,
+          }));
+
+    $('#selector_div').append( $("#res_selector_tmpl").tmpl( {
+        'id' : 'all',
+        'text' : '{% trans "All" %}',
+        'text_visible' : 'visible',
+        'link_visible' : 'visible',
+     }));
+
 // foreach all, women, men, friend list
 //   add and bind a result_selector link
 //   "all" is selected by default
@@ -144,10 +156,7 @@ function show_results( data ) {
 //   when something new is selected:
 //      (hide link, show span) of new, unselect previous (hide span, show link)
 
-    $('#main_container').html( $("#show_results_tmpl").tmpl({
-            'question_text': data.question_text,
-            'question_key_name': data.question_key_name,
-          }));
+
 
     for (var i = 0; i < data.answers.length; i++) {
 
