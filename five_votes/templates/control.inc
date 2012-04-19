@@ -134,6 +134,7 @@ function show_votes( answer_key, num_votes ) {
 }
 
 
+var selected_tab = 'all';
 function show_results( data ) {
     $('#main_container').fadeOut('fast');
 
@@ -146,7 +147,40 @@ function show_results( data ) {
         'id' : 'all',
         'text' : '{% trans "All" %}',
         'text_visible' : 'visible',
+        'link_visible' : 'hidden',
+        'selected_result' : 'selected_result',
+     }));
+
+    $("#selector_link_all").click(function() {
+        $("#selector_link_" + selected_tab).show();
+        $("#selector_text_" + selected_tab).hide();
+        $("#selector_link_all").hide();
+        $("#selector_text_all").show();
+        selected_tab = 'all';
+     } );
+
+    $('#selector_div').append( $("#res_selector_tmpl").tmpl( {
+        'id' : 'women',
+        'text' : '{% trans "Women" %}',
+        'text_visible' : 'hidden',
         'link_visible' : 'visible',
+        'selected_result' : '',
+     }));
+
+    $("#selector_link_women").click(function() {
+        $("#selector_link_" + selected_tab).show();
+        $("#selector_text_" + selected_tab).hide();
+        $("#selector_link_women").hide();
+        $("#selector_text_women").show();
+        selected_tab = 'women';
+     } );
+
+    $('#selector_div').append( $("#res_selector_tmpl").tmpl( {
+        'id' : 'men',
+        'text' : '{% trans "Men" %}',
+        'text_visible' : 'hidden',
+        'link_visible' : 'visible',
+        'selected_result' : '',
      }));
 
 // foreach all, women, men, friend list

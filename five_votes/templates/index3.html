@@ -454,9 +454,6 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 <div> 
     <div id="question_text">${question_text}</div>
     <div id="selector_div">
-        <div class="result_selector selected_result">Foo bar baz</div>
-        <div class="result_selector">Hello</div>
-        <div class="result_selector">Foo bar baz</div>
     </div>
     <div id="result_answers_div">
     </div>
@@ -464,7 +461,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 </script>
 
 <script id="res_selector_tmpl" type="text/html">
-    <div class="result_selector"><span id="selector_text_${id}" class="${text_visible}">${text}</span><span id="selector_link_${id}" class="vote_link ${link_visible}"><a href="#" onclick="return false;">${text}</a></span></div>
+    <div class="result_selector ${selected_result}"><span id="selector_text_${id}" class="${text_visible}">${text}</span><span id="selector_link_${id}" class="vote_link ${link_visible}"><a href="#" onclick="return false;">${text}</a></span></div>
 </script>
 
 <script id="show_answer_for_results_tmpl" type="text/html">
