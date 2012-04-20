@@ -134,7 +134,59 @@ function show_votes( answer_key, num_votes ) {
 }
 
 
+function show_data( data, id ) {
+
+    id_key = (id == 'all') ? 'num_votes' : (id == 'men') ? 'male_votes' : 'female_votes';
+
+    $('#result_answers_div').html('');
+
+    for (var i = 0; i < data.answers.length; i++) {
+        $('#result_answers_div').append( $("#show_answer_for_results_tmpl").tmpl( {
+            'answer_key' : data.answers[i].answer_key,
+            'answer_text' : data.answers[i].answer_text,
+            'num_votes' : data.answers[i][id_key],
+         }));
+
+        if( data.answers[i].has_pic ) {
+           $('#picture_' + data.answers[i].answer_key ).html( $("#show_result_pic_tmpl").tmpl({'answer_key': data.answers[i].answer_key}));
+        }        
+    }
+}
+
+
 var selected_tab = 'all';
+function show_selector( data, id, text, selected ) {
+     if( selected ) {
+         text_visible = 'visible';
+         link_visible = 'hidden';
+         selected_result = 'selected_result';
+     } else  {
+         text_visible = 'hidden';
+         link_visible = 'visible';
+         selected_result = '';
+     }
+
+     $('#selector_div').append( $("#res_selector_tmpl").tmpl( {
+            'id' : id,
+            'text' : text,
+            'text_visible' : text_visible,
+            'link_visible' : link_visible,
+            'selected_result' : selected_result,
+     }));
+
+     $('#selector_link_' + id).click(function() {
+          $("#selector_" + selected_tab).removeClass('selected_result');
+          $("#selector_link_" + selected_tab).show();
+          $("#selector_text_" + selected_tab).hide();
+          $("#selector_" + id).addClass('selected_result');
+          $('#selector_link_' + id).hide();
+          $('#selector_text_' + id).show();
+          selected_tab = id;
+          show_data( data, id );
+     } );
+}
+
+
 function show_results( data ) {
     $('#main_container').fadeOut('fast');
 
@@ -143,45 +195,11 @@ function show_results( data ) {
             'question_key_name': data.question_key_name,
           }));
 
-    $('#selector_div').append( $("#res_selector_tmpl").tmpl( {
-        'id' : 'all',
-        'text' : '{% trans "All" %}',
-        'text_visible' : 'visible',
-        'link_visible' : 'hidden',
-        'selected_result' : 'selected_result',
-     }));
+    show_selector(data, 'all', '{% trans "All" %}', 1 );
+    show_selector(data, 'women', '{% trans "Women" %}', 0 );
+    show_selector(data, 'men', '{% trans "Men" %}', 0 );
 
-    $("#selector_link_all").click(function() {
-        $("#selector_link_" + selected_tab).show();
-        $("#selector_text_" + selected_tab).hide();
-        $("#selector_link_all").hide();
-        $("#selector_text_all").show();
-        selected_tab = 'all';
-     } );
-
-    $('#selector_div').append( $("#res_selector_tmpl").tmpl( {
-        'id' : 'women',
-        'text' : '{% trans "Women" %}',
-        'text_visible' : 'hidden',
-        'link_visible' : 'visible',
-        'selected_result' : '',
-     }));
-
-    $("#selector_link_women").click(function() {
-        $("#selector_link_" + selected_tab).show();
-        $("#selector_text_" + selected_tab).hide();
-        $("#selector_link_women").hide();
-        $("#selector_text_women").show();
-        selected_tab = 'women';
-     } );
-
-    $('#selector_div').append( $("#res_selector_tmpl").tmpl( {
-        'id' : 'men',
-        'text' : '{% trans "Men" %}',
-        'text_visible' : 'hidden',
-        'link_visible' : 'visible',
-        'selected_result' : '',
-     }));
+    show_data( data, 'all');
 
 // foreach all, women, men, friend list
 //   add and bind a result_selector link
@@ -190,22 +208,6 @@ function show_results( data ) {
 //   when something new is selected:
 //      (hide link, show span) of new, unselect previous (hide span, show link)
 
-
-
-    for (var i = 0; i < data.answers.length; i++) {
-
-        $('#result_answers_div').append( $("#show_answer_for_results_tmpl").tmpl( {
-            'answer_key' : data.answers[i].answer_key,
-            'answer_text' : data.answers[i].answer_text,
-            'num_votes' : data.answers[i].num_votes,
-         }));
-
-        if( data.answers[i].has_pic ) {
-           $('#picture_' + data.answers[i].answer_key ).html( $("#show_result_pic_tmpl").tmpl({'answer_key': data.answers[i].answer_key}));
-        }
-        
-        //Do something
-    }
     $('#main_container').fadeIn('fast');
 }
 
