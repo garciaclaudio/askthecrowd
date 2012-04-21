@@ -1,10 +1,20 @@
 
 
 
+TODO:
 
-Next: populate ResultsSummary
+all: [ [answer_id, value], [answer_id, value], [answer_id, value] ... ]
+male_votes: [ [answer_id, value], [answer_id, value], [answer_id, value] ... ]
+female_votes: [ [answer_id, value], [answer_id, value], [answer_id, value] ... ]
 
-user_id = db.StringProperty(required=True)
+BUGS: 
+
+    * When a new user goes directly into a question, there's a crash. 
+    * Also, no redirect after logging-in for the first time.
+
+
+For friend results: Have a find_by_user_ids method in Vote (takes friends list as parameter, and question id). 
+
 
 [All][Men][Women][You][Friend 1][Friend 2]...
 
@@ -15,7 +25,6 @@ user_id = db.StringProperty(required=True)
 Have a table called: Question results, with a summary per answer / gender.
 
 
-For friend results: Have a find_by_user_ids method in Vote (takes friends list as parameter, and question id). 
 
 
 

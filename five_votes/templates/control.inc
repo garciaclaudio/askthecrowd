@@ -136,20 +136,22 @@ function show_votes( answer_key, num_votes ) {
 
 function show_data( data, id ) {
 
-    id_key = (id == 'all') ? 'num_votes' : (id == 'men') ? 'male_votes' : 'female_votes';
-
     $('#result_answers_div').html('');
 
-    for (var i = 0; i < data.answers.length; i++) {
+    for (var i = 0; i < data.results[id].length; i++) {
+        ans_key = data.results[id][i][0]
+        num_votes = data.results[id][i][1]
+        ans = data.answers_hash[ans_key]
+
         $('#result_answers_div').append( $("#show_answer_for_results_tmpl").tmpl( {
-            'answer_key' : data.answers[i].answer_key,
-            'answer_text' : data.answers[i].answer_text,
-            'num_votes' : data.answers[i][id_key],
+            'answer_key' : ans.answer_key,
+            'answer_text' : ans.answer_text,
+            'num_votes' : num_votes,
          }));
 
-        if( data.answers[i].has_pic ) {
-           $('#picture_' + data.answers[i].answer_key ).html( $("#show_result_pic_tmpl").tmpl({'answer_key': data.answers[i].answer_key}));
-        }        
+        if( ans.has_pic ) {
+           $('#picture_' + ans.answer_key ).html( $("#show_result_pic_tmpl").tmpl({'answer_key': ans.answer_key}));
+        }               
     }
 }
 
@@ -196,8 +198,8 @@ function show_results( data ) {
           }));
 
     show_selector(data, 'all', '{% trans "All" %}', 1 );
-    show_selector(data, 'women', '{% trans "Women" %}', 0 );
-    show_selector(data, 'men', '{% trans "Men" %}', 0 );
+    show_selector(data, 'male', '{% trans "Women" %}', 0 );
+    show_selector(data, 'female', '{% trans "Men" %}', 0 );
 
     show_data( data, 'all');
 
