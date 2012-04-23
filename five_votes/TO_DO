@@ -8,7 +8,7 @@ male_votes: [ [answer_id, value], [answer_id, value], [answer_id, value] ... ]
 female_votes: [ [answer_id, value], [answer_id, value], [answer_id, value] ... ]
 
 BUGS: 
-
+    * male and female votes seem to be inverted
     * When a new user goes directly into a question, there's a crash. 
     * Also, no redirect after logging-in for the first time.
 

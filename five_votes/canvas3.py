@@ -182,7 +182,7 @@ class Vote(db.Model):
     @staticmethod
     def find_by_user_ids(user_ids, question, limit=1000):
         if user_ids:
-            return Vote.gql(u'WHERE question IN :1 AND user_id IN :2', question, user_ids)
+            return Vote.gql(u'WHERE question = :1 AND user_id IN :2', question, user_ids).fetch(limit)
         else:
             return []
 
@@ -660,33 +660,31 @@ class AjaxHandler(BaseHandler):
         for friend in select_random(
             User.get_by_key_name(self.user.friends), 300):
             friends[friend.user_id] = { 'name' : friend.name, 'user_id' : friend.user_id }
-            friend_ids.append( friend.user_id )
+            friend_ids.append( str(friend.user_id) )
+            print >> sys.stderr, 'ADDING FRIEND ID: ' + str(friend.user_id)
 
         question = Question.get_by_key_name( self.request.get('question_key_name') );
 
         summaries = ResultsSummary.gql( 'where question = :1', question )
 
-        votes_count_hash = {}
         tot_votes = 0
-
         results = { 'all':[], 'male':[], 'female':[] }
 
         for summary in summaries:
-            votes_count_hash[ str(summary.answer.key()) ] = { 'male_votes' : summary.male_votes, 'female_votes' : summary.female_votes }
             tot_votes += (summary.male_votes + summary.female_votes)
             results['all'].append([ str(summary.answer.key()), summary.male_votes + summary.female_votes ])
             results['male'].append([ str(summary.answer.key()), summary.male_votes ])
             results['female'].append([ str(summary.answer.key()), summary.female_votes ])
 
-#        # XXX, aqui voy, test this, think about how to pass it to the client
-#        friend_votes = Vote.find_by_user_ids( friend_ids, question )
-#        for fv in friend_votes:
-#            print >> sys.stderr, 'FRIEND VOTE: ' + str(fv.answer.answer_text) + ', ' + str(fv.num_votes)
-#            if votes_count_hash[ str(fv.answer.key()) ]:
-#                votes_count_hash[ str(fv.answer.key()) ][ 'fv_' + fv.user_id ] = fv.num_votes
-#            else:
-#                votes_count_hash[ str(fv.answer.key()) ] = { 'fv_' + fv.user_id : fv.num_votes }
-#
+        friend_votes = Vote.find_by_user_ids( friend_ids, question )
+
+        friends_with_votes = []
+        for fv in friend_votes:
+            print >> sys.stderr, 'FRIEND VOTE: ' + str(fv.answer.answer_text) + ', ' + str(fv.num_votes)
+            if not results.has_key( 'friend_'+str(fv.user_id) ):
+                results['friend_'+str(fv.user_id)] = []
+                friends_with_votes.append(fv.user_id)
+            results['friend_'+str(fv.user_id)].append([ str(fv.answer.key()), fv.num_votes ])
 
         answers = Answer.gql( 'where question = :1', question )
 
@@ -703,11 +701,6 @@ class AjaxHandler(BaseHandler):
                 'has_pic' : has_pic,
                 'num_votes' : 0,
                 }
-            if votes_count_hash.has_key( str(ans.key()) ):
-                ans_data['num_votes'] = votes_count_hash[ str(ans.key()) ]['male_votes'] + votes_count_hash[ str(ans.key()) ]['female_votes']
-                ans_data['male_votes'] = votes_count_hash[ str(ans.key()) ]['male_votes']
-                ans_data['female_votes'] = votes_count_hash[ str(ans.key()) ]['female_votes']
-
             ans_struct.append( ans_data )
             ans_hash[ str(ans.key()) ] = ans_data
 
@@ -720,6 +713,7 @@ class AjaxHandler(BaseHandler):
                           'friends': friends,
                           'results': results,
                           'answers_hash':ans_hash,
+                          'friends_with_votes':friends_with_votes,
                           }
         return result_struct
 
