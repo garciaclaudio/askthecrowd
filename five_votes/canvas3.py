@@ -655,7 +655,7 @@ class AjaxHandler(BaseHandler):
 
 
     def handle_get_results(self):
-        friends = {'foo':'bar'}
+        friends = {}
         friend_ids = []
         for friend in select_random(
             User.get_by_key_name(self.user.friends), 300):
@@ -683,7 +683,8 @@ class AjaxHandler(BaseHandler):
             print >> sys.stderr, 'FRIEND VOTE: ' + str(fv.answer.answer_text) + ', ' + str(fv.num_votes)
             if not results.has_key( 'friend_'+str(fv.user_id) ):
                 results['friend_'+str(fv.user_id)] = []
-                friends_with_votes.append(fv.user_id)
+                friends_with_votes.append(friends[fv.user_id])
+
             results['friend_'+str(fv.user_id)].append([ str(fv.answer.key()), fv.num_votes ])
 
         answers = Answer.gql( 'where question = :1', question )
@@ -710,7 +711,6 @@ class AjaxHandler(BaseHandler):
                           'question_text': str(question.question_text),
                           'answers': sorted_ans,
                           'total_votes': tot_votes,
-                          'friends': friends,
                           'results': results,
                           'answers_hash':ans_hash,
                           'friends_with_votes':friends_with_votes,
