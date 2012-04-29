@@ -1,5 +1,8 @@
 
 BUGS: 
+    * Make results cards less tall, smaller.
+    * Make it usable as a standalone website as well.
+    * App SHOULD show the language of the users FB. Or the user's browser? [good enough]
     * Test arriving without having added the app, to main and question page.
     * Test arriving having added the app, to main and question page.
     * Test arriving having added the app (but logged out of FB), to main and question page.
@@ -14,6 +17,11 @@ BUGS:
     * Main page: show all questions user has added, most recent to least. See blue notebook for details.
     * Main page: clicking on new question link not working.
     * Make sure main and question page are displayed in user's lang.
+    * Add "Create other questions like this one" link in question page (to main page).
+    * Add questions from all users, with paging (least to most), to main page.
+    * Keep track of language of user and store in question.
+
+[IGNORE]  * Problem, comments-plugin "loading" image won't go away. Not on production, only on localhost.
 
 
 For friend results: Have a find_by_user_ids method in Vote (takes friends list as parameter, and question id). 

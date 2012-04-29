@@ -30,13 +30,15 @@ div.centered_container {top: 0; left: 0; width: 100%; height: 100%; display: tab
 p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:center;}
 
 #app_logo {
+    width:100%;
     padding:10px;
     display:table;
     background-color:#9dee1d;
+/*    text-align: center; */
+    text-align: right;
     color:black;
-    text-align: center;
-    font-size: 350%;
-    font-weight: bold;
+    font-size: 120%;
+/*    font-weight: bold; */
     margin-left:auto; 
     margin-right:auto; 
    -moz-border-radius: 12px;
@@ -52,10 +54,11 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 #top_container {
    margin: 0px auto;
-   padding: 10px;
+/*   padding: 10px; */
 }
 
 #main_container {
+    width:100%;
     padding:20px;
     display:table;
     background-color: yellow;
@@ -272,22 +275,127 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 }
 
 
+#contentwrapper{
+float: left;
+width: 100%;
+}
+
+#contentcolumn{
+margin-right: 255px; /*Set right margin to RightColumnWidth*/
+}
+
+#rightcolumn{
+float: left;
+width: 250px; /*Width of right column in pixels*/
+margin-left: -250px; /*Set left margin to -(RightColumnWidth) */
+}
+
+#footer{
+clear: left;
+width: 100%;
+background: black;
+color: #FFF;
+text-align: center;
+padding: 4px 0;
+}
+
+#footer a{
+color: #FFFF80;
+}
+
+.innertube{
+margin: 5px; /*Margins for inner DIV inside each column (to provide padding)*/
+margin-top: 0px;
+}
+
+.toptube{
+margin-top: 5px;
+}
+
+
+#right_col {
+    width:100%;
+    padding:10px;
+    display:table;
+    background-color:#9dee1d;
+/*    text-align: center; */
+    text-align: right;
+    color:black;
+    font-size: 120%;
+/*    font-weight: bold; */
+    margin-left:auto; 
+    margin-right:auto; 
+   -moz-border-radius: 12px;
+   -webkit-border-radius: 12px;
+    border-radius: 12px;
+}
+
+
 </style>
+
+<script type="text/javascript">
+/*** Temporary text filler function. Remove when deploying template. ***/
+var gibberish=["This is just some filler text", "Welcome to Dynamic Drive CSS Library", "Demo content nothing to read here"]
+function filltext(words){
+for (var i=0; i<words; i++)
+document.write(gibberish[Math.floor(Math.random()*3)]+" ")
+}
+</script>
+
+
     </head>
 <body>
 
 {% include "control.inc" %}
 
-<br />
-<div id="app_logo">{% trans "Five Votes" %}</div>
-<br />
-<div id="super_top_container" >
-  <div id="top_container" >
-    <div id="main_container" >
-    </div> <!-- main container -->
-  </div> <!-- -->
-</div> <!-- -->
 
+<div id="maincontainer">
+
+<div class="innertube toptube">
+<div id="app_logo">{% trans "Five Votes" %}</div>
+</div>
+
+<div id="contentwrapper">
+<div id="contentcolumn">
+  <div id="super_top_container" class="innertube">
+    <div id="top_container" >
+      <div id="main_container" >
+      </div> <!-- main container -->
+    </div> <!-- top_container -->
+  </div> <!-- super_top_container -->
+</div>
+</div> <!-- contentwrapper -->
+
+<div id="rightcolumn">
+<div class="innertube">
+
+<div id="right_col">HELLO</div>
+
+</div>
+</div>
+
+<div id="footer">
+   SOME FOOTER
+</div>
+
+</div> <!--maincontainer -->
+
+
+
+<div id="wrap">
+  <div id="header">
+
+  </div>
+
+  <div id="main">
+
+
+
+    <div id="foo" >
+
+<div class="fb-comments" data-href="http://five-votes.appspot.com/q1" data-num-posts="4" data-width="350"></div>
+
+    </div> <!-- foo -->
 
 <div id="welcome_msg" style="display:none;">{% trans "Welcome, in order to use this app, you must sign in with your facebook account:" %}
 </div>
