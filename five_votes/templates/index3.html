@@ -35,7 +35,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
     display:table;
     background-color:#9dee1d;
 /*    text-align: center; */
-    text-align: right;
+    text-align: left;
     color:black;
     font-size: 120%;
 /*    font-weight: bold; */
@@ -281,13 +281,13 @@ width: 100%;
 }
 
 #contentcolumn{
-margin-right: 255px; /*Set right margin to RightColumnWidth*/
+margin-right: 305px; /*Set right margin to RightColumnWidth*/
 }
 
 #rightcolumn{
 float: left;
-width: 250px; /*Width of right column in pixels*/
-margin-left: -250px; /*Set left margin to -(RightColumnWidth) */
+width: 300px; /*Width of right column in pixels*/
+margin-left: -300px; /*Set left margin to -(RightColumnWidth) */
 }
 
 #footer{
@@ -330,6 +330,17 @@ margin-top: 5px;
     border-radius: 12px;
 }
 
+#maincontainer {
+    margin-left:auto; 
+    margin-right:auto; 
+   width:96%;
+}
+
+.tiny {
+  text-align:left;
+  font-size: 0.6em;
+}
+
 
 </style>
 
@@ -369,7 +380,11 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <div id="rightcolumn">
 <div class="innertube">
 
-<div id="right_col">HELLO</div>
+<div id="right_col">
+   <div style="text-align:left;" id="faces_div"></div>
+   <p class="tiny">{% trans "Questions about this app? Leave them here:"%}</p>
+   <div class="fb-comments" data-href="http://five-votes.appspot.com" data-num-posts="4" data-width="270"></div>
+</div>
 
 </div>
 </div>
@@ -389,19 +404,6 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 
   <div id="main">
 
-
-
-    <div id="foo" >
-
-<div class="fb-comments" data-href="http://five-votes.appspot.com/q1" data-num-posts="4" data-width="350"></div>
-
-    </div> <!-- foo -->
-
-<div id="welcome_msg" style="display:none;">{% trans "Welcome, in order to use this app, you must sign in with your facebook account:" %}
-</div>
-
-<fb:login-button show-faces="true"></fb:login-button>
-
 {% include "lang_selector.html" %}
 
 
@@ -414,6 +416,16 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 {% endif %}
 
 <!-- JS TEMPLATES START -->
+
+<script id="logged_in_faces_tmpl">
+<fb:login-button show-faces="true"></fb:login-button>
+</script>
+
+<script id="welcome_msg_tmpl">
+<div id="welcome_msg"><p>{% trans "To use this app, sign in with your facebook account:" %}</p>
+<fb:login-button show-faces="true"></fb:login-button>
+</div>
+</script>
 
 <script id="show_pic_tmpl" type="text/html">
 <img class="answer_picture" src="image?answer_key=${answer_key}">

@@ -340,40 +340,36 @@ function show_question_for_voting() {
             FB.getLoginStatus(function(response) {
 
               if (response.status === 'connected') {
-                // the user is logged in and connected to your
-                // app, and response.authResponse supplies
-                // the user's ID, a valid access token, a signed
-                // request, and the time the access token 
-                // and signed request each expire
-                var uid = response.authResponse.userID;
-                var accessToken = response.authResponse.accessToken;
+alert('adding faces');
 
-              {% if question %}
-                  show_question_for_voting();
-              {% else %}
-                  show_new_question();
-              {% endif %}
-            
-//            alert('user connected ' +  uid + ' -- ' + accessToken );
+                  $('#faces_div').html( $("#logged_in_faces_tmpl").tmpl({}) );
+                  FB.XFBML.parse( document.getElementById('faces_div') );
 
-// XXX poner codigo en un div, llamar FB.XFBML.Host.parseDomTree();
-// (ver index.html)
-//                   $('#login_div').html(
-//                      "<p><fb:profile-pic uid='loggedinuser' facebook-logo='true'></fb:profile-pic> Welcome, <fb:name uid='loggedinuser' useyou='false'></fb:name>. You are logged in with your Facebook account.</p>" );
-//                   FB.XFBML.parse( document.getElementById('login_div') );
+                  // the user is logged in and connected to your
+                  // app, and response.authResponse supplies
+                  // the user's ID, a valid access token, a signed
+                  // request, and the time the access token 
+                  // and signed request each expire
+                  var uid = response.authResponse.userID;
+                  var accessToken = response.authResponse.accessToken;
+
+                  {% if question %}
+                      show_question_for_voting();
+                  {% else %}
+                      show_new_question();
+                  {% endif %}
 
               } else if (response.status === 'not_authorized') {
-                // the user is logged in to Facebook, 
-                //but not connected to the app
+                  // the user is logged in to Facebook, 
+                  //but not connected to the app
 
-                $('#welcome_msg').show();
-
-//            alert( 'not authorized' );
-            
+                  $('#main_container').html( $("#welcome_msg_tmpl").tmpl({}));
+                  FB.XFBML.parse( document.getElementById('welcome_msg') );
               } else {
                 // the user isn't even logged in to Facebook.
             
-            alert( 'not logged in to FB' );
+                  $('#main_container').html( $("#welcome_msg_tmpl").tmpl({}));
+                  FB.XFBML.parse( document.getElementById('welcome_msg') );
             
               }
             

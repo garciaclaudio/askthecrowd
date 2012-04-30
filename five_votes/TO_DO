@@ -1,5 +1,10 @@
 
+
+
+
 BUGS: 
+    * Clicking login, getting FB log-in popup, submitting, THEN nothing happens (no page reload).
+    * Not-logged in, nothing shown.
     * Make results cards less tall, smaller.
     * Make it usable as a standalone website as well.
     * App SHOULD show the language of the users FB. Or the user's browser? [good enough]
@@ -32,7 +37,6 @@ For friend results: Have a find_by_user_ids method in Vote (takes friends list a
 
 
 
-
 Have a table called: Question results, with a summary per answer / gender.
 
 
@@ -50,6 +54,10 @@ Get results,
 
 Admin console!
 http://localhost:8080/_ah/admin/datastore
+
+
+CSS layouts made EASY:
+http://www.dynamicdrive.com/style/layouts/category/C9/
 
 Nice video holding popups.
 http://www.willowgarage.com/pages/pr2/overview
