@@ -340,8 +340,6 @@ function show_question_for_voting() {
             FB.getLoginStatus(function(response) {
 
               if (response.status === 'connected') {
-alert('adding faces');
-
                   $('#faces_div').html( $("#logged_in_faces_tmpl").tmpl({}) );
                   FB.XFBML.parse( document.getElementById('faces_div') );
 
