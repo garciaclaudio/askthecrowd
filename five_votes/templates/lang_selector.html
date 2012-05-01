@@ -1,7 +1,5 @@
 {% load i18n %}
-<h4>
-{% trans "Select your language" %}:<br/>
-</h4>
+<div style="float:right;">
 <form action="/" method="get">
     <select name="lang" onChange="submit()">
           <option value="en" {% if language_en %}selected="selected"{% endif %}>{% lang2name "en" %}
@@ -9,4 +7,5 @@
           <option value="es" {% if language_es %}selected="selected"{% endif %}>{% lang2name "es" %}</option>
     </select>
 </form>
-
+</div>
+<div style="float:right;margin-top:5px;">{% trans "Select your language" %}:&nbsp;</div>

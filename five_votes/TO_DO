@@ -1,7 +1,6 @@
 
 
 
-
 BUGS: 
     * Clicking login, getting FB log-in popup, submitting, THEN nothing happens (no page reload).
     * Not-logged in, nothing shown.

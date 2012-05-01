@@ -291,12 +291,21 @@ margin-left: -300px; /*Set left margin to -(RightColumnWidth) */
 }
 
 #footer{
-clear: left;
-width: 100%;
-background: black;
-color: #FFF;
-text-align: center;
-padding: 4px 0;
+    clear: left;
+    width:100%;
+    padding:10px;
+    display:table;
+    background-color:#9dee1d;
+/*    text-align: center; */
+    text-align: right;
+    color:black;
+    font-size: 0.6em;
+/*    font-weight: bold; */
+    margin-left:auto; 
+    margin-right:auto; 
+   -moz-border-radius: 12px;
+   -webkit-border-radius: 12px;
+    border-radius: 12px;
 }
 
 #footer a{
@@ -389,9 +398,12 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 </div>
 </div>
 
-<div id="footer">
-   SOME FOOTER
+<div class="innertube">
+  <div id="footer">
+{% include "lang_selector.html" %}
+  </div>
 </div>
+
 
 </div> <!--maincontainer -->
 
@@ -403,8 +415,6 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
   </div>
 
   <div id="main">
-
-{% include "lang_selector.html" %}
 
 
 <p>Locale: {{locale}}</p>
