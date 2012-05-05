@@ -103,22 +103,22 @@ function show_new_question() {
 
 function update_votes_header( votes_left ) {
     if( votes_left == 0 ) {
-       $('#app_logo').html('{% trans "Zero Votes" %}');
+       $('#app_logo').html('<div class="mytube">{% trans "Zero Votes" %}</div>');
     }
     else if( votes_left == 1 ) {
-       $('#app_logo').html('{% trans "One Vote" %}');
+       $('#app_logo').html('<div class="mytube">{% trans "One Vote" %}</div>');
     }
     else if( votes_left == 2 ) {
-       $('#app_logo').html('{% trans "Two Votes" %}');
+       $('#app_logo').html('<div class="mytube">{% trans "Two Votes" %}</div>');
     }
     else if( votes_left == 3 ) {
-       $('#app_logo').html('{% trans "Three Votes" %}');
+       $('#app_logo').html('<div class="mytube">{% trans "Three Votes" %}</div>');
     }
      else if( votes_left == 4 ) {
-       $('#app_logo').html('{% trans "Four Votes" %}');
+       $('#app_logo').html('<div class="mytube">{% trans "Four Votes" %}</div>');
     }
      else if( votes_left == 5 ) {
-       $('#app_logo').html('{% trans "Five Votes" %}');
+       $('#app_logo').html('<div class="mytube">{% trans "Five Votes" %}</div>');
     }
 }
 

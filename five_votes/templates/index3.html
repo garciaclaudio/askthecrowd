@@ -31,7 +31,6 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 #app_logo {
     width:100%;
-    padding:10px;
     display:table;
     background-color:#9dee1d;
 /*    text-align: center; */
@@ -59,7 +58,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 #main_container {
     width:100%;
-    padding:20px;
+    padding:0px;
     display:table;
     background-color: yellow;
     text-align: center;
@@ -293,7 +292,6 @@ margin-left: -300px; /*Set left margin to -(RightColumnWidth) */
 #footer{
     clear: left;
     width:100%;
-    padding:10px;
     display:table;
     background-color:#9dee1d;
 /*    text-align: center; */
@@ -321,10 +319,13 @@ margin-top: 0px;
 margin-top: 5px;
 }
 
+.mytube{
+margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
+}
+
 
 #right_col {
     width:100%;
-    padding:10px;
     display:table;
     background-color:#9dee1d;
 /*    text-align: center; */
@@ -340,9 +341,9 @@ margin-top: 5px;
 }
 
 #maincontainer {
-    margin-left:auto; 
+/*    margin-left:auto; 
     margin-right:auto; 
-   width:96%;
+   width:96%; */
 }
 
 .tiny {
@@ -372,7 +373,8 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <div id="maincontainer">
 
 <div class="innertube toptube">
-<div id="app_logo">{% trans "Five Votes" %}</div>
+<div id="app_logo"><div class="mytube">{% trans "Five Votes" %}</div>
+</div>
 </div>
 
 <div id="contentwrapper">
@@ -390,9 +392,11 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <div class="innertube">
 
 <div id="right_col">
-   <div style="text-align:left;" id="faces_div"></div>
-   <p class="tiny">{% trans "Questions about this app? Leave them here:"%}</p>
-   <div class="fb-comments" data-href="http://five-votes.appspot.com" data-num-posts="4" data-width="270"></div>
+     <div class="mytube">
+         <div style="text-align:left;" id="faces_div"></div>
+         <p class="tiny">{% trans "Questions about this app? Leave them here:"%}</p>
+         <div class="fb-comments" data-href="http://five-votes.appspot.com" data-num-posts="4" data-width="270"></div>
+     </div>
 </div>
 
 </div>
@@ -400,21 +404,15 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 
 <div class="innertube">
   <div id="footer">
+    <div class="mytube">
 {% include "lang_selector.html" %}
+    </div>
   </div>
 </div>
 
 
 </div> <!--maincontainer -->
 
-
-
-<div id="wrap">
-  <div id="header">
-
-  </div>
-
-  <div id="main">
 
 
 <p>Locale: {{locale}}</p>
@@ -432,8 +430,10 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 </script>
 
 <script id="welcome_msg_tmpl">
+<div class="mytube">
 <div id="welcome_msg"><p>{% trans "To use this app, sign in with your facebook account:" %}</p>
 <fb:login-button show-faces="true"></fb:login-button>
+</div>
 </div>
 </script>
 
@@ -462,6 +462,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 </script>
 
 <script id="question_created_tmpl" type="text/html">
+<div class="mytube">
 <div id="question_created"> 
     <p>{% trans "Question created" %}</p>
     <div id="question_text">${question_text}</div>
@@ -486,10 +487,12 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
     <div style="clear:both">
         <br /><button id="done_button" class="my_button">{% trans "Done" %}</button>
     </div>
-</div>    
+</div>
+</div>
 </script>
 
 <script id="new_question_tmpl" type="text/html">
+<div class="mytube">
     <div id="question_form_div">
         <form id="question_form" action="/ajax.html" method="get">
               <input type="hidden" name="action" value="create_question">
@@ -500,19 +503,23 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
             <button type="submit" id="create_question_button" class="my_button">{% trans "Create" %}</button>
         </form>
     </div>
+</div>
 </script>
 
 <script id="done_question_tmpl" type="text/html">
+<div class="mytube">
     <p>{% trans "You're done" %}</p>
     <div id="question_text">${question_text}</div>
 
     <p>{% trans "Your question's URL is:" %} <a href="http://apps.facebook.com/five_votes/q${question_key_name}">"http://apps.facebook.com/five_votes/q${question_key_name}</a></p>
 
     <button type="submit" id="close_button" class="my_button">{% trans "Close" %}</button>
+</div>
 </script>
 
 
 <script id="answer_question_tmpl" type="text/html">
+<div class="mytube">
 <div> 
     <div id="question_text">${question_text}</div>
 <br />
@@ -523,7 +530,8 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
         <br /><button id="see_results_button" class="my_button">{% trans "See results" %}</button>
     </div>
 
-</div>    
+</div>
+</div>
 </script>
 
 
@@ -581,6 +589,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 
 
 <script id="show_results_tmpl" type="text/html">
+<div class="mytube">
 <div> 
     <div id="question_text">${question_text}</div>
     <div id="selector_div">
@@ -588,6 +597,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
     <div id="result_answers_div">
     </div>
 </div>    
+</div>
 </script>
 
 <script id="res_selector_tmpl" type="text/html">

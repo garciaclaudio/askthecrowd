@@ -2,15 +2,20 @@
 
 
 BUGS: 
-    * Clicking login, getting FB log-in popup, submitting, THEN nothing happens (no page reload).
-    * Not-logged in, nothing shown.
-    * Make results cards less tall, smaller.
-    * Make it usable as a standalone website as well.
-    * App SHOULD show the language of the users FB. Or the user's browser? [good enough]
+[DONE]   * TRY updating the production site, maybe login will work there. 
+[DONE]   * Bug: two redirects (reloads) after first login.
+[DONE]   * Clicking login, getting FB log-in popup, submitting, THEN nothing happens (no page reload). [works in prod]
+[DONE]   * Not-logged in, nothing shown.
+[DONE]    * App SHOULD show the language of the users FB. Or the user's browser? [good enough]
+
+    * main and side bar overlap on FF.
     * Test arriving without having added the app, to main and question page.
     * Test arriving having added the app, to main and question page.
     * Test arriving having added the app (but logged out of FB), to main and question page.
-    * Too many redirects when arriving to a question page for the 1st time?
+
+    * Make results cards less tall, smaller.
+    * Make it usable as a standalone website as well.
+
     * When a new user goes directly into a question, there's a crash. 
     * male and female votes are inverted
     * Also, no redirect after logging-in for the first time.
@@ -24,6 +29,7 @@ BUGS:
     * Add "Create other questions like this one" link in question page (to main page).
     * Add questions from all users, with paging (least to most), to main page.
     * Keep track of language of user and store in question.
+[POSTP]    * Too many redirects when arriving to a question page for the 1st time?
 
 [IGNORE]  * Problem, comments-plugin "loading" image won't go away. Not on production, only on localhost.
 
@@ -51,9 +57,13 @@ Get results,
    friend_id
       a second call not needed, send all data in one go?
 
+
+Youtube API
+https://developers.google.com/youtube/js_api_reference
+https://developers.google.com/youtube/youtube_player_demo
+
 Admin console!
 http://localhost:8080/_ah/admin/datastore
-
 
 CSS layouts made EASY:
 http://www.dynamicdrive.com/style/layouts/category/C9/
