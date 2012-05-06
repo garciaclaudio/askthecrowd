@@ -312,6 +312,29 @@ function show_question_for_voting() {
     // add and bind new_answer_form here
 }
 
+
+
+function show_question_for_welcome() {
+
+    $('#main_container').html( $("#welcome_question_tmpl").tmpl({
+             'question_text': "{{question.question_text}}",
+             'question_key_name': "{{question_key_name}}",
+	     }));
+
+    {% for ans in answers %}
+      $('#answers_div').append( $("#show_answer_for_welcome_tmpl").tmpl( {
+         'answer_key' : '{{ans.answer_key}}',
+         'answer_text' : '{{ans.answer_text}}',
+      }));
+
+      {% if ans.has_pic %}
+          $('#picture_' + '{{ans.answer_key}}').html( $("#show_pic_tmpl").tmpl({'answer_key': '{{ans.answer_key}}'} ));
+      {% endif %}
+    {% endfor %}
+}
+
+
+
 {% if NOT_IN_DEV_SERVER %}
 
         window.fbAsyncInit = function() {
@@ -328,11 +351,17 @@ function show_question_for_voting() {
           // response contains the user data, but we prefer to reload
           // so that a user is created
           //
-          FB.Event.subscribe('auth.login', function(response) {
-              // Reload the entire page
-              top.location = 'http://apps.facebook.com/five_votes/';
-          });
-
+         {% if question %}
+              FB.Event.subscribe('auth.login', function(response) {
+                  // Reload the entire page
+                  top.location = 'http://apps.facebook.com/five_votes/q{{question_key_name}}';
+              });
+         {% else %}
+              FB.Event.subscribe('auth.login', function(response) {
+                  // Reload the entire page
+                  top.location = 'http://apps.facebook.com/five_votes/';
+              });
+         {% endif %}
 //
 //          FB.ui({ method: 'feed', 
 //                  message: 'Facebook for Websites is super-cool'});
@@ -357,16 +386,21 @@ function show_question_for_voting() {
                       show_new_question();
                   {% endif %}
 
-              } else if (response.status === 'not_authorized') {
-                  // the user is logged in to Facebook, 
-                  //but not connected to the app
-
-                  $('#main_container').html( $("#welcome_msg_tmpl").tmpl({}));
-                  FB.XFBML.parse( document.getElementById('welcome_msg') );
+//              } else if (response.status === 'not_authorized') {
+//                  // the user is logged in to Facebook, 
+//                  //but not connected to the app
+//
+//                  $('#main_container').html( $("#welcome_msg_tmpl").tmpl({}));
+//                  FB.XFBML.parse( document.getElementById('welcome_msg') );
               } else {
                 // the user isn't even logged in to Facebook.
+
+                  {% if question %}
+                      show_question_for_welcome();
+                  {% else %}
+                      $('#main_container').html( $("#welcome_msg_tmpl").tmpl({}));
+                  {% endif %}
             
-                  $('#main_container').html( $("#welcome_msg_tmpl").tmpl({}));
                   FB.XFBML.parse( document.getElementById('welcome_msg') );
             
               }

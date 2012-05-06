@@ -7,18 +7,15 @@ BUGS:
 [DONE]   * Clicking login, getting FB log-in popup, submitting, THEN nothing happens (no page reload). [works in prod]
 [DONE]   * Not-logged in, nothing shown.
 [DONE]    * App SHOULD show the language of the users FB. Or the user's browser? [good enough]
+[DONE]    * main and side bar overlap on FF.
+[DONE]    * When a new user goes directly into a question, there's a crash. 
+[DONE]    * instead, login should happen and redirect to same question
 
-    * main and side bar overlap on FF.
-    * Test arriving without having added the app, to main and question page.
-    * Test arriving having added the app, to main and question page.
-    * Test arriving having added the app (but logged out of FB), to main and question page.
+    * Add "suggest new answer" form to vote template.
 
+    * Improve colors.
     * Make results cards less tall, smaller.
-    * Make it usable as a standalone website as well.
-
-    * When a new user goes directly into a question, there's a crash. 
     * male and female votes are inverted
-    * Also, no redirect after logging-in for the first time.
     * Voting allows 6 votes
     * Question page and 
     * Main page (logged in and out), show "fulanito is using" thing and lang selector and comments on 2nd column.
@@ -29,7 +26,15 @@ BUGS:
     * Add "Create other questions like this one" link in question page (to main page).
     * Add questions from all users, with paging (least to most), to main page.
     * Keep track of language of user and store in question.
+
+
+[TEST IN P]    * Two redirects happen after login.
+[TEST IN P]    * Also, no redirect after logging-in for the first time.
 [POSTP]    * Too many redirects when arriving to a question page for the 1st time?
+[POSTP]   * Test arriving without having added the app, to main and question page.
+[POSTP]   * Test arriving having added the app, to main and question page.
+[POSTP]   * Test arriving having added the app (but logged out of FB), to main and question page.
+[POSTP]    * Make it usable as a standalone website as well.
 
 [IGNORE]  * Problem, comments-plugin "loading" image won't go away. Not on production, only on localhost.
 

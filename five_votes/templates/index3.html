@@ -583,7 +583,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 
   </div>
 
-    </div> <!-- answer_card-->
+  </div> <!-- answer_card-->
 </script>
 
 
@@ -615,6 +615,33 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 
 <script id="show_result_pic_tmpl" type="text/html">
 <img class="answer_picture" width="50" height="50" src="image?answer_key=${answer_key}">
+</script>
+
+
+<script id="welcome_question_tmpl" type="text/html">
+<div class="mytube">
+  <div> 
+      <div id="welcome_msg"><p>{% trans "To vote on this question, sign in with your facebook account:" %}</p> <fb:login-button show-faces="true"></fb:login-button>
+      </div>
+      <div id="question_text">${question_text}</div>
+<br />
+      <div id="answers_div">
+      </div>
+
+      <div style="clear:both;">{%trans "login to vote" %}</div>
+  </div>
+</div>
+</script>
+
+
+<script id="show_answer_for_welcome_tmpl" type="text/html">
+  <div class="answer_card" id="answer_${answer_key}">
+    <div class="card_inset">
+          <div id="picture_${answer_key}"></div>
+          <span class="answer_text">${answer_text}</span>
+      <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
+    </div>
+  </div> <!-- answer_card-->
 </script>
 
 
