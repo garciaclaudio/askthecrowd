@@ -237,11 +237,32 @@ function show_question_for_voting() {
 
     $('#see_results_button').click( function() {
 
-        $.getJSON("ajax.html?action=get_results;question_key_name={{question_key_name}}",
-             function(data){
-                 show_results(data);
-             }
-        );
+// XXX, populate correctly
+
+        if( $('input[name=post_to_fb]').is(':checked') ) {
+            var obj = {
+              method: 'feed',
+              link: 'https://developers.facebook.com/docs/reference/dialogs/',
+              picture: 'http://fbrell.com/f8.jpg',
+              name: 'Facebook Dialogs',
+              caption: 'Reference Documentation',
+              description: 'Using Dialogs to interact with users.'
+            };
+            function callback(response) {
+                $.getJSON("ajax.html?action=get_results;question_key_name={{question_key_name}}",
+                   function(data){
+                      show_results(data);
+                   }
+                );
+            }
+            FB.ui(obj, callback);
+        } else {
+            $.getJSON("ajax.html?action=get_results;question_key_name={{question_key_name}}",
+                 function(data){
+                     show_results(data);
+                 }
+            );
+        }
     });
 
     {% for ans in answers %}

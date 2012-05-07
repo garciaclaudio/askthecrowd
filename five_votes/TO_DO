@@ -2,31 +2,22 @@
 
 
 BUGS: 
-[DONE]   * TRY updating the production site, maybe login will work there. 
-[DONE]   * Bug: two redirects (reloads) after first login.
-[DONE]   * Clicking login, getting FB log-in popup, submitting, THEN nothing happens (no page reload). [works in prod]
-[DONE]   * Not-logged in, nothing shown.
-[DONE]    * App SHOULD show the language of the users FB. Or the user's browser? [good enough]
-[DONE]    * main and side bar overlap on FF.
-[DONE]    * When a new user goes directly into a question, there's a crash. 
-[DONE]    * instead, login should happen and redirect to same question
-
     * Add "suggest new answer" form to vote template.
-
+    * Add "post to Facebook" after 5th vote.
     * Improve colors.
+    * Show whirly "wait" thing when vote link is pressed.
+    * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
     * Make results cards less tall, smaller.
     * male and female votes are inverted
     * Voting allows 6 votes
-    * Question page and 
-    * Main page (logged in and out), show "fulanito is using" thing and lang selector and comments on 2nd column.
-    * Question page (logged in and out), show "fulanito is using" thing and lang selector and comments on 2nd column.
     * Main page: show all questions user has added, most recent to least. See blue notebook for details.
     * Main page: clicking on new question link not working.
     * Make sure main and question page are displayed in user's lang.
     * Add "Create other questions like this one" link in question page (to main page).
     * Add questions from all users, with paging (least to most), to main page.
     * Keep track of language of user and store in question.
-
+    * Add "invite friends" (see blue book) after question creation.
+    * Show friend photos in results page.
 
 [TEST IN P]    * Two redirects happen after login.
 [TEST IN P]    * Also, no redirect after logging-in for the first time.
@@ -37,6 +28,20 @@ BUGS:
 [POSTP]    * Make it usable as a standalone website as well.
 
 [IGNORE]  * Problem, comments-plugin "loading" image won't go away. Not on production, only on localhost.
+
+[DONE]   * TRY updating the production site, maybe login will work there. 
+[DONE]   * Bug: two redirects (reloads) after first login.
+[DONE]   * Clicking login, getting FB log-in popup, submitting, THEN nothing happens (no page reload). [works in prod]
+[DONE]   * Not-logged in, nothing shown.
+[DONE]    * App SHOULD show the language of the users FB. Or the user's browser? [good enough]
+[DONE]    * main and side bar overlap on FF.
+[DONE]    * When a new user goes directly into a question, there's a crash. 
+[DONE]    * instead, login should happen and redirect to same question
+[DONE]    * Question page and
+[DONE]    * Main page (logged in and out), show "fulanito is using" thing and lang selector and comments on 2nd column.
+[DONE]    * Question page (logged in and out), show "fulanito is using" thing and lang selector and comments on 2nd column.
+
+
 
 
 For friend results: Have a find_by_user_ids method in Vote (takes friends list as parameter, and question id). 

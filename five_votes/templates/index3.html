@@ -528,12 +528,14 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <br />
     <div id="see_results_div" style="clear:both;display:none;">
         <br /><button id="see_results_button" class="my_button">{% trans "See results" %}</button>
+
+<input type="checkbox" name="post_to_fb" value="post_to_fb" checked>{% trans "Post to Facebook" %}<br>
+
     </div>
 
 </div>
 </div>
 </script>
-
 
 <script id="suggest_another_answer_tmpl" type="text/html">
     <p>{% trans "Suggest another answer" %}</p>
