@@ -1,7 +1,8 @@
 
-
-
+templates/
 BUGS: 
+    * create default image for feed posts (five checkmarks?)
+    * allow all pic types (gif, png), and larger size uploads.
     * Add "suggest new answer" form to vote template.
     * Add "post to Facebook" after 5th vote.
     * Improve colors.

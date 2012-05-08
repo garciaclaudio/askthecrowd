@@ -122,7 +122,11 @@ function update_votes_header( votes_left ) {
     }
 }
 
+
+var answer_votes = {}
+
 function show_votes( answer_key, num_votes ) {
+    answer_votes[answer_key] = num_votes;
     // change color of answer card
     $("#answer_" + answer_key).addClass('voted_answer');
     // show / update value of count_inset div
@@ -139,9 +143,9 @@ function show_data( data, id ) {
     $('#result_answers_div').html('');
 
     for (var i = 0; i < data.results[id].length; i++) {
-        ans_key = data.results[id][i][0]
-        num_votes = data.results[id][i][1]
-        ans = data.answers_hash[ans_key]
+        ans_key = data.results[id][i][0];
+        num_votes = data.results[id][i][1];
+        ans = data.answers_hash[ans_key];
 
         $('#result_answers_div').append( $("#show_answer_for_results_tmpl").tmpl( {
             'answer_key' : ans.answer_key,
@@ -218,6 +222,7 @@ function show_results( data ) {
     $('#main_container').fadeIn('fast');
 }
 
+var answers = {};
 
 function show_question_for_voting() {
 
@@ -237,13 +242,29 @@ function show_question_for_voting() {
 
     $('#see_results_button').click( function() {
 
-// XXX, populate correctly
-
         if( $('input[name=post_to_fb]').is(':checked') ) {
+            var selected_answer_key;
+            var selected_ans_votes = 0;
+            for (answer_key in answer_votes) {
+                n_votes = answer_votes[answer_key];
+                answer = answers[answer_key];
+                if(n_votes > selected_ans_votes && answer.has_pic > 0 ) {
+                     selected_ans_votes = n_votes;
+                     selected_answer_key = answer_key;
+                }
+            }
+
+            var pic_link = 'https://five-votes.appspot.com/images/open_letter.jpg';
+            if( selected_ans_votes > 0 ) {
+                pic_link = 'https://five-votes.appspot.com/image?answer_key=' + selected_answer_key
+            }
+
+//alert('pic link: ' + pic_link);
+
             var obj = {
               method: 'feed',
-              link: 'https://developers.facebook.com/docs/reference/dialogs/',
-              picture: 'http://fbrell.com/f8.jpg',
+              link: 'https://five-votes.appspot.com/q{{question_key_name}}',
+              picture: pic_link,
               name: 'Facebook Dialogs',
               caption: 'Reference Documentation',
               description: 'Using Dialogs to interact with users.'
@@ -251,7 +272,7 @@ function show_question_for_voting() {
             function callback(response) {
                 $.getJSON("ajax.html?action=get_results;question_key_name={{question_key_name}}",
                    function(data){
-                      show_results(data);
+//                      show_results(data);
                    }
                 );
             }
@@ -259,13 +280,17 @@ function show_question_for_voting() {
         } else {
             $.getJSON("ajax.html?action=get_results;question_key_name={{question_key_name}}",
                  function(data){
-                     show_results(data);
+//                     show_results(data);
                  }
             );
         }
     });
 
     {% for ans in answers %}
+
+      var ans = { 'has_pic' : '{{ans.has_pic}}', 'answer_key' : '{{ans.answer_key}}' };
+
+      answers[ans.answer_key] = ans;
 
       $('#answers_div').append( $("#show_answer_for_voting_tmpl").tmpl( {
          'answer_key' : '{{ans.answer_key}}',
