@@ -243,14 +243,18 @@ function show_question_for_voting() {
     $('#see_results_button').click( function() {
 
         if( $('input[name=post_to_fb]').is(':checked') ) {
+            var selected_answer_text;
             var selected_answer_key;
             var selected_ans_votes = 0;
             for (answer_key in answer_votes) {
                 n_votes = answer_votes[answer_key];
                 answer = answers[answer_key];
-                if(n_votes > selected_ans_votes && answer.has_pic > 0 ) {
-                     selected_ans_votes = n_votes;
-                     selected_answer_key = answer_key;
+                if(n_votes > selected_ans_votes) {
+                    selected_answer_text = answer.answer_text;
+                    if( answer.has_pic > 0 ) {
+                        selected_ans_votes = n_votes;
+                        selected_answer_key = answer_key;
+                    }
                 }
             }
 
@@ -259,15 +263,17 @@ function show_question_for_voting() {
                 pic_link = 'https://five-votes.appspot.com/image?answer_key=' + selected_answer_key
             }
 
-//alert('pic link: ' + pic_link);
+            name = "{{question.question_text}}";
+            caption = "{{user_name}} " + ' {% trans "answered this question on Five Votes." %}';
+            var desc = '{% trans "His/her selection was:" %} ' + selected_answer_text;
 
             var obj = {
               method: 'feed',
               link: 'https://five-votes.appspot.com/q{{question_key_name}}',
               picture: pic_link,
-              name: 'Facebook Dialogs',
-              caption: 'Reference Documentation',
-              description: 'Using Dialogs to interact with users.'
+              name: name,
+              caption: caption,
+              description: desc,
             };
             function callback(response) {
                 $.getJSON("ajax.html?action=get_results;question_key_name={{question_key_name}}",
@@ -288,7 +294,9 @@ function show_question_for_voting() {
 
     {% for ans in answers %}
 
-      var ans = { 'has_pic' : '{{ans.has_pic}}', 'answer_key' : '{{ans.answer_key}}' };
+      var ans = { 'has_pic' : '{{ans.has_pic}}',
+                  'answer_key' : '{{ans.answer_key}}',
+                  'answer_text' : '{{ans.answer_text}}', };
 
       answers[ans.answer_key] = ans;
 

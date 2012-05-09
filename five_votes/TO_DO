@@ -19,6 +19,7 @@ BUGS:
     * Keep track of language of user and store in question.
     * Add "invite friends" (see blue book) after question creation.
     * Show friend photos in results page.
+    * Error si se llega a un url inválido, "q27" (cunado q27 no exitste aun).
 
 [TEST IN P]    * Two redirects happen after login.
 [TEST IN P]    * Also, no redirect after logging-in for the first time.

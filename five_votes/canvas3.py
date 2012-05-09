@@ -778,7 +778,10 @@ class QuestionHandler(BaseHandler):
 
         tot_votes = 0
         votes_count_hash = {}
+
+        user_name = ''
         if self.user:
+            user_name = self.user.name
             # obtain votes by this user to this questions
             all_my_voted = Vote.gql( 'where question = :1 AND user_id = :2 AND num_votes>0', question , self.user.user_id )
 
@@ -805,6 +808,7 @@ class QuestionHandler(BaseHandler):
             ans_struct.append( ans_data )
 
         self.render(u'index3',
+                    user_name=user_name,
                     question=question,
                     question_key_name=str(question.key().name()),
                     answers=ans_struct,
