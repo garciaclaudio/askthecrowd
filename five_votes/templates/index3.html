@@ -85,7 +85,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 }
 
 .answer_text {
-  font-size: 110%;
+  font-size: 95%;
   font-weight:bold;
 }
 
@@ -146,8 +146,9 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 	-o-transition: all 0.1s ease-in-out;
 }
 
-#add_answer_link {
-	font-size: 140%;
+#add_ans_link {
+   font-size: 80%;
+   float:right;
 }
 
 .vote_link {
@@ -526,6 +527,25 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
     <div id="answers_div">
     </div>
 <br />
+
+    <div class="vote_link" id="add_ans_link" style="clear:both;">
+      <div class="mytube">
+        <a href="#" onclick="add_ans_link_func();return false;">{% trans "suggest new answer" %}</a>
+      </div>
+    </div>
+
+    <div id="add_new_ans" style="clear:both;float:right;display:none;">
+      <div class="mytube">
+         <form id="add_new_ans_form" action="/ajax.html" method="get">
+            <input type="hidden" name="question_key_name" value="${question_key_name}">
+            <input type="hidden" name="action" value="add_answer">
+
+            <input id="new_answer" name="answer_text" class="text" type="text" size=20>
+&nbsp;<button id="new_answer" type="submit">{% trans "add" %}</button>
+         </form>
+      </div>
+    </div>
+
     <div id="see_results_div" style="clear:both;display:none;">
         <br /><button id="see_results_button" class="my_button">{% trans "See results" %}</button>
 
@@ -643,6 +663,48 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
           <span class="answer_text">${answer_text}</span>
       <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
     </div>
+  </div> <!-- answer_card-->
+</script>
+
+
+<script id="show_answer_for_voting_and_editing_tmpl" type="text/html">
+  <div class="answer_card" id="answer_${answer_key}">
+
+    <div class="delete_answer_div">
+        <form method="post" id="delete_answer_form_${answer_key}" action="/ajax.html">
+            <input type="hidden" name="answer_key" value="${answer_key}">
+            <input type="hidden" name="action" value="delete_answer">
+<a href="#" onclick="$('#delete_answer_form_${answer_key}').submit();return false;"><b>x</b></a>
+       </form>
+   </div>
+
+   <div class="card_inset">
+
+        <div id="picture_${answer_key}"></div>
+        <span class="answer_text">${answer_text}</span>
+        <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
+    <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
+
+    <div class="plus_vote_div">
+        <form method="post" id="plus_vote_form_${answer_key}" action="/ajax.html">
+            <input type="hidden" name="answer_key" value="${answer_key}">
+            <input type="hidden" name="action" value="vote">
+            <input type="hidden" name="vote_val" value="1">
+<span class="vote_link"><a href="#" onclick="$('#plus_vote_form_${answer_key}').submit();return false;">{% trans "vote" %}</a>
+       </form>
+   </div>
+
+    <div id="minus_vote_link_${answer_key}" class="minus_vote_div">
+        <form method="post" id="minus_vote_form_${answer_key}" action="/ajax.html">
+            <input type="hidden" name="answer_key" value="${answer_key}">
+            <input type="hidden" name="action" value="vote">
+            <input type="hidden" name="vote_val" value="-1">
+<span class="vote_link"><a href="#" onclick="$('#minus_vote_form_${answer_key}').submit();return false;">{% trans "unvote" %}</a>
+       </form>
+   </div>
+
+  </div>
+
   </div> <!-- answer_card-->
 </script>
 

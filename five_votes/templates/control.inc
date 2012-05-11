@@ -27,9 +27,9 @@ function show_answer(data) {
             element: document.getElementById('file_uploader_' + data.answer_key),
             action: '/ajax.html',
             debug: true,
-//            sizeLimit: 100000,
+            sizeLimit: 1048576, // 1 MB
             uploadText: '{% trans "add picture" %}',
-            allowedExtensions: ['jpg', 'jpeg'],
+            allowedExtensions: ['jpg', 'jpeg', 'gif', 'png'],
             onComplete: function(id, file_name, data){
                 $('#file_uploader_' + data.answer_key).remove();
                 $('#picture_' + data.answer_key).html( $("#show_pic_tmpl").tmpl({'answer_key': data.answer_key} ));
@@ -265,6 +265,8 @@ function show_question_for_voting() {
 
             name = "{{question.question_text}}";
             caption = "{{user_name}} " + ' {% trans "answered this question on Five Votes." %}';
+
+// AQUI VOY, check for user_gender
             var desc = '{% trans "His/her selection was:" %} ' + selected_answer_text;
 
             var obj = {
@@ -385,6 +387,30 @@ function show_question_for_welcome() {
           $('#picture_' + '{{ans.answer_key}}').html( $("#show_pic_tmpl").tmpl({'answer_key': '{{ans.answer_key}}'} ));
       {% endif %}
     {% endfor %}
+}
+
+
+function add_ans_link_func() {
+    $('#add_ans_link').hide();
+
+    // bind "add" click (form submit)
+    $('#add_new_ans_form').ajaxForm({
+         dataType:  'json', 
+         success: function(data) { 
+             if( data.error ) {
+                 alert( data.error );
+             } else {
+
+                //clean answer form
+                $('#new_answer').val('');
+                show_answer(data);
+                $('#add_new_ans').hide();
+                $('#add_ans_link').show();
+             }
+         }
+    });
+
+    $('#add_new_ans').show();
 }
 
 
