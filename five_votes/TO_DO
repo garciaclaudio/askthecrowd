@@ -23,7 +23,7 @@ TO-DO: - make add ans_link_func use show answer_for_voting and_editing tmpl.
     * Keep track of language of user and store in question.
     * Add "invite friends" (see blue book) after question creation.
     * Show friend photos in results page.
-    * Error si se llega a un url inválido, "q27" (cunado q27 no exitste aun).
+    * Error si se llega a un url inválido, "q27" (cuando q27 no exitste aun).
     * Make comments section in question page be tailored to question.
     * Make images show larger popup on hover.
 

@@ -4,12 +4,7 @@
 
 <script>
 
-function show_answer(data) {
-    $('#answers_div').append( $("#show_answer_tmpl").tmpl( {
-       'answer_key': data.answer_key,
-       'answer_text': data.answer_text,
-    }));
-
+function bind_delete_and_uploader(data) {
      // bind "add" click (form submit)
     $('#delete_answer_form_' + data.answer_key ).ajaxForm({
          dataType:  'json', 
@@ -40,8 +35,15 @@ function show_answer(data) {
 		      answer_key : data.answer_key,
             }
     });
+}
 
+function show_answer(data) {
+    $('#answers_div').append( $("#show_answer_tmpl").tmpl( {
+       'answer_key': data.answer_key,
+       'answer_text': data.answer_text,
+    }));
 
+    bind_delete_and_uploader(data);
 }
 
 function show_created_question(data) {
@@ -222,6 +224,56 @@ function show_results( data ) {
     $('#main_container').fadeIn('fast');
 }
 
+
+
+function bind_vote_links(answer_key) {
+
+     $('#plus_vote_form_' + answer_key ).ajaxForm({
+         dataType:  'json', 
+         success: function(data) { 
+             if( data.error ) {
+                alert( data.error );
+             } else {
+                if( data.votes_left <= 0 ) {
+                   $('.plus_vote_div').hide();
+                   $('#see_results_div').show();
+                }
+                $('#del_ans_link_' + data.answer_key).hide();
+                show_votes( data.answer_key, data.new_count );
+                update_votes_header( data.votes_left );
+             }
+         }
+     });
+
+     $('#minus_vote_form_' + answer_key ).ajaxForm({
+         dataType:  'json', 
+         success: function(data) { 
+             if( data.error ) {
+                alert( data.error );
+             } else {
+
+                update_votes_header( data.votes_left );
+
+                if( data.votes_left > 0 ) {
+                   $('.plus_vote_div').show();
+                   $('#see_results_div').hide();
+                }
+                if( data.new_count == 0 ) {
+                    $('#del_ans_link_' + data.answer_key).show();
+                    $("#count_inset_" + data.answer_key).hide();
+                    $("#answer_" + data.answer_key).removeClass('voted_answer');
+                    $("#minus_vote_link_" + data.answer_key).hide();
+                } else {
+                    $("#count_text_" + data.answer_key).html( data.new_count + '&#10003;' );
+                }
+             }
+         }
+     });
+}
+
+
+
+
 var answers = {};
 
 function show_question_for_voting() {
@@ -315,46 +367,7 @@ function show_question_for_voting() {
           show_votes( '{{ans.answer_key}}', {{ans.num_votes}} );
       {% endif %}
 
-      // bind vote buttons here
-     $('#plus_vote_form_' + '{{ans.answer_key}}' ).ajaxForm({
-         dataType:  'json', 
-         success: function(data) { 
-             if( data.error ) {
-                alert( data.error );
-             } else {
-                if( data.votes_left <= 0 ) {
-                   $('.plus_vote_div').hide();
-                   $('#see_results_div').show();
-                }
-                show_votes( data.answer_key, data.new_count );
-                update_votes_header( data.votes_left );
-             }
-         }
-     });
-
-     $('#minus_vote_form_' + '{{ans.answer_key}}' ).ajaxForm({
-         dataType:  'json', 
-         success: function(data) { 
-             if( data.error ) {
-                alert( data.error );
-             } else {
-
-                update_votes_header( data.votes_left );
-
-                if( data.votes_left > 0 ) {
-                   $('.plus_vote_div').show();
-                   $('#see_results_div').hide();
-                }
-                if( data.new_count == 0 ) {
-                    $("#count_inset_" + data.answer_key).hide();
-                    $("#answer_" + data.answer_key).removeClass('voted_answer');
-                    $("#minus_vote_link_" + data.answer_key).hide();
-                } else {
-                    $("#count_text_" + data.answer_key).html( data.new_count + '&#10003;' );
-                }
-             }
-         }
-     });
+      bind_vote_links('{{ans.answer_key}}');
 
     {% endfor %}
 
@@ -390,6 +403,17 @@ function show_question_for_welcome() {
 }
 
 
+function show_answer_for_voting_and_editing(data) {
+    $('#answers_div').append( $("#show_answer_for_voting_and_editing_tmpl").tmpl( {
+       'answer_key': data.answer_key,
+       'answer_text': data.answer_text,
+    }));
+
+    bind_delete_and_uploader(data);
+    bind_vote_links(data.answer_key);
+}
+
+
 function add_ans_link_func() {
     $('#add_ans_link').hide();
 
@@ -403,7 +427,7 @@ function add_ans_link_func() {
 
                 //clean answer form
                 $('#new_answer').val('');
-                show_answer(data);
+                show_answer_for_voting_and_editing(data);
                 $('#add_new_ans').hide();
                 $('#add_ans_link').show();
              }
@@ -411,6 +435,7 @@ function add_ans_link_func() {
     });
 
     $('#add_new_ans').show();
+    $('#new_answer').focus();
 }
 
 

@@ -670,7 +670,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <script id="show_answer_for_voting_and_editing_tmpl" type="text/html">
   <div class="answer_card" id="answer_${answer_key}">
 
-    <div class="delete_answer_div">
+    <div class="delete_answer_div" id="del_ans_link_${answer_key}">
         <form method="post" id="delete_answer_form_${answer_key}" action="/ajax.html">
             <input type="hidden" name="answer_key" value="${answer_key}">
             <input type="hidden" name="action" value="delete_answer">
