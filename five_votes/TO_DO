@@ -1,34 +1,38 @@
 
-templates/
 BUGS: 
 
-TO-DO: - make add ans_link_func use show answer_for_voting and_editing tmpl.
-       - make new func to bind all the thingies in show answer_for_voting and_editing.
-       - put all binding stuff in funcs that can be called from the several places they're needed at.
+    * Main page: show all questions user has added, most recent to least. See blue notebook for details.
+    * Add questions from all users, with paging (least to most), to main page (also as landing page)
+    * Add post-to-fb link after question creation.
 
-    * Add "suggest new answer" form to vote template.
+
     * create default image for feed posts (five checkmarks?)
+    * male and female votes are inverted
+    * Voting allows 6 votes
+    * Make comments section in question page be tailored to question.
+    * Add "Create other questions like this one" link in question page (to main page).
+    * Keep track of language of user and store in question?
+
+    * show "created by" photo and link in question page "By <Claudio Garcia>".
+    * show "created by" photo? and link in user-suggested answers? "By <Claudio Garcia>".
+
     * Improve colors.
     * Show correct gender line in post-to-fb dialog.
     * Show whirly "wait" thing when vote link is pressed.
     * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
     * Make results cards less tall, smaller.
-    * male and female votes are inverted
-    * Voting allows 6 votes
-    * Main page: show all questions user has added, most recent to least. See blue notebook for details.
+
     * Main page: clicking on new question link not working.
-    * Make sure main and question page are displayed in user's lang.
-    * Add "Create other questions like this one" link in question page (to main page).
-    * Add questions from all users, with paging (least to most), to main page.
-    * Keep track of language of user and store in question.
-    * Add "invite friends" (see blue book) after question creation.
+
     * Show friend photos in results page.
-    * Error si se llega a un url inválido, "q27" (cuando q27 no exitste aun).
-    * Make comments section in question page be tailored to question.
+    * Error si se llega a un url inválido, "q27" (cuando q27 no existe aun).
     * Make images show larger popup on hover.
 
+
+[TEST IN P]    * Make sure main and question page are displayed in user's lang.
 [TEST IN P]    * Two redirects happen after login.
 [TEST IN P]    * Also, no redirect after logging-in for the first time.
+
 
 [POSTP]   * Añadir opción para hacerlo "sólo para [mexicanos, gringos, etc.]"
             - Esta opción pregunta al usuario de que estado es.
@@ -37,6 +41,7 @@ TO-DO: - make add ans_link_func use show answer_for_voting and_editing tmpl.
             - permite hacer preguntas tales como "mi desayuno favorito es".
             - lo que mas se me antoja (un montón de fotos de cosas ricas, o chuscas,
               como un gansito, o un tamrindo).
+[POSTP]    * Add "invite friends" (see blue book) after question creation.
 [POSTP]    * limit answer input to X chars.
 [POSTP]    * Super long words (>x chars) should be split automatically.
 [POSTP]    * Too many redirects when arriving to a question page for the 1st time?
@@ -47,6 +52,7 @@ TO-DO: - make add ans_link_func use show answer_for_voting and_editing tmpl.
 
 [IGNORE]  * Problem, comments-plugin "loading" image won't go away. Not on production, only on localhost.
 
+[DONE]    * Add "suggest new answer" form to vote template.
 [DONE]    * Add "post to Facebook" after 5th vote.
 [DONE]    * allow all pic types (gif, png), and larger size uploads (1 MB)
 [DONE]   * TRY updating the production site, maybe login will work there. 

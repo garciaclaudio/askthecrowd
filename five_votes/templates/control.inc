@@ -37,6 +37,25 @@ function bind_delete_and_uploader(data) {
     });
 }
 
+
+function show_new_question() {
+    $('#main_container').html( $("#new_question_tmpl").tmpl({}));
+    $('#main_container').fadeIn('fast');
+    $('#question_form').ajaxForm({
+         dataType:  'json', 
+         success: function(data) { 
+             if( data.error ) {
+                 alert( data.error );
+             } else {
+                 show_created_question(data);
+             }
+         }
+     });
+    $('#question').focus();
+}
+
+
+
 function show_answer(data) {
     $('#answers_div').append( $("#show_answer_tmpl").tmpl( {
        'answer_key': data.answer_key,
@@ -73,33 +92,28 @@ function show_created_question(data) {
       $('#new_answer').focus();
 
     $('#done_button').click( function() {
+
+        // post to fb if requested
+        if( $('input[name=post_to_fb]').is(':checked') ) {
+alert('post to fb, do the gener thing first');
+        }
+
         $('#main_container').fadeOut('fast');
         $('#main_container').html( $("#done_question_tmpl").tmpl({
              'question_text': data.question_text,
              'question_key_name': data.question_key_name,
            }));
+           // bind add-another button
+           $('#create_another_button').click( function() {
+               show_new_question();
+           });
+
         $('#main_container').fadeIn('fast');
+
+
     });
 
     $('#main_container').fadeIn('fast');
-}
-
-
-
-function show_new_question() {
-    $('#main_container').html( $("#new_question_tmpl").tmpl({}));
-    $('#main_container').fadeIn('fast');
-    $('#question_form').ajaxForm({
-         dataType:  'json', 
-         success: function(data) { 
-             if( data.error ) {
-                 alert( data.error );
-             } else {
-                 show_created_question(data);
-             }
-         }
-     });
-    $('#question').focus();
 }
 
 
@@ -291,7 +305,7 @@ function show_question_for_voting() {
              'question_text': "{{question.question_text}}",
              'question_key_name': "{{question_key_name}}",
 	     }));
-
+             
     $('#see_results_button').click( function() {
 
         if( $('input[name=post_to_fb]').is(':checked') ) {
