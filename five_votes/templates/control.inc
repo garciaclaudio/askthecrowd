@@ -4,6 +4,15 @@
 
 <script>
 
+var images_base_url = 'https://five-votes.appspot.com';
+{% if IN_DEV_SERVER %}
+    images_base_url = 'http://localhost:8080';
+{% endif %}
+
+var new_question_selected_pic_key = '';
+var new_question_text = '';
+var new_question_key_name = '';
+
 function bind_delete_and_uploader(data) {
      // bind "add" click (form submit)
     $('#delete_answer_form_' + data.answer_key ).ajaxForm({
@@ -29,6 +38,10 @@ function bind_delete_and_uploader(data) {
                 $('#file_uploader_' + data.answer_key).remove();
                 $('#picture_' + data.answer_key).html( $("#show_pic_tmpl").tmpl({'answer_key': data.answer_key} ));
 
+                // save for feed posting
+                if( ! new_question_selected_pic_key ) {
+                     new_question_selected_pic_key = data.answer_key;
+                }
             },
             params: {
                       action: 'upload_picture',
@@ -52,6 +65,23 @@ function show_new_question() {
          }
      });
     $('#question').focus();
+
+    // 
+    $.getJSON("ajax.html?action=get_user_questions",
+             function(data){
+//                 alert('hello');  //show_results(data);
+
+                 for (var i = 0; i < data.length; i++) {
+                     alert('QUESTION: ' + data[i].question_text );
+                 }
+//                ans_key = data.results[id][i][0];
+//      num_votes = data.results[id][i][1];
+//        ans = data.answers_hash[ans_key];
+
+             }
+    );
+
+
 }
 
 
@@ -66,6 +96,10 @@ function show_answer(data) {
 }
 
 function show_created_question(data) {
+
+    // save for feed posting
+    new_question_text = data.question_text;
+    new_question_key_name = data.question_key_name;
 
     $('#main_container').fadeOut('fast');
     $('#main_container').html( $("#question_created_tmpl").tmpl(
@@ -95,7 +129,25 @@ function show_created_question(data) {
 
         // post to fb if requested
         if( $('input[name=post_to_fb]').is(':checked') ) {
-alert('post to fb, do the gener thing first');
+            var pic_link = 'https://five-votes.appspot.com/images/open_letter.jpg';
+            if( new_question_selected_pic_key ) {
+                pic_link = images_base_url + '/image?answer_key=' + new_question_selected_pic_key
+                new_question_selected_pic_key = '';
+            }
+
+            name = new_question_text;
+            caption = "{{user_name}} " + ' {% trans "created this question on Five Votes." %}';
+            var desc = '{% trans "Your opinion is needed!" %} ';
+
+            var obj = {
+              method: 'feed',
+              link: 'https://five-votes.appspot.com/q' + new_question_key_name,
+              picture: pic_link,
+              name: name,
+              caption: caption,
+              description: desc,
+            };
+            FB.ui(obj);
         }
 
         $('#main_container').fadeOut('fast');
@@ -326,14 +378,17 @@ function show_question_for_voting() {
 
             var pic_link = 'https://five-votes.appspot.com/images/open_letter.jpg';
             if( selected_ans_votes > 0 ) {
-                pic_link = 'https://five-votes.appspot.com/image?answer_key=' + selected_answer_key
+                pic_link = images_base_url + '/image?answer_key=' + selected_answer_key
             }
 
             name = "{{question.question_text}}";
             caption = "{{user_name}} " + ' {% trans "answered this question on Five Votes." %}';
 
-// AQUI VOY, check for user_gender
-            var desc = '{% trans "His/her selection was:" %} ' + selected_answer_text;
+{% if  user_is_male %}
+            var desc = '{% trans "His selection was:" %} ' + selected_answer_text;
+{% else %}
+            var desc = '{% trans "Her selection was:" %} ' + selected_answer_text;
+{% endif %}
 
             var obj = {
               method: 'feed',
@@ -346,7 +401,7 @@ function show_question_for_voting() {
             function callback(response) {
                 $.getJSON("ajax.html?action=get_results;question_key_name={{question_key_name}}",
                    function(data){
-//                      show_results(data);
+                      show_results(data);
                    }
                 );
             }
@@ -354,7 +409,7 @@ function show_question_for_voting() {
         } else {
             $.getJSON("ajax.html?action=get_results;question_key_name={{question_key_name}}",
                  function(data){
-//                     show_results(data);
+                     show_results(data);
                  }
             );
         }

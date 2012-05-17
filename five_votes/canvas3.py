@@ -488,12 +488,19 @@ def user_required(fn):
 
 
 class MainPage(BaseHandler):
-    """Show recent runs for the user and friends"""
     def get(self):
-        self.render(u'index3')
+        user_name = ''
+        if self.user:
+            user_name = self.user.name
 
+        self.render(u'index3',
+                    user_name=user_name)
     def post(self):
-        self.render(u'index3')
+        user_name = ''
+        if self.user:
+            user_name = self.user.name
+        self.render(u'index3',
+                    user_name=user_name)
 
 
 class AjaxHandler(BaseHandler):
@@ -718,6 +725,54 @@ class AjaxHandler(BaseHandler):
         return result_struct
 
 
+    def handle_get_user_questions(self):
+
+        print >> sys.stderr, 'GETTING QUESTIONS for: ' + str(self.user.user_id)
+
+        questions = Question.gql( 'where user_id = :1', self.user.user_id )
+        questions_struct = []
+
+        for question in questions:
+            summaries = ResultsSummary.gql( 'where question = :1', question )
+
+            tot_votes = 0
+            results = { 'all':[], 'male':[], 'female':[] }
+
+            for summary in summaries:
+                tot_votes += (summary.male_votes + summary.female_votes)
+                results['all'].append([ str(summary.answer.key()), summary.male_votes + summary.female_votes ])
+
+            answers = Answer.gql( 'where question = :1', question )
+
+            ans_struct = []
+            ans_hash = {}
+            for ans in answers:
+                if ans.picture:
+                    has_pic = 1
+                else:
+                    has_pic = 0
+                ans_data = {
+                    'answer_key' : str(ans.key()),
+                    'answer_text' : str(ans.answer_text),
+                    'has_pic' : has_pic,
+                    'num_votes' : 0,
+                    }
+                ans_struct.append( ans_data )
+                ans_hash[ str(ans.key()) ] = ans_data
+
+            sorted_ans = sorted(ans_struct, key=lambda k: k['num_votes'], reverse=True) 
+
+            result_struct = { 'question_key_name': str(question.key().name()),
+                              'question_text': str(question.question_text),
+                              'answers': sorted_ans,
+                              'total_votes': tot_votes,
+                              'results': results,
+                              'answers_hash':ans_hash,
+                              }
+            questions_struct.append( result_struct )
+        return questions_struct
+
+
     def post(self):
         result_struct = { 'error' : '1' }
         action = self.request.get('action')
@@ -740,6 +795,10 @@ class AjaxHandler(BaseHandler):
         result_struct = { 'error' : '1' }
 
         action = self.request.get('action')
+
+        if( action == 'get_user_questions' ):
+            print >> sys.stderr, 'WILL IT CALL?'
+            result_struct = self.handle_get_user_questions()
 
         if( action == 'delete_answer' ):
             result_struct = self.handle_delete_answer()
@@ -780,10 +839,11 @@ class QuestionHandler(BaseHandler):
         votes_count_hash = {}
 
         user_name = ''
-        user_gender = ''
+        user_is_male = 0
         if self.user:
             user_name = self.user.name
-            user_gender = self.user.gender
+            if self.user.gender == 'male':
+                user_is_male = 1
             # obtain votes by this user to this questions
             all_my_voted = Vote.gql( 'where question = :1 AND user_id = :2 AND num_votes>0', question , self.user.user_id )
 
@@ -810,7 +870,7 @@ class QuestionHandler(BaseHandler):
             ans_struct.append( ans_data )
 
         self.render(u'index3',
-                    user_gender=user_gender,
+                    user_is_male=user_is_male,
                     user_name=user_name,
                     question=question,
                     question_key_name=str(question.key().name()),
