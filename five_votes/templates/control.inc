@@ -69,19 +69,16 @@ function show_new_question() {
     // 
     $.getJSON("ajax.html?action=get_user_questions",
              function(data){
-//                 alert('hello');  //show_results(data);
-
+                 $('#prev_questions').html( $("#prev_questions_header_tmpl").tmpl({}));
                  for (var i = 0; i < data.length; i++) {
-                     alert('QUESTION: ' + data[i].question_text );
+                     $('#prev_questions').append(
+                          $("#prev_questions_tmpl").tmpl( {
+                               'question_key_name': data[i].question_key_name,
+                               'question_text': data[i].question_text,
+                          }));                    
                  }
-//                ans_key = data.results[id][i][0];
-//      num_votes = data.results[id][i][1];
-//        ans = data.answers_hash[ans_key];
-
              }
     );
-
-
 }
 
 

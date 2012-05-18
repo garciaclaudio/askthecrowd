@@ -69,7 +69,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
     border-radius: 12px;
 }
 
-#question_text {
+.question_text {
     padding:10px;
     display:table;
     background-color:white;
@@ -353,6 +353,21 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 }
 
 
+.prev_question_class {
+    width:100%;
+    padding:0px;
+    display:table;
+    background-color: yellow;
+    text-align: left;
+    margin-top: 5px;
+    margin-left:auto; 
+    margin-right:auto; 
+   -moz-border-radius: 12px;
+   -webkit-border-radius: 12px;
+    border-radius: 12px;
+}
+
+
 </style>
 
 <script type="text/javascript">
@@ -382,8 +397,10 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <div id="contentcolumn">
   <div id="super_top_container" class="innertube">
     <div id="top_container" >
-      <div id="main_container" >
+      <div id="main_container">
       </div> <!-- main container -->
+      <div id="prev_questions">
+      </div> <!-- prev_questions -->
     </div> <!-- top_container -->
   </div> <!-- super_top_container -->
 </div>
@@ -466,7 +483,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <div class="mytube">
 <div id="question_created"> 
     <p>{% trans "Question created" %}</p>
-    <div id="question_text">${question_text}</div>
+    <div class="question_text">${question_text}</div>
 
     <p>{% trans "Suggest inital answers" %}</p>
     <div id="answers_form_div">
@@ -511,7 +528,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <script id="done_question_tmpl" type="text/html">
 <div class="mytube">
     <p>{% trans "You're done!" %}</p>
-    <div id="question_text">${question_text}</div>
+    <div class="question_text">${question_text}</div>
 
     <p>{% trans "Your question's URL is:" %} <a href="http://apps.facebook.com/five_votes/q${question_key_name}">http://apps.facebook.com/five_votes/q${question_key_name}</a></p>
 
@@ -523,7 +540,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <script id="answer_question_tmpl" type="text/html">
 <div class="mytube">
 <div> 
-    <div id="question_text">${question_text}</div>
+    <div class="question_text">${question_text}</div>
 <br />
     <div id="answers_div">
     </div>
@@ -614,7 +631,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <script id="show_results_tmpl" type="text/html">
 <div class="mytube">
 <div> 
-    <div id="question_text">${question_text}</div>
+    <div class="question_text">${question_text}</div>
     <div id="selector_div">
     </div>
     <div id="result_answers_div">
@@ -646,7 +663,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
   <div> 
       <div id="welcome_msg"><p>{% trans "To vote on this question, sign in with your facebook account:" %}</p> <fb:login-button show-faces="true"></fb:login-button>
       </div>
-      <div id="question_text">${question_text}</div>
+      <div class="question_text">${question_text}</div>
 <br />
       <div id="answers_div">
       </div>
@@ -708,5 +725,27 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 
   </div> <!-- answer_card-->
 </script>
+
+
+<script id="prev_questions_tmpl" type="text/html">
+    <div class="prev_question_class" id="prev_question_${question_key_name}">
+        <div class="mytube">
+            <div style="font-size:120%;">${question_text}</div>
+
+<div id="more_link_${question_key_name}" class="vote_link" style="text-align:right;"
+ ><a href="#" onclick="return false;">${question_text}{% trans "more" %}</a></div>
+
+        </div>
+    </div>
+</script>
+
+<script id="prev_questions_header_tmpl" type="text/html">
+    <div style="text-align:left;margin-top:7px;">
+&nbsp;&nbsp;{% trans "Your questions:" %}
+    </div>
+</script>
+
+
+
 
 
