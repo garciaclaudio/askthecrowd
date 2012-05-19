@@ -10,6 +10,8 @@ BUGS:
     * Main page: show all questions user has added, most recent to least. See blue notebook for details.
     * Add questions from all users, with paging (least to most), to main page (also as landing page)
 
+    * After voting, show more questions (first the ones already answered/created by his friends).
+
     * create default image for feed posts (five checkmarks?)
     * male and female votes are inverted
     * Voting allows 6 votes
