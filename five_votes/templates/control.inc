@@ -71,11 +71,38 @@ function show_new_question() {
              function(data){
                  $('#prev_questions').html( $("#prev_questions_header_tmpl").tmpl({}));
                  for (var i = 0; i < data.length; i++) {
+                     q = data[i];
+
                      $('#prev_questions').append(
                           $("#prev_questions_tmpl").tmpl( {
-                               'question_key_name': data[i].question_key_name,
-                               'question_text': data[i].question_text,
-                          }));                    
+                               'question_key_name': q.question_key_name,
+                               'question_text': q.question_text,
+                     }));
+
+                     $('#more_link_' + q.question_key_name).click( function() {
+                              var key = $(this).attr('q_key');
+                              $('#prev_answers_div_' + key).show();
+                              $('#more_link_' + key).hide();
+                              $('#less_link_' + key).show();
+                      });
+
+                      $('#less_link_' + q.question_key_name).click( function() {
+                              var key = $(this).attr('q_key');
+                              $('#prev_answers_div_' + key).hide();
+                              $('#more_link_' + key).show();
+                              $('#less_link_' + key).hide();
+                      });
+
+                      var ans = q.answers;
+                      for (var j = 0; j < data.length; j++) {
+//                        alert( data[i].question_text + ' -- ' + ans[j].answer_text );
+                          $('#prev_answers_div_' + q.question_key_name).append(
+                              $("#show_answer_for_prev_questions_tmpl").tmpl( {
+                                   'answer_key': ans[j].answer_key,
+                                   'answer_text': ans[j].answer_text,
+                                   'has_pic': ans[j].has_pic,
+                              }));
+                      }
                  }
              }
     );

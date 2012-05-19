@@ -354,6 +354,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 
 
 .prev_question_class {
+    position: relative; 
     width:100%;
     padding:0px;
     display:table;
@@ -366,6 +367,15 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
    -webkit-border-radius: 12px;
     border-radius: 12px;
 }
+
+.more_link {
+  position:absolute;top:8px;right:12px;"
+}
+
+.invisible {
+  display:none;
+}
+
 
 
 </style>
@@ -730,12 +740,12 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <script id="prev_questions_tmpl" type="text/html">
     <div class="prev_question_class" id="prev_question_${question_key_name}">
         <div class="mytube">
-            <div style="font-size:120%;">${question_text}</div>
-
-<div id="more_link_${question_key_name}" class="vote_link" style="text-align:right;"
- ><a href="#" onclick="return false;">${question_text}{% trans "more" %}</a></div>
-
+            <span style="font-size:120%;">${question_text}</span>
         </div>
+
+        <div id="more_link_${question_key_name}" q_key="${question_key_name}" class="vote_link more_link"><a href="#" onclick="return false;">[{% trans "open" %}]</a></div>
+        <div id="less_link_${question_key_name}" q_key="${question_key_name}" class="vote_link more_link invisible"><a href="#" onclick="return false;">[{% trans "close" %}]</a></div>
+        <div class="invisible" id="prev_answers_div_${question_key_name}"></div>
     </div>
 </script>
 
@@ -746,6 +756,27 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 </script>
 
 
+
+<script id="show_answer_for_prev_questions_tmpl" type="text/html">
+  <div class="answer_card" id="answer_${answer_key}">
+
+    <div class="delete_answer_div" id="del_ans_link_${answer_key}">
+        <form method="post" id="delete_answer_form_${answer_key}" action="/ajax.html">
+            <input type="hidden" name="answer_key" value="${answer_key}">
+            <input type="hidden" name="action" value="delete_answer">
+<a href="#" onclick="$('#delete_answer_form_${answer_key}').submit();return false;"><b>x</b></a>
+       </form>
+   </div>
+
+   <div class="card_inset">
+        <div id="picture_${answer_key}"></div>
+        <span class="answer_text">${answer_text}</span>
+        <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
+    <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
+  </div>
+
+  </div> <!-- answer_card-->
+</script>
 
 
 

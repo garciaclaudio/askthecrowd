@@ -797,7 +797,6 @@ class AjaxHandler(BaseHandler):
         action = self.request.get('action')
 
         if( action == 'get_user_questions' ):
-            print >> sys.stderr, 'WILL IT CALL?'
             result_struct = self.handle_get_user_questions()
 
         if( action == 'delete_answer' ):
