@@ -71,6 +71,7 @@ function show_new_question() {
              function(data){
                  $('#prev_questions').html( $("#prev_questions_header_tmpl").tmpl({}));
                  for (var i = 0; i < data.length; i++) {
+//alert( i + '--' + data[i].question_text + '--' + data.length);
                      q = data[i];
 
                      $('#prev_questions').append(
@@ -94,8 +95,8 @@ function show_new_question() {
                       });
 
                       var ans = q.answers;
-                      for (var j = 0; j < data.length; j++) {
-//                        alert( data[i].question_text + ' -- ' + ans[j].answer_text );
+                      for (var j = 0; j < ans.length; j++) {
+                        alert( q.question_text + ' -- ' + ans[j].answer_text );
                           $('#prev_answers_div_' + q.question_key_name).append(
                               $("#show_answer_for_prev_questions_tmpl").tmpl( {
                                    'answer_key': ans[j].answer_key,

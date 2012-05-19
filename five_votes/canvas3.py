@@ -555,7 +555,12 @@ class AjaxHandler(BaseHandler):
 
     def handle_delete_answer(self):
         error = ''
-        ans = Answer.get( self.request.get('answer_key') );
+
+        print >> sys.stderr, 'DELETING...' + str( self.request.get('answer_key') )
+
+        ans = Answer.get( self.request.get('answer_key') )
+        summaries = ResultsSummary.gql( 'where answer = :1', ans )
+        votes = Vote.gql( 'where answer = :1', ans )
 
         if( ans is None ): 
             error_msg = _("Answer not found. Should not happen.")
@@ -563,6 +568,10 @@ class AjaxHandler(BaseHandler):
         if error:
             result = { 'error' : error }
         else:
+            for sum in summaries:
+                sum.delete()
+            for vote in votes:
+                vote.delete()
             ans.delete()
             result = { 'error' : 0,
                        'deleted_answer_key' : str(self.request.get('answer_key')),
@@ -734,6 +743,8 @@ class AjaxHandler(BaseHandler):
 
         for question in questions:
             summaries = ResultsSummary.gql( 'where question = :1', question )
+
+            print >> sys.stderr, 'QUESTION: ' + str(question.question_text)
 
             tot_votes = 0
             results = { 'all':[], 'male':[], 'female':[] }
