@@ -26,30 +26,31 @@ function bind_delete_and_uploader(data) {
          }
     });
 
+    if( ! data.has_pic ) {
      // setup upload thingy
-    var uploader = new qq.FileUploader({
-            element: document.getElementById('file_uploader_' + data.answer_key),
-            action: '/ajax.html',
-            debug: true,
-            sizeLimit: 1048576, // 1 MB
-            uploadText: '{% trans "add picture" %}',
-            allowedExtensions: ['jpg', 'jpeg', 'gif', 'png'],
-            onComplete: function(id, file_name, data){
-                $('#file_uploader_' + data.answer_key).remove();
-                $('#picture_' + data.answer_key).html( $("#show_pic_tmpl").tmpl({'answer_key': data.answer_key} ));
-
-                // save for feed posting
-                if( ! new_question_selected_pic_key ) {
-                     new_question_selected_pic_key = data.answer_key;
+        var uploader = new qq.FileUploader({
+                element: document.getElementById('file_uploader_' + data.answer_key),
+                action: '/ajax.html',
+                debug: true,
+                sizeLimit: 1048576, // 1 MB
+                uploadText: '{% trans "add picture" %}',
+                allowedExtensions: ['jpg', 'jpeg', 'gif', 'png'],
+                onComplete: function(id, file_name, data){
+                    $('#file_uploader_' + data.answer_key).remove();
+                    $('#picture_' + data.answer_key).html( $("#show_pic_tmpl").tmpl({'answer_key': data.answer_key} ));
+    
+                    // save for feed posting
+                    if( ! new_question_selected_pic_key ) {
+                         new_question_selected_pic_key = data.answer_key;
+                    }
+                },
+                params: {
+                          action: 'upload_picture',
+    		      answer_key : data.answer_key,
                 }
-            },
-            params: {
-                      action: 'upload_picture',
-		      answer_key : data.answer_key,
-            }
-    });
+        });
+    }
 }
-
 
 function show_new_question() {
     $('#main_container').html( $("#new_question_tmpl").tmpl({}));
@@ -70,7 +71,7 @@ function show_new_question() {
     $.getJSON("ajax.html?action=get_user_questions",
              function(data){
                  $('#prev_questions').html( $("#prev_questions_header_tmpl").tmpl({}));
-                 for (var i = 0; i < data.length; i++) {
+                 for (var i = data.length-1; i >= 0; i--) {
 //alert( i + '--' + data[i].question_text + '--' + data.length);
                      q = data[i];
 
@@ -96,13 +97,17 @@ function show_new_question() {
 
                       var ans = q.answers;
                       for (var j = 0; j < ans.length; j++) {
-                        alert( q.question_text + ' -- ' + ans[j].answer_text );
-                          $('#prev_answers_div_' + q.question_key_name).append(
+//                        alert( q.question_text + ' -- has pic:' + ans[j].has_pic );
+                          $('#inner_prev_answers_div_' + q.question_key_name).append(
                               $("#show_answer_for_prev_questions_tmpl").tmpl( {
                                    'answer_key': ans[j].answer_key,
                                    'answer_text': ans[j].answer_text,
                                    'has_pic': ans[j].has_pic,
                               }));
+                          bind_delete_and_uploader(ans[j]);
+                         if( ans[j].has_pic ) {
+                             $('#picture_' + ans[j].answer_key ).html( $("#show_pic_tmpl").tmpl({'answer_key': ans[j].answer_key}));
+                         }
                       }
                  }
              }
