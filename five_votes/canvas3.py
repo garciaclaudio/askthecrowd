@@ -747,11 +747,11 @@ class AjaxHandler(BaseHandler):
             print >> sys.stderr, 'QUESTION: ' + str(question.question_text)
 
             tot_votes = 0
-            results = { 'all':[], 'male':[], 'female':[] }
 
+            votes_per_answer = {}
             for summary in summaries:
                 tot_votes += (summary.male_votes + summary.female_votes)
-                results['all'].append([ str(summary.answer.key()), summary.male_votes + summary.female_votes ])
+                votes_per_answer[summary.answer.key()] = summary.male_votes + summary.female_votes
 
             answers = Answer.gql( 'where question = :1', question )
 
@@ -762,11 +762,14 @@ class AjaxHandler(BaseHandler):
                     has_pic = 1
                 else:
                     has_pic = 0
+                n_votes = 0
+                if votes_per_answer.has_key( ans.key() ):
+                    n_votes = votes_per_answer[ans.key()]
                 ans_data = {
                     'answer_key' : str(ans.key()),
                     'answer_text' : str(ans.answer_text),
                     'has_pic' : has_pic,
-                    'num_votes' : 0,
+                    'num_votes' : n_votes
                     }
                 ans_struct.append( ans_data )
                 ans_hash[ str(ans.key()) ] = ans_data
@@ -777,7 +780,6 @@ class AjaxHandler(BaseHandler):
                               'question_text': str(question.question_text),
                               'answers': sorted_ans,
                               'total_votes': tot_votes,
-                              'results': results,
                               'answers_hash':ans_hash,
                               }
             questions_struct.append( result_struct )

@@ -1,11 +1,17 @@
 
+
+
 Preguntas INTERESANTES:
     * Cual es la mejor cancion de Joaquin Sabina?
     * Cual es la mayor contribucion de Argentina al mundo?
 
 BUGS: 
 
-    * Open/close links on FF show up in the upper-right corner...
+TO-DO
+ - Open/close links on FF show up in the upper-right corner...
+ - Show votes (including zero votes).
+ - Delete whole question (with confirm).
+ - Make count_insets widen when votes are in the thousands, millions.
 
     * Main page: show all questions user has added, most recent to least. See blue notebook for details.
     * Add questions from all users, with paging (least to most), to main page (also as landing page)

@@ -103,6 +103,7 @@ function show_new_question() {
                                    'answer_key': ans[j].answer_key,
                                    'answer_text': ans[j].answer_text,
                                    'has_pic': ans[j].has_pic,
+                                   'num_votes': ans[j].num_votes,
                               }));
                           bind_delete_and_uploader(ans[j]);
                          if( ans[j].has_pic ) {
