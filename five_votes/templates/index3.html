@@ -187,7 +187,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 .count_text {
   color: white;
-  position:absolute;top:11px;right:6px;"
+  margin-top:6px;
 }
 
 .voted_answer {
@@ -376,14 +376,14 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
   display:none;
 }
 
+
 .prev_questions_count_inset {
-  padding:5px;
+  position:absolute;top:0px;right:20px;
+  margin-top: 8px;
+  padding:3px;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   border-radius: 8px;
-  position:absolute;top:12px;left:12px;"
-  display:table-cell;
-  width:35px;
   height:35px;
   background-color: #00FF00;
   font-size: 20px;
@@ -785,11 +785,12 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
        </form>
    </div>
 
+    <div id="count_inset_${answer_key}" class="prev_questions_count_inset"><div id="count_text_${answer_key}"  class="count_text">${num_votes} &#10003;</div></div>
+
    <div class="card_inset">
         <div id="picture_${answer_key}"></div>
         <span class="answer_text">${answer_text}</span>
         <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
-    <div id="count_inset_${answer_key}" class="prev_questions_count_inset"><div id="count_text_${answer_key}"  class="count_text">${num_votes} &#10003;</div></div>
    </div>
 
   </div> <!-- answer_card-->
