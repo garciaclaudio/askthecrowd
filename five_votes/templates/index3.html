@@ -368,10 +368,6 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
     border-radius: 12px;
 }
 
-.more_link {
-  position:absolute;top:8px;right:12px;"
-}
-
 .invisible {
   display:none;
 }
@@ -752,13 +748,16 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 
 <script id="prev_questions_tmpl" type="text/html">
     <div class="prev_question_class" id="prev_question_${question_key_name}">
-        <div class="mytube">
+        <div class="mytube" style="float:left;">
             <span style="font-size:120%;">${question_text}</span>
         </div>
 
-        <div id="more_link_${question_key_name}" q_key="${question_key_name}" class="vote_link more_link"><a href="#" onclick="return false;">[{% trans "open" %}]</a></div>
-        <div id="less_link_${question_key_name}" q_key="${question_key_name}" class="vote_link more_link invisible"><a href="#" onclick="return false;">[{% trans "close" %}]</a></div>
-        <div class="invisible" id="prev_answers_div_${question_key_name}">
+    <div class="mytube" style="float:right;">
+        <div id="more_link_${question_key_name}" q_key="${question_key_name}" class="vote_link"><a href="#" onclick="return false;">[{% trans "open" %}]</a></div>
+        <div id="less_link_${question_key_name}" q_key="${question_key_name}" class="vote_link invisible"><a href="#" onclick="return false;">[{% trans "close" %}]</a></div>
+   </div>
+
+        <div class="invisible" id="prev_answers_div_${question_key_name}" style="clear:both;">
             <p>{% trans "URL:" %} <a href="http://apps.facebook.com/five_votes/q${question_key_name}">http://apps.facebook.com/five_votes/q${question_key_name}</a></p>
            <div id="inner_prev_answers_div_${question_key_name}"></div>
        </div>
