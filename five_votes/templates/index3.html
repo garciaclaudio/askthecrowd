@@ -9,7 +9,8 @@
                 <script type="text/javascript" src="js/jquery.form.js"></script>
                 <script type="text/javascript" src="js/jquery.tmpl.js"></script>
                 <script type="text/javascript" src="js/fileuploader.js"></script>
-                <link href="css/fileuploader.css" rel="stylesheet" type="text/css">	
+                <link href="css/fileuploader.css" rel="stylesheet" type="text/css">
+                <link href="css/smoothness/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css">
 
 <style type="text/css">
 
@@ -159,6 +160,15 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 .vote_link A:link {color:#0000FF; text-decoration:none;}      /* unvisited link */
 .vote_link A:visited {color:#0000FF;}  /* visited link */
 .vote_link A:hover {text-decoration:underline;}  /* mouse over link */
+
+
+.question_link {
+  font-size: 1.2em;
+}
+
+.question_link A:link {color:#0000FF;text-decoration:none;}      /* unvisited link */
+.question_link A:visited {color:#0000FF;text-decoration:none;}  /* visited link */
+.question_link A:hover {text-decoration:underline;}  /* mouse over link */
 
 
 .minus_vote_div {
@@ -538,7 +548,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <div>              <input name="question" id="question" size=45 class="text" type="text">
 </div>
 <br />
-            <button type="submit" id="create_question_button" class="my_button">{% trans "Create" %}</button>
+            <button type="submit" id="create_question_button" class="my_button">{% trans "create" %}</button>
         </form>
     </div>
 </div>
@@ -749,7 +759,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <script id="prev_questions_tmpl" type="text/html">
     <div class="prev_question_class" id="prev_question_${question_key_name}">
         <div class="mytube" style="float:left;">
-            <span style="font-size:120%;">${question_text}</span>
+             <div class="question_link"><a target="_blank" href="http://apps.facebook.com/five_votes/q${question_key_name}">${question_text}</a></div>
         </div>
 
     <div class="mytube" style="float:right;">
@@ -757,15 +767,20 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
         <div id="less_link_${question_key_name}" q_key="${question_key_name}" class="vote_link invisible"><a href="#" onclick="return false;">[{% trans "close" %}]</a></div>
    </div>
 
-        <div class="invisible" id="prev_answers_div_${question_key_name}" style="clear:both;">
-            <p>{% trans "URL:" %} <a href="http://apps.facebook.com/five_votes/q${question_key_name}">http://apps.facebook.com/five_votes/q${question_key_name}</a></p>
+        <div class="mytube invisible" id="prev_answers_div_${question_key_name}" style="clear:both;">
            <div id="inner_prev_answers_div_${question_key_name}"></div>
+           <div style="clear:both;text-align:center;"><button class="my_button delete_question_button" q_key="${question_key_name}">{% trans "delete" %}</button></div>
        </div>
 
     </div>
 </script>
 
 <script id="prev_questions_header_tmpl" type="text/html">
+
+    <div id="dialog-confirm" class="invisible" title="Empty the recycle bin?">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p>
+    </div>
+
     <div style="text-align:left;margin-top:7px;">
 &nbsp;&nbsp;{% trans "Your questions:" %}
     </div>

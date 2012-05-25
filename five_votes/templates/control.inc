@@ -71,6 +71,24 @@ function show_new_question() {
     $.getJSON("ajax.html?action=get_user_questions",
              function(data){
                  $('#prev_questions').html( $("#prev_questions_header_tmpl").tmpl({}));
+
+                 $( "#dialog-confirm" ).dialog({
+                             autoOpen: false,
+                             resizable: false,
+                             height:140,
+                             modal: true,
+                             buttons: {
+				"Delete all items": function() {
+					$( this ).dialog( "close" );
+                                        return false;
+				},
+				Cancel: function() {
+					$( this ).dialog( "close" );
+                                        return false;
+				}
+                             }
+                 });
+
                  for (var i = data.length-1; i >= 0; i--) {
 //alert( i + '--' + data[i].question_text + '--' + data.length);
                      q = data[i];
@@ -111,6 +129,15 @@ function show_new_question() {
                          }
                       }
                  }
+                 $('.delete_question_button').click( function() {
+
+                         var key = $(this).attr('q_key');
+
+alert('hello ' + key );
+
+                         $( "#dialog-confirm" ).dialog('open');
+
+                 });
              }
     );
 }
