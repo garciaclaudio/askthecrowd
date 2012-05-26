@@ -553,6 +553,16 @@ class AjaxHandler(BaseHandler):
                        }
         return result
 
+    def handle_delete_question(self):
+        error = ''
+        if error:
+            result = { 'error' : error }
+        else:
+            result = { 'error' : 0,
+                       'deleted_question_key' : str(self.request.get('question_key_name')),
+                       }
+        return result
+
     def handle_delete_answer(self):
         error = ''
 
@@ -814,6 +824,9 @@ class AjaxHandler(BaseHandler):
 
         if( action == 'delete_answer' ):
             result_struct = self.handle_delete_answer()
+
+        if( action == 'delete_question' ):
+            result_struct = self.handle_delete_question()
 
         if( action == 'create_question' ):
             result_struct = self.handle_new_question()

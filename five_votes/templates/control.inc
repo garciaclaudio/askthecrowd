@@ -52,6 +52,10 @@ function bind_delete_and_uploader(data) {
     }
 }
 
+
+var existing_usr_questions = {}
+var question_key_name_to_delete = ''
+
 function show_new_question() {
     $('#main_container').html( $("#new_question_tmpl").tmpl({}));
     $('#main_container').fadeIn('fast');
@@ -75,14 +79,19 @@ function show_new_question() {
                  $( "#dialog-confirm" ).dialog({
                              autoOpen: false,
                              resizable: false,
-                             height:140,
+                             height:220,
                              modal: true,
                              buttons: {
-				"Delete all items": function() {
-					$( this ).dialog( "close" );
-                                        return false;
+				"{% trans "yes, delete it" %}": function() {
+
+                                    $.getJSON("ajax.html?action=delete_question;question_key_name=" + question_key_name_to_delete, function(data){
+                                            $('#prev_question_' + data.deleted_question_key).hide();
+                                    });
+
+                                    $( this ).dialog( "close" );
+                                    return false;
 				},
-				Cancel: function() {
+				"{% trans "no, no, no" %}": function() {
 					$( this ).dialog( "close" );
                                         return false;
 				}
@@ -92,6 +101,8 @@ function show_new_question() {
                  for (var i = data.length-1; i >= 0; i--) {
 //alert( i + '--' + data[i].question_text + '--' + data.length);
                      q = data[i];
+
+                     existing_usr_questions[q.question_key_name] = q.question_text;
 
                      $('#prev_questions').append(
                           $("#prev_questions_tmpl").tmpl( {
@@ -130,11 +141,9 @@ function show_new_question() {
                       }
                  }
                  $('.delete_question_button').click( function() {
-
                          var key = $(this).attr('q_key');
-
-alert('hello ' + key );
-
+                         question_key_name_to_delete = key;
+                         $('#confirm_delete_question_div').html(existing_usr_questions[key]);
                          $( "#dialog-confirm" ).dialog('open');
 
                  });

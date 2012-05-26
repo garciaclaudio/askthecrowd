@@ -10,6 +10,7 @@ TO-DO
 
     * Delete whole question (with confirm) (prev_questions section)
     * Improve layout, colors (prev_questions section)
+    * Make new question be inserted in the questions section (refresh whole thing?).
 
     * Main page: show all questions user has added, most recent to least. See blue notebook for details.
     * Add questions from all users, with paging (least to most), to main page (also as landing page)

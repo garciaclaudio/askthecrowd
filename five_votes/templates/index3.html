@@ -10,7 +10,7 @@
                 <script type="text/javascript" src="js/jquery.tmpl.js"></script>
                 <script type="text/javascript" src="js/fileuploader.js"></script>
                 <link href="css/fileuploader.css" rel="stylesheet" type="text/css">
-                <link href="css/smoothness/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css">
+                <link href="css/start/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css">
 
 <style type="text/css">
 
@@ -777,8 +777,10 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 
 <script id="prev_questions_header_tmpl" type="text/html">
 
-    <div id="dialog-confirm" class="invisible" title="Empty the recycle bin?">
-	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>These items will be permanently deleted and cannot be recovered. Are you sure?</p>
+    <div id="dialog-confirm" class="invisible" title="{% trans "Delete this question?" %}">
+	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+        <span id="confirm_delete_question_div"></span>
+</p>
     </div>
 
     <div style="text-align:left;margin-top:7px;">
