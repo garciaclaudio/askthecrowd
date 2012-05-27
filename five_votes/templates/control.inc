@@ -56,21 +56,7 @@ function bind_delete_and_uploader(data) {
 var existing_usr_questions = {}
 var question_key_name_to_delete = ''
 
-function show_new_question() {
-    $('#main_container').html( $("#new_question_tmpl").tmpl({}));
-    $('#main_container').fadeIn('fast');
-    $('#question_form').ajaxForm({
-         dataType:  'json', 
-         success: function(data) { 
-             if( data.error ) {
-                 alert( data.error );
-             } else {
-                 show_created_question(data);
-             }
-         }
-     });
-    $('#question').focus();
-
+function get_and_display_user_questions() {
     // 
     $.getJSON("ajax.html?action=get_user_questions",
              function(data){
@@ -151,6 +137,23 @@ function show_new_question() {
     );
 }
 
+function show_new_question() {
+    $('#main_container').html( $("#new_question_tmpl").tmpl({}));
+    $('#main_container').fadeIn('fast');
+    $('#question_form').ajaxForm({
+         dataType:  'json', 
+         success: function(data) { 
+             if( data.error ) {
+                 alert( data.error );
+             } else {
+                 show_created_question(data);
+             }
+         }
+     });
+    $('#question').focus();
+    get_and_display_user_questions();
+}
+
 
 
 function show_answer(data) {
@@ -222,14 +225,15 @@ function show_created_question(data) {
              'question_text': data.question_text,
              'question_key_name': data.question_key_name,
            }));
-           // bind add-another button
-           $('#create_another_button').click( function() {
-               show_new_question();
-           });
+        // bind add-another button
+        $('#create_another_button').click( function() {
+             show_new_question();
+        });
+
+        // this is wasteful replace, wait to allow for repl. delay
+        setTimeout(get_and_display_user_questions, 1500) 
 
         $('#main_container').fadeIn('fast');
-
-
     });
 
     $('#main_container').fadeIn('fast');

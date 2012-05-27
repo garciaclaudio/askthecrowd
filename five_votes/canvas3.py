@@ -61,6 +61,8 @@ import urllib
 template.register_template_library('templatetags.myfilters')
 
 
+def numeric_compare(x, y):
+    return int(x) - int(y)
 
 def truncate( value ):
     # be safe
@@ -553,22 +555,10 @@ class AjaxHandler(BaseHandler):
                        }
         return result
 
-    def handle_delete_question(self):
+
+    def del_answer(self, answer_key):
         error = ''
-        if error:
-            result = { 'error' : error }
-        else:
-            result = { 'error' : 0,
-                       'deleted_question_key' : str(self.request.get('question_key_name')),
-                       }
-        return result
-
-    def handle_delete_answer(self):
-        error = ''
-
-        print >> sys.stderr, 'DELETING...' + str( self.request.get('answer_key') )
-
-        ans = Answer.get( self.request.get('answer_key') )
+        ans = Answer.get( answer_key )
         summaries = ResultsSummary.gql( 'where answer = :1', ans )
         votes = Vote.gql( 'where answer = :1', ans )
 
@@ -586,6 +576,28 @@ class AjaxHandler(BaseHandler):
             result = { 'error' : 0,
                        'deleted_answer_key' : str(self.request.get('answer_key')),
                        }
+        return result
+
+
+    def handle_delete_question(self):
+        question = Question.get_by_key_name( self.request.get('question_key_name') )
+        answers = Answer.gql( 'where question = :1', question )
+        for ans in answers:
+            self.del_answer( ans.key() )
+        question.delete()
+        error = ''
+        if error:
+            result = { 'error' : error }
+        else:
+            result = { 'error' : 0,
+                       'deleted_question_key' : str(self.request.get('question_key_name')),
+                       }
+        return result
+
+
+    def handle_delete_answer(self):
+        print >> sys.stderr, 'DELETING...' + str( self.request.get('answer_key') )
+        result = self.del_answer( self.request.get('answer_key') )
         return result
 
     def handle_upload_picture(self):
@@ -745,9 +757,6 @@ class AjaxHandler(BaseHandler):
 
 
     def handle_get_user_questions(self):
-
-        print >> sys.stderr, 'GETTING QUESTIONS for: ' + str(self.user.user_id)
-
         questions = Question.gql( 'where user_id = :1', self.user.user_id )
         questions_struct = []
 
@@ -785,7 +794,6 @@ class AjaxHandler(BaseHandler):
                 ans_hash[ str(ans.key()) ] = ans_data
 
             sorted_ans = sorted(ans_struct, key=lambda k: k['num_votes'], reverse=True) 
-
             result_struct = { 'question_key_name': str(question.key().name()),
                               'question_text': str(question.question_text),
                               'answers': sorted_ans,
@@ -793,7 +801,10 @@ class AjaxHandler(BaseHandler):
                               'answers_hash':ans_hash,
                               }
             questions_struct.append( result_struct )
-        return questions_struct
+
+        sorted_questions = sorted(questions_struct, key=lambda k: k['question_key_name'], cmp=numeric_compare, reverse=False) 
+
+        return sorted_questions
 
 
     def post(self):

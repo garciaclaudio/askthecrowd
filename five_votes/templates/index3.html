@@ -368,7 +368,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
     width:100%;
     padding:0px;
     display:table;
-    background-color: yellow;
+    background-color: #7cffc3;
     text-align: left;
     margin-top: 5px;
     margin-left:auto; 
@@ -532,7 +532,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
     </div>
 
     <div style="clear:both">
-        <br /><button id="done_button" class="my_button">{% trans "Done" %}</button>
+        <br /><button id="done_button" class="my_button">{% trans "done" %}</button>
         <input type="checkbox" name="post_to_fb" value="post_to_fb" checked>{% trans "Post to Facebook" %}<br>
     </div>
 </div>
@@ -561,7 +561,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 
     <p>{% trans "Your question's URL is:" %} <a href="http://apps.facebook.com/five_votes/q${question_key_name}">http://apps.facebook.com/five_votes/q${question_key_name}</a></p>
 
-    <button type="submit" id="create_another_button" class="my_button">{% trans "Create another question" %}</button>
+    <button type="submit" id="create_another_button" class="my_button">{% trans "create another question" %}</button>
 </div>
 </script>
 
@@ -784,7 +784,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
     </div>
 
     <div style="text-align:left;margin-top:7px;">
-&nbsp;&nbsp;{% trans "Your questions:" %}
+&nbsp;&nbsp;{% trans "Your questions" %}
     </div>
 </script>
 
