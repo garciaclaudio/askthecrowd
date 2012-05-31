@@ -309,7 +309,7 @@ margin-left: -300px; /*Set left margin to -(RightColumnWidth) */
 /*    text-align: center; */
     text-align: right;
     color:black;
-    font-size: 0.6em;
+    font-size: 0.8em;
 /*    font-weight: bold; */
     margin-left:auto; 
     margin-right:auto; 
@@ -319,7 +319,7 @@ margin-left: -300px; /*Set left margin to -(RightColumnWidth) */
 }
 
 #footer a{
-color: #FFFF80;
+  font-size: 1.6em;
 }
 
 .innertube{
@@ -452,7 +452,23 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <div class="innertube">
   <div id="footer">
     <div class="mytube">
-{% include "lang_selector.html" %}
+
+      <div class="vote_link" style="float:left;margin-top:8px;">
+        <a href="http://apps.facebook.com/five_votes/all">{% trans "Questions from other users" %}</a>
+      </div>
+
+
+<div style="float:right;margin-top:5px;margin-bottom:10px;">
+<form action="/" method="get">
+    <select name="lang" onChange="submit()">
+          <option value="en" {% if language_en %}selected="selected"{% endif %}>{% lang2name "en" %}
+</option>
+          <option value="es" {% if language_es %}selected="selected"{% endif %}>{% lang2name "es" %}</option>
+    </select>
+</form>
+</div>
+<div style="float:right;margin-top:9px;">{% trans "Select your language" %}:&nbsp;</div>
+
     </div>
   </div>
 </div>
