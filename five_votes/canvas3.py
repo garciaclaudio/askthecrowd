@@ -175,6 +175,23 @@ class Answer(db.Model):
     picture = db.BlobProperty()
 
 
+class UserVotedQuestions(db.Model):
+    question = db.ReferenceProperty(Question)
+    user_id = db.StringProperty(required=True)
+
+    @staticmethod
+    def add(user_id, quest):
+        usrq = UserVotedQuestions(user_id = user_id)
+        usrq.question = quest
+        usrq.put()
+
+    def find_by_user_ids(user_ids, limit=1000):
+        if user_ids:
+            return UserVotedQuestions.gql(u'WHERE user_id IN :1', user_ids).fetch(limit)
+        else:
+            return []
+
+
 class Vote(db.Model):
     answer = db.ReferenceProperty(Answer)
     question = db.ReferenceProperty(Question)
@@ -664,6 +681,8 @@ class AjaxHandler(BaseHandler):
                     else:
                         results_summary.female_votes = results_summary.female_votes + 1
                     results_summary.put()
+                UserVotedQuestions.add(self.user.user_id,ans.question)
+                    
             elif vote_val == "-1":
                 new_count = my_vote.num_votes - 1
                 if new_count >= 0:
@@ -918,11 +937,67 @@ class QuestionHandler(BaseHandler):
         self.render(u'index3')
 
 
+#class AllHandler(BaseHandler):
+#    def get(self, question_key_name):
+#
+# IDEALLY
+#
+# 1st. Show all questions user friends have voted for.
+#      And the user has not voted for already.
+# 2nd. Show all questions the user has voted for.
+# 3rd. Show all questions in the user's language.
+# 4th. Show EN questions.
+# 5th. Show all other questions.
+#
+# FOR THE MOMENT:
+# 1st. Show all questions, from newest to oldest.
+#
+#        if self.user:
+#            user_name = self.user.name
+#            all_my_voted = Vote.gql( 'where question = :1 AND user_id = :2 AND num_votes>0', question , self.user.user_id )
+#
+#            tot_votes = 0
+#            for vote in all_my_voted:
+#                votes_count_hash[ str(vote.answer.key()) ] = vote.num_votes
+#                tot_votes += vote.num_votes
+#
+#        ans_struct = []
+#        for ans in answers:
+#            if ans.picture:
+#                has_pic = 1
+#            else:
+#                has_pic = 0
+#
+#            ans_data = {
+#                'answer_key' : str(ans.key()),
+#                'answer_text' : str(ans.answer_text),
+#                'has_pic' : has_pic,
+#                }
+#            if votes_count_hash.has_key( str(ans.key()) ):
+#                ans_data['num_votes'] = votes_count_hash[ str(ans.key()) ]
+#
+#            ans_struct.append( ans_data )
+#
+#        self.render(u'index3',
+#                    user_is_male=user_is_male,
+#                    user_name=user_name,
+#                    question=question,
+#                    question_key_name=str(question.key().name()),
+#                    answers=ans_struct,
+#                    votes_left= 5-tot_votes,
+#                    )
+#
+#    def post(self, question_key_name):
+#        self.render(u'index3')
+#
+
+
 def main():
     routes = [
         ('/image', GetImage),
         ('/ajax.html', AjaxHandler),
         ('/q(.*)', QuestionHandler),
+#        ('/all', AllHandler),
         (r'/', MainPage),
     ]
     application = webapp.WSGIApplication(routes,

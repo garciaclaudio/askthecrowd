@@ -8,8 +8,9 @@ BUGS:
 
 TO-DO
     * Add questions from all users, with paging (least to most), to main page (as landing page, with link from the footer).
-    * Add yourself as moderator to all comments social plugins (see: http://stackoverflow.com/questions/8370679/how-to-moderate-comments-from-social-plugin-facebook)
     * After voting, suggest more questions the user can vote on (first the ones already answered/created by his/her friends).
+
+    * Add yourself as moderator to all comments social plugins (see: http://stackoverflow.com/questions/8370679/how-to-moderate-comments-from-social-plugin-facebook)
     * create default image for feed posts (five checkmarks?)
     * male and female votes are inverted
     * Voting allows 6 votes
