@@ -628,7 +628,11 @@ function add_ans_link_func() {
                   {% if question %}
                       show_question_for_voting();
                   {% else %}
-                      show_new_question();
+                      {% if all_questions %}
+                           alert('hello all_questions not in dev!');
+                      {% else %}
+                          show_new_question();
+                      {% endif %}
                   {% endif %}
 
 //              } else if (response.status === 'not_authorized') {
@@ -671,11 +675,13 @@ $(function(){
 {% if IN_DEV_SERVER %}
 
     {% if question %}
-
         show_question_for_voting();
-
     {% else %}
-       show_new_question();
+        {% if all_questions %}
+alert('hello all_questions in dev');
+        {% else %}
+           show_new_question();
+        {% endif %}
     {% endif %}
 {% endif %}
 

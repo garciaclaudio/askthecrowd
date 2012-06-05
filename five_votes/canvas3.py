@@ -937,9 +937,9 @@ class QuestionHandler(BaseHandler):
         self.render(u'index3')
 
 
-#class AllHandler(BaseHandler):
-#    def get(self, question_key_name):
-#
+class AllHandler(BaseHandler):
+    def get(self):
+
 # IDEALLY
 #
 # 1st. Show all questions user friends have voted for.
@@ -978,18 +978,13 @@ class QuestionHandler(BaseHandler):
 #
 #            ans_struct.append( ans_data )
 #
-#        self.render(u'index3',
-#                    user_is_male=user_is_male,
-#                    user_name=user_name,
-#                    question=question,
-#                    question_key_name=str(question.key().name()),
-#                    answers=ans_struct,
-#                    votes_left= 5-tot_votes,
-#                    )
-#
-#    def post(self, question_key_name):
-#        self.render(u'index3')
-#
+        self.render(u'index3',
+                    all_questions=1
+                    )
+
+    def post(self, question_key_name):
+        self.render(u'index3')
+
 
 
 def main():
@@ -997,7 +992,7 @@ def main():
         ('/image', GetImage),
         ('/ajax.html', AjaxHandler),
         ('/q(.*)', QuestionHandler),
-#        ('/all', AllHandler),
+        ('/all', AllHandler),
         (r'/', MainPage),
     ]
     application = webapp.WSGIApplication(routes,
