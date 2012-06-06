@@ -773,22 +773,11 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 
 
 <script id="prev_questions_tmpl" type="text/html">
-    <div class="prev_question_class" id="prev_question_${question_key_name}">
+    <div class="prev_question_class">
         <div class="mytube" style="float:left;">
              <div class="question_link"><a target="_blank" href="http://apps.facebook.com/five_votes/q${question_key_name}">${question_text}</a></div>
         </div>
-
-    <div class="mytube" style="float:right;">
-        <div id="more_link_${question_key_name}" q_key="${question_key_name}" class="vote_link"><a href="#" onclick="return false;">[{% trans "open" %}]</a></div>
-        <div id="less_link_${question_key_name}" q_key="${question_key_name}" class="vote_link invisible"><a href="#" onclick="return false;">[{% trans "close" %}]</a></div>
    </div>
-
-        <div class="mytube invisible" id="prev_answers_div_${question_key_name}" style="clear:both;">
-           <div id="inner_prev_answers_div_${question_key_name}"></div>
-           <div style="clear:both;text-align:center;"><button class="my_button delete_question_button" q_key="${question_key_name}">{% trans "delete" %}</button></div>
-       </div>
-
-    </div>
 </script>
 
 <script id="prev_questions_header_tmpl" type="text/html">
@@ -829,4 +818,11 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 </script>
 
 
+<script id="all_questions_question_tmpl" type="text/html">
+    <div class="prev_question_class" id="prev_question_${question_key_name}">
+        <div class="mytube" style="float:left;">
+             <div class="question_link"><a target="_blank" href="http://apps.facebook.com/five_votes/q${question_key_name}">${question_text}</a></div>
+        </div>
+    </div>
+</script>
 

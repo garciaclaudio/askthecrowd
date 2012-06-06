@@ -77,7 +77,7 @@ function get_and_display_user_questions() {
                                     $( this ).dialog( "close" );
                                     return false;
 				},
-				"{% trans "no, no, no" %}": function() {
+				"{% trans "no, cancel" %}": function() {
 					$( this ).dialog( "close" );
                                         return false;
 				}
@@ -579,6 +579,20 @@ function add_ans_link_func() {
 }
 
 
+function show_all_questions() {
+
+      $('#main_container').append( $("#all_questions_question_tmpl").tmpl( {
+         'question_key_name' : '1234',
+         'question_text' : 'Foo bar baz?',
+      }));
+
+    {% for q in questions %}
+//      $('#all_questions_div').append( $("#all_questions_question_tmpl").tmpl( {
+//         'question_key' : '{{q.question_key}}',
+//         'question_text' : '{{q.question_text}}',
+//      }));
+    {% endfor %}
+}
 
 {% if NOT_IN_DEV_SERVER %}
 
@@ -629,7 +643,7 @@ function add_ans_link_func() {
                       show_question_for_voting();
                   {% else %}
                       {% if all_questions %}
-                           alert('hello all_questions not in dev!');
+                           show_all_questions()
                       {% else %}
                           show_new_question();
                       {% endif %}
@@ -678,7 +692,7 @@ $(function(){
         show_question_for_voting();
     {% else %}
         {% if all_questions %}
-alert('hello all_questions in dev');
+            show_all_questions()
         {% else %}
            show_new_question();
         {% endif %}
