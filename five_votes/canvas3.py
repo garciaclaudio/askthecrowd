@@ -952,34 +952,19 @@ class AllHandler(BaseHandler):
 # FOR THE MOMENT:
 # 1st. Show all questions, from newest to oldest.
 #
-#        if self.user:
-#            user_name = self.user.name
-#            all_my_voted = Vote.gql( 'where question = :1 AND user_id = :2 AND num_votes>0', question , self.user.user_id )
-#
-#            tot_votes = 0
-#            for vote in all_my_voted:
-#                votes_count_hash[ str(vote.answer.key()) ] = vote.num_votes
-#                tot_votes += vote.num_votes
-#
-#        ans_struct = []
-#        for ans in answers:
-#            if ans.picture:
-#                has_pic = 1
-#            else:
-#                has_pic = 0
-#
-#            ans_data = {
-#                'answer_key' : str(ans.key()),
-#                'answer_text' : str(ans.answer_text),
-#                'has_pic' : has_pic,
-#                }
-#            if votes_count_hash.has_key( str(ans.key()) ):
-#                ans_data['num_votes'] = votes_count_hash[ str(ans.key()) ]
-#
-#            ans_struct.append( ans_data )
-#
+        questions_struct = []
+
+        q_query = Question.all()
+        questions = q_query.fetch(50);
+        for q in questions:
+            questions_struct.append( {
+                    'question_key_name' : str(q.key().name()),
+                    'question_text' : str(q.question_text),
+                    })
+
         self.render(u'index3',
-                    all_questions=1
+                    all_questions=1,
+                    questions=questions_struct
                     )
 
     def post(self, question_key_name):

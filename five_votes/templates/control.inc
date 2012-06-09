@@ -84,7 +84,6 @@ function get_and_display_user_questions() {
                              }
                  });
 
-alert('length:' + data.length);
                  for (var i = data.length-1; i >= 0; i--) {
 //alert( i + '--' + data[i].question_text + '--' + data.length);
                      q = data[i];
@@ -582,7 +581,30 @@ function add_ans_link_func() {
 
 function show_all_questions() {
 
-      $('#main_container').append( $("#all_questions_question_tmpl").tmpl( {
+     $('#all_users_questions').hide();
+
+     $('#main_container').html( '<h3>{% trans "Questions from all users"%}</h3>' );
+
+    {% for q in questions %}
+      $('#prev_questions').append( $("#all_questions_question_tmpl").tmpl( {
+         'question_key_name' : '{{q.question_key_name}}',
+         'question_text' : '{{q.question_text}}',
+      }));
+    {% endfor %}
+
+     $('#prev_questions').append( $("#all_questions_question_tmpl").tmpl( {
+         'question_key_name' : '1234',
+         'question_text' : 'Foo bar baz?',
+      }));
+      $('#prev_questions').append( $("#all_questions_question_tmpl").tmpl( {
+         'question_key_name' : '1234',
+         'question_text' : 'Foo bar baz?',
+      }));
+      $('#prev_questions').append( $("#all_questions_question_tmpl").tmpl( {
+         'question_key_name' : '1234',
+         'question_text' : 'Foo bar baz?',
+      }));
+      $('#prev_questions').append( $("#all_questions_question_tmpl").tmpl( {
          'question_key_name' : '1234',
          'question_text' : 'Foo bar baz?',
       }));
