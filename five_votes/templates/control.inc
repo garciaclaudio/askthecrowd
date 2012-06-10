@@ -341,8 +341,8 @@ function show_results( data ) {
           }));
 
     show_selector(data, 'all', '{% trans "All" %}', 1 );
-    show_selector(data, 'male', '{% trans "Women" %}', 0 );
-    show_selector(data, 'female', '{% trans "Men" %}', 0 );
+    show_selector(data, 'female', '{% trans "Women" %}', 0 );
+    show_selector(data, 'male', '{% trans "Men" %}', 0 );
 
     for (var i = 0; i < data.friends_with_votes.length; i++) {
         friend_id = 'friend_' + data.friends_with_votes[i].user_id;
