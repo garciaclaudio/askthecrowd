@@ -1,5 +1,7 @@
 
 
+
+
 Preguntas INTERESANTES:
     * Cual es la mejor cancion de Joaquin Sabina?
     * Cual es la mayor contribucion de Argentina al mundo?
@@ -7,14 +9,8 @@ Preguntas INTERESANTES:
 BUGS: 
 
 TO-DO
-[DONE]    * male and female votes are inverted
-[DONE]    * Make each question page have a separate comment box.
 
     * create default image for feed posts (five checkmarks?)
-    * Make comments section in question page be tailored to question.
-    * Add "Create other questions like this one" link in question page (to main page).
-    * Keep track of language of user and store in question?
-
     * show "created by" photo and link in question page "By <Claudio Garcia>".
     * show "created by" photo? and link in user-suggested answers? "By <Claudio Garcia>".
 
@@ -31,6 +27,7 @@ TO-DO
     * Add "add youtube video" link.
     * Translate.
 
+[TEST IN P]    * Make comments section in question page be tailored to question.
 [TEST IN P]    * Voting allows 6 votes (works now?)
 [TEST IN P]    * Add yourself as moderator to all comments social plugins (see: http://stackoverflow.com/questions/8370679/how-to-moderate-comments-from-social-plugin-facebook)
 [TEST IN P]    * Make sure main and question page are displayed in user's lang.
@@ -53,8 +50,11 @@ TO-DO
 [POSTP]   * Test arriving having added the app (but logged out of FB), to main and question page.
 [POSTP]    * Make it usable as a standalone website as well.
 
-
 [DONISH]    * Add questions from all users, with paging (least to most), to main page (as landing page, with link from the footer).
+[DONE]    * Keep track of language of user and store in question.
+[DONE]    * male and female votes are inverted
+[DONE]    * Make each question page have a separate comment box.
+[DONE]    * Add "Create other questions like this one" link in question page (to main page).
 [DONE]    * Main page: show all questions user has added, most recent to least. See blue notebook for details.
 [DONE]    * Improve layout, colors (prev_questions section)
 [DONE]    * Make new question be inserted in the questions section (refresh whole thing?).

@@ -160,6 +160,7 @@ class Question(db.Model):
     user_id = db.StringProperty(required=True)
     created = db.DateTimeProperty(auto_now=True)
     question_text = db.StringProperty()
+    language_code = db.StringProperty()
 
     @staticmethod
     def find_by_user_ids(question, user_ids, limit=50):
@@ -536,7 +537,8 @@ class AjaxHandler(BaseHandler):
             new_question = Question(
                 key_name = str(new_question_id),
                 user_id=self.user.user_id,
-                question_text = question_text
+                question_text = question_text,
+                language_code=str(self.selected_lang),
             )
             new_question.put()
             result = { 'error' : 0,
