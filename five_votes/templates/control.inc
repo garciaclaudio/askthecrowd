@@ -199,7 +199,7 @@ function show_created_question(data) {
 
         // post to fb if requested
         if( $('input[name=post_to_fb]').is(':checked') ) {
-            var pic_link = 'https://five-votes.appspot.com/images/open_letter.jpg';
+            var pic_link = 'https://five-votes.appspot.com/images/Logo_5votes_small.jpg';
             if( new_question_selected_pic_key ) {
                 pic_link = images_base_url + '/image?answer_key=' + new_question_selected_pic_key
                 new_question_selected_pic_key = '';
@@ -447,7 +447,7 @@ function show_question_for_voting() {
                 }
             }
 
-            var pic_link = 'https://five-votes.appspot.com/images/open_letter.jpg';
+            var pic_link = 'https://five-votes.appspot.com/images/Logo_5votes_small.png';
             if( selected_ans_votes > 0 ) {
                 pic_link = images_base_url + '/image?answer_key=' + selected_answer_key
             }

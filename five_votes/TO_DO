@@ -1,7 +1,5 @@
 
 
-
-
 Preguntas INTERESANTES:
     * Cual es la mejor cancion de Joaquin Sabina?
     * Cual es la mayor contribucion de Argentina al mundo?
@@ -18,6 +16,8 @@ TO-DO
     * Show whirly "wait" thing when vote link is pressed.
     * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
     * Make results cards less tall, smaller.
+
+    * Cambiar mensaje de post a FB, para invitar a quienes ya hicieron la encuesta a ver las respuestas del amigo.
 
     * Main page: clicking on new question link not working.
 
@@ -109,6 +109,9 @@ Get results,
    friend_id
       a second call not needed, send all data in one go?
 
+
+Making round corners in Gimp:
+http://www.tekstadventure.nl/branko/blog/2008/12/how-to-make-rounded-corners-with-the-gimp
 
 How to moderate comments:
 http://developers.facebook.com/docs/reference/plugins/comments/
