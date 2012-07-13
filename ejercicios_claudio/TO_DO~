@@ -1,0 +1,28 @@
+
+
+1. Crear base de datos. Todas las imágenes asociadas a una larga lista de palabras, guardando las palabras.
+
+2. Script para Elegir imágenes para el ejercicio. Mostrar veinte o 30 imagenes aleatoriamente seleccionadas (pero incluyendo todas las palabras con el mismo tag cada vez (ej. todas las brujas, todas las ovejas, etc.). Dar click en cada una, la selecciona para el ejercicio. Botón "mostrar otras", cambia las imágenes. Imprimir a "./nuevo archivo" el archivo de configuración, que no es mas que una lista de ids de foto, una por renglón. Formato:
+
+[numero de foto], [id de foto], [letra de clave], [descripción para que el niño lea]
+
+Ejemplo generado:
+1, 345, "", ""
+
+3. Script para mostrar imágenes del archivo de configuración. Muestra las imágenes seleccionadas, con sus números. Entonces, el archivo se abre y edita usando las imágenes como guía.
+
+Ejemplo editado:
+1, 345, "C", "perrito rosa"
+
+4. Script para generar el ejercicio.
+
+[foto] [foto] [foto] [foto]     [foto] [foto] [foto]    [foto] [foto]
+ ___    ___    ___    ___        ___    ___    ___        ___    ___   
+
+
+A. Perrito rosa    B. Casa vieja
+C. Casa nueva      D. Sol contento
+
+
+Un ejercicio para cada dia del verano.
+
