@@ -1,4 +1,7 @@
 
+sudo apt-get install libdbi-perl
+sudo apt-get install libdbd-sqlite3-perl
+perldoc DBD::SQLite
 
 1. Crear base de datos. Todas las imágenes asociadas a una lista de palabras, guardando las palabras, y la lista. Las palabras pueden estar en inglés.
 
