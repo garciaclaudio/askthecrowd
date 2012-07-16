@@ -14,7 +14,7 @@ use WWW::Mechanize;
 use DBD::SQLite;
 use DBI qw(:sql_types);
 
-my $dbfile = 'data.db3';
+my $dbfile = '/home/claudio/Documents/data.db3';
 
 my $dbh = DBI->connect("dbi:SQLite:dbname=$dbfile","","");
 
