@@ -1,4 +1,5 @@
 
+# sqlite3 ~/Documents/data.db3
 
 CREATE TABLE images(
   id  INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -24,10 +25,12 @@ perldoc DBD::SQLite
 ===================================================
 
 [DONE] 1. Crear base de datos. Todas las imágenes asociadas a una lista de palabras, guardando las palabras, y la lista. Las palabras pueden estar en inglés.
+`
+# perl add_images.pl --words_file=word_lists/word_list_1
 
-add_images.pl word_list
+2. Script para Elegir imágenes para el ejercicio. Mostrar veinte o 30 imagenes aleatoriamente seleccionadas (pero incluyendo todas las palabras con el mismo tag cada vez (ej. todas las brujas, todas las ovejas, etc.). Dar click en cada una, la selecciona para el ejercicio. Botón "mostrar otras", cambia las imágenes. Cuando se juntan 18, sale. Imprimir a "./nuevo archivo" el archivo de configuración, que no es mas que una lista de ids de foto, una por renglón. Formato:
 
-2. Script para Elegir imágenes para el ejercicio. Mostrar veinte o 30 imagenes aleatoriamente seleccionadas (pero incluyendo todas las palabras con el mismo tag cada vez (ej. todas las brujas, todas las ovejas, etc.). Dar click en cada una, la selecciona para el ejercicio. Botón "mostrar otras", cambia las imágenes. Imprimir a "./nuevo archivo" el archivo de configuración, que no es mas que una lista de ids de foto, una por renglón. Formato:
+# perl make_exercise.pl
 
 [numero de foto], [id de foto], [letra de clave], [descripción para que el niño lea]
 
