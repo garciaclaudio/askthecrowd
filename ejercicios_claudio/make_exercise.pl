@@ -24,13 +24,18 @@ my $dbh = DBI->connect("dbi:SQLite:dbname=$dbfile","","");
 
 
 my %images;
+my %images_by_id;
 
 my $rows = $dbh->selectall_arrayref("SELECT id,tag,group_tag,image FROM images");
 
 foreach my $row ( @$rows ) {
     my( $id, $tag, $group_tag, $image) = @$row;
-    push @{ $images{$tag} }, { id => $id, group_tag => $group_tag, image_blob => $image };
+    my $img = { id => $id, group_tag => $group_tag, image_blob => $image };
+    push @{ $images{$tag} }, $img;
+    $images_by_id{$id} = $img;
 }
+
+my @shuffled_tags = shuffle keys %images;;
 
 
 my $mw  = MainWindow->new();
@@ -44,12 +49,24 @@ sub make_sub {
 };
 
 
-sub add_new_frame {
+sub make_output {
+    my $selected = shift;
+    open FOO, ">nuevo_archivo";
+    my $i=1;
+    foreach my $id ( @$selected ) {
+        print FOO "$i,$id,,\n";
+        $i++;
+    }
+    close FOO;
+}
 
+
+my @selected;
+
+sub add_new_frame {
     my $new_frame = $mw->Frame();
 
-    # XXX, fix this
-    my ($selected_tag) = (keys %images);
+    my $selected_tag = pop @shuffled_tags;
 
     my @selected_images = @{ $images{$selected_tag} };
 
@@ -88,29 +105,20 @@ sub add_new_frame {
 			       -text    => "seleccióname",
 			       -width   => 10,
 			       -command => sub { $selected = &$subby;
-#				      print "SELECTED $selected\n";
-#						 $selected_images{$active_word} = $selected;
-#
-#						 if( scalar keys %selected_images == 18 ) {
-#
-#						     make_pdf( \%selected_images );
-#
-#						     %selected_images = ();
-#						 }
-#
-#						 next_word();
-						 $old_frame->destroy;
-						 add_new_frame( $mw );
-					     },
-			      )->pack(@pl);
+				      print "SELECTED $selected\n";
+                                      push @selected, $selected;
+                                      if( @selected == 18 ) {
+                                          make_output(\@selected);
+                                          exit;
+                                      }
+                                },
+                          )->pack(@pl);
 	}
     }
 
     $new_frame->pack();
-
     $mw->minsize( $mw->width(),
 		  $mw->height() );
-
     $old_frame = $new_frame;
 }
 
@@ -169,6 +177,72 @@ sub get_images {
 
     return @result;
 }
+
+
+my $pdf_index = 1;
+sub make_pdf {
+    my $selected_images = shift;
+
+    print "making pdf $pdf_index\n";
+
+    open FOO, ">/tmp/result_$pdf_index.html";
+
+    print FOO <<ENDY;
+<HTML>
+<HEAD>
+<STYLE TYPE="text/css">
+td { font-size: 30pt }
+</STYLE>
+</HEAD>
+<BODY>
+<TABLE cellpadding="15" width="100%">
+<TR>
+ENDY
+
+
+    my @www = shuffle keys %$selected_images;
+    my @iii = shuffle values %$selected_images;
+
+    # first, one column of 9 images
+    print FOO qq{<td width="10%"><table cellpadding="15">\n};
+    foreach my $i ( 0 .. 8 ) {
+	my $img = $iii[ $i ];
+	print FOO qq{<tr><TD><IMG width="70" src="/tmp/img_$img.jpg"></TD></tr>\n};
+    }
+    print FOO qq{</table></td>\n};
+
+    # then, 18 words
+    print FOO qq{<td width="60%" align="center"><table cellpadding="15" align="center">\n};
+    foreach my $i ( 0 .. 17 ) {
+	my $word = $www[ $i ];
+        if( $word ) {
+            print FOO qq{<tr align="center"><td align="center">$word</td></tr>\n};
+        }
+    }
+    print FOO qq{</table></td>\n};
+
+    # a spacer column
+    print FOO q{<td width="10%">&nbsp;</td>\n};
+
+    # last, another column of 9 images
+    print FOO qq{<td width="20%"><table cellpadding="15">\n};
+    foreach my $i ( 9 .. 17 ) {
+	my $img = $iii[ $i ];
+        if( $img ) {
+            print FOO qq{<tr><TD><IMG width="70" src="/tmp/img_$img.jpg"></TD></tr>\n};
+        }
+    }
+    print FOO qq{</table></td>\n};
+
+    print FOO "</TR></table></body></html>\n";
+
+    close FOO;
+
+    `htmldoc -f ./${pdf_name}_${pdf_index}.pdf  /tmp/result_${pdf_index}.html --webpage --size a4 --no-numbered --fontsize 18`;
+
+    $pdf_index++;
+}
+
 
 
 
@@ -271,73 +345,9 @@ sub make_sub {
 };
 
 
-my $pdf_index = 1;
-sub make_pdf {
-    my $selected_images = shift;
-
-    print "making pdf $pdf_index\n";
-
-    open FOO, ">/tmp/result_$pdf_index.html";
-
-    print FOO <<ENDY;
-<HTML>
-<HEAD>
-<STYLE TYPE="text/css">
-td { font-size: 30pt }
-</STYLE>
-</HEAD>
-<BODY>
-<TABLE cellpadding="15" width="100%">
-<TR>
-ENDY
-
-
-    my @www = shuffle keys %$selected_images;
-    my @iii = shuffle values %$selected_images;
-
-    # first, one column of 9 images
-    print FOO qq{<td width="10%"><table cellpadding="15">\n};
-    foreach my $i ( 0 .. 8 ) {
-	my $img = $iii[ $i ];
-	print FOO qq{<tr><TD><IMG width="70" src="/tmp/img_$img.jpg"></TD></tr>\n};
-    }
-    print FOO qq{</table></td>\n};
-
-    # then, 18 words
-    print FOO qq{<td width="60%" align="center"><table cellpadding="15" align="center">\n};
-    foreach my $i ( 0 .. 17 ) {
-	my $word = $www[ $i ];
-        if( $word ) {
-            print FOO qq{<tr align="center"><td align="center">$word</td></tr>\n};
-        }
-    }
-    print FOO qq{</table></td>\n};
-
-    # a spacer column
-    print FOO q{<td width="10%">&nbsp;</td>\n};
-
-    # last, another column of 9 images
-    print FOO qq{<td width="20%"><table cellpadding="15">\n};
-    foreach my $i ( 9 .. 17 ) {
-	my $img = $iii[ $i ];
-        if( $img ) {
-            print FOO qq{<tr><TD><IMG width="70" src="/tmp/img_$img.jpg"></TD></tr>\n};
-        }
-    }
-    print FOO qq{</table></td>\n};
-
-    print FOO "</TR></table></body></html>\n";
-
-    close FOO;
-
-    `htmldoc -f ./${pdf_name}_${pdf_index}.pdf  /tmp/result_${pdf_index}.html --webpage --size a4 --no-numbered --fontsize 18`;
-
-    $pdf_index++;
-}
 
 my $old_frame;
 sub add_new_frame {
-
     my $new_frame = $mw->Frame();
 
     my @ids = get_next_few();
