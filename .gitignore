@@ -26,3 +26,9 @@
 *.log
 *.sql
 *.sqlite
+
+# Emacs temp files
+######################
+*~
+*#
+.#*

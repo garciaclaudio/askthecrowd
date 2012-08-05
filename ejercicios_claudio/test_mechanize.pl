@@ -9,7 +9,7 @@ use Data::Dumper;
 use List::Util qw( shuffle );
 
 BEGIN {
-#    $ENV{HTTP_proxy}='http://webproxy.corp.booking.com:3128/';
+    $ENV{HTTP_proxy}='http://webproxy.corp.booking.com:3128/';
 }
 
 #
@@ -106,9 +106,10 @@ sub get_next_few {
 
 	my $url = $i->url;
 	
-#	print STDERR "URL: $url\n";
+	print STDERR "URL: $url\n";
 
 	next if( $url !~ /gstatic/ );
+
 
 	my $img = get $url;
 

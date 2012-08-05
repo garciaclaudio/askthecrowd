@@ -8,6 +8,10 @@ use Tk::JPEG;
 use Data::Dumper;
 use List::Util qw( shuffle );
 
+BEGIN {
+#    $ENV{HTTP_proxy}='http://webproxy.corp.booking.com:3128/';
+}
+
 use LWP::Simple;
 use Getopt::Long;
 use WWW::Mechanize;
@@ -16,11 +20,20 @@ use DBI qw(:sql_types);
 
 my $dbfile = '/home/claudio/Documents/data.db3';
 
+
 my $dbh = DBI->connect("dbi:SQLite:dbname=$dbfile","","");
 
 
-BEGIN {
-#    $ENV{HTTP_proxy}='http://webproxy.corp.booking.com:3128/';
+#
+# read all images in, and use to prevent duplicate downloads
+#
+
+my %images;
+my $rows = $dbh->selectall_arrayref("SELECT id,tag,group_tag FROM images");
+foreach my $row ( @$rows ) {
+    my( $id, $tag, $group_tag) = @$row;
+    my $img = { id => $id, group_tag => $group_tag };
+    push @{ $images{$tag} }, $img;
 }
 
 #
@@ -38,6 +51,11 @@ open WORDS, $words_file;
 my @word_list = grep{ $_ } map { chomp $_; $_ } (<WORDS>);
 
 foreach my $word ( @word_list ) {
+
+    if( exists $images{$word} ) {
+        print STDERR "Already in db, skipping: $word\n";
+        next;
+    }
     my @images = get_images( $words_file, $word );
 }
 
@@ -66,7 +84,6 @@ sub get_images {
 	my $url = $i->url;	
 #	print STDERR "URL: $url\n";
 	next if( $url !~ /gstatic/ );
-
 	my $img = get $url;
 
         print "Inserting $word\n";

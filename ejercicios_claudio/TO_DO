@@ -39,10 +39,15 @@ Ejemplo generado:
 
 3. Script para mostrar imágenes del archivo de configuración. Muestra las imágenes seleccionadas, con sus números. Entonces, el archivo se abre y edita usando las imágenes como guía.
 
-Ejemplo editado:
+# perl show_images.pl --conf_file=
+
+Ejemplo editado: NOTA: usar Ctrl-X RET f para grabar el archivo en latin-1
 1, 345, "C", "perrito rosa"
 
 4. Script para generar el ejercicio.
+
+# perl make_pdf.pl --conf_file=ejercicios/basico_2  (escribe a ejercicios_pdf/basico_2.pdf)
+
 
 [foto] [foto] [foto] [foto]     [foto] [foto] [foto]    [foto] [foto]
  ___    ___    ___    ___        ___    ___    ___        ___    ___   
@@ -52,5 +57,5 @@ A. Perrito rosa    B. Casa vieja
 C. Casa nueva      D. Sol contento
 
 
-Un ejercicio para cada dia del verano.
+Varios ejercicios para cada dia del verano.
 
