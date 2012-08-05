@@ -293,13 +293,13 @@ width: 100%;
 }
 
 #contentcolumn{
-margin-right: 305px; /*Set right margin to RightColumnWidth*/
+margin-right: 335px; /*Set right margin to RightColumnWidth*/
 }
 
 #rightcolumn{
 float: left;
-width: 300px; /*Width of right column in pixels*/
-margin-left: -300px; /*Set left margin to -(RightColumnWidth) */
+width: 330px; /*Width of right column in pixels*/
+margin-left: -330px; /*Set left margin to -(RightColumnWidth) */
 }
 
 #footer{
@@ -444,10 +444,10 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
          <div style="text-align:left;" id="faces_div"></div>
      {% if question %}
          <p class="tiny">{% trans "Comments?" %}</p>
-         <div class="fb-comments" data-href="http://five-votes.appspot.com/q{{question_key_name}}" data-num-posts="4" data-width="270"></div>
+         <div class="fb-comments" data-href="http://five-votes.appspot.com/q{{question_key_name}}" data-num-posts="4" data-width="300"></div>
      {% else %}
          <p class="tiny">{% trans "Questions about this app? Leave them here:"%}</p>
-         <div class="fb-comments" data-href="http://five-votes.appspot.com" data-num-posts="4" data-width="270"></div>
+         <div class="fb-comments" data-href="http://five-votes.appspot.com" data-num-posts="4" data-width="300"></div>
      {% endif %}
      </div>
 </div>
