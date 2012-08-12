@@ -1,4 +1,12 @@
 
+PLAN
+
+[DONE] 1. Modificar make_exercise para obtener num. variable de imágenes.
+
+2. Modificar make_pdf para leer frase secreta en la primera línea del archivo (cada línea separada por |) y generar nuevo tipo de documento.
+
+======================================================================
+
 # sqlite3 ~/Documents/data.db3
 
 CREATE TABLE images(
@@ -28,7 +36,7 @@ perldoc DBD::SQLite
 `
 # perl add_images.pl --words_file=word_lists/word_list_1
 
-2. Script para Elegir imágenes para el ejercicio. Mostrar veinte o 30 imagenes aleatoriamente seleccionadas (pero incluyendo todas las palabras con el mismo tag cada vez (ej. todas las brujas, todas las ovejas, etc.). Dar click en cada una, la selecciona para el ejercicio. Botón "mostrar otras", cambia las imágenes. Cuando se juntan 18, sale. Imprimir a "./nuevo archivo" el archivo de configuración, que no es mas que una lista de ids de foto, una por renglón. Formato:
+[DONE] 2. Script para Elegir imágenes para el ejercicio. Mostrar veinte o 30 imagenes aleatoriamente seleccionadas (pero incluyendo todas las palabras con el mismo tag cada vez (ej. todas las brujas, todas las ovejas, etc.). Dar click en cada una, la selecciona para el ejercicio. Botón "mostrar otras", cambia las imágenes. Cuando se juntan 18, sale. Imprimir a "./nuevo archivo" el archivo de configuración, que no es mas que una lista de ids de foto, una por renglón. Formato:
 
 # perl make_exercise.pl
 
@@ -37,14 +45,14 @@ perldoc DBD::SQLite
 Ejemplo generado:
 1, 345, "", ""
 
-3. Script para mostrar imágenes del archivo de configuración. Muestra las imágenes seleccionadas, con sus números. Entonces, el archivo se abre y edita usando las imágenes como guía.
+[DONE] 3. Script para mostrar imágenes del archivo de configuración. Muestra las imágenes seleccionadas, con sus números. Entonces, el archivo se abre y edita usando las imágenes como guía.
 
 # perl show_images.pl --conf_file=
 
 Ejemplo editado: NOTA: usar Ctrl-X RET f para grabar el archivo en latin-1
 1, 345, "C", "perrito rosa"
 
-4. Script para generar el ejercicio.
+[DONE] 4. Script para generar el ejercicio.
 
 # perl make_pdf.pl --conf_file=ejercicios/basico_2  (escribe a ejercicios_pdf/basico_2.pdf)
 

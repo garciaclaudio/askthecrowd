@@ -5,11 +5,18 @@ Preguntas INTERESANTES:
     * Cual es la mayor contribucion de Argentina al mundo?
     * Cual es el mejor album de Soda? (con links a videos)
 BUGS: 
+   * Los resultados no aparecen de mayor a menor número de votos.
+[DONE]   * Las ligas "create and share your own questions" y "questions from others" no jalan.
+[DONE]   * La liga a la pregunta recién creada tampoco funciona.
+[DONE]   * El botón "delete this question" no funciona (si funciona pero no refresca).
 
 TO-DO
+    * Make all cards and fonts, smaller. Make black photos frame thinner.
     * Test layout. Seems OK now.
-    * Porque no postea a FB, ni muestra resultados?
     * Questions from other users no funciona cuando no estás logueado.
+    * On FB post: "Fulanito has answered X, His selection was:" is too formal, make nicer.
+    * "Your questions" header is ugly.
+    * "Five votes" top-left app name is ugly.
 
 [DONE]    * create default image for feed posts (five checkmarks?)
 
@@ -17,20 +24,21 @@ TO-DO
     * show "created by" photo and link in question page "By <Claudio Garcia>".
     * show "created by" photo? and link in user-suggested answers? "By <Claudio Garcia>".
 
-    * Improve colors.
     * Show whirly "wait" thing when vote link is pressed.
     * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
     * Make results cards less tall, smaller.
+    * Improve colors.
+    * Make results page show results using the normal layout (but in different color).
 
+    * Si el nombre del archivo es muy grande, el mensaje de upload se sale de cuadro.
     * Cambiar mensaje de post a FB, para invitar a quienes ya hicieron la encuesta a ver las respuestas del amigo.
-
-    * Main page: clicking on new question link not working.
 
     * Show friend photos in results page.
     * Error si se llega a un url inválido, "q27" (cuando q27 no existe aun).
     * Make images show larger popup on hover.
     * Add "add youtube video" link.
     * Translate.
+
 
 [TEST IN P]    * Make comments section in question page be tailored to question.
 [TEST IN P]    * Voting allows 6 votes (works now?)
@@ -39,6 +47,7 @@ TO-DO
 [TEST IN P]    * Two redirects happen after login.
 [TEST IN P]    * Also, no redirect after logging-in for the first time.
 
+[DONE]    * Main page: clicking on new question link not working.
 [POSTP]   * Añadir opción para hacerlo "sólo para [mexicanos, gringos, etc.]"
             - Esta opción pregunta al usuario de que estado es.
             - Muestra resultados por estado.

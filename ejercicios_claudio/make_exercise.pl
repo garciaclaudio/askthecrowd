@@ -22,6 +22,9 @@ my $dbh = DBI->connect("dbi:SQLite:dbname=$dbfile","","");
 #
 
 
+my $num_imgs = 18;
+GetOptions( 'num_images=s' => \$num_imgs );
+
 my %images;
 my %images_by_id;
 
@@ -106,7 +109,7 @@ sub add_new_frame {
 			       -command => sub { $selected = &$subby;
 				      print "SELECTED $selected\n";
                                       push @selected, $selected;
-                                      if( @selected == 18 ) {
+                                      if( @selected == $num_imgs ) {
                                           make_output(\@selected);
                                           exit;
                                       }

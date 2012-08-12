@@ -462,9 +462,9 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
       <div class="vote_link" id="all_users_questions" style="float:left;margin-top:8px;margin-left:15px;font-size:0.6em;">
 
      {% if question %}
-        <a href="http://apps.facebook.com/five_votes">{% trans "Create and share your own questions!" %}</a>
+        <a href="http://apps.facebook.com/five_votes" target="_top">{% trans "Create and share your own questions!" %}</a>
      {% else %}
-        <a href="http://apps.facebook.com/five_votes/all">{% trans "Questions from other users" %}</a>
+        <a href="http://apps.facebook.com/five_votes/all" target="_top">{% trans "Questions from other users" %}</a>
      {% endif %}
 
       </div>
@@ -587,7 +587,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
     <p>{% trans "You're done!" %}</p>
     <div class="question_text">${question_text}</div>
 
-    <p>{% trans "Your question's URL is:" %} <a href="http://apps.facebook.com/five_votes/q${question_key_name}">http://apps.facebook.com/five_votes/q${question_key_name}</a></p>
+    <p>{% trans "Your question's URL is:" %} <a target="_top" href="http://apps.facebook.com/five_votes/q${question_key_name}">http://apps.facebook.com/five_votes/q${question_key_name}</a></p>
 
     <button type="submit" id="create_another_button" class="my_button">{% trans "create another question" %}</button>
 </div>
@@ -785,7 +785,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 
 
 <script id="prev_questions_tmpl" type="text/html">
-    <div class="prev_question_class">
+    <div class="prev_question_class" id="prev_question_${question_key_name}">
         <div class="mytube" style="float:left;">
              <div class="question_link"><a target="_blank" href="http://apps.facebook.com/five_votes/q${question_key_name}">${question_text}</a></div>
         </div>
