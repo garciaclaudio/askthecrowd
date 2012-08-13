@@ -254,7 +254,7 @@ ENDY
             next;
         }
 
-        print BAR qq{    <TD valign="top" ><TABLE cellpadding="10">\n};
+        print BAR qq{    <TD valign="top" ><TABLE cellpadding="2">\n};
 
         foreach my $desc ( @$col ) {
             my $char = $chars_for_images{$desc};
@@ -270,73 +270,10 @@ ENDY
 
     close BAR;
 
-    `htmldoc -f ./ejercicios_pdf/${name}.pdf  /tmp/${name}.html --webpage --size a4 --no-numbered --fontsize 18`;
+    `htmldoc -f ./ejercicios_pdf/${name}.pdf  /tmp/${name}.html --webpage --size a4 --no-numbered --fontsize 12`;
 }
 
 __END__
-
-
-    my @www = shuffle keys %$selected_images;
-    my @iii = shuffle values %$selected_images;
-
-    my $img_index;
-    foreach my $line ( @lines ) {
-        foreach my $char ( '' $line ) {
-        }
-    }
-
-    # first, one column of 9 images
-    print BAR qq{<td width="10%"><table cellpadding="15">\n};
-    foreach my $i ( 0 .. 8 ) {
-	my $img = $iii[ $i ];
-	print BAR qq{<tr><TD><IMG width="70" src="/tmp/img_$img.jpg"></TD></tr>\n};
-    }
-    print BAR qq{</table></td>\n};
-
-    # then, 18 words
-    print BAR qq{<td width="60%" align="center"><table cellpadding="15" align="center">\n};
-    foreach my $i ( 0 .. 17 ) {
-	my $word = $www[ $i ];
-        if( $word ) {
-            print BAR qq{<tr align="center"><td align="center">$word</td></tr>\n};
-        }
-    }
-    print BAR qq{</table></td>\n};
-
-    # a spacer column
-    print BAR q{<td width="10%">&nbsp;</td>\n};
-
-    # last, another column of 9 images
-    print BAR qq{<td width="20%"><table cellpadding="15">\n};
-    foreach my $i ( 9 .. 17 ) {
-	my $img = $iii[ $i ];
-        if( $img ) {
-            print BAR qq{<tr><TD><IMG width="70" src="/tmp/img_$img.jpg"></TD></tr>\n};
-        }
-    }
-    print BAR qq{</table></td>\n};
-
-    print BAR "</TR></table></body></html>\n";
-
-    close BAR;
-
-    `htmldoc -f ./ejercicios_pdf/${name}.pdf  /tmp/${name}.html --webpage --size a4 --no-numbered --fontsize 18`;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

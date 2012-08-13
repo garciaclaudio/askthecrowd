@@ -277,13 +277,24 @@ function show_votes( answer_key, num_votes ) {
 }
 
 
+function dynamicSort(property) {
+    return function (a,b) {
+        return (b[property] < a[property]) ? -1 : (b[property] > a[property]) ? 1 : 0;
+    }
+}
+
+
 function show_data( data, id ) {
 
     $('#result_answers_div').html('');
 
-    for (var i = 0; i < data.results[id].length; i++) {
-        ans_key = data.results[id][i][0];
-        num_votes = data.results[id][i][1];
+    results = data.results[id];
+
+    results.sort(dynamicSort(1));
+
+    for (var i = 0; i < results.length; i++) {
+        ans_key = results[i][0];
+        num_votes = results[i][1];
         ans = data.answers_hash[ans_key];
 
         $('#result_answers_div').append( $("#show_answer_for_results_tmpl").tmpl( {
