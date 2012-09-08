@@ -42,9 +42,9 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 /*    font-weight: bold; */
     margin-left:auto; 
     margin-right:auto; 
-   -moz-border-radius: 12px;
-   -webkit-border-radius: 12px;
-    border-radius: 12px;
+   -moz-border-radius: 6px;
+   -webkit-border-radius: 6px;
+    border-radius: 6px;
 }
 
 
@@ -66,9 +66,9 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
     text-align: center;
     margin-left:auto; 
     margin-right:auto; 
-   -moz-border-radius: 12px;
-   -webkit-border-radius: 12px;
-    border-radius: 12px;
+   -moz-border-radius: 6px;
+   -webkit-border-radius: 6px;
+    border-radius: 6px;
 }
 
 .question_text {
@@ -77,44 +77,47 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
     background-color:white;
     color:black;
     text-align: center;
-    font-size: 150%;
-    font-weight: bold;
+    font-size: 120%;
+/*    font-weight: bold; */
     margin-left:auto; 
     margin-right:auto; 
-   -moz-border-radius: 12px;
-   -webkit-border-radius: 12px;
-    border-radius: 12px;
+   -moz-border-radius: 6px;
+   -webkit-border-radius: 6px;
+    border-radius: 6px;
 }
 
 .answer_text {
-  font-size: 95%;
-  font-weight:bold;
+  font-size: 90%;
+/*  font-weight:bold; */
 }
 
 .answer_card {
   position: relative; 
   float: left;
-  width: 140px;
-  height: 160px;
-  margin: 4px;
+/*  width: 120px; */
+/*  height: 150px; */
+  margin: 3px;
   background-color: white;
-  padding: 10px;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-  border-radius: 8px;
+  padding-top: 20px;
+  padding-bottom: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
 }
 
 .card_inset {
   text-align: center;
-  width:140px;
-  height:160px;
+  width:200px;
+/*  height:160px; */
   display:table-cell;
   vertical-align:middle;
 }
 
 
 .answer_picture {
-	border: 2px solid #000000;
+	border: 1px solid #000000;
 }
 
 .my_button, button.my_button {
@@ -127,9 +130,9 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 	color: #FFF;
 	/* border and roundedness */
 #	border: 4px solid #fff;
-	-moz-border-radius: 12px;
-	-webkit-border-radius: 12px;
-	border-radius: 12px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
 	/* shadow */
 	-moz-box-shadow: 1px 1px 2px #999;
 	-webkit-box-shadow: 1px 1px 2px #999;
@@ -181,28 +184,48 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
   position:absolute;bottom:7px;right:15px;"
 }
 
-.count_inset {
-  display:none;
-  padding:5px;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-  border-radius: 8px;
+
+.prev_questions_count_inset {
+  opacity: .78;
+  padding-top:2px;
+  padding-bottom:2px;
+  padding-right:0px;
+  padding-left:10px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
   position:absolute;top:12px;right:12px;"
   display:table-cell;
-  width:35px;
-  height:35px;
+  width:45px;
+  height:30px;
   background-color: #00FF00;
-  font-size: 20px;
-  font-weight:bold;
+}
+
+.count_inset {
+  display:none;
+  opacity: .78;
+  padding:2px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  position:absolute;top:12px;right:12px;"
+  display:table-cell;
+  width:45px;
+  height:30px;
+  background-color: #FFFFFF;
+/*  font-size: 20px;
+  font-weight:bold; */
 }
 
 .count_text {
-  color: white;
-  margin-top:6px;
+  font-size: 25px;
+  color: red;
+/*  margin-top:6px; */
 }
 
 .voted_answer {
    background-color:#c5f982;
+/*   padding-top:37px; */
 }
 
 
@@ -214,23 +237,23 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
   margin: 4px;
   background-color: white;
   padding: 10px;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-  border-radius: 8px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  border-radius: 6px;
   clear:both;
 }
 
 .results_count_text {
-  color: #00FF00;
+  color: #FF0000;
   position:absolute;top:29px;right:17px;
   font-size: 25px;
-  font-weight:bold;
+/*  font-weight:bold; */
 }
 
 .results_text {
   color: black;
   float:left;
-  font-weight:bold;
+/*  font-weight:bold; */
   font-size: 22px;
   line-height:55px;
   margin: 5px;
@@ -260,9 +283,9 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
   color:black;
   text-align: center;
   font-size: 80%;
-  -moz-border-radius: 12px;
-  -webkit-border-radius: 12px;
-   border-radius: 12px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+   border-radius: 6px;
 }
 
 .selected_result {
@@ -292,9 +315,16 @@ float: left;
 width: 100%;
 }
 
+{% if question_page %}
+#contentcolumn{
+    clear: left;
+    width:100%;
+}
+{% else %}
 #contentcolumn{
 margin-right: 335px; /*Set right margin to RightColumnWidth*/
 }
+{% endif %}
 
 #rightcolumn{
 float: left;
@@ -314,9 +344,9 @@ margin-left: -330px; /*Set left margin to -(RightColumnWidth) */
 /*    font-weight: bold; */
     margin-left:auto; 
     margin-right:auto; 
-   -moz-border-radius: 12px;
-   -webkit-border-radius: 12px;
-    border-radius: 12px;
+   -moz-border-radius: 6px;
+   -webkit-border-radius: 6px;
+    border-radius: 6px;
 }
 
 #footer a{
@@ -348,9 +378,9 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 /*    font-weight: bold; */
     margin-left:auto; 
     margin-right:auto; 
-   -moz-border-radius: 12px;
-   -webkit-border-radius: 12px;
-    border-radius: 12px;
+   -moz-border-radius: 6px;
+   -webkit-border-radius: 6px;
+    border-radius: 6px;
 }
 
 #maincontainer {
@@ -374,9 +404,9 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
     margin-top: 5px;
     margin-left:auto; 
     margin-right:auto; 
-   -moz-border-radius: 12px;
-   -webkit-border-radius: 12px;
-    border-radius: 12px;
+   -moz-border-radius: 6px;
+   -webkit-border-radius: 6px;
+    border-radius: 6px;
 }
 
 .invisible {
@@ -384,18 +414,6 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 }
 
 
-.prev_questions_count_inset {
-  position:absolute;top:0px;right:20px;
-  margin-top: 8px;
-  padding:3px;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-  border-radius: 8px;
-  height:35px;
-  background-color: #00FF00;
-  font-size: 20px;
-  font-weight:bold;
-}
 
 
 </style>
@@ -416,10 +434,28 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 {% include "control.inc" %}
 
 
+{% if question_page %}
+
 <div id="maincontainer">
 
 <div class="innertube toptube">
-<div id="app_logo"><div class="mytube">{% trans "Five Votes" %}</div>
+<div id="app_logo"><div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %}</div>
+</div>
+</div>
+
+<div class="innertube">
+      <div id="main_container">
+      </div> <!-- main container -->
+</div>
+
+
+
+{% else %}
+
+<div id="maincontainer">
+
+<div class="innertube toptube">
+<div id="app_logo"><div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %}</div>
 </div>
 </div>
 
@@ -435,6 +471,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
   </div> <!-- super_top_container -->
 </div>
 </div> <!-- contentwrapper -->
+
 
 <div id="rightcolumn">
 <div class="innertube">
@@ -454,6 +491,10 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 
 </div>
 </div>
+
+{% endif  %}
+
+
 
 <div class="innertube">
   <div id="footer">
@@ -828,7 +869,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
        </form>
    </div>
 
-    <div id="count_inset_${answer_key}" class="prev_questions_count_inset"><div id="count_text_${answer_key}"  class="count_text">${num_votes} &#10003;</div></div>
+    <div id="count_inset_${answer_key}" class="prev_questions_count_inset ${visible}"><div id="count_text_${answer_key}" class="count_text">${num_votes}&#10003;</div></div>
 
    <div class="card_inset">
         <div id="picture_${answer_key}"></div>

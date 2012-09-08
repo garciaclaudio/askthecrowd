@@ -1,43 +1,92 @@
 
 
+Felipe con Maquío. Antes protestaba y ahora cobija un nuevo fraude. "No hay pruebas contundentes", la chapuza hecha no habría cambiado la elección, etc.. Será falta de ánimo, cobardía o complicidad.
+
+madrileño
+
+holandés, y deprimirse horriblemente
+
+Nueva variante: [será bueno? quién sabe]
+    En vez de FIVE VOTES, llamarle "love and hate".
+        5 corazoncitos. 5 tachas.
+        Hate    unhate  (odiar, desodiar)
+        Love    unlove  (amar, desamar)
+
+
 Preguntas INTERESANTES:
     * Cual es la mejor cancion de Joaquin Sabina?
     * Cual es la mayor contribucion de Argentina al mundo?
     * Cual es el mejor album de Soda? (con links a videos)
+    * Cual es la mejor canción de los 80's? (90's, etc.).
+    * Las cien cosas que los padre deben saber (consejos para la buena crianza de los hijos).
+    * Consejos de padres mexicanos/regiomontanos/etc. para padres mexicanos/regiomontanos/etc..
+
 BUGS: 
-   * Los resultados no aparecen de mayor a menor número de votos.
+[DONE]   * Los resultados no aparecen de mayor a menor número de votos.
 [DONE]   * Las ligas "create and share your own questions" y "questions from others" no jalan.
 [DONE]   * La liga a la pregunta recién creada tampoco funciona.
 [DONE]   * El botón "delete this question" no funciona (si funciona pero no refresca).
 
 TO-DO
-    * Make all cards and fonts, smaller. Make black photos frame thinner.
-    * Test layout. Seems OK now.
-    * Questions from other users no funciona cuando no estás logueado.
-    * On FB post: "Fulanito has answered X, His selection was:" is too formal, make nicer.
-    * "Your questions" header is ugly.
-    * "Five votes" top-left app name is ugly.
 
+
+* Beautify: http://googleresearch.blogspot.co.uk/2012/08/users-love-simple-and-familiar-designs.html
+  Also: http://masonry.desandro.com/
+        http://stackoverflow.com/questions/7109362/how-to-replicate-pinterest-coms-absolute-div-stacking-layout
+
+BEAUTY ACTIONS:
+    * Wider photos, wider cards.
+    * Narrower margins.
+    * Pinterest-like neat columns.
+    * Comments where? Abajo de las respuestas, ocupando dos columnas, o centrado.
+
+* show "created by" photo and link in question page "By <Claudio Garcia>".
+* show "created by" photo? and link in user-suggested answers? "By <Claudio Garcia>".
+     Del lado bajo-izquierdo de la pregunta, en letra chica, aparece el link "by Claudio". Cuando se le da click, la caja crece para mostrar la foto y la liga a la pag. de FB del autor. Lo mismo para las cajas de respuesta.
+
+* Translate.
+* Improve colors.
+* Test
+
+* BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
+
+
+[POSTP] * Put in public domain?
+
+[POSTP] * Make it look nice on mobile phones.
+
+[POSTP] * Add "add youtube video" link.
+
+[POSTP] * Investigate how to make a nice looking layout when cards have different heights. Fluid per column, or something. Like Pinterest. Look it up.
+
+[POSTP] * Make results page show results using the normal layout (but in different color). Think about this.
+
+[POSTP] * Cambiar mensaje de post a FB, para invitar a quienes ya hicieron la encuesta a ver las respuestas del amigo.
+
+[POSTP] * Show friend photos in results page.
+
+[POSTP] * Make images show larger popup on hover.
+
+[POSTP] * Error si se llega a un url inválido, "q27" (cuando q27 no existe aun). Make it show nice error page.
+
+[POSTP] * Questions from other users no funciona cuando no estás logueado.
+
+[POSTP]    * Make the text posted after voting mention all the answers the user chose.
+[POSTP]    * Show whirly "wait" thing when vote link is pressed.
+[POSTP]    * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
+
+[DONE] * Fix layout of count inset on "your questions" section. Also make results page use same colors for counts.
+[DONE]    * Si la respuesta es muy larga, y se agrega una foto, el texto se sale de la caja... SOL: reducir número de letras permitidas. Hacer el texto mas pequeño.
+[DONE]    * Long words also make text appear out of box.
+[DONE]    * Make card text smaller.
+
+[DONE]  * Bug, 5 votes, 4 votes, 3 votes thingy is buggy.
+[DONE]    * Make max photo size: 2MB.
+[DONE]    * Make all cards and fonts, smaller. Make black photos frame thinner.
+[DONE]    * Test layout. Seems OK now.
 [DONE]    * create default image for feed posts (five checkmarks?)
-
-    * Make the text posted after voting mention all the answers the user chose.
-    * show "created by" photo and link in question page "By <Claudio Garcia>".
-    * show "created by" photo? and link in user-suggested answers? "By <Claudio Garcia>".
-
-    * Show whirly "wait" thing when vote link is pressed.
-    * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
-    * Make results cards less tall, smaller.
-    * Improve colors.
-    * Make results page show results using the normal layout (but in different color).
-
-    * Si el nombre del archivo es muy grande, el mensaje de upload se sale de cuadro.
-    * Cambiar mensaje de post a FB, para invitar a quienes ya hicieron la encuesta a ver las respuestas del amigo.
-
-    * Show friend photos in results page.
-    * Error si se llega a un url inválido, "q27" (cuando q27 no existe aun).
-    * Make images show larger popup on hover.
-    * Add "add youtube video" link.
-    * Translate.
+[DONE]    * Make results cards less tall, smaller.
+[DONE]    * Si el nombre del archivo es muy grande, el mensaje de upload se sale de cuadro.
 
 
 [TEST IN P]    * Make comments section in question page be tailored to question.
@@ -47,15 +96,23 @@ TO-DO
 [TEST IN P]    * Two redirects happen after login.
 [TEST IN P]    * Also, no redirect after logging-in for the first time.
 
+
+[DONE]    * On FB post: "Fulanito has answered X, His selection was:" is too formal, make nicer.
 [DONE]    * Main page: clicking on new question link not working.
 [POSTP]   * Añadir opción para hacerlo "sólo para [mexicanos, gringos, etc.]"
-            - Esta opción pregunta al usuario de que estado es.
+                      - Esta opción pregunta al usuario de que estado es.
             - Muestra resultados por estado.
             - Promociona "sólo para mexicanos" en el feed caption.
             - permite hacer preguntas tales como "mi desayuno favorito es".
             - lo que mas se me antoja (un montón de fotos de cosas ricas, o chuscas,
               como un gansito, o un tamrindo).
+[POSTP]    * Page loads too slowly, in chunks. Can it not be pre-rendered somehow?
 [POSTP]    * After voting, suggest more questions the user can vote on (first the ones already answered/created by his/her friends). --users will get to their friends' questions through FB, so this can wait.[POSTP]    * Add "invite friends" (see blue book) after question creation.
+
+[POSTP]    * Add "troll" button to answers. How? Link top-right. Link se convierte en "untroll".  Punishment: answers with troll marks move to the end of the list. What else? --For now, don't implement, showing name of person who created anwer should motivate users to provide good answers.
+
+[POSTP]    * Each answer has a popup with FB comments about the answer, that is also a landing page. * Answers can have an extended description, that can include links to other pages (a smart editor). * Pictures should also be saved in a 300 wide format, to include in the answer landing page.
+
 [POSTP]    * limit answer input to X chars.
 [POSTP]    * Super long words (>x chars) should be split automatically.
 [POSTP]    * Too many redirects when arriving to a question page for the 1st time?
@@ -63,6 +120,9 @@ TO-DO
 [POSTP]   * Test arriving having added the app, to main and question page.
 [POSTP]   * Test arriving having added the app (but logged out of FB), to main and question page.
 [POSTP]    * Make it usable as a standalone website as well.
+
+[POSTP]    * "Your questions" header is ugly.
+[POSTP]    * "Five votes" top-left app name is ugly.
 
 [DONISH]    * Add questions from all users, with paging (least to most), to main page (as landing page, with link from the footer).
 [DONE]    * Keep track of language of user and store in question.
@@ -79,6 +139,8 @@ TO-DO
 [DONE]    * See results button broken (not showing results)
 [DONE]    * Add post-to-fb link after question creation.
 [DONE]    * Show correct gender line in post-to-fb dialog.
+
+[IGNORE]    * Add comments to answers? Nope, we have FB comments for the whole question.
 
 [IGNORE]  * Problem, comments-plugin "loading" image won't go away. Not on production, only on localhost.
 

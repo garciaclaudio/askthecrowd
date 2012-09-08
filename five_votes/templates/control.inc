@@ -32,7 +32,7 @@ function bind_delete_and_uploader(data) {
                 element: document.getElementById('file_uploader_' + data.answer_key),
                 action: '/ajax.html',
                 debug: true,
-                sizeLimit: 1048576, // 1 MB
+                sizeLimit: 2088576, // 2 MB
                 uploadText: '{% trans "add picture" %}',
                 allowedExtensions: ['jpg', 'jpeg', 'gif', 'png'],
                 onComplete: function(id, file_name, data){
@@ -119,6 +119,7 @@ function get_and_display_user_questions() {
                                    'answer_text': ans[j].answer_text,
                                    'has_pic': ans[j].has_pic,
                                    'num_votes': ans[j].num_votes,
+                                   'visible': (ans[j].num_votes>0) ? '' : 'invisible',
                               }));
                           bind_delete_and_uploader(ans[j]);
                          if( ans[j].has_pic ) {
@@ -157,6 +158,7 @@ function show_new_question() {
 
 
 function show_answer(data) {
+
     $('#answers_div').append( $("#show_answer_tmpl").tmpl( {
        'answer_key': data.answer_key,
        'answer_text': data.answer_text,
@@ -245,19 +247,19 @@ function update_votes_header( votes_left ) {
        $('#app_logo').html('<div class="mytube">{% trans "Zero Votes" %}</div>');
     }
     else if( votes_left == 1 ) {
-       $('#app_logo').html('<div class="mytube">{% trans "One Vote" %}</div>');
+       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;</span> {% trans "One Vote" %}</div>');
     }
     else if( votes_left == 2 ) {
-       $('#app_logo').html('<div class="mytube">{% trans "Two Votes" %}</div>');
+       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;</span> {% trans "Two Votes" %}</div>');
     }
     else if( votes_left == 3 ) {
-       $('#app_logo').html('<div class="mytube">{% trans "Three Votes" %}</div>');
+       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;</span> {% trans "Three Votes" %}</div>');
     }
      else if( votes_left == 4 ) {
-       $('#app_logo').html('<div class="mytube">{% trans "Four Votes" %}</div>');
+       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;</span> {% trans "Four Votes" %}</div>');
     }
      else if( votes_left == 5 ) {
-       $('#app_logo').html('<div class="mytube">{% trans "Five Votes" %}</div>');
+       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %}</div>');
     }
 }
 
@@ -268,6 +270,7 @@ function show_votes( answer_key, num_votes ) {
     answer_votes[answer_key] = num_votes;
     // change color of answer card
     $("#answer_" + answer_key).addClass('voted_answer');
+
     // show / update value of count_inset div
     $("#count_inset_" + answer_key).show();
     $("#count_text_" + answer_key).html( num_votes + '&#10003;' );
@@ -467,9 +470,9 @@ function show_question_for_voting() {
             caption = "{{user_name}} " + ' {% trans "answered this question on Five Votes." %}';
 
 {% if  user_is_male %}
-            var desc = '{% trans "His selection was:" %} ' + selected_answer_text;
+            var desc = '{% trans "His top choice was:" %} ' + selected_answer_text;
 {% else %}
-            var desc = '{% trans "Her selection was:" %} ' + selected_answer_text;
+            var desc = '{% trans "Her top choice was:" %} ' + selected_answer_text;
 {% endif %}
 
             var obj = {

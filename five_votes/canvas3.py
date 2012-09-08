@@ -624,7 +624,7 @@ class AjaxHandler(BaseHandler):
 #        time.sleep(3)
         ans = Answer.get( self.request.get('answer_key') );
 
-        new_pic =  images.resize(self.request.body, 100, 100)
+        new_pic =  images.resize(self.request.body, 192 )
         ans.picture = db.Blob(new_pic)
         ans.put();
 
@@ -703,6 +703,7 @@ class AjaxHandler(BaseHandler):
             my_vote.answer = ans
             my_vote.num_votes = 1
             my_vote.put()
+            votes_left = votes_left-1
             if self.user.gender == 'male':
                 results_summary.male_votes = results_summary.male_votes + 1
             else:
@@ -933,6 +934,7 @@ class QuestionHandler(BaseHandler):
                     question_key_name=str(question.key().name()),
                     answers=ans_struct,
                     votes_left= 5-tot_votes,
+                    question_page=1
                     )
 
     def post(self, question_key_name):
