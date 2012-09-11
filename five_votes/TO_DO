@@ -1,16 +1,13 @@
 
 
-Felipe con Maquío. Antes protestaba y ahora cobija un nuevo fraude. "No hay pruebas contundentes", la chapuza hecha no habría cambiado la elección, etc.. Será falta de ánimo, cobardía o complicidad.
-
-madrileño
-
-holandés, y deprimirse horriblemente
 
 Nueva variante: [será bueno? quién sabe]
     En vez de FIVE VOTES, llamarle "love and hate".
         5 corazoncitos. 5 tachas.
         Hate    unhate  (odiar, desodiar)
         Love    unlove  (amar, desamar)
+
+
 
 
 Preguntas INTERESANTES:
@@ -29,20 +26,29 @@ BUGS:
 
 TO-DO
 
-
 * Beautify: http://googleresearch.blogspot.co.uk/2012/08/users-love-simple-and-familiar-designs.html
   Also: http://masonry.desandro.com/
         http://stackoverflow.com/questions/7109362/how-to-replicate-pinterest-coms-absolute-div-stacking-layout
 
 BEAUTY ACTIONS:
-    * Wider photos, wider cards.
-    * Narrower margins.
-    * Pinterest-like neat columns.
-    * Comments where? Abajo de las respuestas, ocupando dos columnas, o centrado.
+[DONE]    * Wider photos, wider cards.
 
-* show "created by" photo and link in question page "By <Claudio Garcia>".
-* show "created by" photo? and link in user-suggested answers? "By <Claudio Garcia>".
-     Del lado bajo-izquierdo de la pregunta, en letra chica, aparece el link "by Claudio". Cuando se le da click, la caja crece para mostrar la foto y la liga a la pag. de FB del autor. Lo mismo para las cajas de respuesta.
+    * Question in dark red, no border.
+    * Background in white (instead of yellow).
+    * Cards light yellow.
+    * Cards aligned (can align) with header (no padding).
+    * "suggest new answer" and "comments" links aligned with the lower right card.
+    * Cards section has to be centered (like pinterest, and users photo tool).
+    * Pinterest-like neat columns.
+    * Comentarios: Cada tarjeta tiene comentarios propios? No, sólo la pregunta misma. Se muestra el link "Comments" o "X comments" (si ya hay comentarios, ver fb:comments-count). Al dar click, los comentarios aparecen en la columna derecha, donde estaban.
+
+
+    * show "created by" photo and link in question page "By <Claudio Garcia>".
+    * show "created by" photo? and link in user-suggested answers? "By <Claudio Garcia>".
+      Del lado bajo-izquierdo de la pregunta, en letra chica, aparece el link "by Claudio". Cuando se le da click, la caja crece para mostrar la foto y el texto "Fulanito ha creado X preguntas en Cinco Votos, y ha votado en Y preguntas". Click muestra la página de este usuario, y sus preguntas (las que ha creado y las que ha votado).
+    * Crear pág. del usuario, que muestra las preguntas que ha creado y las que ha votado.
+
+la liga a la pag. de FB del autor. Lo mismo para las cajas de respuesta.
 
 * Translate.
 * Improve colors.
@@ -50,6 +56,10 @@ BEAUTY ACTIONS:
 
 * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
 
+[POSTP]    * Narrower margins? No margins! (for photos). Not sure of this.
+[POSTP] * Mostrar votantes de la pregunta de algún modo?
+
+[POSTP] * Mostrar "popular questions", con otras preguntas no contestadas por el usuario, pero contestadas por sus amigos.
 
 [POSTP] * Put in public domain?
 

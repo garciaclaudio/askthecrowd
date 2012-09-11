@@ -38,7 +38,13 @@ function bind_delete_and_uploader(data) {
                 onComplete: function(id, file_name, data){
                     $('#file_uploader_' + data.answer_key).remove();
                     $('#picture_' + data.answer_key).html( $("#show_pic_tmpl").tmpl({'answer_key': data.answer_key} ));
-    
+                    // pic uploaded, do a masonry reload when the image is loaded!
+                    var img = new Image();
+                    img.onload = function() {
+                        $('#answers_div').masonry('reload');
+                    }
+                    img.src = "image?answer_key=" + data.answer_key;
+
                     // save for feed posting
                     if( ! new_question_selected_pic_key ) {
                          new_question_selected_pic_key = data.answer_key;
@@ -558,10 +564,15 @@ function show_question_for_welcome() {
 
 
 function show_answer_for_voting_and_editing(data) {
-    $('#answers_div').append( $("#show_answer_for_voting_and_editing_tmpl").tmpl( {
+
+    var new_elem =  $("#show_answer_for_voting_and_editing_tmpl").tmpl( {
        'answer_key': data.answer_key,
        'answer_text': data.answer_text,
-    }));
+    });
+
+    $('#answers_div').append( new_elem );
+
+    $('#answers_div').masonry('reload');
 
     bind_delete_and_uploader(data);
     bind_vote_links(data.answer_key);
@@ -739,6 +750,14 @@ $(function(){
 
 });
 
-</script>
 
+$(window).load(function(){  
+  $('#answers_div').masonry({
+    itemSelector: '.answer_card',
+    isFitWidth: true
+  });
+});
+
+
+</script>
 

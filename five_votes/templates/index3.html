@@ -9,6 +9,7 @@
 		<script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
                 <script type="text/javascript" src="js/jquery.form.js"></script>
                 <script type="text/javascript" src="js/jquery.tmpl.js"></script>
+                <script type="text/javascript" src="js/jquery.masonry.min.js"></script>
                 <script type="text/javascript" src="js/fileuploader.js"></script>
                 <link href="css/fileuploader.css" rel="stylesheet" type="text/css">
                 <link href="css/start/jquery-ui-1.7.2.custom.css" rel="stylesheet" type="text/css">
@@ -47,7 +48,6 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
     border-radius: 6px;
 }
 
-
 #super_top_container {
     text-align: center;
     width:100%;
@@ -61,29 +61,37 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 #main_container {
     width:100%;
     padding:0px;
-    display:table;
-    background-color: yellow;
+/*    display:table; */
+    background-color: #777777;
     text-align: center;
-    margin-left:auto; 
-    margin-right:auto; 
+   margin: 0 auto;
+
+/*    margin-left:auto; 
+    margin-right:auto; */
    -moz-border-radius: 6px;
    -webkit-border-radius: 6px;
     border-radius: 6px;
 }
 
+#main_container2 {
+    background-color: #777777;
+}
+
+
+
 .question_text {
-    padding:10px;
+    padding:15px;
     display:table;
-    background-color:white;
+/*    background-color:white; */
     color:black;
     text-align: center;
-    font-size: 120%;
+    font-size: 130%;
 /*    font-weight: bold; */
     margin-left:auto; 
     margin-right:auto; 
-   -moz-border-radius: 6px;
+/*   -moz-border-radius: 6px;
    -webkit-border-radius: 6px;
-    border-radius: 6px;
+    border-radius: 6px; */
 }
 
 .answer_text {
@@ -92,12 +100,13 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 }
 
 .answer_card {
+/*  display: inline-block; */
   position: relative; 
-  float: left;
+  float: left; 
 /*  width: 120px; */
 /*  height: 150px; */
   margin: 3px;
-  background-color: white;
+  background-color: yellow;
   padding-top: 20px;
   padding-bottom: 25px;
   padding-left: 10px;
@@ -384,6 +393,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 }
 
 #maincontainer {
+    text-align: center; 
 /*    margin-left:auto; 
     margin-right:auto; 
    width:96%; */
@@ -413,7 +423,10 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
   display:none;
 }
 
-
+#answers_div  {
+    background-color:#9dee1d;
+margin: 0 auto;
+}
 
 
 </style>
@@ -437,7 +450,6 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 {% if question_page %}
 
 <div id="maincontainer">
-
 <div class="innertube toptube">
 <div id="app_logo"><div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %}</div>
 </div>
@@ -447,7 +459,6 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
       <div id="main_container">
       </div> <!-- main container -->
 </div>
-
 
 
 {% else %}
@@ -528,8 +539,6 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 
 
 </div> <!--maincontainer -->
-
-
 
 <p>Locale: {{locale}}</p>
 <p>IN DEV SERVER: {{IN_DEV_SERVER}}</p>
@@ -639,7 +648,7 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <div class="mytube">
 <div> 
     <div class="question_text">${question_text}</div>
-<br />
+
     <div id="answers_div">
     </div>
 <br />
