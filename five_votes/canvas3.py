@@ -14,7 +14,7 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 import os, sys
-
+reload(sys); sys.setdefaultencoding('utf-8')
 from google.appengine.api import images
 
 import time
@@ -161,6 +161,9 @@ class Question(db.Model):
     created = db.DateTimeProperty(auto_now=True)
     question_text = db.StringProperty()
     language_code = db.StringProperty()
+
+    def owner(self):
+        return User.gql(u'WHERE user_id = :1', self.user_id).fetch(1)[0]
 
     @staticmethod
     def find_by_user_ids(question, user_ids, limit=50):
@@ -537,7 +540,7 @@ class AjaxHandler(BaseHandler):
             new_question = Question(
                 key_name = str(new_question_id),
                 user_id=self.user.user_id,
-                question_text = question_text,
+                question_text = question_text.encode('utf-8'),
                 language_code=str(self.selected_lang),
             )
             new_question.put()
@@ -889,7 +892,6 @@ class GetImage(BaseHandler):
 
 class QuestionHandler(BaseHandler):
     def get(self, question_key_name):
-        print >> sys.stderr, 'in BASE HANDLER, QUESTIONHANDLER GET' + str(question_key_name) + '<<<<----'
         question = Question.get_by_key_name( question_key_name );
         answers = Answer.gql( 'where question = :1', question )
 
@@ -927,17 +929,20 @@ class QuestionHandler(BaseHandler):
 
             ans_struct.append( ans_data )
 
+        self.response.headers['Content-Type'] = 'text/html; charset=UTF-8'
         self.render(u'index3',
                     user_is_male=user_is_male,
                     user_name=user_name,
                     question=question,
-                    question_key_name=str(question.key().name()),
+                    owner_name=str(question.owner().name),
+                    question_key_name=str(question.key().name().encode('ascii', 'ignore')),
                     answers=ans_struct,
                     votes_left= 5-tot_votes,
                     question_page=1
                     )
 
     def post(self, question_key_name):
+        self.response.headers['Content-Type'] = 'text/html; charset=UTF-8'
         self.render(u'index3')
 
 
@@ -965,7 +970,7 @@ class AllHandler(BaseHandler):
                     'question_key_name' : str(q.key().name()),
                     'question_text' : str(q.question_text),
                     })
-
+        self.response.headers['Content-Type'] = 'text/html; charset=UTF-8'
         self.render(u'index3',
                     all_questions=1,
                     questions=questions_struct

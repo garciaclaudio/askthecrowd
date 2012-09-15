@@ -31,22 +31,27 @@ TO-DO
         http://stackoverflow.com/questions/7109362/how-to-replicate-pinterest-coms-absolute-div-stacking-layout
 
 BEAUTY ACTIONS:
+
+* Improve colors. Look at skype.com.
+
 [DONE]    * Wider photos, wider cards.
-
-    * Question in dark red, no border.
-    * Background in white (instead of yellow).
-    * Cards light yellow.
-    * Cards aligned (can align) with header (no padding).
-    * "suggest new answer" and "comments" links aligned with the lower right card.
-    * Cards section has to be centered (like pinterest, and users photo tool).
-    * Pinterest-like neat columns.
-    * Comentarios: Cada tarjeta tiene comentarios propios? No, sólo la pregunta misma. Se muestra el link "Comments" o "X comments" (si ya hay comentarios, ver fb:comments-count). Al dar click, los comentarios aparecen en la columna derecha, donde estaban.
-
+[DONE]    * Question in black, no border.
+[DONE]    * Background in whitish (instead of yellow).
+[DONE]    * Cards yellow.
+[DONE]    * Cards aligned (can align) with header (no padding).
+[DONE]    * Cards section has to be centered (like pinterest, and users photo tool).
+[DONE]    * Pinterest-like neat columns.
+[DONE]    * "suggest new answer" and "comments" at bottom.
+[NOT ANYMORE]    * Comentarios: Cada tarjeta tiene comentarios propios? No, sólo la pregunta misma. Se muestra el link "Comments" o "X comments" (si ya hay comentarios, ver fb:comments-count). Al dar click, los comentarios aparecen en la parte de abajo, y la pág. escrolea para mostrarlos.
+[DONE]    * Al llenar el último voto, la pág. escrolea hasta el botón "mostrar resultados".
+[DONE]    * BUG: allow utf-8 strings.
 
     * show "created by" photo and link in question page "By <Claudio Garcia>".
     * show "created by" photo? and link in user-suggested answers? "By <Claudio Garcia>".
       Del lado bajo-izquierdo de la pregunta, en letra chica, aparece el link "by Claudio". Cuando se le da click, la caja crece para mostrar la foto y el texto "Fulanito ha creado X preguntas en Cinco Votos, y ha votado en Y preguntas". Click muestra la página de este usuario, y sus preguntas (las que ha creado y las que ha votado).
     * Crear pág. del usuario, que muestra las preguntas que ha creado y las que ha votado.
+    * Despues de agregar una foto, la pág. debe escrolear de vuelta hasta la tarjeta que recibió la misma.
+
 
 la liga a la pag. de FB del autor. Lo mismo para las cajas de respuesta.
 

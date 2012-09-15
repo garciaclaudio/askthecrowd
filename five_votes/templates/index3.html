@@ -16,8 +16,9 @@
 
 <style type="text/css">
 
+
 body {
-    background-color: #FFFFFF;
+    background-color: #dceaf1;
     font: medium/1.2 Arial,Helvetica,sans-serif;
     margin: 0;
     padding: 0;
@@ -35,17 +36,19 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 #app_logo {
     width:100%;
     display:table;
-    background-color:#9dee1d;
-/*    text-align: center; */
+    background-color:#b0ffa0;
     text-align: left;
+
+    font-family:Impact,sans-serif;
+    font-style:italic;
     color:black;
-    font-size: 120%;
+    font-size: 130%;
 /*    font-weight: bold; */
-    margin-left:auto; 
+/*    margin-left:auto; 
     margin-right:auto; 
-   -moz-border-radius: 6px;
-   -webkit-border-radius: 6px;
-    border-radius: 6px;
+   -moz-border-radius: 3px;
+   -webkit-border-radius: 3px;
+    border-radius: 3px; */
 }
 
 #super_top_container {
@@ -62,36 +65,29 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
     width:100%;
     padding:0px;
 /*    display:table; */
-    background-color: #777777;
+    background-color: #dceaf1;
     text-align: center;
-   margin: 0 auto;
-
+    margin: 0 auto;
 /*    margin-left:auto; 
-    margin-right:auto; */
-   -moz-border-radius: 6px;
-   -webkit-border-radius: 6px;
-    border-radius: 6px;
+    margin-right:auto;
+   -moz-border-radius: 3px;
+   -webkit-border-radius: 3px;
+    border-radius: 3px;  */
 }
-
-#main_container2 {
-    background-color: #777777;
-}
-
-
 
 .question_text {
     padding:15px;
     display:table;
-/*    background-color:white; */
+    background-color:#dceaf1;
     color:black;
     text-align: center;
     font-size: 130%;
 /*    font-weight: bold; */
     margin-left:auto; 
     margin-right:auto; 
-/*   -moz-border-radius: 6px;
-   -webkit-border-radius: 6px;
-    border-radius: 6px; */
+/*   -moz-border-radius: 3px;
+   -webkit-border-radius: 3px;
+    border-radius: 3px; */
 }
 
 .answer_text {
@@ -105,15 +101,15 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
   float: left; 
 /*  width: 120px; */
 /*  height: 150px; */
-  margin: 3px;
-  background-color: yellow;
+  margin: 6px;
+  background-color: #fffd5c;
   padding-top: 20px;
   padding-bottom: 25px;
   padding-left: 10px;
   padding-right: 10px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  border-radius: 6px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
 }
 
 .card_inset {
@@ -139,9 +135,9 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 	color: #FFF;
 	/* border and roundedness */
 #	border: 4px solid #fff;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
-	border-radius: 6px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
 	/* shadow */
 	-moz-box-shadow: 1px 1px 2px #999;
 	-webkit-box-shadow: 1px 1px 2px #999;
@@ -161,9 +157,11 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 	-o-transition: all 0.1s ease-in-out;
 }
 
-#add_ans_link {
+.add_ans_class {
+   text-align: center;
+   width:100%;
    font-size: 80%;
-   float:right;
+   clear:both;
 }
 
 .vote_link {
@@ -246,9 +244,9 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
   margin: 4px;
   background-color: white;
   padding: 10px;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-  border-radius: 6px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
   clear:both;
 }
 
@@ -268,7 +266,6 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
   margin: 5px;
 }
 
-
 .results_pic {
   float:left;
   margin: 5px;
@@ -277,7 +274,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 #selector_div {
     padding:10px;
     display:table;
-    background-color: yellow;
+    background-color: #fffd5c;
     text-align: center;
     margin-left:auto; 
     margin-right:auto; 
@@ -292,9 +289,9 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
   color:black;
   text-align: center;
   font-size: 80%;
-  -moz-border-radius: 6px;
-  -webkit-border-radius: 6px;
-   border-radius: 6px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+   border-radius: 3px;
 }
 
 .selected_result {
@@ -307,7 +304,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
     display:table;
     text-align: center;
     margin-left:auto; 
-    margin-right:auto; 
+    margin-right:auto;
 }
 
 
@@ -345,7 +342,7 @@ margin-left: -330px; /*Set left margin to -(RightColumnWidth) */
     clear: left;
     width:100%;
     display:table;
-    background-color:#9dee1d;
+    background-color:#b0ffa0;
 /*    text-align: center; */
     text-align: right;
     color:black;
@@ -353,9 +350,9 @@ margin-left: -330px; /*Set left margin to -(RightColumnWidth) */
 /*    font-weight: bold; */
     margin-left:auto; 
     margin-right:auto; 
-   -moz-border-radius: 6px;
-   -webkit-border-radius: 6px;
-    border-radius: 6px;
+   -moz-border-radius: 3px;
+   -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 
 #footer a{
@@ -379,7 +376,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 #right_col {
     width:100%;
     display:table;
-    background-color:#9dee1d;
+    background-color:#b0ffa0;
 /*    text-align: center; */
     text-align: right;
     color:black;
@@ -387,9 +384,9 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 /*    font-weight: bold; */
     margin-left:auto; 
     margin-right:auto; 
-   -moz-border-radius: 6px;
-   -webkit-border-radius: 6px;
-    border-radius: 6px;
+   -moz-border-radius: 3px;
+   -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 
 #maincontainer {
@@ -414,9 +411,9 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
     margin-top: 5px;
     margin-left:auto; 
     margin-right:auto; 
-   -moz-border-radius: 6px;
-   -webkit-border-radius: 6px;
-    border-radius: 6px;
+   -moz-border-radius: 3px;
+   -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 
 .invisible {
@@ -424,9 +421,21 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 }
 
 #answers_div  {
-    background-color:#9dee1d;
-margin: 0 auto;
+    background-color:#dceaf1; 
+    margin: 0 auto;
+    clear:both;
 }
+
+
+
+.author_link {
+  font-size: 0.8em;
+}
+
+.author_link A:link {color:#999999; text-decoration:none;}      /* unvisited link */
+.author_link A:visited {color:#999999;}  /* visited link */
+.author_link A:hover {text-decoration:underline;}  /* mouse over link */
+
 
 
 </style>
@@ -449,21 +458,14 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 
 {% if question_page %}
 
-<div id="maincontainer">
-<div class="innertube toptube">
 <div id="app_logo"><div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %}</div>
 </div>
-</div>
 
-<div class="innertube">
-      <div id="main_container">
-      </div> <!-- main container -->
-</div>
+<div id="main_container">
+</div> <!-- main container -->
 
 
 {% else %}
-
-<div id="maincontainer">
 
 <div class="innertube toptube">
 <div id="app_logo"><div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %}</div>
@@ -490,13 +492,8 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <div id="right_col">
      <div class="mytube">
          <div style="text-align:left;" id="faces_div"></div>
-     {% if question %}
-         <p class="tiny">{% trans "Comments?" %}</p>
-         <div class="fb-comments" data-href="http://five-votes.appspot.com/q{{question_key_name}}" data-num-posts="4" data-width="300"></div>
-     {% else %}
          <p class="tiny">{% trans "Questions about this app? Leave them here:"%}</p>
          <div class="fb-comments" data-href="http://five-votes.appspot.com" data-num-posts="4" data-width="300"></div>
-     {% endif %}
      </div>
 </div>
 
@@ -505,6 +502,15 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 
 {% endif  %}
 
+{% if question_page %}
+  <div class="add_ans_class">
+     <div class="mytube">
+         <div id="faces_div"></div>
+{% trans "Comments?" %}
+         <div class="fb-comments" data-href="http://five-votes.appspot.com/q{{question_key_name}}" data-num-posts="4" data-width="300"></div>
+     </div>
+  </div>
+{% endif %}
 
 
 <div class="innertube">
@@ -538,7 +544,6 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 </div>
 
 
-</div> <!--maincontainer -->
 
 <p>Locale: {{locale}}</p>
 <p>IN DEV SERVER: {{IN_DEV_SERVER}}</p>
@@ -645,21 +650,24 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 
 
 <script id="answer_question_tmpl" type="text/html">
-<div class="mytube">
-<div> 
-    <div class="question_text">${question_text}</div>
+
+    <div class="question_text">${question_text}
+    </div>
+
+    <div class="author_link"><a href="#">{% trans "by" %} ${owner_name}</a></div>
 
     <div id="answers_div">
     </div>
+
 <br />
 
-    <div class="vote_link" id="add_ans_link" style="clear:both;">
+    <div class="vote_link add_ans_class add_ans_link">
       <div class="mytube">
         <a href="#" onclick="add_ans_link_func();return false;">{% trans "suggest new answer" %}</a>
       </div>
     </div>
 
-    <div id="add_new_ans" style="clear:both;float:right;display:none;">
+    <div id="add_new_ans" class="add_ans_class" style="display:none;">
       <div class="mytube">
          <form id="add_new_ans_form" action="/ajax.html" method="get">
             <input type="hidden" name="question_key_name" value="${question_key_name}">
@@ -671,14 +679,16 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
       </div>
     </div>
 
+<br />
+
+
     <div id="see_results_div" style="clear:both;display:none;">
-        <br /><button id="see_results_button" class="my_button">{% trans "See results" %}</button>
+        <button id="see_results_button" class="my_button">{% trans "See results" %}</button>
 
 <input type="checkbox" name="post_to_fb" value="post_to_fb" checked>{% trans "Post to Facebook" %}<br>
 
     </div>
 
-</div>
 </div>
 </script>
 
@@ -827,6 +837,8 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 <span class="vote_link"><a href="#" onclick="$('#minus_vote_form_${answer_key}').submit();return false;">{% trans "unvote" %}</a>
        </form>
    </div>
+
+    <div class="author_link"><a href="#">{% trans "by" %} hello</a></div>
 
   </div>
 

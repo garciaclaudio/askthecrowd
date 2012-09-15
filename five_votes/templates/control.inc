@@ -4,6 +4,17 @@
 
 <script>
 
+//### XXX not used, may want to fix
+jQuery.fn.idle = function(time){
+	var i = $(this);
+	i.queue(function(){
+		setTimeout(function(){
+			i.dequeue();
+		}, time);
+	});
+};
+
+
 var images_base_url = 'https://five-votes.appspot.com';
 {% if IN_DEV_SERVER %}
     images_base_url = 'http://localhost:8080';
@@ -256,16 +267,16 @@ function update_votes_header( votes_left ) {
        $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;</span> {% trans "One Vote" %}</div>');
     }
     else if( votes_left == 2 ) {
-       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;</span> {% trans "Two Votes" %}</div>');
+       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;</span> {% trans "Two Votes" %} <span style="color:red;">&#10003;</span> </div>');
     }
     else if( votes_left == 3 ) {
-       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;</span> {% trans "Three Votes" %}</div>');
+       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;</span> {% trans "Three Votes" %} <span style="color:red;">&#10003;</span> </div>');
     }
      else if( votes_left == 4 ) {
-       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;</span> {% trans "Four Votes" %}</div>');
+       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;</span> {% trans "Four Votes" %} <span style="color:red;">&#10003;&#10003;</span> </div>');
     }
      else if( votes_left == 5 ) {
-       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %}</div>');
+       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %} <span style="color:red;">&#10003;&#10003;</span> </div>');
     }
 }
 
@@ -382,7 +393,6 @@ function show_results( data ) {
 }
 
 
-
 function bind_vote_links(answer_key) {
 
      $('#plus_vote_form_' + answer_key ).ajaxForm({
@@ -394,6 +404,9 @@ function bind_vote_links(answer_key) {
                 if( data.votes_left <= 0 ) {
                    $('.plus_vote_div').hide();
                    $('#see_results_div').show();
+                   $(window).scrollTop($('#see_results_div').offset().top);
+                   $('.add_ans_link').hide();
+                   $('#add_new_ans').hide();
                 }
                 $('#del_ans_link_' + data.answer_key).hide();
                 show_votes( data.answer_key, data.new_count );
@@ -414,6 +427,7 @@ function bind_vote_links(answer_key) {
                 if( data.votes_left > 0 ) {
                    $('.plus_vote_div').show();
                    $('#see_results_div').hide();
+                   $('.add_ans_link').show();
                 }
                 if( data.new_count == 0 ) {
                     $('#del_ans_link_' + data.answer_key).show();
@@ -446,6 +460,7 @@ function show_question_for_voting() {
 
     $('#main_container').html( $("#answer_question_tmpl").tmpl({
              'question_text': "{{question.question_text}}",
+             'owner_name': "{{owner_name}}",
              'question_key_name': "{{question_key_name}}",
 	     }));
              
@@ -536,8 +551,8 @@ function show_question_for_voting() {
     {% if votes_left <= 0 %}
         $('.plus_vote_div').hide();
         $('#see_results_div').show();
+        $('#see_results_div')[0].scrollIntoView(true);
     {% endif %}
-
     // add and bind new_answer_form here
 }
 
@@ -580,7 +595,7 @@ function show_answer_for_voting_and_editing(data) {
 
 
 function add_ans_link_func() {
-    $('#add_ans_link').hide();
+    $('.add_ans_link').hide();
 
     // bind "add" click (form submit)
     $('#add_new_ans_form').ajaxForm({
@@ -594,7 +609,7 @@ function add_ans_link_func() {
                 $('#new_answer').val('');
                 show_answer_for_voting_and_editing(data);
                 $('#add_new_ans').hide();
-                $('#add_ans_link').show();
+                $('.add_ans_link').show();
              }
          }
     });
