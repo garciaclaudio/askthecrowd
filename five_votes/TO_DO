@@ -1,4 +1,25 @@
 
+cd(frames[0]) 
+
+
+César García Treviño
+
+Nice colors, layouts:
+http://www.fastcodesign.com/1670705/microsoft-new-design-strategy#2
+
+[Very good] http://blog.notdot.net/2010/07/Getting-unicode-right-in-Python (also, nice design)
+[READ AGAIN] http://stackoverflow.com/questions/10764474/python-and-utf-8-kind-of-confusing/10764517#10764517
+[Very good] http://stackoverflow.com/questions/368805/python-unicodedecodeerror-am-i-misunderstanding-encode/370199#370199
+[Very good, read again] http://intertwingly.net/blog/1761.html
+
+[Very good] http://stackoverflow.com/questions/960330/how-to-set-google-app-engine-java-content-type-to-utf-8
+
+
+WebSocket emulation lib:
+https://github.com/sockjs
+
+cgarciatrevino@gmail.com
+foobar12345
 
 
 Nueva variante: [será bueno? quién sabe]
@@ -31,6 +52,16 @@ TO-DO
         http://stackoverflow.com/questions/7109362/how-to-replicate-pinterest-coms-absolute-div-stacking-layout
 
 BEAUTY ACTIONS:
+
+User page:
+
+Very simple:
+    User photo, user name.
+    List of questions from this user.
+    List of questions this user has added.
+    List of questions this user has voted.
+
+
 
 * Improve colors. Look at skype.com.
 

@@ -14,7 +14,10 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 import os, sys
-reload(sys); sys.setdefaultencoding('utf-8')
+#
+# Introduces bug...
+#reload(sys); 
+#sys.setdefaultencoding('utf-8')
 from google.appengine.api import images
 
 import time
@@ -529,7 +532,7 @@ class MainPage(BaseHandler):
 class AjaxHandler(BaseHandler):
 
     def handle_new_question(self):
-        question_text = sanitize_html( self.request.get('question') )
+        question_text =  sanitize_html( self.request.get('question') )
         error = ''
         if question_text == "":
             error = '* ' + _("Question text cannot be empty.");
@@ -540,12 +543,12 @@ class AjaxHandler(BaseHandler):
             new_question = Question(
                 key_name = str(new_question_id),
                 user_id=self.user.user_id,
-                question_text = question_text.encode('utf-8'),
+                question_text = unicode(question_text),
                 language_code=str(self.selected_lang),
             )
             new_question.put()
             result = { 'error' : 0,
-                       'question_text' : str(question_text),
+                       'question_text' : unicode(question_text),
                        'question_key_name' : str(new_question.key().name())
                        }
         return result
@@ -568,11 +571,11 @@ class AjaxHandler(BaseHandler):
             new_ans = Answer(
                 question=question,
                 user_id=self.user.user_id,
-                answer_text = answer_text,
+                answer_text = unicode(answer_text),
             )
             new_ans.save()
             result = { 'error' : 0,
-                       'answer_text' : str(answer_text),
+                       'answer_text' : unicode(answer_text),
                        'answer_key' : str(new_ans.key())
                        }
         return result
@@ -788,7 +791,7 @@ class AjaxHandler(BaseHandler):
         for question in questions:
             summaries = ResultsSummary.gql( 'where question = :1', question )
 
-            print >> sys.stderr, 'QUESTION: ' + str(question.question_text)
+            print >> sys.stderr, 'QUESTION: ' + unicode(question.question_text)
 
             tot_votes = 0
 
@@ -811,7 +814,7 @@ class AjaxHandler(BaseHandler):
                     n_votes = votes_per_answer[ans.key()]
                 ans_data = {
                     'answer_key' : str(ans.key()),
-                    'answer_text' : str(ans.answer_text),
+                    'answer_text' : unicode(ans.answer_text),
                     'has_pic' : has_pic,
                     'num_votes' : n_votes
                     }
@@ -820,7 +823,7 @@ class AjaxHandler(BaseHandler):
 
             sorted_ans = sorted(ans_struct, key=lambda k: k['num_votes'], reverse=True) 
             result_struct = { 'question_key_name': str(question.key().name()),
-                              'question_text': str(question.question_text),
+                              'question_text': unicode(question.question_text),
                               'answers': sorted_ans,
                               'total_votes': tot_votes,
                               'answers_hash':ans_hash,
@@ -921,7 +924,7 @@ class QuestionHandler(BaseHandler):
 
             ans_data = {
                 'answer_key' : str(ans.key()),
-                'answer_text' : str(ans.answer_text),
+                'answer_text' : unicode(ans.answer_text),
                 'has_pic' : has_pic,
                 }
             if votes_count_hash.has_key( str(ans.key()) ):
@@ -929,26 +932,24 @@ class QuestionHandler(BaseHandler):
 
             ans_struct.append( ans_data )
 
-        self.response.headers['Content-Type'] = 'text/html; charset=UTF-8'
         self.render(u'index3',
                     user_is_male=user_is_male,
                     user_name=user_name,
                     question=question,
-                    owner_name=str(question.owner().name),
-                    question_key_name=str(question.key().name().encode('ascii', 'ignore')),
+                    owner_name= unicode(question.owner().name),
+                    question_key_name=str(question.key().name()),
                     answers=ans_struct,
                     votes_left= 5-tot_votes,
                     question_page=1
                     )
 
     def post(self, question_key_name):
-        self.response.headers['Content-Type'] = 'text/html; charset=UTF-8'
-        self.render(u'index3')
+        self.get(question_key_name)
 
 
 class AllHandler(BaseHandler):
     def get(self):
-
+        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
 # IDEALLY
 #
 # 1st. Show all questions user friends have voted for.
@@ -970,22 +971,27 @@ class AllHandler(BaseHandler):
                     'question_key_name' : str(q.key().name()),
                     'question_text' : str(q.question_text),
                     })
-        self.response.headers['Content-Type'] = 'text/html; charset=UTF-8'
         self.render(u'index3',
                     all_questions=1,
                     questions=questions_struct
                     )
 
     def post(self, question_key_name):
+        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
         self.render(u'index3')
 
 
+class UsrHandler(BaseHandler):
+    def get(self, user_id):
+        user = User.get_by_key_name(user_id)
+# XXX, AQUI VOY
 
 def main():
     routes = [
         ('/image', GetImage),
         ('/ajax.html', AjaxHandler),
         ('/q(.*)', QuestionHandler),
+        ('/u(.*)', UsrHandler),
         ('/all', AllHandler),
         (r'/', MainPage),
     ]
