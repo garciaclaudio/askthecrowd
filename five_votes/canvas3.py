@@ -791,7 +791,7 @@ class AjaxHandler(BaseHandler):
         for question in questions:
             summaries = ResultsSummary.gql( 'where question = :1', question )
 
-            print >> sys.stderr, 'QUESTION: ' + unicode(question.question_text)
+#            print >> sys.stderr, 'QUESTION: ' + unicode(question.question_text)
 
             tot_votes = 0
 
@@ -983,7 +983,22 @@ class AllHandler(BaseHandler):
 
 class UsrHandler(BaseHandler):
     def get(self, user_id):
+        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
         user = User.get_by_key_name(user_id)
+        questions = Question.gql( 'where user_id = :1', user_id ).fetch(500);
+        answers = Answer.gql( 'where user_id = :1', user_id ).fetch(500);
+        votes_questions = UserVotedQuestions.gql( 'where user_id = :1', user_id ).fetch(500);
+
+        self.render(u'index3',
+                    usr_page=1,
+                    user=user
+                    )
+
+    def post(self, question_key_name):
+        self.get(question_key_name)
+
+
+
 # XXX, AQUI VOY
 
 def main():

@@ -704,6 +704,15 @@ function show_all_questions() {
 
                   {% if question %}
                       show_question_for_voting();
+                      $('.answer_picture').imagesLoaded(
+                          function(){ 
+                              $('#answers_div').masonry({
+                                   itemSelector: '.answer_card',
+                                   isFitWidth: true
+                              });
+                           }
+                      );
+
                   {% else %}
                       {% if all_questions %}
                            show_all_questions()
