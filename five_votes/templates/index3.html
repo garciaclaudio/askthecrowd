@@ -321,16 +321,9 @@ float: left;
 width: 100%;
 }
 
-{% if question_page %}
-#contentcolumn{
-    clear: left;
-    width:100%;
-}
-{% else %}
 #contentcolumn{
 margin-right: 335px; /*Set right margin to RightColumnWidth*/
 }
-{% endif %}
 
 #rightcolumn{
 float: left;
@@ -440,37 +433,39 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 
 </style>
 
-<script type="text/javascript">
-/*** Temporary text filler function. Remove when deploying template. ***/
-var gibberish=["This is just some filler text", "Welcome to Dynamic Drive CSS Library", "Demo content nothing to read here"]
-function filltext(words){
-for (var i=0; i<words; i++)
-document.write(gibberish[Math.floor(Math.random()*3)]+" ")
-}
-</script>
-
 
     </head>
 <body>
 
 {% include "control.inc" %}
 
-
-{% if question_page %}
-
 <div id="app_logo"><div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %}</div>
 </div>
+
+{% if question_page %}
 
 <div id="main_container">
 </div> <!-- main container -->
 
+  <div class="add_ans_class">
+     <div class="mytube">
+         <div id="faces_div"></div>
+{% trans "Comments?" %}
+         <div class="fb-comments" data-href="http://five-votes.appspot.com/q{{question_key_name}}" data-num-posts="4" data-width="300"></div>
+     </div>
+  </div>
 
 {% else %}
+    {% if usr_page %}
 
-<div class="innertube toptube">
-<div id="app_logo"><div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %}</div>
-</div>
-</div>
+<p>{{user.name}}</p>
+
+    {% for q in questions %}
+<p>{{q.question_text}}</p>
+    {% endfor %}
+<p>THIS IS THE USER PAGE</p>
+
+    {% else %}    
 
 <div id="contentwrapper">
 <div id="contentcolumn">
@@ -500,17 +495,8 @@ document.write(gibberish[Math.floor(Math.random()*3)]+" ")
 </div>
 </div>
 
+    {% endif  %}
 {% endif  %}
-
-{% if question_page %}
-  <div class="add_ans_class">
-     <div class="mytube">
-         <div id="faces_div"></div>
-{% trans "Comments?" %}
-         <div class="fb-comments" data-href="http://five-votes.appspot.com/q{{question_key_name}}" data-num-posts="4" data-width="300"></div>
-     </div>
-  </div>
-{% endif %}
 
 
 <div class="innertube">

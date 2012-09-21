@@ -77,6 +77,8 @@ Very simple:
 [DONE]    * Al llenar el último voto, la pág. escrolea hasta el botón "mostrar resultados".
 [DONE]    * BUG: allow utf-8 strings.
 
+* BUG: cambiar idioma manda al usuario a la página principal.
+
     * show "created by" photo and link in question page "By <Claudio Garcia>".
     * show "created by" photo? and link in user-suggested answers? "By <Claudio Garcia>".
       Del lado bajo-izquierdo de la pregunta, en letra chica, aparece el link "by Claudio". Cuando se le da click, la caja crece para mostrar la foto y el texto "Fulanito ha creado X preguntas en Cinco Votos, y ha votado en Y preguntas". Click muestra la página de este usuario, y sus preguntas (las que ha creado y las que ha votado).

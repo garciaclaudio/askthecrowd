@@ -983,14 +983,25 @@ class AllHandler(BaseHandler):
 
 class UsrHandler(BaseHandler):
     def get(self, user_id):
+
+        print >> sys.stderr, '=========> USR: ' + str(user_id)
         self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
         user = User.get_by_key_name(user_id)
-        questions = Question.gql( 'where user_id = :1', user_id ).fetch(500);
+
+        print >> sys.stderr, '=========> USR NAM: ' + unicode(user.name)
+        questions = Question.gql( 'where user_id = :1', user.user_id );
+
+        for question in questions:
+            summaries = ResultsSummary.gql( 'where question = :1', question )
+            print >> sys.stderr, 'QUESTION: ' + unicode(question.question_text)
+
+
         answers = Answer.gql( 'where user_id = :1', user_id ).fetch(500);
         votes_questions = UserVotedQuestions.gql( 'where user_id = :1', user_id ).fetch(500);
 
         self.render(u'index3',
                     usr_page=1,
+                    questions = questions,
                     user=user
                     )
 
