@@ -1,7 +1,6 @@
 
 cd(frames[0]) 
 
-
 César García Treviño
 
 Nice colors, layouts:
@@ -77,6 +76,8 @@ Very simple:
 [DONE]    * Al llenar el último voto, la pág. escrolea hasta el botón "mostrar resultados".
 [DONE]    * BUG: allow utf-8 strings.
 
+[DONE] * BUG: al borrar preguntas, se deben borrar uservotedquestions
+* BUG: solo debe habe 1 registro por usuario-pregunta en UserVotedQuestions
 * BUG: cambiar idioma manda al usuario a la página principal.
 
     * show "created by" photo and link in question page "By <Claudio Garcia>".

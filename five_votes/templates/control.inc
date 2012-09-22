@@ -714,11 +714,14 @@ function show_all_questions() {
                       );
 
                   {% else %}
+
                       {% if all_questions %}
                            show_all_questions()
-                      {% else %}
+                      {% endif %}
+                      {% if main_page %}
                           show_new_question();
                       {% endif %}
+
                   {% endif %}
 
 //              } else if (response.status === 'not_authorized') {
@@ -765,7 +768,8 @@ $(function(){
     {% else %}
         {% if all_questions %}
             show_all_questions()
-        {% else %}
+        {% endif %}
+        {% if main_page %}
            show_new_question();
         {% endif %}
     {% endif %}

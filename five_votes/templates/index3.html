@@ -431,6 +431,18 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 
 
 
+#usr_page_div {
+  width: 90% ;
+  margin-left: auto ;
+  margin-right: auto ;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.usr_page_link {
+    margin:10px;
+}
+
 </style>
 
 
@@ -458,12 +470,34 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 {% else %}
     {% if usr_page %}
 
-<p>{{user.name}}</p>
+<div id="usr_page_div">
 
-    {% for q in questions %}
-<p>{{q.question_text}}</p>
-    {% endfor %}
-<p>THIS IS THE USER PAGE</p>
+<p>
+<img class="answer_picture" src="{{user.picture}}">
+</p>
+    {% if num_questions %}
+<h3>{% trans "Questions by" %} {{user.name}}</h3>
+      {% for q in questions %}
+           <div class="question_link usr_page_link"><a href="http://apps.facebook.com/five_votes/q{{q.question_key_name}}">{{q.question_text}}</a></div>
+      {% endfor %}
+    {% endif %}
+
+    {% if num_ans_questions %}
+<h3>{% trans "Questions answered by" %} {{user.name}}</h3>
+      {% for q in ans_questions %}
+           <div class="question_link usr_page_link"><a href="http://apps.facebook.com/five_votes/q{{q.question_key_name}}">{{q.question_text}}</a></div>
+      {% endfor %}
+    {% endif %}
+
+    {% if num_voted_questions %}
+<h3>{% trans "Questions voted by" %} {{user.name}}</h3>
+      {% for q in voted_questions %}
+           <div class="question_link usr_page_link"><a href="http://apps.facebook.com/five_votes/q{{q.question_key_name}}">{{q.question_text}}</a></div>
+      {% endfor %}
+    {% endif %}
+
+
+</div> <!-- usr_page -->
 
     {% else %}    
 

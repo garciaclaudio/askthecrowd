@@ -520,13 +520,10 @@ class MainPage(BaseHandler):
             user_name = self.user.name
 
         self.render(u'index3',
+                    main_page=1,
                     user_name=user_name)
     def post(self):
-        user_name = ''
-        if self.user:
-            user_name = self.user.name
-        self.render(u'index3',
-                    user_name=user_name)
+        self.get()
 
 
 class AjaxHandler(BaseHandler):
@@ -606,6 +603,11 @@ class AjaxHandler(BaseHandler):
 
     def handle_delete_question(self):
         question = Question.get_by_key_name( self.request.get('question_key_name') )
+
+        usr_voted = UserVotedQuestions.gql( 'where question = :1', question )
+        for v in usr_voted:        
+            v.delete()
+
         answers = Answer.gql( 'where question = :1', question )
         for ans in answers:
             self.del_answer( ans.key() )
@@ -969,7 +971,7 @@ class AllHandler(BaseHandler):
         for q in questions:
             questions_struct.append( {
                     'question_key_name' : str(q.key().name()),
-                    'question_text' : str(q.question_text),
+                    'question_text' : unicode(q.question_text),
                     })
         self.render(u'index3',
                     all_questions=1,
@@ -991,17 +993,38 @@ class UsrHandler(BaseHandler):
         print >> sys.stderr, '=========> USR NAM: ' + unicode(user.name)
         questions = Question.gql( 'where user_id = :1', user.user_id );
 
-        for question in questions:
-            summaries = ResultsSummary.gql( 'where question = :1', question )
-            print >> sys.stderr, 'QUESTION: ' + unicode(question.question_text)
+        questions_struct = []
 
+        for q in questions:
+            questions_struct.append( {
+                    'question_key_name' : str(q.key().name()),
+                    'question_text' : unicode(q.question_text),
+                    })
 
         answers = Answer.gql( 'where user_id = :1', user_id ).fetch(500);
-        votes_questions = UserVotedQuestions.gql( 'where user_id = :1', user_id ).fetch(500);
+        answers_struct = []
+        for a in answers:
+            answers_struct.append( {
+                    'question_key_name' : str(a.question.key().name()),
+                    'question_text' : unicode(a.question.question_text),
+                    })
+
+#        votes_struct = []
+#        votes_questions = UserVotedQuestions.gql( 'where user_id = :1', user_id ).fetch(500);
+#        for v in votes_questions:
+#            votes_struct.append( {
+#                    'question_key_name' : str(v.question.key().name()),
+#                    'question_text' : unicode(v.question.question_text),
+#                    })
 
         self.render(u'index3',
                     usr_page=1,
-                    questions = questions,
+                    questions = questions_struct,
+                    num_questions = len(questions_struct),
+                    ans_questions = answers_struct,
+                    num_ans_questions = len(answers_struct),
+#                    voted_questions = votes_struct,
+#                    num_voted_questions = len(votes_struct),
                     user=user
                     )
 
