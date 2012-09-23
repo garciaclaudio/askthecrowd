@@ -77,7 +77,7 @@ Very simple:
 [DONE]    * BUG: allow utf-8 strings.
 
 [DONE] * BUG: al borrar preguntas, se deben borrar uservotedquestions
-* BUG: solo debe habe 1 registro por usuario-pregunta en UserVotedQuestions
+[DONE] * BUG: solo debe habe 1 registro por usuario-pregunta en UserVotedQuestions
 * BUG: cambiar idioma manda al usuario a la página principal.
 
     * show "created by" photo and link in question page "By <Claudio Garcia>".

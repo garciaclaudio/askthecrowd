@@ -188,9 +188,11 @@ class UserVotedQuestions(db.Model):
 
     @staticmethod
     def add(user_id, quest):
-        usrq = UserVotedQuestions(user_id = user_id)
-        usrq.question = quest
-        usrq.put()
+        existing = UserVotedQuestions.gql(u'WHERE user_id = :1 and question = :2', user_id, quest).fetch(1)
+        if not existing:
+            usrq = UserVotedQuestions(user_id = user_id)
+            usrq.question = quest
+            usrq.put()
 
     def find_by_user_ids(user_ids, limit=1000):
         if user_ids:
@@ -691,7 +693,6 @@ class AjaxHandler(BaseHandler):
                     else:
                         results_summary.female_votes = results_summary.female_votes + 1
                     results_summary.put()
-                UserVotedQuestions.add(self.user.user_id,ans.question)
                     
             elif vote_val == "-1":
                 new_count = my_vote.num_votes - 1
@@ -717,6 +718,7 @@ class AjaxHandler(BaseHandler):
             else:
                 results_summary.female_votes = results_summary.female_votes + 1
             results_summary.put()
+            UserVotedQuestions.add(self.user.user_id,ans.question)
 
         result_struct = { 'answer_key': answer_key, 'new_count' : my_vote.num_votes, 'votes_left' : votes_left }
         return result_struct
@@ -994,8 +996,9 @@ class UsrHandler(BaseHandler):
         questions = Question.gql( 'where user_id = :1', user.user_id );
 
         questions_struct = []
-
+        questions_dict = {}
         for q in questions:
+            questions_dict[ q.key().name() ] = 1
             questions_struct.append( {
                     'question_key_name' : str(q.key().name()),
                     'question_text' : unicode(q.question_text),
@@ -1003,19 +1006,26 @@ class UsrHandler(BaseHandler):
 
         answers = Answer.gql( 'where user_id = :1', user_id ).fetch(500);
         answers_struct = []
+        answers_dict = {}
         for a in answers:
-            answers_struct.append( {
-                    'question_key_name' : str(a.question.key().name()),
-                    'question_text' : unicode(a.question.question_text),
-                    })
+            aq = a.question.key().name()
+            if not questions_dict[aq] and not answers_dict[aq]:
+                answers_dict[aq] = 1
+                answers_struct.append( {
+                        'question_key_name' : str(a.question.key().name()),
+                        'question_text' : unicode(a.question.question_text),
+                        })
 
-#        votes_struct = []
-#        votes_questions = UserVotedQuestions.gql( 'where user_id = :1', user_id ).fetch(500);
-#        for v in votes_questions:
-#            votes_struct.append( {
-#                    'question_key_name' : str(v.question.key().name()),
-#                    'question_text' : unicode(v.question.question_text),
-#                    })
+        votes_struct = []
+        votes_dict = {}
+        votes_questions = UserVotedQuestions.gql( 'where user_id = :1', user_id ).fetch(500);
+        for v in votes_questions:
+            vq = v.question.key().name()
+            if not questions_dict[vq] and not answers_dict[vq] and not votes_dict[vq]:
+                votes_struct.append( {
+                        'question_key_name' : str(v.question.key().name()),
+                        'question_text' : unicode(v.question.question_text),
+                        })
 
         self.render(u'index3',
                     usr_page=1,
