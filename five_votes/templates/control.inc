@@ -461,6 +461,7 @@ function show_question_for_voting() {
     $('#main_container').html( $("#answer_question_tmpl").tmpl({
              'question_text': "{{question.question_text}}",
              'owner_name': "{{owner_name}}",
+             'owner_id': "{{owner_id}}",
              'question_key_name': "{{question_key_name}}",
 	     }));
              
@@ -529,7 +530,14 @@ function show_question_for_voting() {
 
       answers[ans.answer_key] = ans;
 
+      var by_link = '';
+
+      {% if ans.show_owner %}
+          by_link = '<div class="author_link"><a href="http://apps.facebook.com/five_votes/u{{ ans.owner_id }}">{% trans "by" %} {{ ans.owner_name }}</a></div>';
+      {% endif %}
+
       $('#answers_div').append( $("#show_answer_for_voting_tmpl").tmpl( {
+         'by_link' : by_link,
          'answer_key' : '{{ans.answer_key}}',
          'answer_text' : '{{ans.answer_text}}',
       }));
@@ -555,8 +563,6 @@ function show_question_for_voting() {
     {% endif %}
     // add and bind new_answer_form here
 }
-
-
 
 function show_question_for_welcome() {
 
@@ -604,7 +610,6 @@ function add_ans_link_func() {
              if( data.error ) {
                  alert( data.error );
              } else {
-
                 //clean answer form
                 $('#new_answer').val('');
                 show_answer_for_voting_and_editing(data);

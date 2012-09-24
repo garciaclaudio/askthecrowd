@@ -674,7 +674,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
     <div class="question_text">${question_text}
     </div>
 
-    <div class="author_link"><a href="#">{% trans "by" %} ${owner_name}</a></div>
+    <div class="author_link"><a href="http://apps.facebook.com/five_votes/u${owner_id}">{% trans "by" %} ${owner_name}</a></div>
 
     <div id="answers_div">
     </div>
@@ -757,6 +757,8 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 <span class="vote_link"><a href="#" onclick="$('#minus_vote_form_${answer_key}').submit();return false;">{% trans "unvote" %}</a>
        </form>
    </div>
+
+{% templatetag openbrace %}{% templatetag openbrace %}html by_link{% templatetag closebrace %}{% templatetag closebrace %}
 
   </div>
 

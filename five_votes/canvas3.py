@@ -926,9 +926,14 @@ class QuestionHandler(BaseHandler):
             else:
                 has_pic = 0
 
+            show_owner = 1
+
             ans_data = {
                 'answer_key' : str(ans.key()),
                 'answer_text' : unicode(ans.answer_text),
+                'show_owner' : show_owner,
+                'owner_name' : u'foo bar',
+                'owner_id' : 12345,
                 'has_pic' : has_pic,
                 }
             if votes_count_hash.has_key( str(ans.key()) ):
@@ -941,6 +946,7 @@ class QuestionHandler(BaseHandler):
                     user_name=user_name,
                     question=question,
                     owner_name= unicode(question.owner().name),
+                    owner_id= question.owner().user_id,
                     question_key_name=str(question.key().name()),
                     answers=ans_struct,
                     votes_left= 5-tot_votes,
