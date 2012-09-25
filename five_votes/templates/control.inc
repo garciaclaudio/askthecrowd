@@ -404,7 +404,10 @@ function bind_vote_links(answer_key) {
                 if( data.votes_left <= 0 ) {
                    $('.plus_vote_div').hide();
                    $('#see_results_div').show();
+
+                   // XXX, make it scroll smoothly
                    $(window).scrollTop($('#see_results_div').offset().top);
+
                    $('.add_ans_link').hide();
                    $('#add_new_ans').hide();
                 }
@@ -589,6 +592,8 @@ function show_answer_for_voting_and_editing(data) {
     var new_elem =  $("#show_answer_for_voting_and_editing_tmpl").tmpl( {
        'answer_key': data.answer_key,
        'answer_text': data.answer_text,
+       'owner_id' : data.owner_id,
+       'owner_name' : data.owner_name,
     });
 
     $('#answers_div').append( new_elem );

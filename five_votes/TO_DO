@@ -80,21 +80,23 @@ Very simple:
 [DONE] * BUG: solo debe habe 1 registro por usuario-pregunta en UserVotedQuestions
 * BUG: cambiar idioma manda al usuario a la página principal.
 
-    * show "created by" photo and link in question page "By <Claudio Garcia>".
-    * show "created by" photo? and link in user-suggested answers? "By <Claudio Garcia>".
-      Del lado bajo-izquierdo de la pregunta, en letra chica, aparece el link "by Claudio". Cuando se le da click, la caja crece para mostrar la foto y el texto "Fulanito ha creado X preguntas en Cinco Votos, y ha votado en Y preguntas". Click muestra la página de este usuario, y sus preguntas (las que ha creado y las que ha votado).
-    * Crear pág. del usuario, que muestra las preguntas que ha creado y las que ha votado.
+[DONE]    * show "created by" photo and link in question page "By <Claudio Garcia>".
+[DONE]    * show "created by" photo? and link in user-suggested answers? "By <Claudio Garcia>".
+[DONE]      Del lado bajo-izquierdo de la pregunta, en letra chica, aparece el link "by Claudio". Cuando se le da click, la caja crece para mostrar la foto y el texto "Fulanito ha creado X preguntas en Cinco Votos, y ha votado en Y preguntas". Click muestra la página de este usuario, y sus preguntas (las que ha creado y las que ha votado).
+[DONE]    * Crear pág. del usuario, que muestra las preguntas que ha creado y las que ha votado.
     * Al meter el ultimo voto, el escrol debe ser lento, o debe haber una pausita.
     * Despues de agregar una foto, la pág. debe escrolear de vuelta hasta la tarjeta que recibió la misma.
     * Test user page with multiple users (check that questions user has answered / voted sections work well)
 
-la liga a la pag. de FB del autor. Lo mismo para las cajas de respuesta.
 
 * Translate.
 * Improve colors.
 * Test
 
 * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
+
+
+[NOT NEEDED?] la liga a la pag. de FB del autor. Lo mismo para las cajas de respuesta.
 
 [POSTP]    * Narrower margins? No margins! (for photos). Not sure of this.
 [POSTP] * Mostrar votantes de la pregunta de algún modo?

@@ -180,6 +180,8 @@ class Answer(db.Model):
     user_id = db.StringProperty(required=True)
     answer_text = db.StringProperty()
     picture = db.BlobProperty()
+    def owner(self):
+        return User.gql(u'WHERE user_id = :1', self.user_id).fetch(1)[0]
 
 
 class UserVotedQuestions(db.Model):
@@ -575,7 +577,9 @@ class AjaxHandler(BaseHandler):
             new_ans.save()
             result = { 'error' : 0,
                        'answer_text' : unicode(answer_text),
-                       'answer_key' : str(new_ans.key())
+                       'answer_key' : str(new_ans.key()),
+                       'owner_name' : unicode(self.user.name),
+                       'owner_id' : self.user.user_id
                        }
         return result
 
@@ -926,14 +930,18 @@ class QuestionHandler(BaseHandler):
             else:
                 has_pic = 0
 
-            show_owner = 1
+            show_owner = 0
+            owner_name = ''
+            if question.user_id != ans.user_id:
+                show_owner = 1
+                owner_name = unicode(ans.owner().name)
 
             ans_data = {
                 'answer_key' : str(ans.key()),
                 'answer_text' : unicode(ans.answer_text),
                 'show_owner' : show_owner,
-                'owner_name' : u'foo bar',
-                'owner_id' : 12345,
+                'owner_name' : owner_name,
+                'owner_id' : ans.user_id,
                 'has_pic' : has_pic,
                 }
             if votes_count_hash.has_key( str(ans.key()) ):
