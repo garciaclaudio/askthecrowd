@@ -52,6 +52,8 @@ function bind_delete_and_uploader(data) {
                     // pic uploaded, do a masonry reload when the image is loaded!
                     var img = new Image();
                     img.onload = function() {
+                        $(window).scrollTop($('#picture_' + data.answer_key ).offset().top - 100);
+
                         $('#answers_div').masonry('reload');
                     }
                     img.src = "image?answer_key=" + data.answer_key;
@@ -405,8 +407,9 @@ function bind_vote_links(answer_key) {
                    $('.plus_vote_div').hide();
                    $('#see_results_div').show();
 
-                   // XXX, make it scroll smoothly
-                   $(window).scrollTop($('#see_results_div').offset().top);
+                    $('html, body').animate({
+                        scrollTop: $("#see_results_div").offset().top - 100
+                    }, 2000);
 
                    $('.add_ans_link').hide();
                    $('#add_new_ans').hide();

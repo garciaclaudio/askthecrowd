@@ -237,12 +237,16 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 
 .results_card {
-  position: relative; 
-  float: left;
-  width: 450px;
+/*  position: relative; */
+
+  width:700px;
+/*   float: left; */
+display:inline-block;
+  background-color: white;
+
+/*  width: 450px; */
   height: 63px;
   margin: 4px;
-  background-color: white;
   padding: 10px;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -252,7 +256,8 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 .results_count_text {
   color: #FF0000;
-  position:absolute;top:29px;right:17px;
+float:right;
+/*  position:absolute;top:29px;right:17px; */
   font-size: 25px;
 /*  font-weight:bold; */
 }
@@ -300,9 +305,11 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 }
 
 #result_answers_div {
+    width: 90%;
     padding:0px;
     display:table;
     text-align: center;
+align:center;
     margin-left:auto; 
     margin-right:auto;
 }
@@ -785,9 +792,9 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 
 <script id="show_answer_for_results_tmpl" type="text/html">
   <div class="results_card" id="answer_${answer_key}">
+      <div class="results_count_text">${num_votes} &#10003;</div>
       <div class="results_pic" id="picture_${answer_key}"></div>
       <div class="results_text">${answer_text}</div>
-      <div class="results_count_text">${num_votes} &#10003;</div>
   </div>
 </script>
 

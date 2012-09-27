@@ -9,6 +9,8 @@ http://www.fastcodesign.com/1670705/microsoft-new-design-strategy#2
 Nice cards layout: http://www.meetup.com/
 
 
+[Interesting] http://johnpolacek.github.com/superscrollorama/
+[Good] http://papermashup.com/jquery-page-scrolling/
 [Very good] http://blog.notdot.net/2010/07/Getting-unicode-right-in-Python (also, nice design)
 [READ AGAIN] http://stackoverflow.com/questions/10764474/python-and-utf-8-kind-of-confusing/10764517#10764517
 [Very good] http://stackoverflow.com/questions/368805/python-unicodedecodeerror-am-i-misunderstanding-encode/370199#370199
@@ -52,13 +54,12 @@ TO-DO
 
 BEAUTY ACTIONS:
 
-User page:
-
-Very simple:
-    User photo, user name.
-    List of questions from this user.
-    List of questions this user has added.
-    List of questions this user has voted.
+[DONE] User page:
+[DONE] Very simple:
+[DONE]     User photo, user name.
+[DONE]     List of questions from this user.
+[DONE]     List of questions this user has added.
+[DONE]     List of questions this user has voted.
 
 
 
@@ -66,7 +67,7 @@ Very simple:
 
 [DONE]    * Wider photos, wider cards.
 [DONE]    * Question in black, no border.
-[DONE]    * Background in whitish (instead of yellow).
+[DONE]       * Background in whitish (instead of yellow).
 [DONE]    * Cards yellow.
 [DONE]    * Cards aligned (can align) with header (no padding).
 [DONE]    * Cards section has to be centered (like pinterest, and users photo tool).
@@ -84,13 +85,17 @@ Very simple:
 [DONE]    * show "created by" photo? and link in user-suggested answers? "By <Claudio Garcia>".
 [DONE]      Del lado bajo-izquierdo de la pregunta, en letra chica, aparece el link "by Claudio". Cuando se le da click, la caja crece para mostrar la foto y el texto "Fulanito ha creado X preguntas en Cinco Votos, y ha votado en Y preguntas". Click muestra la página de este usuario, y sus preguntas (las que ha creado y las que ha votado).
 [DONE]    * Crear pág. del usuario, que muestra las preguntas que ha creado y las que ha votado.
-    * Al meter el ultimo voto, el escrol debe ser lento, o debe haber una pausita.
-    * Despues de agregar una foto, la pág. debe escrolear de vuelta hasta la tarjeta que recibió la misma.
+[DONE]    * Al meter el ultimo voto, el escrol debe ser lento, o debe haber una pausita.
+[DONE]    * Despues de agregar una foto, la pág. debe escrolear de vuelta hasta la tarjeta que recibió la misma.
+[DONISH]    * Check the text posted to FB when users answer. It should say something like "click to participate and see his/her results". Is it?
+
     * Test user page with multiple users (check that questions user has answered / voted sections work well)
+[HERE I AM]    * Mejorar / cambiar pág. de resultados? Make it not be fixed width. Make fonts smaller?
+                 http://jsfiddle.net/qHn4t/
 
 
 * Translate.
-* Improve colors.
+* Improve colors and margins.
 * Test
 
 * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
