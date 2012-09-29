@@ -305,6 +305,15 @@ function dynamicSort(property) {
     }
 }
 
+function _set_results_width() {
+//    var parent_width = $(window).width();
+    var parent_width = $('#main_container').width();
+    if( parent_width > 400 ) {
+       $('.results_card').width(450);
+    } else {
+       $('.results_card').width(parent_width-40);
+    }
+}
 
 function show_data( data, id ) {
 
@@ -329,6 +338,11 @@ function show_data( data, id ) {
            $('#picture_' + ans.answer_key ).html( $("#show_result_pic_tmpl").tmpl({'answer_key': ans.answer_key}));
         }               
     }
+
+    _set_results_width();
+    $(window).on("debouncedresize", function( event ) {
+        _set_results_width();
+    });
 }
 
 
@@ -787,7 +801,6 @@ $(function(){
         {% endif %}
     {% endif %}
 {% endif %}
-
 
 });
 
