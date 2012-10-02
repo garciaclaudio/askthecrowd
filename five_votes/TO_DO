@@ -3,11 +3,22 @@ cd(frames[0])
 
 César García Treviño
 
+<DESIGN>
+Header, footer: Skype blue, white text, red checkmarks
 
+Body: light gray, cards: light yellow?
+
+Body: skype whitish gray; cards: light skype blue; cards border: 1px darker blue;  question text: skype text blue; cards text: dark gray; info headers (e.g. questions by Fulanito): medium gray; photos-border: none;
+
+
+</DESIGN>
+<DESIGN EXAMPLES>
+More squares: www.flipboard.com
 Nice colors, layouts:
 http://www.fastcodesign.com/1670705/microsoft-new-design-strategy#2
 Nice cards layout: http://www.meetup.com/
-
+[Nice fonts] http://www.shell.com/home/content/products_services/on_the_road/fuels/fuel_save_challenge/?utm_source=outbrain&utm_medium=cpc&utm_content=make_netherlands_smartest&utm_campaign=shell_nl
+</DESIGNS EXAMPLES>
 
 [Interesting] http://johnpolacek.github.com/superscrollorama/
 [Good] http://papermashup.com/jquery-page-scrolling/
@@ -16,6 +27,7 @@ Nice cards layout: http://www.meetup.com/
 [Very good] http://stackoverflow.com/questions/368805/python-unicodedecodeerror-am-i-misunderstanding-encode/370199#370199
 [Very good, read again] http://intertwingly.net/blog/1761.html
 [Very good] http://stackoverflow.com/questions/960330/how-to-set-google-app-engine-java-content-type-to-utf-8
+
 
 WebSocket emulation lib:
 https://github.com/sockjs
