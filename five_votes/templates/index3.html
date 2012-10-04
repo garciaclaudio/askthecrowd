@@ -161,8 +161,12 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 }
 
 .add_ans_class {
+   background-color: #e5f6fd;
+   border: 1px solid #b3e7fa;
    text-align: center;
-   width:100%;
+   display:table;
+   margin-left:auto; 
+   margin-right:auto;
    font-size: 80%;
    clear:both;
 }
@@ -451,7 +455,6 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 <body>
 
 {% include "control.inc" %}
-
 <div id="app_logo"><div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %}</div>
 </div>
 
@@ -459,13 +462,9 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 
 <div id="main_container">
 </div> <!-- main container -->
-
-  <div class="add_ans_class">
-     <div class="mytube">
-         <div id="faces_div"></div>
-{% trans "Comments?" %}
-         <div class="fb-comments" data-href="http://five-votes.appspot.com/q{{question_key_name}}" data-num-posts="4" data-width="300"></div>
-     </div>
+   <div class="add_ans_class">
+          <div style="float:left;padding:10px;"><div class="fb-comments" data-href="http://five-votes.appspot.com/q{{question_key_name}}" data-num-posts="4" data-width="400"></div></div>
+          <div style="float:left;margin-left:10px;padding:10px;" id="faces_div"></div>
   </div>
 
 {% else %}
@@ -532,7 +531,6 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 
     {% endif  %}
 {% endif  %}
-
 
 <div class="innertube">
   <div id="footer">
@@ -808,7 +806,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
       <div id="answers_div">
       </div>
 
-      <div style="clear:both;">{%trans "login to vote" %}</div>
+      <div class="add_ans_class" style="padding:10px;font-size:110%;clear:both;">{%trans "login to vote" %}</div>
   </div>
 </div>
 </script>

@@ -43,7 +43,7 @@ function bind_delete_and_uploader(data) {
                 element: document.getElementById('file_uploader_' + data.answer_key),
                 action: '/ajax.html',
                 debug: true,
-                sizeLimit: 2088576, // 2 MB
+                sizeLimit: 2*2088576, // 4 MB
                 uploadText: '{% trans "add picture" %}',
                 allowedExtensions: ['jpg', 'jpeg', 'gif', 'png'],
                 onComplete: function(id, file_name, data){
@@ -762,6 +762,14 @@ function show_all_questions() {
 
                   {% if question %}
                       show_question_for_welcome();
+                      $('.answer_picture').imagesLoaded(
+                          function(){ 
+                              $('#answers_div').masonry({
+                                   itemSelector: '.answer_card',
+                                   isFitWidth: true
+                              });
+                           }
+                      );
                   {% else %}
                       $('#main_container').html( $("#welcome_msg_tmpl").tmpl({}));
                   {% endif %}
