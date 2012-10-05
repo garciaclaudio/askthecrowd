@@ -64,15 +64,9 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 #main_container {
     width:100%;
     padding:0px;
-/*    display:table; */
     background-color: #ffffff;
     text-align: center;
     margin: 0 auto;
-/*    margin-left:auto; 
-    margin-right:auto;
-   -moz-border-radius: 3px;
-   -webkit-border-radius: 3px;
-    border-radius: 3px;  */
 }
 
 .question_text {
@@ -327,7 +321,7 @@ width: 100%;
 }
 
 #contentcolumn{
-margin-right: 335px; /*Set right margin to RightColumnWidth*/
+margin-right: 330px; /*Set right margin to RightColumnWidth*/
 }
 
 #rightcolumn{
@@ -341,16 +335,10 @@ margin-left: -330px; /*Set left margin to -(RightColumnWidth) */
     width:100%;
     display:table;
     background-color:#00aff0;
-/*    text-align: center; */
+    margin-top:10px;
     text-align: right;
     color:black;
     font-size: 0.8em;
-/*    font-weight: bold; */
-    margin-left:auto; 
-    margin-right:auto; 
-   -moz-border-radius: 3px;
-   -webkit-border-radius: 3px;
-    border-radius: 3px;
 }
 
 #footer a{
@@ -372,19 +360,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 
 
 #right_col {
-    width:100%;
-    display:table;
-    background-color:#00aff0;
-/*    text-align: center; */
-    text-align: right;
-    color:black;
-    font-size: 120%;
-/*    font-weight: bold; */
-    margin-left:auto; 
-    margin-right:auto; 
-   -moz-border-radius: 3px;
-   -webkit-border-radius: 3px;
-    border-radius: 3px;
+   margin-left:5px;
 }
 
 #maincontainer {
@@ -404,14 +380,12 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
     width:100%;
     padding:0px;
     display:table;
-    background-color: #7cffc3;
+    background-color: #e7bcff;
+    border: 1px solid #b535ff;
     text-align: left;
     margin-top: 5px;
     margin-left:auto; 
     margin-right:auto; 
-   -moz-border-radius: 3px;
-   -webkit-border-radius: 3px;
-    border-radius: 3px;
 }
 
 .invisible {
@@ -504,35 +478,28 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 <div id="contentwrapper">
 <div id="contentcolumn">
   <div id="super_top_container" class="innertube">
-    <div id="top_container" >
-      <div id="main_container">
+      <div id="main_container" style="margin-top:20px;margin-bottom:20px;">
       </div> <!-- main container -->
       <div id="prev_questions">
       </div> <!-- prev_questions -->
-    </div> <!-- top_container -->
   </div> <!-- super_top_container -->
 </div>
 </div> <!-- contentwrapper -->
 
 
 <div id="rightcolumn">
-<div class="innertube">
-
-<div id="right_col">
+  <div id="right_col">
      <div class="mytube">
          <div style="text-align:left;" id="faces_div"></div>
          <p class="tiny">{% trans "Questions about this app? Leave them here:"%}</p>
-         <div class="fb-comments" data-href="http://five-votes.appspot.com" data-num-posts="4" data-width="300"></div>
+         <div class="fb-comments" data-href="http://five-votes.appspot.com" data-num-posts="4" data-width="305"></div>
      </div>
-</div>
-
-</div>
+  </div>
 </div>
 
     {% endif  %}
 {% endif  %}
 
-<div class="innertube">
   <div id="footer">
     <div class="mytube">
 
@@ -547,30 +514,20 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
       </div>
 
 
-<div style="float:right;margin-top:5px;margin-bottom:10px;">
-<form action="/" method="get">
-    <select name="lang" onChange="submit()">
-          <option value="en" {% if language_en %}selected="selected"{% endif %}>{% lang2name "en" %}
+    <div style="float:right;margin-top:5px;margin-bottom:10px;">
+        <form action="/" method="get">
+        <select name="lang" onChange="submit()">
+              <option value="en" {% if language_en %}selected="selected"{% endif %}>{% lang2name "en" %}
 </option>
-          <option value="es" {% if language_es %}selected="selected"{% endif %}>{% lang2name "es" %}</option>
-    </select>
-</form>
-</div>
-<div style="float:right;margin-top:9px;">{% trans "Select your language" %}:&nbsp;</div>
-
+              <option value="es" {% if language_es %}selected="selected"{% endif %}>{% lang2name "es" %}</option>
+        </select>
+        </form>
+    </div>
+    <div style="float:right;margin-top:9px;">{% trans "Select your language" %}:&nbsp;</div>
     </div>
   </div>
-</div>
 
 
-
-<p>Locale: {{locale}}</p>
-<p>IN DEV SERVER: {{IN_DEV_SERVER}}</p>
-<p>NOT IN DEV SERVER: {{NOT_IN_DEV_SERVER}}</p>
-
-{% if IN_DEV_SERVER %}
-<h1>IN DEV</h1>
-{% endif %}
 
 <!-- JS TEMPLATES START -->
 
@@ -893,9 +850,6 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 </p>
     </div>
 
-    <div style="text-align:left;margin-top:7px;">
-&nbsp;&nbsp;{% trans "Your questions" %}
-    </div>
 </script>
 
 

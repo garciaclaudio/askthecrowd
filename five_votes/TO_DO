@@ -108,6 +108,8 @@ BEAUTY ACTIONS:
 
 * Translate.
 * Improve colors and margins.
+* Show "welcome Claudio" in white in the header, centered, when a user is logged in.
+* Fix delete-answer X mark, obscured by photos after new margins added.
 * Test
 
 * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
