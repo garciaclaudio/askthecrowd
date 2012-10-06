@@ -120,6 +120,10 @@ function get_and_display_user_questions() {
                               $('#prev_answers_div_' + key).show();
                               $('#more_link_' + key).hide();
                               $('#less_link_' + key).show();
+                              $('#inner_prev_answers_div_' + key ).masonry({
+                                   itemSelector: '.answer_card',
+                                   isFitWidth: true
+                              });
                       });
 
                       $('#less_link_' + q.question_key_name).click( function() {

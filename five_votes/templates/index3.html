@@ -25,7 +25,12 @@ body {
 }
 
 .delete_answer_div {
+  background-color: #e5f6fd;
   position:absolute;top:2px;right:7px;"
+  padding:2px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
 }
 
 
@@ -380,7 +385,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
     width:100%;
     padding:0px;
     display:table;
-    background-color: #e7bcff;
+    background-color: #f8eff9;
     border: 1px solid #b535ff;
     text-align: left;
     margin-top: 5px;
@@ -658,7 +663,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 <br />
 
 
-    <div id="see_results_div" style="clear:both;display:none;">
+    <div id="see_results_div" style="clear:both;display:none;padding-bottom:20px;">
         <button id="see_results_button" class="my_button">{% trans "See results" %}</button>
 
 <input type="checkbox" name="post_to_fb" value="post_to_fb" checked>{% trans "Post to Facebook" %}<br>

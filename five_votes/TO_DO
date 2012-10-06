@@ -113,10 +113,11 @@ BEAUTY ACTIONS:
 * Test
 
 * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
-
+* BUG: In prev questions: adding photo will make cards appear out of block.
 
 [NOT NEEDED?] la liga a la pag. de FB del autor. Lo mismo para las cajas de respuesta.
 
+[POSTP] * Make prev questions bodies be loaded on demand, when "open" is clicked.
 [POSTP]    * Narrower margins? No margins! (for photos). Not sure of this.
 [POSTP] * Mostrar votantes de la pregunta de algún modo?
 
