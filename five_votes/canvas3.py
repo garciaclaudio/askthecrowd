@@ -788,6 +788,8 @@ class AjaxHandler(BaseHandler):
                           'results': results,
                           'answers_hash':ans_hash,
                           'friends_with_votes':friends_with_votes,
+                          'owner_name':unicode(question.owner().name),
+                          'owner_id':question.owner().user_id
                           }
         return result_struct
 
@@ -953,7 +955,7 @@ class QuestionHandler(BaseHandler):
                     user_is_male=user_is_male,
                     user_name=user_name,
                     question=question,
-                    owner_name= unicode(question.owner().name),
+                    owner_name=unicode(question.owner().name),
                     owner_id= question.owner().user_id,
                     question_key_name=str(question.key().name()),
                     answers=ans_struct,

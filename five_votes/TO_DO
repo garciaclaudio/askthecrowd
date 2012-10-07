@@ -102,7 +102,7 @@ BEAUTY ACTIONS:
 [DONISH]    * Check the text posted to FB when users answer. It should say something like "click to participate and see his/her results". Is it?
 
     * Test user page with multiple users (check that questions user has answered / voted sections work well)
-[HERE I AM]    * Mejorar / cambiar pág. de resultados? Make it not be fixed width. Make fonts smaller?
+[DONE]    * Mejorar / cambiar pág. de resultados? Make it not be fixed width. Make fonts smaller?
                  http://jsfiddle.net/qHn4t/
                  http://layout.jquery-dev.net/demos.cfm
 
@@ -117,6 +117,8 @@ BEAUTY ACTIONS:
 
 [NOT NEEDED?] la liga a la pag. de FB del autor. Lo mismo para las cajas de respuesta.
 
+[POSTP] * Add "User name" selector in results page (so users can review their votes,  maybe with link back to voting page, to allow them to change their votes).
+[POSTP] * Make answers not by question owner show "by fulanito" in results page.
 [POSTP] * Make prev questions bodies be loaded on demand, when "open" is clicked.
 [POSTP]    * Narrower margins? No margins! (for photos). Not sure of this.
 [POSTP] * Mostrar votantes de la pregunta de algún modo?

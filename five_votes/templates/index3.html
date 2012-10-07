@@ -242,10 +242,11 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 }
 
 .results_card {
+  background-color: #e5f6fd;
+  border: 1px solid #b3e7fa;
     margin:5px;
-    padding:10px;
+    padding:0px;
     text-align: left;
-    background: #eee;
     max-width:400px;
     display: inline-block;
     /* IE7 bs */
@@ -257,31 +258,32 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
   color: #FF0000;
   float:right;
   font-size: 25px;
+  margin:10px;
 }
 
 
 .results_text {
   color: black;
   float:left;
-/*  font-weight:bold; */
-  font-size: 22px;
-  line-height:55px;
-  margin: 5px;
+  font-size: 120%;
+/*  line-height:55px; */
+  margin: 10px;
 }
 
 .results_pic {
   float:left;
-  margin: 5px;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
 
 #selector_div {
-    padding:10px;
+    padding:00px;
     display:table;
-    background-color: #e5f6fd;
-    border: 1px solid #b3e7fa;
     text-align: center;
     margin-left:auto; 
-    margin-right:auto; 
+    margin-right:auto;
+    margin-bottom:10px;
 }
 
 .result_selector {
@@ -732,6 +734,9 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 <div class="mytube">
 <div> 
     <div class="question_text">${question_text}</div>
+
+    <div class="author_link" style="margin-bottom:10px;"><a href="http://apps.facebook.com/five_votes/u${owner_id}">{% trans "by" %} ${owner_name}</a></div>
+
     <div id="selector_div">
     </div>
     <div id="result_answers_div">
@@ -754,7 +759,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 
 
 <script id="show_result_pic_tmpl" type="text/html">
-<img class="answer_picture" width="50" height="50" src="image?answer_key=${answer_key}">
+<img class="answer_picture" width="100" height="100" src="image?answer_key=${answer_key}">
 </script>
 
 

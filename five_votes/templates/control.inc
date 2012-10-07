@@ -387,6 +387,8 @@ function show_results( data ) {
     $('#main_container').fadeOut('fast');
 
     $('#main_container').html( $("#show_results_tmpl").tmpl({
+            'owner_id' : data.owner_id,
+            'owner_name' : data.owner_name,
             'question_text': data.question_text,
             'question_key_name': data.question_key_name,
           }));
