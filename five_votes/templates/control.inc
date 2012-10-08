@@ -53,8 +53,9 @@ function bind_delete_and_uploader(data) {
                     var img = new Image();
                     img.onload = function() {
                         $(window).scrollTop($('#picture_' + data.answer_key ).offset().top - 100);
+                       $('#answer_' + data.answer_key).parent().masonry({itemSelector: '.answer_card', isFitWidth: true
+                        });
 
-                        $('#answers_div').masonry('reload');
                     }
                     img.src = "image?answer_key=" + data.answer_key;
 
@@ -188,6 +189,8 @@ function show_answer(data) {
     }));
 
     bind_delete_and_uploader(data);
+
+    $('#answers_div').masonry('reload');
 }
 
 function show_created_question(data) {

@@ -10,8 +10,8 @@ Body: light gray, cards: light yellow?
 
 Body: skype whitish gray; cards: light skype blue; cards border: 1px darker blue;  question text: skype text blue; cards text: dark gray; info headers (e.g. questions by Fulanito): medium gray; photos-border: none;
 
-
 </DESIGN>
+
 <DESIGN EXAMPLES>
 More squares: www.flipboard.com
 Nice colors, layouts:
@@ -51,8 +51,21 @@ Preguntas INTERESANTES:
     * Cual es la mejor canción de los 80's? (90's, etc.).
     * Las cien cosas que los padre deben saber (consejos para la buena crianza de los hijos).
     * Consejos de padres mexicanos/regiomontanos/etc. para padres mexicanos/regiomontanos/etc..
+    * En este momento se me antoja / at this very moment I crave
+
+<TODO>
+    * Test user page with multiple users (check that questions user has answered / voted sections work well)
+    * Translate.
+    * Test
+    * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
+    * Show "welcome Claudio" in white in the header, centered, when a user is logged in.
+</TODO>
 
 BUGS: 
+
+[DONE]    * BUG: In prev questions: adding photo will make cards appear out of block (needs masonry on photo load).
+[DONE]    * BUG: Adding photos in create-question will spoil the layout (needs masonry).
+[DONE]    * BUG: cambiar idioma manda al usuario a la página principal.
 [DONE]   * Los resultados no aparecen de mayor a menor número de votos.
 [DONE]   * Las ligas "create and share your own questions" y "questions from others" no jalan.
 [DONE]   * La liga a la pregunta recién creada tampoco funciona.
@@ -73,10 +86,7 @@ BEAUTY ACTIONS:
 [DONE]     List of questions this user has added.
 [DONE]     List of questions this user has voted.
 
-
-
-* Improve colors. Look at skype.com.
-
+[DONISH] * Improve colors. Look at skype.com.
 [DONE]    * Wider photos, wider cards.
 [DONE]    * Question in black, no border.
 [DONE]       * Background in whitish (instead of yellow).
@@ -91,7 +101,7 @@ BEAUTY ACTIONS:
 
 [DONE] * BUG: al borrar preguntas, se deben borrar uservotedquestions
 [DONE] * BUG: solo debe habe 1 registro por usuario-pregunta en UserVotedQuestions
-* BUG: cambiar idioma manda al usuario a la página principal.
+
 
 [DONE]    * show "created by" photo and link in question page "By <Claudio Garcia>".
 [DONE]    * show "created by" photo? and link in user-suggested answers? "By <Claudio Garcia>".
@@ -101,19 +111,12 @@ BEAUTY ACTIONS:
 [DONE]    * Despues de agregar una foto, la pág. debe escrolear de vuelta hasta la tarjeta que recibió la misma.
 [DONISH]    * Check the text posted to FB when users answer. It should say something like "click to participate and see his/her results". Is it?
 
-    * Test user page with multiple users (check that questions user has answered / voted sections work well)
 [DONE]    * Mejorar / cambiar pág. de resultados? Make it not be fixed width. Make fonts smaller?
                  http://jsfiddle.net/qHn4t/
                  http://layout.jquery-dev.net/demos.cfm
 
-* Translate.
-* Improve colors and margins.
-* Show "welcome Claudio" in white in the header, centered, when a user is logged in.
-* Fix delete-answer X mark, obscured by photos after new margins added.
-* Test
-
-* BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
-* BUG: In prev questions: adding photo will make cards appear out of block.
+[DONE] * Improve colors and margins.
+[DONISH] * Fix delete-answer X mark, obscured by photos after new margins added.
 
 [NOT NEEDED?] la liga a la pag. de FB del autor. Lo mismo para las cajas de respuesta.
 
