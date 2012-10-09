@@ -54,12 +54,17 @@ Preguntas INTERESANTES:
     * En este momento se me antoja / at this very moment I crave
 
 <TODO>
+    * BUG, user page, photo became too big
+[DONE]  * BUG, user page: https://apps.facebook.com/five_votes/u518261219 (unicode, data problem, fixed)
     * Test user page with multiple users (check that questions user has answered / voted sections work well)
     * Translate.
     * Test
+    * Silence / cleanup all debug data into the logs
     * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
     * Show "welcome Claudio" in white in the header, centered, when a user is logged in.
 </TODO>
+
+* Allow longer texts as answers, with external links and bold, italics. Like in carta-a-femsa comments. To implement things like "Las cien cosas que...".
 
 BUGS: 
 

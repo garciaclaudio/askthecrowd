@@ -1008,7 +1008,7 @@ class UsrHandler(BaseHandler):
         self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
         user = User.get_by_key_name(user_id)
 
-        print >> sys.stderr, '=========> USR NAM: ' + unicode(user.name)
+#        print >> sys.stderr, '=========> USR NAM: ' + unicode(user.name)
         questions = Question.gql( 'where user_id = :1', user.user_id );
 
         questions_struct = []
