@@ -1,4 +1,42 @@
 
+BUG (when arriving with a new user): http://apps.facebook.com/five_votes/q1
+
+Traceback (most recent call last):
+  File "/home/claudio/google_appengine/google/appengine/tools/dev_appserver.py", line 3858, in _HandleRequest
+    self._Dispatch(dispatcher, self.rfile, outfile, env_dict)
+  File "/home/claudio/google_appengine/google/appengine/tools/dev_appserver.py", line 3792, in _Dispatch
+    base_env_dict=env_dict)
+  File "/home/claudio/google_appengine/google/appengine/tools/dev_appserver.py", line 580, in Dispatch
+    base_env_dict=base_env_dict)
+  File "/home/claudio/google_appengine/google/appengine/tools/dev_appserver.py", line 2918, in Dispatch
+    self._module_dict)
+  File "/home/claudio/google_appengine/google/appengine/tools/dev_appserver.py", line 2822, in ExecuteCGI
+    reset_modules = exec_script(handler_path, cgi_path, hook)
+  File "/home/claudio/google_appengine/google/appengine/tools/dev_appserver.py", line 2704, in ExecuteOrImportScript
+    script_module.main()
+  File "/home/claudio/git/five_votes/canvas3.py", line 1075, in main
+    util.run_wsgi_app(application)
+  File "/home/claudio/google_appengine/google/appengine/ext/webapp/util.py", line 98, in run_wsgi_app
+    run_bare_wsgi_app(add_wsgi_middleware(application))
+  File "/home/claudio/google_appengine/google/appengine/ext/webapp/util.py", line 116, in run_bare_wsgi_app
+    result = application(env, _start_response)
+  File "/home/claudio/google_appengine/google/appengine/ext/webapp/__init__.py", line 622, in __call__
+    handler.initialize(request, response)
+  File "/home/claudio/git/five_votes/canvas3.py", line 331, in initialize
+    self.init_facebook()
+  File "/home/claudio/git/five_votes/canvas3.py", line 451, in init_facebook
+    gender=me[u'gender'])
+  File "/home/claudio/google_appengine/google/appengine/ext/db/__init__.py", line 890, in __init__
+    prop.__set__(self, value)
+  File "/home/claudio/google_appengine/google/appengine/ext/db/__init__.py", line 593, in __set__
+    value = self.validate(value)
+  File "/home/claudio/google_appengine/google/appengine/ext/db/__init__.py", line 2594, in validate
+    % (self.name, type(value).__name__))
+BadValueError: Property picture must be a str or unicode instance, not a dict
+
+
+
+
 cd(frames[0]) 
 
 César García Treviño
@@ -54,7 +92,8 @@ Preguntas INTERESANTES:
     * En este momento se me antoja / at this very moment I crave
 
 <TODO>
-    * BUG, user page, photo became too big
+[DONE]    * BUG, user page, photo became too big (target="_top" missing)
+[DONE]    * BUG, user page, clicking on links won't work (has to go to the top page)
 [DONE]  * BUG, user page: https://apps.facebook.com/five_votes/u518261219 (unicode, data problem, fixed)
     * Test user page with multiple users (check that questions user has answered / voted sections work well)
     * Translate.

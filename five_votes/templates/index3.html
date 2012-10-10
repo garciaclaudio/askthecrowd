@@ -454,26 +454,26 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 <div id="usr_page_div">
 
 <p>
-<img class="answer_picture" width="192" src="{{user.picture}}">
+<img src="{{user.picture}}">
 </p>
     {% if num_questions %}
 <h3>{% trans "Questions by" %} {{user.name}}</h3>
       {% for q in questions %}
-           <div class="question_link usr_page_link"><a href="http://apps.facebook.com/five_votes/q{{q.question_key_name}}">{{q.question_text}}</a></div>
+           <div class="question_link usr_page_link"><a href="http://apps.facebook.com/five_votes/q{{q.question_key_name}}" target="_top">{{q.question_text}}</a></div>
       {% endfor %}
     {% endif %}
 
     {% if num_ans_questions %}
 <h3>{% trans "Questions answered by" %} {{user.name}}</h3>
       {% for q in ans_questions %}
-           <div class="question_link usr_page_link"><a href="http://apps.facebook.com/five_votes/q{{q.question_key_name}}">{{q.question_text}}</a></div>
+           <div class="question_link usr_page_link"><a href="http://apps.facebook.com/five_votes/q{{q.question_key_name}}" target="_top">{{q.question_text}}</a></div>
       {% endfor %}
     {% endif %}
 
     {% if num_voted_questions %}
 <h3>{% trans "Questions voted by" %} {{user.name}}</h3>
       {% for q in voted_questions %}
-           <div class="question_link usr_page_link"><a href="http://apps.facebook.com/five_votes/q{{q.question_key_name}}">{{q.question_text}}</a></div>
+           <div class="question_link usr_page_link"><a href="http://apps.facebook.com/five_votes/q{{q.question_key_name}}" target="_top">{{q.question_text}}</a></div>
       {% endfor %}
     {% endif %}
 
@@ -636,7 +636,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
     <div class="question_text">${question_text}
     </div>
 
-    <div class="author_link" style="margin-bottom:10px;"><a href="http://apps.facebook.com/five_votes/u${owner_id}">{% trans "by" %} ${owner_name}</a></div>
+    <div class="author_link" style="margin-bottom:10px;"><a href="http://apps.facebook.com/five_votes/u${owner_id}" target="_top">{% trans "by" %} ${owner_name}</a></div>
 
     <div id="answers_div">
     </div>
@@ -734,7 +734,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 <div> 
     <div class="question_text">${question_text}</div>
 
-    <div class="author_link" style="margin-bottom:10px;"><a href="http://apps.facebook.com/five_votes/u${owner_id}">{% trans "by" %} ${owner_name}</a></div>
+    <div class="author_link" style="margin-bottom:10px;"><a href="http://apps.facebook.com/five_votes/u${owner_id}" target="_top">{% trans "by" %} ${owner_name}</a></div>
 
     <div id="selector_div">
     </div>
@@ -825,7 +825,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
        </form>
    </div>
 
-    <div class="author_link"><a href="http://apps.facebook.com/five_votes/u${owner_id}">{% trans "by" %} ${owner_name}</a></div>
+    <div class="author_link"><a href="http://apps.facebook.com/five_votes/u${owner_id}" target="_top">{% trans "by" %} ${owner_name}</a></div>
 
   </div>
 
@@ -836,7 +836,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 <script id="prev_questions_tmpl" type="text/html">
     <div class="prev_question_class" id="prev_question_${question_key_name}">
         <div class="mytube" style="float:left;">
-             <div class="question_link"><a target="_blank" href="http://apps.facebook.com/five_votes/q${question_key_name}">${question_text}</a></div>
+             <div class="question_link"><a target="_blank" href="http://apps.facebook.com/five_votes/q${question_key_name}" target="_top">${question_text}</a></div>
         </div>
 
         <div class="mytube" style="float:right;">
@@ -889,7 +889,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 <script id="all_questions_question_tmpl" type="text/html">
     <div class="prev_question_class" id="prev_question_${question_key_name}">
         <div class="mytube" style="float:left;">
-             <div class="question_link"><a target="_blank" href="http://apps.facebook.com/five_votes/q${question_key_name}">${question_text}</a></div>
+             <div class="question_link"><a target="_top" href="http://apps.facebook.com/five_votes/q${question_key_name}">${question_text}</a></div>
         </div>
     </div>
 </script>
