@@ -21,6 +21,7 @@ import os, sys
 from google.appengine.api import images
 
 import time
+import pprint
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'conf.settings'
 
@@ -138,7 +139,7 @@ class User(db.Model):
         self.dirty = False
         self.name = me[u'name']
         self.email = me.get(u'email')
-        self.picture = me[u'picture']
+        self.picture = me[u'picture'][u'data'][u'url']
         self.friends = [user[u'id'] for user in me[u'friends'][u'data']]
         return self.put()
 
@@ -375,6 +376,9 @@ class BaseHandler(I18NRequestHandler):
         """Render a template"""
         if not data:
             data = {}
+
+        pprint.pprint( self.user, sys.stderr);
+
         data[u'js_conf'] = json.dumps({
             u'appId': settings.FACEBOOK_APP_ID,
             u'canvasName': settings.FACEBOOK_CANVAS_NAME,
@@ -435,7 +439,7 @@ class BaseHandler(I18NRequestHandler):
             if not user and facebook.access_token:
                 me = facebook.api(u'/me', {u'fields': _USER_FIELDS})
                 try:
-                    friends = [user[u'id'] for user in me[u'friends'][u'data']]
+                    friends = [ usr1[u'id'] for usr1 in me[u'friends'][u'data'] ]
 
                     print >> sys.stderr, 'CREATING USER: ' + str(facebook.user_id)
                     print >> sys.stderr, 'NAME: ' + str( me[u'name'].encode('ascii', 'ignore') )
@@ -444,14 +448,23 @@ class BaseHandler(I18NRequestHandler):
                     for user in me[u'friends'][u'data']:
                         print >> sys.stderr, '  Friend: ' + str( user[u'id'] ) + ' -' + str( user[u'name'].encode('ascii', 'ignore') )
 
+                    print >> sys.stderr, '===NEW USER 1: '
+
+                    pprint.pprint( me, sys.stderr);
+
                     user = User(key_name=facebook.user_id,
                         user_id=facebook.user_id, friends=friends,
                         access_token=facebook.access_token, name=me[u'name'],
-                        email=me.get(u'email'), picture=me[u'picture'],
+                        email=me.get(u'email'), picture=me[u'picture'][u'data'][u'url'],
                         gender=me[u'gender'])
+                    print >> sys.stderr, '===NEW USER 2: '
                     user.put()
+                    print >> sys.stderr, '===NEW USER 3: '
+                    pprint.pprint( user, sys.stderr);
+                    print >> sys.stderr, '===NEW USER 4: '
+
                 except KeyError, ex:
-                    pass # ignore if can't get the minimum fields
+                    raise # ignore if can't get the minimum fields
 
         self.facebook = facebook
         self.user = user
