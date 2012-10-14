@@ -15,10 +15,16 @@ jQuery.fn.idle = function(time){
 };
 
 
-var images_base_url = 'https://five-votes.appspot.com';
+// XXX, change this when going live
 {% if IN_DEV_SERVER %}
-    images_base_url = 'http://localhost:8080';
+var images_base_url = 'http://localhost:8080';
+{% else %}
+var images_base_url = 'http://five-votes.appspot.com';
 {% endif %}
+
+var logo_pic_link = 'http://five-votes.appspot.com/images/Logo_5votes_small.jpg';
+
+
 
 var new_question_selected_pic_key = '';
 var new_question_text = '';
@@ -227,11 +233,13 @@ function show_created_question(data) {
 
         // post to fb if requested
         if( $('input[name=post_to_fb]').is(':checked') ) {
-            var pic_link = 'https://five-votes.appspot.com/images/Logo_5votes_small.jpg';
+            var pic_link = logo_pic_link
             if( new_question_selected_pic_key ) {
                 pic_link = images_base_url + '/image?answer_key=' + new_question_selected_pic_key
                 new_question_selected_pic_key = '';
             }
+
+alert('pic link: ' + pic_link );
 
             name = new_question_text;
             caption = "{{user_name}} " + ' {% trans "created this question on Five Votes." %}';
@@ -239,7 +247,7 @@ function show_created_question(data) {
 
             var obj = {
               method: 'feed',
-              link: 'https://five-votes.appspot.com/q' + new_question_key_name,
+              link: 'http://apps.facebook.com/five_votes/q' + new_question_key_name,
               picture: pic_link,
               name: name,
               caption: caption,
@@ -512,10 +520,12 @@ function show_question_for_voting() {
                 }
             }
 
-            var pic_link = 'https://five-votes.appspot.com/images/Logo_5votes_small.png';
+            var pic_link = logo_pic_link
             if( selected_ans_votes > 0 ) {
                 pic_link = images_base_url + '/image?answer_key=' + selected_answer_key
             }
+
+alert('pic link: ' + pic_link );
 
             name = "{{question.question_text}}";
             caption = "{{user_name}} " + ' {% trans "answered this question on Five Votes." %}';
@@ -528,7 +538,7 @@ function show_question_for_voting() {
 
             var obj = {
               method: 'feed',
-              link: 'https://five-votes.appspot.com/q{{question_key_name}}',
+              link: 'http://five-votes.appspot.com/q{{question_key_name}}',
               picture: pic_link,
               name: name,
               caption: caption,
@@ -693,7 +703,7 @@ function show_all_questions() {
     {% endfor %}
 }
 
-{% if NOT_IN_DEV_SERVER %}
+{% if NOT_IN_DEV_SERVER_OLD %}
 
         window.fbAsyncInit = function() {
           FB.init({
@@ -805,7 +815,7 @@ function show_all_questions() {
 
 $(function(){
 
-{% if IN_DEV_SERVER %}
+{% if IN_DEV_SERVER_OLD %}
 
     {% if question %}
         show_question_for_voting();

@@ -1,38 +1,35 @@
 
-BUG (when arriving with a new user): http://apps.facebook.com/five_votes/q1
 
-Traceback (most recent call last):
-  File "/home/claudio/google_appengine/google/appengine/tools/dev_appserver.py", line 3858, in _HandleRequest
-    self._Dispatch(dispatcher, self.rfile, outfile, env_dict)
-  File "/home/claudio/google_appengine/google/appengine/tools/dev_appserver.py", line 3792, in _Dispatch
-    base_env_dict=env_dict)
-  File "/home/claudio/google_appengine/google/appengine/tools/dev_appserver.py", line 580, in Dispatch
-    base_env_dict=base_env_dict)
-  File "/home/claudio/google_appengine/google/appengine/tools/dev_appserver.py", line 2918, in Dispatch
-    self._module_dict)
-  File "/home/claudio/google_appengine/google/appengine/tools/dev_appserver.py", line 2822, in ExecuteCGI
-    reset_modules = exec_script(handler_path, cgi_path, hook)
-  File "/home/claudio/google_appengine/google/appengine/tools/dev_appserver.py", line 2704, in ExecuteOrImportScript
-    script_module.main()
-  File "/home/claudio/git/five_votes/canvas3.py", line 1075, in main
-    util.run_wsgi_app(application)
-  File "/home/claudio/google_appengine/google/appengine/ext/webapp/util.py", line 98, in run_wsgi_app
-    run_bare_wsgi_app(add_wsgi_middleware(application))
-  File "/home/claudio/google_appengine/google/appengine/ext/webapp/util.py", line 116, in run_bare_wsgi_app
-    result = application(env, _start_response)
-  File "/home/claudio/google_appengine/google/appengine/ext/webapp/__init__.py", line 622, in __call__
-    handler.initialize(request, response)
-  File "/home/claudio/git/five_votes/canvas3.py", line 331, in initialize
-    self.init_facebook()
-  File "/home/claudio/git/five_votes/canvas3.py", line 451, in init_facebook
-    gender=me[u'gender'])
-  File "/home/claudio/google_appengine/google/appengine/ext/db/__init__.py", line 890, in __init__
-    prop.__set__(self, value)
-  File "/home/claudio/google_appengine/google/appengine/ext/db/__init__.py", line 593, in __set__
-    value = self.validate(value)
-  File "/home/claudio/google_appengine/google/appengine/ext/db/__init__.py", line 2594, in validate
-    % (self.name, type(value).__name__))
-BadValueError: Property picture must be a str or unicode instance, not a dict
+==>1st, FINISH
+
+add: country, province when logging in
+add: video playing.
+add: big photo popups on click.
+add: in-app comments per answer
+add: "denunciar" button (fusilar de pinterest)
+add: category drop-down to question creation
+add: recent questions blog-like page: created by Fulanito, from Tucumán, Argentina (photo, flag), by language, this can be the site's main landing page.
+add: popular questions landing page, blog like (most voted)
+add: index landing page, by country, province, category, showing how many pages
+
+LOOK FOR SPONSORS?
+
+When the user 1st logs in (or before voting if she doesn't have a country/province), we ask her: Where is your country and region? Or, if he is visiting a Mexican question, we ask: "eres mexicano? (si/no" -> de que Estado? / de que País / Estado?
+
+Then, he is a member of his country's community. The Country's flag shows by the logo.
+
+So, I ask a question, and I belong to Mexico. 
+
+  Then, the results page will show: 
+
+     Friends
+     Men
+     Women
+     Mexican states
+     Countries
+
+Tagging? Categorías (copiar las de Pinterest, modificar un poco). Cada pregunta creada, debe tener una categoría asignada.
+
 
 
 
@@ -82,6 +79,7 @@ Nueva variante: [será bueno? quién sabe]
         Love    unlove  (amar, desamar)
 
 
+
 Preguntas INTERESANTES:
     * Cual es la mejor cancion de Joaquin Sabina?
     * Cual es la mayor contribucion de Argentina al mundo?
@@ -90,23 +88,32 @@ Preguntas INTERESANTES:
     * Las cien cosas que los padre deben saber (consejos para la buena crianza de los hijos).
     * Consejos de padres mexicanos/regiomontanos/etc. para padres mexicanos/regiomontanos/etc..
     * En este momento se me antoja / at this very moment I crave
+    * Hoy desayuné...
 
 <TODO>
-[DONE]    * BUG, user page, photo became too big (target="_top" missing)
-[DONE]    * BUG, user page, clicking on links won't work (has to go to the top page)
+[DONE]  * BUG, user page, photo became too big (target="_top" missing)
+[DONE]  * BUG, user page, clicking on links won't work (has to go to the top page)
 [DONE]  * BUG, user page: https://apps.facebook.com/five_votes/u518261219 (unicode, data problem, fixed)
+[DONE]  * BUG, if user has no friends, error on login
+
+    * BUG: post to FB will not show photo of highest rated pic?? it does, I think
+    * BUG: link back to app (from FB post) is broken (should point to in-fb page?), it points to https page at appspot...
+
     * Test user page with multiple users (check that questions user has answered / voted sections work well)
     * Translate.
     * Test
+    * After voting for one question, show other questions the user may be interested in.
     * Silence / cleanup all debug data into the logs
     * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
     * Show "welcome Claudio" in white in the header, centered, when a user is logged in.
+    * BUG: deleting an answer from prev. questions, will not rearrange cards.
 </TODO>
 
-* Allow longer texts as answers, with external links and bold, italics. Like in carta-a-femsa comments. To implement things like "Las cien cosas que...".
+* Allow longer texts as answers, with external links. Like in carta-a-femsa comments. To implement things like "Las cien cosas que...".
 
 BUGS: 
 
+[DONE] BUG (when arriving with a new user): BadValueError: Property picture must be a str or unicode instance, not a dict
 [DONE]    * BUG: In prev questions: adding photo will make cards appear out of block (needs masonry on photo load).
 [DONE]    * BUG: Adding photos in create-question will spoil the layout (needs masonry).
 [DONE]    * BUG: cambiar idioma manda al usuario a la página principal.
@@ -306,6 +313,8 @@ Get results,
    friend_id
       a second call not needed, send all data in one go?
 
+WYSIWYG editor
+http://ckeditor.com/demo
 
 Making round corners in Gimp:
 http://www.tekstadventure.nl/branko/blog/2008/12/how-to-make-rounded-corners-with-the-gimp

@@ -321,7 +321,7 @@ class BaseHandler(I18NRequestHandler):
 
         super(BaseHandler, self).initialize(request, response)
 
-        if settings.IN_DEV_SERVER:
+        if settings.IN_DEV_SERVER_OLD:
             print >> sys.stderr, '[[[[ IN DEV SERVER ]]]]'
             self.user = User.get_by_key_name('518261219')
             self.csrf_token = '12345'
@@ -394,6 +394,8 @@ class BaseHandler(I18NRequestHandler):
         data[u'csrf_token'] = self.csrf_token
         data[u'canvas_name'] = settings.FACEBOOK_CANVAS_NAME
 
+        data[u'IN_DEV_SERVER_OLD'] = settings.IN_DEV_SERVER_OLD
+        data[u'NOT_IN_DEV_SERVER_OLD'] = not settings.IN_DEV_SERVER_OLD
         data[u'IN_DEV_SERVER'] = settings.IN_DEV_SERVER
         data[u'NOT_IN_DEV_SERVER'] = not settings.IN_DEV_SERVER
 
@@ -439,14 +441,19 @@ class BaseHandler(I18NRequestHandler):
             if not user and facebook.access_token:
                 me = facebook.api(u'/me', {u'fields': _USER_FIELDS})
                 try:
-                    friends = [ usr1[u'id'] for usr1 in me[u'friends'][u'data'] ]
+
+                    if me.has_key( u'friends' ):
+                        friends = [ usr1[u'id'] for usr1 in me[u'friends'][u'data'] ]
+                    else:
+                        friends = []
 
                     print >> sys.stderr, 'CREATING USER: ' + str(facebook.user_id)
                     print >> sys.stderr, 'NAME: ' + str( me[u'name'].encode('ascii', 'ignore') )
                     print >> sys.stderr, 'GENDER: ' + str( me[u'gender'] )
 
-                    for user in me[u'friends'][u'data']:
-                        print >> sys.stderr, '  Friend: ' + str( user[u'id'] ) + ' -' + str( user[u'name'].encode('ascii', 'ignore') )
+                    if me.has_key( u'friends' ):
+                        for user in me[u'friends'][u'data']:
+                            print >> sys.stderr, '  Friend: ' + str( user[u'id'] ) + ' -' + str( user[u'name'].encode('ascii', 'ignore') )
 
                     print >> sys.stderr, '===NEW USER 1: '
 
