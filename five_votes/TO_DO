@@ -99,6 +99,10 @@ Preguntas INTERESANTES:
     * BUG: post to FB will not show photo of highest rated pic?? it does, I think
     * BUG: link back to app (from FB post) is broken (should point to in-fb page?), it points to https page at appspot...
 
+    * Photos should be stored as images (they load slowly).
+    * Show whirly "wait" thing when vote link is pressed.
+    * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
+
     * Test user page with multiple users (check that questions user has answered / voted sections work well)
     * Translate.
     * Test
@@ -200,8 +204,6 @@ BEAUTY ACTIONS:
 [POSTP] * Questions from other users no funciona cuando no estás logueado.
 
 [POSTP]    * Make the text posted after voting mention all the answers the user chose.
-[POSTP]    * Show whirly "wait" thing when vote link is pressed.
-[POSTP]    * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
 
 [DONE] * Fix layout of count inset on "your questions" section. Also make results page use same colors for counts.
 [DONE]    * Si la respuesta es muy larga, y se agrega una foto, el texto se sale de la caja... SOL: reducir número de letras permitidas. Hacer el texto mas pequeño.

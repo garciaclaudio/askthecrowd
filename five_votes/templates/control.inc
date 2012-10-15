@@ -239,7 +239,7 @@ function show_created_question(data) {
                 new_question_selected_pic_key = '';
             }
 
-alert('pic link: ' + pic_link );
+//alert('pic link: ' + pic_link );
 
             name = new_question_text;
             caption = "{{user_name}} " + ' {% trans "created this question on Five Votes." %}';
@@ -525,7 +525,7 @@ function show_question_for_voting() {
                 pic_link = images_base_url + '/image?answer_key=' + selected_answer_key
             }
 
-alert('pic link: ' + pic_link );
+//alert('pic link: ' + pic_link );
 
             name = "{{question.question_text}}";
             caption = "{{user_name}} " + ' {% trans "answered this question on Five Votes." %}';

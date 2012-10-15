@@ -792,7 +792,7 @@ class AjaxHandler(BaseHandler):
                 has_pic = 0
             ans_data = {
                 'answer_key' : str(ans.key()),
-                'answer_text' : str(ans.answer_text),
+                'answer_text' : unicode(ans.answer_text),
                 'has_pic' : has_pic,
                 'num_votes' : 0,
                 }
@@ -801,8 +801,8 @@ class AjaxHandler(BaseHandler):
 
         sorted_ans = sorted(ans_struct, key=lambda k: k['num_votes'], reverse=True) 
 
-        result_struct = { 'question_key_name': str(question.key().name()),
-                          'question_text': str(question.question_text),
+        result_struct = { 'question_key_name': unicode(question.key().name()),
+                          'question_text': unicode(question.question_text),
                           'answers': sorted_ans,
                           'total_votes': tot_votes,
                           'results': results,
