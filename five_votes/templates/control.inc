@@ -538,7 +538,7 @@ function show_question_for_voting() {
 
             var obj = {
               method: 'feed',
-              link: 'http://five-votes.appspot.com/q{{question_key_name}}',
+              link: 'http://apps.facebook.com/five_votes/q{{question_key_name}}',
               picture: pic_link,
               name: name,
               caption: caption,

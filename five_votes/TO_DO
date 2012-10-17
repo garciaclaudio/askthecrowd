@@ -96,9 +96,26 @@ Preguntas INTERESANTES:
 [DONE]  * BUG, user page: https://apps.facebook.com/five_votes/u518261219 (unicode, data problem, fixed)
 [DONE]  * BUG, if user has no friends, error on login
 
+[DONE?]    * FB posted messages point to appspot domain, not http://apps.facebook.com/five_votes/
+    * Error en pág de Linda Amcgjcdfjfga Chengman: https://apps.facebook.com/five_votes/u100003703460671
+
+2012-10-17 14:33:49.508
+u'28': 
+Traceback (most recent call last):
+  File "/base/python_runtime/python_lib/versions/1/google/appengine/ext/webapp/_webapp25.py", line 710, in __call__
+    handler.get(*groups)
+  File "/base/data/home/apps/s~five-votes/1.362477720574079113/canvas3.py", line 1060, in get
+    if not questions_dict[vq] and not answers_dict[vq] and not votes_dict[vq]:
+KeyError: u'28'
+
+
+    * Clicking on questions in prev-questions list should not have target=_blank
+    * Create and share your own questions should be more prominent.
+    * Questions from all users should be replaced by the planned recent-questions landing page.
+    * Clicking the logo should take you to the front page.
     * BUG: post to FB will not show photo of highest rated pic?? it does, I think
     * BUG: link back to app (from FB post) is broken (should point to in-fb page?), it points to https page at appspot...
-
+    * Add logo to app description on FB side so that automatic "fulanito played five votes" messages, show the logo.
     * Photos should be stored as images (they load slowly).
     * Show whirly "wait" thing when vote link is pressed.
     * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
