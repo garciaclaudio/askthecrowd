@@ -1040,12 +1040,14 @@ class UsrHandler(BaseHandler):
                     'question_text' : unicode(q.question_text),
                     })
 
-        answers = Answer.gql( 'where user_id = :1', user_id ).fetch(500);
+        print >> sys.stderr, '=========> LOOKING FOR ANSWERS BY: ' + unicode(user_id)
+        answers = Answer.gql( 'where user_id = :1', user_id );
         answers_struct = []
         answers_dict = {}
         for a in answers:
             aq = a.question.key().name()
-            if not questions_dict[aq] and not answers_dict[aq]:
+            print >> sys.stderr, '=========> FOUND ANSWER: ' + unicode(aq)
+            if not questions_dict.has_key(aq) and not answers_dict.has_key(aq):
                 answers_dict[aq] = 1
                 answers_struct.append( {
                         'question_key_name' : str(a.question.key().name()),
@@ -1054,10 +1056,10 @@ class UsrHandler(BaseHandler):
 
         votes_struct = []
         votes_dict = {}
-        votes_questions = UserVotedQuestions.gql( 'where user_id = :1', user_id ).fetch(500);
+        votes_questions = UserVotedQuestions.gql( 'where user_id = :1', user_id )
         for v in votes_questions:
             vq = v.question.key().name()
-            if not questions_dict[vq] and not answers_dict[vq] and not votes_dict[vq]:
+            if not questions_dict.has_key(vq) and not answers_dict.has_key(vq) and not votes_dict.has_key(vq):
                 votes_struct.append( {
                         'question_key_name' : str(v.question.key().name()),
                         'question_text' : unicode(v.question.question_text),
@@ -1069,8 +1071,8 @@ class UsrHandler(BaseHandler):
                     num_questions = len(questions_struct),
                     ans_questions = answers_struct,
                     num_ans_questions = len(answers_struct),
-#                    voted_questions = votes_struct,
-#                    num_voted_questions = len(votes_struct),
+                    voted_questions = votes_struct,
+                    num_voted_questions = len(votes_struct),
                     user=user
                     )
 

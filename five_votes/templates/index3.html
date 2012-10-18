@@ -464,7 +464,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
     {% endif %}
 
     {% if num_ans_questions %}
-<h3>{% trans "Questions answered by" %} {{user.name}}</h3>
+<h3>{% trans "Questions with answers by" %} {{user.name}}</h3>
       {% for q in ans_questions %}
            <div class="question_link usr_page_link"><a href="http://apps.facebook.com/five_votes/q{{q.question_key_name}}" target="_top">{{q.question_text}}</a></div>
       {% endfor %}
