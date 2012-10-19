@@ -278,22 +278,22 @@ function show_created_question(data) {
 
 function update_votes_header( votes_left ) {
     if( votes_left == 0 ) {
-       $('#app_logo').html('<div class="mytube">{% trans "Zero Votes" %}</div>');
+       $('#logo_text').html('<div class="mytube">{% trans "Zero Votes" %}</div>');
     }
     else if( votes_left == 1 ) {
-       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;</span> {% trans "One Vote" %}</div>');
+       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;</span> {% trans "One Vote" %}</div>');
     }
     else if( votes_left == 2 ) {
-       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;</span> {% trans "Two Votes" %} <span style="color:red;">&#10003;</span> </div>');
+       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;</span> {% trans "Two Votes" %} <span style="color:red;">&#10003;</span> </div>');
     }
     else if( votes_left == 3 ) {
-       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;</span> {% trans "Three Votes" %} <span style="color:red;">&#10003;</span> </div>');
+       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;</span> {% trans "Three Votes" %} <span style="color:red;">&#10003;</span> </div>');
     }
      else if( votes_left == 4 ) {
-       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;</span> {% trans "Four Votes" %} <span style="color:red;">&#10003;&#10003;</span> </div>');
+       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;</span> {% trans "Four Votes" %} <span style="color:red;">&#10003;&#10003;</span> </div>');
     }
      else if( votes_left == 5 ) {
-       $('#app_logo').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %} <span style="color:red;">&#10003;&#10003;</span> </div>');
+       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %} <span style="color:red;">&#10003;&#10003;</span> </div>');
     }
 }
 

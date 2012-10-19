@@ -53,7 +53,7 @@ Nice colors, layouts:
 http://www.fastcodesign.com/1670705/microsoft-new-design-strategy#2
 Nice cards layout: http://www.meetup.com/
 [Nice fonts] http://www.shell.com/home/content/products_services/on_the_road/fuels/fuel_save_challenge/?utm_source=outbrain&utm_medium=cpc&utm_content=make_netherlands_smartest&utm_campaign=shell_nl
-</DESIGNS EXAMPLES>
+</DESIGN EXAMPLES>
 
 [Interesting] http://johnpolacek.github.com/superscrollorama/
 [Good] http://papermashup.com/jquery-page-scrolling/
@@ -80,7 +80,7 @@ Nueva variante: [será bueno? quién sabe]
 
 
 
-Preguntas INTERESANTES:
+<Preguntas INTERESANTES>
     * Cual es la mejor cancion de Joaquin Sabina?
     * Cual es la mayor contribucion de Argentina al mundo?
     * Cual es el mejor album de Soda? (con links a videos)
@@ -89,37 +89,42 @@ Preguntas INTERESANTES:
     * Consejos de padres mexicanos/regiomontanos/etc. para padres mexicanos/regiomontanos/etc..
     * En este momento se me antoja / at this very moment I crave
     * Hoy desayuné...
+</Preguntas INTERESANTES>
+
 
 <TODO>
-[DONE]  * BUG, user page, photo became too big (target="_top" missing)
-[DONE]  * BUG, user page, clicking on links won't work (has to go to the top page)
-[DONE]  * BUG, user page: https://apps.facebook.com/five_votes/u518261219 (unicode, data problem, fixed)
-[DONE]  * BUG, if user has no friends, error on login
-
-[DONE?]    * FB posted messages point to appspot domain, not http://apps.facebook.com/five_votes/
-[DONE]    * Error en pág de Linda Amcgjcdfjfga Chengman: https://apps.facebook.com/five_votes/u100003703460671
-
-[DONE]    * Test friend tabs in results page.
-
-    * Fonts in user page too big.
+    * Clicking the logo should take you to the front page.
+    * Show "welcome Claudio" in white in the header, centered, when a user is logged in, with pic.
+    * Tab fonts too little in results page.
+    * Fonts in user page too big and bold.
     * Clicking on questions in prev-questions list should not have target=_blank
     * Create and share your own questions should be more prominent.
-    * Questions from all users should be replaced by the planned recent-questions landing page.
-    * Clicking the logo should take you to the front page.
-    * BUG: post to FB will not show photo of highest rated pic?? it does, I think
-[DONE]    * BUG: link back to app (from FB post) is broken (should point to in-fb page?), it points to https page at appspot...
     * Add logo to app description on FB side so that automatic "fulanito played five votes" messages, show the logo.
-    * Photos should be stored as images (they load slowly).
     * Show whirly "wait" thing when vote link is pressed.
     * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
-
-[DONE]   * Test user page with multiple users (check that questions user has answered / voted sections work well)
+    * After voting for one question, show other questions the user may be interested in, not answered yet (from friends / same lang / all ).
     * Translate.
-    * Test
-    * After voting for one question, show other questions the user may be interested in.
+    * Test that users get the right language (from their browser) automatically.
+    * Test that posts to FB are made in the user's language.
     * Silence / cleanup all debug data into the logs
+    * fill out app details (and logo icons): https://developers.facebook.com/apps/331909936825023/appdetails
+        Privacy Policy URL
+        Missing translated Tagline for Español
+        Missing translated Description for Español
+        Missing translated Detailed Description for Español
+        Image: 128 x 128
+        Image: Web Banner
+        Image: Cover Image
+        You must upload at least 3 screenshots for App on Facebook
+
+    * Translate app name and details to Spanish.
+
+ ---RELEASE---
+
+    * Photos should be stored as images (they load slowly).
+    * Questions from all users should be replaced by the planned recent-questions landing page.
+    * Photos in results page look distorted (square).
     * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
-    * Show "welcome Claudio" in white in the header, centered, when a user is logged in.
     * BUG: deleting an answer from prev. questions, will not rearrange cards.
 </TODO>
 
@@ -128,13 +133,23 @@ Preguntas INTERESANTES:
 
 [POSTP] * Show friend photos in results page.
 [POSTP]   * BUG: friends must be refreshed when users log in. This can be done every few weeks or so. Or via the real time api. See: http://developers.facebook.com/docs/samples/canvas/ (real time updates).
+[POSTP] * Offer users to notify them when voters vote on their question (once per day or so, by FB post). They need to grant additional permissions for this.
 
 </POSTP>
 
-* Allow longer texts as answers, with external links. Like in carta-a-femsa comments. To implement things like "Las cien cosas que...".
 
-BUGS: 
+<DONE>
+[DONE]    * BUG: post to FB will not show photo of highest rated pic?? it does, I think
+[DONE]  * BUG, user page, photo became too big (target="_top" missing)
+[DONE]  * BUG, user page, clicking on links won't work (has to go to the top page)
+[DONE]  * BUG, user page: https://apps.facebook.com/five_votes/u518261219 (unicode, data problem, fixed)
+[DONE]  * BUG, if user has no friends, error on login
 
+[DONE?]    * FB posted messages point to appspot domain, not http://apps.facebook.com/five_votes/
+[DONE]    * Error en pág de Linda Amcgjcdfjfga Chengman: https://apps.facebook.com/five_votes/u100003703460671
+[DONE]    * Test friend tabs in results page.
+[DONE]    * BUG: link back to app (from FB post) is broken (should point to in-fb page?), it points to https page at appspot...
+[DONE]   * Test user page with multiple users (check that questions user has answered / voted sections work well)
 [DONE] BUG (when arriving with a new user): BadValueError: Property picture must be a str or unicode instance, not a dict
 [DONE]    * BUG: In prev questions: adding photo will make cards appear out of block (needs masonry on photo load).
 [DONE]    * BUG: Adding photos in create-question will spoil the layout (needs masonry).
@@ -143,6 +158,13 @@ BUGS:
 [DONE]   * Las ligas "create and share your own questions" y "questions from others" no jalan.
 [DONE]   * La liga a la pregunta recién creada tampoco funciona.
 [DONE]   * El botón "delete this question" no funciona (si funciona pero no refresca).
+
+</DONE>
+
+* Allow longer texts as answers, with external links. Like in carta-a-femsa comments. To implement things like "Las cien cosas que...".
+
+BUGS: 
+
 
 TO-DO
 
@@ -158,7 +180,6 @@ BEAUTY ACTIONS:
 [DONE]     List of questions from this user.
 [DONE]     List of questions this user has added.
 [DONE]     List of questions this user has voted.
-
 [DONISH] * Improve colors. Look at skype.com.
 [DONE]    * Wider photos, wider cards.
 [DONE]    * Question in black, no border.
@@ -174,7 +195,6 @@ BEAUTY ACTIONS:
 
 [DONE] * BUG: al borrar preguntas, se deben borrar uservotedquestions
 [DONE] * BUG: solo debe habe 1 registro por usuario-pregunta en UserVotedQuestions
-
 
 [DONE]    * show "created by" photo and link in question page "By <Claudio Garcia>".
 [DONE]    * show "created by" photo? and link in user-suggested answers? "By <Claudio Garcia>".

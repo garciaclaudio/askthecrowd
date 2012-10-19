@@ -48,6 +48,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
     font-style:italic;
     color:white;
     font-size: 130%;
+
 /*    font-weight: bold; */
 /*    margin-left:auto; 
     margin-right:auto; 
@@ -55,6 +56,10 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
    -webkit-border-radius: 3px;
     border-radius: 3px; */
 }
+
+#app_logo A:link {color:#FFFFFF; text-decoration:none;}      /* unvisited link */
+#app_logo A:visited {color:#FFFFFF;}  /* visited link */
+#app_logo A:hover {text-decoration:underline;}  /* mouse over link */
 
 #super_top_container {
     text-align: center;
@@ -436,7 +441,8 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 <body>
 
 {% include "control.inc" %}
-<div id="app_logo"><div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %}</div>
+<div id="app_logo">
+<div class="mytube"><a href="http://apps.facebook.com/five_votes/" target="_top"><span id="logo_text"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %}</span></a></div>
 </div>
 
 {% if question_page %}
