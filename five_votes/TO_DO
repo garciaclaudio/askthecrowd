@@ -93,20 +93,18 @@ Nueva variante: [será bueno? quién sabe]
 
 
 <TODO>
-    * Clicking the logo should take you to the front page.
-    * Show "welcome Claudio" in white in the header, centered, when a user is logged in, with pic.
-    * Tab fonts too little in results page.
-    * Fonts in user page too big and bold.
-    * Clicking on questions in prev-questions list should not have target=_blank
-    * Create and share your own questions should be more prominent.
-    * Add logo to app description on FB side so that automatic "fulanito played five votes" messages, show the logo.
-    * Show whirly "wait" thing when vote link is pressed.
-    * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
+[DONE]    * Clicking the logo should take you to the front page.
+[DONE]    * Tab fonts too little in results page.
+[DONE]    * Fonts in user page too big and bold.
+[DONE]    * Clicking on questions in prev-questions list should not have target=_blank
+[DONE]    * Create and share your own questions should be more prominent.
+[DONE]    * Show whirly "wait" thing when vote link is pressed.
     * After voting for one question, show other questions the user may be interested in, not answered yet (from friends / same lang / all ).
     * Translate.
     * Test that users get the right language (from their browser) automatically.
     * Test that posts to FB are made in the user's language.
     * Silence / cleanup all debug data into the logs
+    * Add logo to app description on FB side so that automatic "fulanito played five votes" messages, show the logo.
     * fill out app details (and logo icons): https://developers.facebook.com/apps/331909936825023/appdetails
         Privacy Policy URL
         Missing translated Tagline for Español
@@ -118,6 +116,7 @@ Nueva variante: [será bueno? quién sabe]
         You must upload at least 3 screenshots for App on Facebook
 
     * Translate app name and details to Spanish.
+    * Delete all existing questions / data structs.
 
  ---RELEASE---
 
@@ -131,9 +130,11 @@ Nueva variante: [será bueno? quién sabe]
 
 <POSTP>
 
+[POSTP]    * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
 [POSTP] * Show friend photos in results page.
 [POSTP]   * BUG: friends must be refreshed when users log in. This can be done every few weeks or so. Or via the real time api. See: http://developers.facebook.com/docs/samples/canvas/ (real time updates).
 [POSTP] * Offer users to notify them when voters vote on their question (once per day or so, by FB post). They need to grant additional permissions for this.
+[POSTP]    * Show "welcome Claudio" in white in the header, centered, when a user is logged in, with pic.
 
 </POSTP>
 

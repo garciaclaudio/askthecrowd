@@ -430,6 +430,10 @@ function bind_vote_links(answer_key) {
 
      $('#plus_vote_form_' + answer_key ).ajaxForm({
          dataType:  'json', 
+         beforeSubmit: function(data) { 
+            $("#count_inset_" + answer_key).hide();
+            $("#whirly_" + answer_key).show();
+         },
          success: function(data) { 
              if( data.error ) {
                 alert( data.error );
@@ -446,6 +450,8 @@ function bind_vote_links(answer_key) {
                    $('#add_new_ans').hide();
                 }
                 $('#del_ans_link_' + data.answer_key).hide();
+                $("#count_inset_" + answer_key).show();
+                $("#whirly_" + answer_key).hide();
                 show_votes( data.answer_key, data.new_count );
                 update_votes_header( data.votes_left );
              }
@@ -454,11 +460,16 @@ function bind_vote_links(answer_key) {
 
      $('#minus_vote_form_' + answer_key ).ajaxForm({
          dataType:  'json', 
+         beforeSubmit: function(data) { 
+            $("#count_inset_" + answer_key).hide();
+            $("#whirly_" + answer_key).show();
+         },
          success: function(data) { 
              if( data.error ) {
                 alert( data.error );
              } else {
-
+                $("#whirly_" + data.answer_key).hide();
+                $("#count_inset_" + data.answer_key).show();
                 update_votes_header( data.votes_left );
 
                 if( data.votes_left > 0 ) {

@@ -678,6 +678,8 @@ class AjaxHandler(BaseHandler):
         print >> sys.stderr, 'in handle_vote, user :' + str(self.user)
         print >> sys.stderr, 'in handle_vote, vote_val :' + str(vote_val)
     
+        time.sleep(1)
+
         all_my_voted_ideas = Vote.gql( 'where question = :1 AND user_id = :2 AND num_votes>0', ans.question , self.user.user_id )
 
         votes_cast=0

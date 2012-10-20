@@ -299,7 +299,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
   background-color:#a2f1ff;
   color:black;
   text-align: center;
-  font-size: 80%;
+  font-size: 90%;
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
    border-radius: 3px;
@@ -432,6 +432,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 
 .usr_page_link {
     margin:10px;
+    font-size: 90%;
 }
 
 </style>
@@ -454,6 +455,13 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
           <div style="float:left;margin-left:10px;padding:10px;" id="faces_div"></div>
   </div>
 
+<br />
+    <div class="vote_link add_ans_class add_ans_link">
+      <div class="mytube">
+        <a href="http://apps.facebook.com/five_votes" target="_top">{% trans "Create your own questions!" %}</a>
+      </div>
+    </div>
+
 {% else %}
     {% if usr_page %}
 
@@ -463,21 +471,21 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 <img src="{{user.picture}}">
 </p>
     {% if num_questions %}
-<h3>{% trans "Questions by" %} {{user.name}}</h3>
+<h4>{% trans "Questions by" %} {{user.name}}</h4>
       {% for q in questions %}
            <div class="question_link usr_page_link"><a href="http://apps.facebook.com/five_votes/q{{q.question_key_name}}" target="_top">{{q.question_text}}</a></div>
       {% endfor %}
     {% endif %}
 
     {% if num_ans_questions %}
-<h3>{% trans "Questions with answers by" %} {{user.name}}</h3>
+<h4>{% trans "Questions with answers by" %} {{user.name}}</h4>
       {% for q in ans_questions %}
            <div class="question_link usr_page_link"><a href="http://apps.facebook.com/five_votes/q{{q.question_key_name}}" target="_top">{{q.question_text}}</a></div>
       {% endfor %}
     {% endif %}
 
     {% if num_voted_questions %}
-<h3>{% trans "Questions voted by" %} {{user.name}}</h3>
+<h4>{% trans "Questions voted by" %} {{user.name}}</h4>
       {% for q in voted_questions %}
            <div class="question_link usr_page_link"><a href="http://apps.facebook.com/five_votes/q{{q.question_key_name}}" target="_top">{{q.question_text}}</a></div>
       {% endfor %}
@@ -615,7 +623,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
     <div id="question_form_div">
         <form id="question_form" action="/ajax.html" method="get">
               <input type="hidden" name="action" value="create_question">
-              <label for="question">{% trans "Enter your question" %}</label><br /><br />
+              <label for="question">{% trans "Enter your question:" %}</label><br /><br />
 <div>              <input name="question" id="question" size=45 class="text" type="text">
 </div>
 <br />
@@ -706,6 +714,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
         <div id="picture_${answer_key}"></div>
         <span class="answer_text">${answer_text}</span>
 
+    <div id="whirly_${answer_key}" class="count_inset" style="display:none;"><img src="/images/loading.gif"></div>
     <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
 
     <div class="plus_vote_div">
@@ -842,7 +851,7 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
 <script id="prev_questions_tmpl" type="text/html">
     <div class="prev_question_class" id="prev_question_${question_key_name}">
         <div class="mytube" style="float:left;">
-             <div class="question_link"><a target="_blank" href="http://apps.facebook.com/five_votes/q${question_key_name}" target="_top">${question_text}</a></div>
+             <div class="question_link"><a href="http://apps.facebook.com/five_votes/q${question_key_name}" target="_top">${question_text}</a></div>
         </div>
 
         <div class="mytube" style="float:right;">
