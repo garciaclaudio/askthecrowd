@@ -1,97 +1,5 @@
 
 
-==>1st, FINISH
-
-add: country, province when logging in
-add: video playing.
-add: big photo popups on click.
-add: in-app comments per answer
-add: "denunciar" button (fusilar de pinterest)
-add: category drop-down to question creation
-add: recent questions blog-like page: created by Fulanito, from Tucumán, Argentina (photo, flag), by language, this can be the site's main landing page.
-add: popular questions landing page, blog like (most voted)
-add: index landing page, by country, province, category, showing how many pages
-
-LOOK FOR SPONSORS?
-
-When the user 1st logs in (or before voting if she doesn't have a country/province), we ask her: Where is your country and region? Or, if he is visiting a Mexican question, we ask: "eres mexicano? (si/no" -> de que Estado? / de que País / Estado?
-
-Then, he is a member of his country's community. The Country's flag shows by the logo.
-
-So, I ask a question, and I belong to Mexico. 
-
-  Then, the results page will show: 
-
-     Friends
-     Men
-     Women
-     Mexican states
-     Countries
-
-Tagging? Categorías (copiar las de Pinterest, modificar un poco). Cada pregunta creada, debe tener una categoría asignada.
-
-
-
-
-
-cd(frames[0]) 
-
-César García Treviño
-
-<DESIGN>
-Header, footer: Skype blue, white text, red checkmarks
-
-Body: light gray, cards: light yellow?
-
-Body: skype whitish gray; cards: light skype blue; cards border: 1px darker blue;  question text: skype text blue; cards text: dark gray; info headers (e.g. questions by Fulanito): medium gray; photos-border: none;
-
-</DESIGN>
-
-<DESIGN EXAMPLES>
-More squares: www.flipboard.com
-Nice colors, layouts:
-http://www.fastcodesign.com/1670705/microsoft-new-design-strategy#2
-Nice cards layout: http://www.meetup.com/
-[Nice fonts] http://www.shell.com/home/content/products_services/on_the_road/fuels/fuel_save_challenge/?utm_source=outbrain&utm_medium=cpc&utm_content=make_netherlands_smartest&utm_campaign=shell_nl
-</DESIGN EXAMPLES>
-
-[Interesting] http://johnpolacek.github.com/superscrollorama/
-[Good] http://papermashup.com/jquery-page-scrolling/
-[Very good] http://blog.notdot.net/2010/07/Getting-unicode-right-in-Python (also, nice design)
-[READ AGAIN] http://stackoverflow.com/questions/10764474/python-and-utf-8-kind-of-confusing/10764517#10764517
-[Very good] http://stackoverflow.com/questions/368805/python-unicodedecodeerror-am-i-misunderstanding-encode/370199#370199
-[Very good, read again] http://intertwingly.net/blog/1761.html
-[Very good] http://stackoverflow.com/questions/960330/how-to-set-google-app-engine-java-content-type-to-utf-8
-
-
-WebSocket emulation lib:
-https://github.com/sockjs
-
-
-cgarciatrevino@gmail.com
-foobar12345
-
-
-Nueva variante: [será bueno? quién sabe]
-    En vez de FIVE VOTES, llamarle "love and hate".
-        5 corazoncitos. 5 tachas.
-        Hate    unhate  (odiar, desodiar)
-        Love    unlove  (amar, desamar)
-
-
-
-<Preguntas INTERESANTES>
-    * Cual es la mejor cancion de Joaquin Sabina?
-    * Cual es la mayor contribucion de Argentina al mundo?
-    * Cual es el mejor album de Soda? (con links a videos)
-    * Cual es la mejor canción de los 80's? (90's, etc.).
-    * Las cien cosas que los padre deben saber (consejos para la buena crianza de los hijos).
-    * Consejos de padres mexicanos/regiomontanos/etc. para padres mexicanos/regiomontanos/etc..
-    * En este momento se me antoja / at this very moment I crave
-    * Hoy desayuné...
-</Preguntas INTERESANTES>
-
-
 <TODO>
 [DONE]    * Clicking the logo should take you to the front page.
 [DONE]    * Tab fonts too little in results page.
@@ -99,7 +7,6 @@ Nueva variante: [será bueno? quién sabe]
 [DONE]    * Clicking on questions in prev-questions list should not have target=_blank
 [DONE]    * Create and share your own questions should be more prominent.
 [DONE]    * Show whirly "wait" thing when vote link is pressed.
-    * After voting for one question, show other questions the user may be interested in, not answered yet (from friends / same lang / all ).
     * Translate.
     * Test that users get the right language (from their browser) automatically.
     * Test that posts to FB are made in the user's language.
@@ -128,8 +35,99 @@ Nueva variante: [será bueno? quién sabe]
 </TODO>
 
 
+==>1st, FINISH, then do this:
+
+<NEXT FOR DEVELOPMENT>
+
+add: country, province when logging in
+add: video playing.
+add: big photo popups on click.
+add: in-app comments per answer
+add: "denunciar" button (fusilar de pinterest)
+add: category drop-down to question creation
+add: recent questions blog-like page: created by Fulanito, from Tucumán, Argentina (photo, flag), by language, this can be the site's main landing page.
+add: popular questions landing page, blog like (most voted in the past day, 7 days, 30 days) --use a new table to aggregate voted questions per language, day, num_voters. Use this to show suggestions in the results page.
+add: index landing page, by country, province, category, showing how many pages
+
+LOOK FOR SPONSORS?
+
+When the user 1st logs in (or before voting if she doesn't have a country/province), we ask her: Where is your country and region? Or, if he is visiting a Mexican question, we ask: "eres mexicano? (si/no" -> de que Estado? / de que País / Estado?
+
+Then, he is a member of his country's community. The Country's flag shows by the logo.
+
+So, I ask a question, and I belong to Mexico. 
+
+  Then, the results page will show: 
+
+     Friends
+     Men
+     Women
+     Mexican states
+     Countries
+
+Tagging? Categorías (copiar las de Pinterest, modificar un poco). Cada pregunta creada, debe tener una categoría asignada.
+
+</NEXT FOR DEVELOPMENT>
+
+
+<DESIGN>
+Header, footer: Skype blue, white text, red checkmarks
+
+Body: light gray, cards: light yellow?
+
+Body: skype whitish gray; cards: light skype blue; cards border: 1px darker blue;  question text: skype text blue; cards text: dark gray; info headers (e.g. questions by Fulanito): medium gray; photos-border: none;
+
+</DESIGN>
+
+<DESIGN EXAMPLES>
+More squares: www.flipboard.com
+Nice colors, layouts:
+http://www.fastcodesign.com/1670705/microsoft-new-design-strategy#2
+Nice cards layout: http://www.meetup.com/
+[Nice fonts] http://www.shell.com/home/content/products_services/on_the_road/fuels/fuel_save_challenge/?utm_source=outbrain&utm_medium=cpc&utm_content=make_netherlands_smartest&utm_campaign=shell_nl
+</DESIGN EXAMPLES>
+
+
+[Interesting] http://johnpolacek.github.com/superscrollorama/
+[Good] http://papermashup.com/jquery-page-scrolling/
+[Very good] http://blog.notdot.net/2010/07/Getting-unicode-right-in-Python (also, nice design)
+[READ AGAIN] http://stackoverflow.com/questions/10764474/python-and-utf-8-kind-of-confusing/10764517#10764517
+[Very good] http://stackoverflow.com/questions/368805/python-unicodedecodeerror-am-i-misunderstanding-encode/370199#370199
+[Very good, read again] http://intertwingly.net/blog/1761.html
+[Very good] http://stackoverflow.com/questions/960330/how-to-set-google-app-engine-java-content-type-to-utf-8
+
+
+
+cd(frames[0]) 
+César García Treviño
+
+WebSocket emulation lib:
+https://github.com/sockjs
+
+cgarciatrevino@gmail.com
+foobar12345
+
+Nueva variante: [será bueno? quién sabe]
+    En vez de FIVE VOTES, llamarle "love and hate".
+        5 corazoncitos. 5 tachas.
+        Hate    unhate  (odiar, desodiar)
+        Love    unlove  (amar, desamar)
+
+<Preguntas INTERESANTES>
+    * Cual es la mejor cancion de Joaquin Sabina?
+    * Cual es la mayor contribucion de Argentina al mundo?
+    * Cual es el mejor album de Soda? (con links a videos)
+    * Cual es la mejor canción de los 80's? (90's, etc.).
+    * Las cien cosas que los padre deben saber (consejos para la buena crianza de los hijos).
+    * Consejos de padres mexicanos/regiomontanos/etc. para padres mexicanos/regiomontanos/etc..
+    * En este momento se me antoja / at this very moment I crave
+    * Hoy desayuné...
+</Preguntas INTERESANTES>
+
+
 <POSTP>
 
+[POSTP]    * After voting for one question, show other questions the user may be interested in, not answered yet (from friends / same lang / all ). Use summary table for popular questions landing page.
 [POSTP]    * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
 [POSTP] * Show friend photos in results page.
 [POSTP]   * BUG: friends must be refreshed when users log in. This can be done every few weeks or so. Or via the real time api. See: http://developers.facebook.com/docs/samples/canvas/ (real time updates).
@@ -351,6 +349,10 @@ Get results,
    filter_by = [all, men, women, friend]
    friend_id
       a second call not needed, send all data in one go?
+
+
+USING THE DATASTORE:
+https://developers.google.com/appengine/docs/python/gettingstarted/usingdatastore
 
 WYSIWYG editor
 http://ckeditor.com/demo
