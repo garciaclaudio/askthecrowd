@@ -8,563 +8,298 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-02-01 23:09+0100\n"
+"POT-Creation-Date: 2012-10-23 00:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: manage_sigs.html:15 letter_links.html:19 letter_links.html.py:30
-msgid "Delete"
+#: canvas3.py:559
+msgid "Question text cannot be empty."
 msgstr ""
 
-#: index.html:5 index.html.py:375 tab_content.html:24 tab_content.html.py:195
-#: public_list.html:5
-#, fuzzy
-msgid "Open Letter To..."
-msgstr "Open Letter To..."
-
-#: index.html:62 public_list.html:62
-msgid "cannot delete signature"
+#: canvas3.py:581
+msgid "Answer text cannot be empty."
 msgstr ""
 
-#: index.html:80 index.html.py:655 public_list.html:80
-msgid "Letter has no signers, try again when signers are present."
+#: canvas3.py:586
+msgid "Question not found. Should not happen."
 msgstr ""
 
-#: index.html:92 index.html.py:573 public_list.html:92 letter_links.html:17
-msgid "Manage signatures"
+#: canvas3.py:614
+msgid "Answer not found. Should not happen."
 msgstr ""
 
-#: index.html:99 public_list.html:99
-msgid "cannot load signers"
-msgstr ""
-
-#: index.html:145 index.html.py:569 public_list.html:145
-msgid "Edit letter"
-msgstr ""
-
-#: index.html:192 public_list.html:192
-msgid "Edit translation"
-msgstr ""
-
-#: index.html:194 public_list.html:194
-msgid "Create translation"
-msgstr ""
-
-#: index.html:249 public_list.html:249
-msgid "Delete letter"
-msgstr ""
-
-#: index.html:293 public_list.html:293
-msgid "Delete letter translation"
-msgstr ""
-
-#: index.html:319
-msgid "Please login first with the Connect button."
-msgstr ""
-
-#: index.html:330 index.html.py:395 public_list.html:331
-msgid "Create new letter"
-msgstr ""
-
-#: index.html:339 public_list.html:340
-msgid "Letter created"
-msgstr ""
-
-#: index.html:364
-#, fuzzy
-msgid "Press the connect button to log in with your Facebook account"
-msgstr ""
-"To sign this letter with your Facebook account, press the Connect button (if "
-"you don't have a Facebook account, you will get the option to register):"
-
-#: index.html:364
-#, fuzzy
-msgid ""
-"if you don't have a Facebook account, you will get the option to register"
-msgstr ""
-"To sign this letter with your Facebook account, press the Connect button (if "
-"you don't have a Facebook account, you will get the option to register):"
-
-#: index.html:379
-msgid "Create a letter for anyone to read and sign."
-msgstr ""
-
-#: index.html:410
-msgid ""
-"To create a letter, login with your Facebook account, click on the link "
-"above, and fill out the form."
-msgstr ""
-
-#: index.html:410
-msgid "Your letter will get its own URL that you can distribute to signers."
-msgstr ""
-
-#: index.html:410
-msgid "Letters can  be about any subject. Here are some samples:"
-msgstr ""
-
-#: index.html:412
-msgid "Binational conference agreement"
-msgstr ""
-
-#: index.html:412 index.html.py:413 index.html.py:417 conf/settings_foo.py:6
-#: conf/settings.py:6
+#: conf/settings.py:8 conf/settings_foo.py:6
 msgid "English"
 msgstr ""
 
-#: index.html:412 index.html.py:415 index.html.py:417 conf/settings_foo.py:7
-#: conf/settings.py:7
+#: conf/settings.py:9 conf/settings_foo.py:7
 msgid "Spanish"
 msgstr ""
 
-#: index.html:413
-msgid "neighborhood protest"
+#: templates/control.inc:53
+msgid "add picture"
 msgstr ""
 
-#: index.html:415
-msgid "thank-you letter"
+#: templates/control.inc:97
+msgid "yes, delete it"
 msgstr ""
 
-#: index.html:417
-msgid "school reunion agreement"
+#: templates/control.inc:106
+msgid "no, cancel"
 msgstr ""
 
-#: index.html:417
-msgid "setup to only accept Facebook signatures"
+#: templates/control.inc:245
+msgid "created this question on Five Votes."
 msgstr ""
 
-#: index.html:417
-msgid "Feel free to test signing the sample letters."
+#: templates/control.inc:246
+msgid "Your opinion is needed!"
 msgstr ""
 
-#: index.html:420
-msgid "Users can choose to have their letters listed in our"
+#: templates/control.inc:281
+msgid "Zero Votes"
 msgstr ""
 
-#: index.html:420
-msgid "public letter list"
+#: templates/control.inc:284
+msgid "One Vote"
 msgstr ""
 
-#: index.html:423
-msgid ""
-"Open-letter-to is free to use by anyone and is provided with no guarantees."
+#: templates/control.inc:287
+msgid "Two Votes"
 msgstr ""
 
-#: index.html:423
-msgid ""
-"It is hosted at the Google Appengine server cloud (appspot), so it should be "
-"very reliable."
+#: templates/control.inc:290
+msgid "Three Votes"
 msgstr ""
 
-#: index.html:423
-msgid ""
-"We are not responsible from any content added by our users and reserve the "
-"right to remove abusive letters."
+#: templates/control.inc:293
+msgid "Four Votes"
 msgstr ""
 
-#: index.html:423
-msgid ""
-"If you have questions or suggestions, or would like to help us translate "
-"this website to a new language, please write to:"
+#: templates/control.inc:296 templates/index3.html:7
+#: templates/index3.html.py:446
+msgid "Five Votes"
 msgstr ""
 
-#: index.html:442 edit_letter.html:11 letter_trans.html:20
-msgid "Letter title"
+#: templates/control.inc:407
+msgid "All"
 msgstr ""
 
-#: index.html:447 edit_letter.html:16
-msgid "Letter language"
+#: templates/control.inc:408
+msgid "Women"
 msgstr ""
 
-#: index.html:456 edit_letter.html:25
-msgid "Letter URL name"
+#: templates/control.inc:409
+msgid "Men"
 msgstr ""
 
-#: index.html:459
-msgid ""
-"Only dashes, underscores and lower case letters allowed. This is the URL "
-"your letter will have."
+#: templates/control.inc:542
+msgid "answered this question on Five Votes."
 msgstr ""
 
-#: index.html:463 edit_letter.html:31 letter_trans.html:25
-msgid "Summary of the letter"
+#: templates/control.inc:545
+msgid "His top choice was:"
 msgstr ""
 
-#: index.html:467 edit_letter.html:35 letter_trans.html:29
-msgid ""
-"A short paragraph explaining the letter and why readers should consider "
-"signing it. This will be displayed on users facebook profiles when they "
-"sign, for their friends to read."
+#: templates/control.inc:547
+msgid "Her top choice was:"
 msgstr ""
 
-#: index.html:469 edit_letter.html:37 letter_trans.html:31
-msgid "Letter text"
+#: templates/control.inc:586 templates/index3.html:653
+#: templates/index3.html.py:752 templates/index3.html:843
+msgid "by"
 msgstr ""
 
-#: index.html:473 edit_letter.html:41 letter_trans.html:35
-msgid ""
-"Bold and italic text in the displayed letter can be obtained by surrounding "
-"it with <strong>strong</strong> and <em>em</em> html tags. Example: &lt;"
-"strong&gt;Joe&lt;/strong&gt; will be shown as <strong>Joe</strong>."
+#: templates/control.inc:683
+msgid "Questions from all users"
 msgstr ""
 
-#: index.html:476 edit_letter.html:44
-msgid "Signatures to collect before signer names are revealed"
+#: templates/index3.html:461
+msgid "Create your own questions!"
 msgstr ""
 
-#: index.html:479
-msgid "reveal immediately"
+#: templates/index3.html:474
+msgid "Questions by"
 msgstr ""
 
-#: index.html:487 edit_letter.html:55
-msgid ""
-"Use this option if you prefer identities of the first signers to be kept "
-"anonymous. Identities will only be revealed until the selected number of "
-"signatures is reached. Before this, only the number of signatures will be "
-"shown."
+#: templates/index3.html:481
+msgid "Questions with answers by"
 msgstr ""
 
-#: index.html:492 index.html.py:494 edit_letter.html:60 edit_letter.html.py:62
-msgid "Only Facebook signers"
+#: templates/index3.html:488
+msgid "Questions voted by"
 msgstr ""
 
-#: index.html:496 edit_letter.html:64
-msgid ""
-"Visitors can sign the letter either with their Facebook accounts or by "
-"entering their name and location. Check this option to only allow Facebook "
-"signatures."
+#: templates/index3.html:515
+msgid "Questions about this app? Leave them here:"
 msgstr ""
 
-#: index.html:500 index.html.py:502 edit_letter.html:68 edit_letter.html.py:70
-msgid "Exclude from public list"
+#: templates/index3.html:530
+msgid "Create and share your own questions!"
 msgstr ""
 
-#: index.html:504 edit_letter.html:72
-msgid ""
-"Check this option if you don't want your letter to be listed in our public "
-"letters directory."
+#: templates/index3.html:532
+msgid "Questions from other users"
 msgstr ""
 
-#: index.html:508
-msgid "Create Letter"
+#: templates/index3.html:546 templates/lang_selector.html:11
+msgid "Select your language"
 msgstr ""
 
-#: index.html:518 index.html.py:535
-msgid "Number of signers:"
-msgstr ""
-
-#: index.html:523
-msgid "Are you sure you want to delete this letter and its signers?"
-msgstr ""
-
-#: index.html:525
-msgid "Delete Letter"
-msgstr ""
-
-#: index.html:527 index.html.py:545
-msgid "Cancel"
-msgstr ""
-
-#: index.html:541
-msgid "Are you sure you want to delete this translation and its signers?"
-msgstr ""
-
-#: index.html:543
-msgid "Delete Translation"
-msgstr ""
-
-#: index.html:563
+#: templates/index3.html:560
 #, fuzzy
-msgid "Your letter has been created."
-msgstr "This letter has been viewed "
-
-#: index.html:565
-msgid "You can see it at:"
-msgstr ""
-
-#: index.html:566
-msgid "You can distribute this URL to letter signers."
-msgstr ""
-
-#: index.html:570
-msgid "You letter can be edited while it has no signers."
-msgstr ""
-
-#: index.html:574
-msgid "Signatures and comments from signers can be deleted."
-msgstr ""
-
-#: index.html:577
-msgid ""
-"You can embed your letter in your own website, by adding the following html "
-"code to it:"
-msgstr ""
-
-#: index.html:583
-msgid "Close"
-msgstr ""
-
-#: index.html:686 tab_content.html:45 tab_content.html.py:52
-msgid "Welcome,"
-msgstr ""
-
-#: index.html:686
-msgid "You are connected with your Facebook account."
-msgstr ""
-
-#: tab_content.html:15
-msgid "This letter has been visited "
-msgstr "This letter has been viewed "
-
-#: tab_content.html:15
-msgid "times, and signed by "
-msgstr ""
-
-#: tab_content.html:15
-msgid "persons"
-msgstr ""
-
-#: tab_content.html:24
-msgid "Powered by "
-msgstr ""
-
-#: tab_content.html:24
-msgid "Easily create letters like this."
-msgstr ""
-
-#: tab_content.html:30
-#, fuzzy
-msgid ""
-"To sign the letter with your Facebook account, press the Connect button (if "
-"you don't have a Facebook account, you will get the option to register):"
+msgid "To use this app, sign in with your facebook account:"
 msgstr ""
 "To sign this letter with your Facebook account, press the Connect button (if "
 "you don't have a Facebook account, you will get the option to register):"
 
-#: tab_content.html:38
-msgid "To sign by entering your name and location, "
+#: templates/index3.html:593
+msgid "Question created"
 msgstr ""
 
-#: tab_content.html:38
-msgid "click here"
+#: templates/index3.html:596
+msgid "Suggest inital answers:"
 msgstr ""
 
-#: tab_content.html:45
-msgid ""
-"You are connected with your Facebook account and you have already signed "
-"this letter."
+#: templates/index3.html:603 templates/index3.html.py:673
+#: templates/index3.html:700
+msgid "add"
 msgstr ""
 
-#: tab_content.html:52
-msgid ""
-"You are logged in with your Facebook account. To sign this letter, press the "
-"sign button below."
+#: templates/index3.html:614
+msgid "done"
 msgstr ""
 
-#: tab_content.html:56
-msgid "Thanks for signing!"
+#: templates/index3.html:615 templates/index3.html.py:684
+msgid "Post to Facebook"
 msgstr ""
 
-#: tab_content.html:73
-msgid "Sign this letter"
+#: templates/index3.html:626
+msgid "Enter your question:"
 msgstr ""
 
-#: tab_content.html:77
-msgid "Name:"
+#: templates/index3.html:630
+msgid "create"
 msgstr ""
 
-#: tab_content.html:81
-msgid "City and country:"
+#: templates/index3.html:638
+msgid "You're done!"
 msgstr ""
 
-#: tab_content.html:86
-msgid "Comment (optional):"
+#: templates/index3.html:641
+msgid "Your question's URL is:"
 msgstr ""
 
-#: tab_content.html:90
-msgid "Show on my Facebook Wall"
+#: templates/index3.html:643
+msgid "create another question"
 msgstr ""
 
-#: tab_content.html:95
-msgid "Sign the Letter"
+#: templates/index3.html:662
+msgid "suggest new answer"
 msgstr ""
 
-#: tab_content.html:108
-msgid "Signers of this letter will be disclosed after "
+#: templates/index3.html:682
+msgid "See results"
 msgstr ""
 
-#: tab_content.html:108
-msgid "signatures are entered."
+#: templates/index3.html:692
+msgid "Suggest another answer"
 msgstr ""
 
-#: tab_content.html:116 tab_content.html.py:179
-msgid "Signers"
+#: templates/index3.html:725 templates/index3.html.py:830
+msgid "vote"
 msgstr ""
 
-#: tab_content.html:197
-msgid " has signed an open letter:"
+#: templates/index3.html:734 templates/index3.html.py:839
+msgid "unvote"
 msgstr ""
 
-#: tab_content.html:204
-msgid "More info"
+#: templates/index3.html:783
+#, fuzzy
+msgid "To vote on this question, sign in with your facebook account:"
+msgstr ""
+"To sign this letter with your Facebook account, press the Connect button (if "
+"you don't have a Facebook account, you will get the option to register):"
+
+#: templates/index3.html:790
+msgid "login to vote"
 msgstr ""
 
-#: public_list.html:368
-msgid "Open Letter To"
-msgstr "Open Letter To..."
-
-#: public_list.html:383
-msgid "Public letter list"
+#: templates/index3.html:858
+msgid "open"
 msgstr ""
 
-#: lang_selector.html:3
-msgid "Select your language"
+#: templates/index3.html:859
+msgid "close"
 msgstr ""
 
-#: letter_links.html:3
-msgid "Your letters:"
+#: templates/index3.html:864
+msgid "delete"
 msgstr ""
 
-#: letter_links.html:13
-msgid "Edit"
+#: templates/index3.html:871
+msgid "Delete this question?"
 msgstr ""
 
-#: letter_links.html:15
-msgid "Add translation"
-msgstr ""
+#, fuzzy
+#~ msgid "Press the connect button to log in with your Facebook account"
+#~ msgstr ""
+#~ "To sign this letter with your Facebook account, press the Connect button "
+#~ "(if you don't have a Facebook account, you will get the option to "
+#~ "register):"
 
-#: letter_links.html:28
-msgid "View"
-msgstr ""
+#, fuzzy
+#~ msgid ""
+#~ "if you don't have a Facebook account, you will get the option to register"
+#~ msgstr ""
+#~ "To sign this letter with your Facebook account, press the Connect button "
+#~ "(if you don't have a Facebook account, you will get the option to "
+#~ "register):"
 
-#: edit_letter.html:28
-msgid "Only dashes, underscores and lower case letters allowed."
-msgstr ""
+#, fuzzy
+#~ msgid "Your match is now created."
+#~ msgstr "This letter has been viewed "
 
-#: edit_letter.html:76 letter_trans.html:38
-msgid "Save"
-msgstr ""
+#, fuzzy
+#~ msgid ""
+#~ "To log in with your Facebook account, press the Connect button (if you "
+#~ "don't have a Facebook account, you will get the option to register):"
+#~ msgstr ""
+#~ "To sign this letter with your Facebook account, press the Connect button "
+#~ "(if you don't have a Facebook account, you will get the option to "
+#~ "register):"
 
-#: ajax.py:77
-msgid "not found"
-msgstr ""
+#, fuzzy
+#~ msgid "You are logged in with your Facebook account."
+#~ msgstr ""
+#~ "To sign this letter with your Facebook account, press the Connect button "
+#~ "(if you don't have a Facebook account, you will get the option to "
+#~ "register):"
 
-#: ajax.py:88 ajax.py:409
-msgid "Letter cannot be edited anymore, because it has been signed."
-msgstr ""
+#, fuzzy
+#~ msgid "Open Letter To..."
+#~ msgstr "Open Letter To..."
 
-#: ajax.py:103 ajax.py:132
-msgid "cannot find letter; should not happen"
-msgstr ""
+#, fuzzy
+#~ msgid ""
+#~ "To sign the letter with your Facebook account, press the Connect button "
+#~ "(if you don't have a Facebook account, you will get the option to "
+#~ "register):"
+#~ msgstr ""
+#~ "To sign this letter with your Facebook account, press the Connect button "
+#~ "(if you don't have a Facebook account, you will get the option to "
+#~ "register):"
 
-#: ajax.py:284
-msgid "Invalid FB UID, should not happen."
-msgstr ""
+#~ msgid "This letter has been visited "
+#~ msgstr "This letter has been viewed "
 
-#: ajax.py:301
-msgid "Could not create user, should not happen."
-msgstr ""
-
-#: ajax.py:309
-msgid "Letter title cannot be empty."
-msgstr ""
-
-#: ajax.py:313 ajax.py:418
-msgid "Signatures before display cannot be empty. "
-msgstr ""
-
-#: ajax.py:316 ajax.py:421 ajax.py:514
-msgid "Strange chars in lang."
-msgstr ""
-
-#: ajax.py:323 ajax.py:427
-msgid "Letter URL name cannot be empty. "
-msgstr ""
-
-#: ajax.py:326 ajax.py:430
-msgid ""
-"Letter URL name should only contain lowercase a to z letters and underscores."
-msgstr ""
-
-#: ajax.py:333 ajax.py:451
-msgid "The URL name "
-msgstr ""
-
-#: ajax.py:333 ajax.py:451
-msgid " already exists. Please choose a different one."
-msgstr ""
-
-#: ajax.py:337 ajax.py:434 ajax.py:519
-msgid "Letter summary cannot be empty. "
-msgstr ""
-
-#: ajax.py:340 ajax.py:437 ajax.py:522
-msgid "Letter summary should be shorter than 240 characters."
-msgstr ""
-
-#: ajax.py:344 ajax.py:441 ajax.py:526
-msgid "Letter text cannot be empty. "
-msgstr ""
-
-#: ajax.py:347 ajax.py:444 ajax.py:529
-msgid "Letter text should be shorter than 30000 characters."
-msgstr ""
-
-#: ajax.py:398 ajax.py:498
-msgid "Could not retrieve user, should not happen."
-msgstr ""
-
-#: ajax.py:405 ajax.py:505
-msgid "Could not retrieve existing letter, should not happen."
-msgstr ""
-
-#: ajax.py:414 ajax.py:510
-msgid "Letter title cannot be empty. "
-msgstr ""
-
-#: ajax.py:547
-msgid "A translation to this language already exists."
-msgstr ""
-
-#: ajax.py:615 ajax.py:660 ajax.py:709
-msgid "Letter not found. Should not happen."
-msgstr ""
-
-#: ajax.py:668
-msgid "Translation not found. Should not happen."
-msgstr ""
-
-#: ajax.py:715
-msgid "Comment should be shorter than 2000 characters."
-msgstr ""
-
-#: ajax.py:726
-msgid "Name cannot be empty or shorter than 5 characters."
-msgstr ""
-
-#: ajax.py:730
-msgid "City and country cannot be empty or shorter than 5 characters."
-msgstr ""
-
-#: ajax.py:755
-msgid "Signer already there. Should not happen."
-msgstr ""
-
-#: ajax.py:761
-msgid "Could not recognize you as a facebook user, please report problem"
-msgstr ""
-
-#: letter_trans.html:9
-msgid "Translation for"
-msgstr ""
-
-#: letter_trans.html:12
-msgid "Translation language"
-msgstr ""
+#~ msgid "Open Letter To"
+#~ msgstr "Open Letter To..."
 
 #~ msgid ""
 #~ "persons have declared that if the stadium is built in La Pastora, they "

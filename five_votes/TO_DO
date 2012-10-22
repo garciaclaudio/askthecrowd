@@ -27,6 +27,7 @@
 
  ---RELEASE---
 
+    * La pág. de resultados no debe decir "cero votos", debe volver a decir "five votes".
     * Photos should be stored as images (they load slowly).
     * Questions from all users should be replaced by the planned recent-questions landing page.
     * Photos in results page look distorted (square).
@@ -87,7 +88,7 @@ Nice cards layout: http://www.meetup.com/
 [Nice fonts] http://www.shell.com/home/content/products_services/on_the_road/fuels/fuel_save_challenge/?utm_source=outbrain&utm_medium=cpc&utm_content=make_netherlands_smartest&utm_campaign=shell_nl
 </DESIGN EXAMPLES>
 
-
+http://angel.co
 [Interesting] http://johnpolacek.github.com/superscrollorama/
 [Good] http://papermashup.com/jquery-page-scrolling/
 [Very good] http://blog.notdot.net/2010/07/Getting-unicode-right-in-Python (also, nice design)
@@ -113,6 +114,7 @@ Nueva variante: [será bueno? quién sabe]
         Hate    unhate  (odiar, desodiar)
         Love    unlove  (amar, desamar)
 
+
 <Preguntas INTERESANTES>
     * Cual es la mejor cancion de Joaquin Sabina?
     * Cual es la mayor contribucion de Argentina al mundo?
@@ -122,6 +124,11 @@ Nueva variante: [será bueno? quién sabe]
     * Consejos de padres mexicanos/regiomontanos/etc. para padres mexicanos/regiomontanos/etc..
     * En este momento se me antoja / at this very moment I crave
     * Hoy desayuné...
+    * Mejor album de Soda.
+    * Mejor canción de Soda.
+    * Mejor canción de... Soda, José José, JuanGa, Chente, etc.
+    * Mejor platillo mexicano. Cochinita pibil. Tamal oaxaqueño. Cabrito, Etc.
+    * Cosas sosas, bobas, simpáticas...
 </Preguntas INTERESANTES>
 
 
@@ -350,6 +357,16 @@ Get results,
    friend_id
       a second call not needed, send all data in one go?
 
+<compiling gettext>
+claudio@claudio:~/git/five_votes$ django-admin makemessages -l es -e py,html,inc
+processing language es
+claudio@claudio:~/git/five_votes$ django-admin makemessages -l en -e py,html,inc
+processing language en
+claudio@claudio:~/git/five_votes$ django-admin compilemessages
+processing file django.po in /home/claudio/git/five_votes/conf/locale/en/LC_MESSAGES
+processing file django.po in /home/claudio/git/five_votes/conf/locale/es/LC_MESSAGES
+claudio@claudio:~/git/five_votes$
+</compiling gettext>
 
 USING THE DATASTORE:
 https://developers.google.com/appengine/docs/python/gettingstarted/usingdatastore
@@ -1022,6 +1039,7 @@ http://martinjansen.com/2008/10/20/django-settings-files-for-development-and-pro
 ================================
 i18N (http://makeyjl.blogspot.com/2009/02/using-djangos-i18n-in-google-app-engine.html)
 ================================
+
 
 cd /home/claudio/google_appengine/askthecrowd
 
