@@ -322,7 +322,7 @@ class BaseHandler(I18NRequestHandler):
         super(BaseHandler, self).initialize(request, response)
 
         if settings.IN_DEV_SERVER_OLD:
-            print >> sys.stderr, '[[[[ IN DEV SERVER ]]]]'
+#            print >> sys.stderr, '[[[[ IN DEV SERVER ]]]]'
             self.user = User.get_by_key_name('518261219')
             self.csrf_token = '12345'
             self.init_lang()
@@ -377,7 +377,7 @@ class BaseHandler(I18NRequestHandler):
         if not data:
             data = {}
 
-        pprint.pprint( self.user, sys.stderr);
+#        pprint.pprint( self.user, sys.stderr);
 
         data[u'js_conf'] = json.dumps({
             u'appId': settings.FACEBOOK_APP_ID,
@@ -423,7 +423,7 @@ class BaseHandler(I18NRequestHandler):
 
         # try to load or create a user object
         if facebook.user_id:
-            print >> sys.stderr, 'getting user: ' + str(facebook.user_id)
+#            print >> sys.stderr, 'getting user: ' + str(facebook.user_id)
             user = User.get_by_key_name(facebook.user_id)
             if user:
                 # update stored access_token
@@ -447,28 +447,21 @@ class BaseHandler(I18NRequestHandler):
                     else:
                         friends = []
 
-                    print >> sys.stderr, 'CREATING USER: ' + str(facebook.user_id)
-                    print >> sys.stderr, 'NAME: ' + str( me[u'name'].encode('ascii', 'ignore') )
-                    print >> sys.stderr, 'GENDER: ' + str( me[u'gender'] )
-
-                    if me.has_key( u'friends' ):
-                        for user in me[u'friends'][u'data']:
-                            print >> sys.stderr, '  Friend: ' + str( user[u'id'] ) + ' -' + str( user[u'name'].encode('ascii', 'ignore') )
-
-                    print >> sys.stderr, '===NEW USER 1: '
-
-                    pprint.pprint( me, sys.stderr);
+#                    print >> sys.stderr, 'CREATING USER: ' + str(facebook.user_id)
+#                    print >> sys.stderr, 'NAME: ' + str( me[u'name'].encode('ascii', 'ignore') )
+#                    print >> sys.stderr, 'GENDER: ' + str( me[u'gender'] )
+#                    if me.has_key( u'friends' ):
+#                        for user in me[u'friends'][u'data']:
+#                            print >> sys.stderr, '  Friend: ' + str( user[u'id'] ) + ' -' + str( user[u'name'].encode('ascii', 'ignore') )
+#                    pprint.pprint( me, sys.stderr);
 
                     user = User(key_name=facebook.user_id,
                         user_id=facebook.user_id, friends=friends,
                         access_token=facebook.access_token, name=me[u'name'],
                         email=me.get(u'email'), picture=me[u'picture'][u'data'][u'url'],
                         gender=me[u'gender'])
-                    print >> sys.stderr, '===NEW USER 2: '
                     user.put()
-                    print >> sys.stderr, '===NEW USER 3: '
-                    pprint.pprint( user, sys.stderr);
-                    print >> sys.stderr, '===NEW USER 4: '
+#                    pprint.pprint( user, sys.stderr);
 
                 except KeyError, ex:
                     raise # ignore if can't get the minimum fields
@@ -495,7 +488,7 @@ class BaseHandler(I18NRequestHandler):
 
         lang = self.request.get('lang')
 
-        print >> sys.stderr, 'LANG PARAM' + str(lang)
+#        print >> sys.stderr, 'LANG PARAM' + str(lang)
 
         if lang:
             if lang == 'unset':
@@ -510,8 +503,8 @@ class BaseHandler(I18NRequestHandler):
         if self.selected_lang == 'es':
             self.locale = 'es_ES'
 
-        print >> sys.stderr, 'SELECTED LANG' + str(self.selected_lang)
-        print >> sys.stderr, 'DJANGO LANG' + str(self.request.LANGUAGE_CODE)
+#        print >> sys.stderr, 'SELECTED LANG' + str(self.selected_lang)
+#        print >> sys.stderr, 'DJANGO LANG' + str(self.request.LANGUAGE_CODE)
 
 
     def set_message(self, **obj):
@@ -649,7 +642,7 @@ class AjaxHandler(BaseHandler):
 
 
     def handle_delete_answer(self):
-        print >> sys.stderr, 'DELETING...' + str( self.request.get('answer_key') )
+#        print >> sys.stderr, 'DELETING...' + str( self.request.get('answer_key') )
         result = self.del_answer( self.request.get('answer_key') )
         return result
 
@@ -674,9 +667,9 @@ class AjaxHandler(BaseHandler):
         vote_val = self.request.get('vote_val')
 
         import sys
-        print >> sys.stderr, 'in handle_vote, question :' + str(ans.question)
-        print >> sys.stderr, 'in handle_vote, user :' + str(self.user)
-        print >> sys.stderr, 'in handle_vote, vote_val :' + str(vote_val)
+#        print >> sys.stderr, 'in handle_vote, question :' + str(ans.question)
+#        print >> sys.stderr, 'in handle_vote, user :' + str(self.user)
+#        print >> sys.stderr, 'in handle_vote, vote_val :' + str(vote_val)
     
 #        time.sleep(1)
 
@@ -687,10 +680,8 @@ class AjaxHandler(BaseHandler):
             print >> sys.stderr, 'in handle_vote 2-5:' + str(vote.key())
             votes_cast += int(vote.num_votes)
 
-        print >> sys.stderr, 'in handle_vote 3:' + str(vote_val)
-
-        import sys
-        print >> sys.stderr, 'VOTES cast :' + str(votes_cast)
+#        print >> sys.stderr, 'in handle_vote 3:' + str(vote_val)
+#        print >> sys.stderr, 'VOTES cast :' + str(votes_cast)
 
         votes_left = 5 - votes_cast
 
@@ -707,8 +698,7 @@ class AjaxHandler(BaseHandler):
                                               female_votes = 0, )
 
         if my_vote:
-            print >> sys.stderr, 'Vote there, update the count'
-
+#            print >> sys.stderr, 'Vote there, update the count'
             if vote_val == "1":
                 if votes_cast < 5:
                     my_vote.num_votes = my_vote.num_votes + 1
@@ -732,7 +722,7 @@ class AjaxHandler(BaseHandler):
                         results_summary.female_votes = results_summary.female_votes - 1
                     results_summary.put()
         else:
-            print >> sys.stderr, 'Vote not there '
+#            print >> sys.stderr, 'Vote not there '
             my_vote = Vote(user_id = self.user.user_id)
             my_vote.question = ans.question
             my_vote.answer = ans
@@ -757,7 +747,7 @@ class AjaxHandler(BaseHandler):
             User.get_by_key_name(self.user.friends), 300):
             friends[friend.user_id] = { 'name' : friend.name, 'user_id' : friend.user_id }
             friend_ids.append( str(friend.user_id) )
-            print >> sys.stderr, 'ADDING FRIEND ID: ' + str(friend.user_id)
+#            print >> sys.stderr, 'ADDING FRIEND ID: ' + str(friend.user_id)
 
         question = Question.get_by_key_name( self.request.get('question_key_name') );
 
@@ -776,7 +766,7 @@ class AjaxHandler(BaseHandler):
 
         friends_with_votes = []
         for fv in friend_votes:
-            print >> sys.stderr, 'FRIEND VOTE: ' + str(fv.answer.answer_text) + ', ' + str(fv.num_votes)
+#            print >> sys.stderr, 'FRIEND VOTE: ' + str(fv.answer.answer_text) + ', ' + str(fv.num_votes)
             if not results.has_key( 'friend_'+str(fv.user_id) ):
                 results['friend_'+str(fv.user_id)] = []
                 friends_with_votes.append(friends[fv.user_id])
@@ -1026,7 +1016,7 @@ class AllHandler(BaseHandler):
 class UsrHandler(BaseHandler):
     def get(self, user_id):
 
-        print >> sys.stderr, '=========> USR: ' + str(user_id)
+#        print >> sys.stderr, '=========> USR: ' + str(user_id)
         self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
         user = User.get_by_key_name(user_id)
 
@@ -1042,13 +1032,13 @@ class UsrHandler(BaseHandler):
                     'question_text' : unicode(q.question_text),
                     })
 
-        print >> sys.stderr, '=========> LOOKING FOR ANSWERS BY: ' + unicode(user_id)
+#        print >> sys.stderr, '=========> LOOKING FOR ANSWERS BY: ' + unicode(user_id)
         answers = Answer.gql( 'where user_id = :1', user_id );
         answers_struct = []
         answers_dict = {}
         for a in answers:
             aq = a.question.key().name()
-            print >> sys.stderr, '=========> FOUND ANSWER: ' + unicode(aq)
+#            print >> sys.stderr, '=========> FOUND ANSWER: ' + unicode(aq)
             if not questions_dict.has_key(aq) and not answers_dict.has_key(aq):
                 answers_dict[aq] = 1
                 answers_struct.append( {

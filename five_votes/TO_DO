@@ -7,9 +7,9 @@
 [DONE]    * Clicking on questions in prev-questions list should not have target=_blank
 [DONE]    * Create and share your own questions should be more prominent.
 [DONE]    * Show whirly "wait" thing when vote link is pressed.
-    * Translate.
-    * Test that users get the right language (from their browser) automatically.
-    * Test that posts to FB are made in the user's language.
+[DONE]    * Translate.
+[DONE]    * Test that users get the right language (from their browser) automatically.
+[DONE]    * Test that posts to FB are made in the user's language.
     * Silence / cleanup all debug data into the logs
     * Add logo to app description on FB side so that automatic "fulanito played five votes" messages, show the logo.
     * fill out app details (and logo icons): https://developers.facebook.com/apps/331909936825023/appdetails
@@ -27,6 +27,7 @@
 
  ---RELEASE---
 
+    * La liga al website desde los comentarios lleva a "http://five-votes.appspot.com/q22"...
     * La pág. de resultados no debe decir "cero votos", debe volver a decir "five votes".
     * Photos should be stored as images (they load slowly).
     * Questions from all users should be replaced by the planned recent-questions landing page.
@@ -129,6 +130,7 @@ Nueva variante: [será bueno? quién sabe]
     * Mejor canción de... Soda, José José, JuanGa, Chente, etc.
     * Mejor platillo mexicano. Cochinita pibil. Tamal oaxaqueño. Cabrito, Etc.
     * Cosas sosas, bobas, simpáticas...
+    * ¿Con quién me gustaría cenar esta noche? wat
 </Preguntas INTERESANTES>
 
 
