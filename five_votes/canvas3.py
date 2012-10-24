@@ -1072,8 +1072,14 @@ class UsrHandler(BaseHandler):
         self.get(question_key_name)
 
 
+class PrivPolHandler(BaseHandler):
+    def get(self):
+        self.render(u'index3',
+                    priv_pol=1
+                    )
+    def post(self):
+        self.get()
 
-# XXX, AQUI VOY
 
 def main():
     routes = [
@@ -1082,6 +1088,7 @@ def main():
         ('/q(.*)', QuestionHandler),
         ('/u(.*)', UsrHandler),
         ('/all', AllHandler),
+        ('/privacy_policy', PrivPolHandler),
         (r'/', MainPage),
     ]
     application = webapp.WSGIApplication(routes,
