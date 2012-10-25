@@ -2,7 +2,7 @@
 ==> "No one ever went broke underestimating the common sense or good taste of the general public" as P.T. Barnum (I think) once said.
 
 MISSING:
-Privacy Policy URL
+[DONE] Privacy Policy URL
 Image: Web Banner
 Image: Cover Image
 You must upload at least 3 screenshots for App on Facebook
@@ -22,22 +22,21 @@ You must upload at least 3 screenshots for App on Facebook
 [DONE]    * Silence / cleanup all debug data into the logs
 [DONE]    * move css into css file
 [DONE]    * move client templates into inc file
-    * move usr page into inc file
-    * move footer into inc file
-    * move header into inc file
-    * move main and question pages into inc files?
-
-    * Add logo to app description on FB side so that automatic "fulanito played five votes" messages, show the logo.
-    * fill out app details (and logo icons): https://developers.facebook.com/apps/331909936825023/appdetails
-[POSTP]        Privacy Policy URL?
-        Missing translated Tagline for Español
-        Missing translated Description for Español
-        Missing translated Detailed Description for Español
-        Image: 128 x 128
-        Image: Web Banner
-        Image: Cover Image
-        You must upload at least 3 screenshots for App on Facebook
-    * Translate app name and details to Spanish.
+[DONE]    * move usr page into inc file
+[DONE]    * move footer into inc file
+[DONE]    * move header into inc file
+[DONE]    * move main and question pages into inc files?
+[DONE]    * Privacy Policy URL?
+[DONE]    * Add logo to app description on FB side so that automatic "fulanito played five votes" messages, show the logo.
+[DONE]    * fill out app details (and logo icons): https://developers.facebook.com/apps/331909936825023/appdetails
+[DONE]        Missing translated Tagline for Español
+[DONE]        Missing translated Description for Español
+[DONE]        Missing translated Detailed Description for Español
+[DONE]        Image: 128 x 128
+[DONE]        Image: Web Banner
+[DONE]        Image: Cover Image
+[DONE]        You must upload at least 3 screenshots for App on Facebook
+[DONE]    * Translate app name and details to Spanish.
     * Delete all existing questions / data structs.
 
  ---RELEASE---
@@ -49,6 +48,7 @@ You must upload at least 3 screenshots for App on Facebook
     * Photos in results page look distorted (square).
     * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
     * BUG: deleting an answer from prev. questions, will not rearrange cards.
+    * Once tested for a while, SUBMIT app details on FB so that it gets promoted / listed.
 </TODO>
 
 
