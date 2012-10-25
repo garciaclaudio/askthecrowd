@@ -1,19 +1,12 @@
 
+==> "No one ever went broke underestimating the common sense or good taste of the general public" as P.T. Barnum (I think) once said.
+
 MISSING:
 Privacy Policy URL
 Image: Web Banner
 Image: Cover Image
 You must upload at least 3 screenshots for App on Facebook
 
-
-¡Lo que opina la mayoría!
-
-Lindas y divertidas encuestas de opinión.
-
-
-Create polls and share them with your Facebook friends. Then, they will have 5 votes to distribute among the poll answers, and can provide answers of their own. In the poll results, friends can see how their friends voted.
-
-Crea encuestas y compártelas con tus amigos. Ellos tendrán 5 votos para distribuir entre las respuestas, y pueden agregar respuestas propias. En los resultados, podrás ver cómo votaron tus amigos.
 
 
 <TODO>
@@ -27,9 +20,8 @@ Crea encuestas y compártelas con tus amigos. Ellos tendrán 5 votos para distribu
 [DONE]    * Test that users get the right language (from their browser) automatically.
 [DONE]    * Test that posts to FB are made in the user's language.
 [DONE]    * Silence / cleanup all debug data into the logs
-
-    * move css into css file
-    * move client templates into inc file
+[DONE]    * move css into css file
+[DONE]    * move client templates into inc file
     * move usr page into inc file
     * move footer into inc file
     * move header into inc file
