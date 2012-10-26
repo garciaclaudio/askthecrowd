@@ -7,8 +7,6 @@ Image: Web Banner
 Image: Cover Image
 You must upload at least 3 screenshots for App on Facebook
 
-
-
 <TODO>
 [DONE]    * Clicking the logo should take you to the front page.
 [DONE]    * Tab fonts too little in results page.
@@ -114,6 +112,19 @@ http://angel.co
 [Very good] http://stackoverflow.com/questions/960330/how-to-set-google-app-engine-java-content-type-to-utf-8
 
 
+¿Que es lo mejor de Argentina al mundo?
+
+El Mate
+Cerati / Soda
+El Tango
+Gardel
+Mafalda
+Maradona
+Messi
+Borges
+Cortázar
+
+
 
 cd(frames[0]) 
 César García Treviño
@@ -131,9 +142,10 @@ Nueva variante: [será bueno? quién sabe]
         Love    unlove  (amar, desamar)
 
 
-<Preguntas INTERESANTES>
+<Preguntas INTERESANTES Y CHUSCAS>
+    * Cual es la mejor cancion de Cri-Cri?
     * Cual es la mejor cancion de Joaquin Sabina?
-    * Cual es la mayor contribucion de Argentina al mundo?
+    * ¿Cual es la mayor contribucion de Argentina al mundo?
     * Cual es el mejor album de Soda? (con links a videos)
     * Cual es la mejor canción de los 80's? (90's, etc.).
     * Las cien cosas que los padre deben saber (consejos para la buena crianza de los hijos).
@@ -146,7 +158,7 @@ Nueva variante: [será bueno? quién sabe]
     * Mejor platillo mexicano. Cochinita pibil. Tamal oaxaqueño. Cabrito, Etc.
     * Cosas sosas, bobas, simpáticas...
     * ¿Con quién me gustaría cenar esta noche? wat
-</Preguntas INTERESANTES>
+</Preguntas INTERESANTES Y CHUSCAS>
 
 
 <POSTP>
