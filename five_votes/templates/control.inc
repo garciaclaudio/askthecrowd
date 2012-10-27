@@ -788,6 +788,7 @@ function show_all_questions() {
                   {% endif %}
             
                   FB.XFBML.parse( document.getElementById('welcome_msg') );
+                  FB.XFBML.parse( document.getElementById('second_login_button') );
             
               }
             

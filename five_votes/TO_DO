@@ -35,10 +35,12 @@ You must upload at least 3 screenshots for App on Facebook
 [DONE]        Image: Cover Image
 [DONE]        You must upload at least 3 screenshots for App on Facebook
 [DONE]    * Translate app name and details to Spanish.
-    * Delete all existing questions / data structs.
+[DONE]    * Delete all existing questions / data structs.
 
  ---RELEASE---
-
+[DONE]    * Ingresa con tu cuenta para votar (en pag. de resultados), debe ir acompañado de un botón de FB para loguearse.
+    * Show "my votes" tab in results page.
+    * Show "change my votes" link under "my votes" tab in results page. 
     * La liga al website desde los comentarios lleva a "http://five-votes.appspot.com/q22"...
     * La pág. de resultados no debe decir "cero votos", debe volver a decir "five votes".
     * Photos should be stored as images (they load slowly).
@@ -112,18 +114,20 @@ http://angel.co
 [Very good] http://stackoverflow.com/questions/960330/how-to-set-google-app-engine-java-content-type-to-utf-8
 
 
-¿Que es lo mejor de Argentina al mundo?
+¿Qué es lo mejor que Argentina le ha dado al mundo?
 
-El Mate
-Cerati / Soda
-El Tango
-Gardel
 Mafalda
+Cerati / Soda
+Gardel
 Maradona
 Messi
+El Ché
 Borges
 Cortázar
-
+Evita
+el tango
+la yerba mate
+Los asados
 
 
 cd(frames[0]) 
@@ -158,6 +162,7 @@ Nueva variante: [será bueno? quién sabe]
     * Mejor platillo mexicano. Cochinita pibil. Tamal oaxaqueño. Cabrito, Etc.
     * Cosas sosas, bobas, simpáticas...
     * ¿Con quién me gustaría cenar esta noche? wat
+    * ¿Quién es el mejor cantante de rancheras que ha existido?
 </Preguntas INTERESANTES Y CHUSCAS>
 
 

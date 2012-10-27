@@ -237,7 +237,7 @@
       <div id="answers_div">
       </div>
 
-      <div class="add_ans_class" style="padding:10px;font-size:110%;clear:both;">{%trans "login to vote" %}</div>
+      <div id="second_login_button" class="add_ans_class" style="padding:15px;font-size:110%;clear:both;">{%trans "login to vote" %} <br /><br /> <fb:login-button show-faces="true"></fb:login-button></div>
   </div>
 </div>
 </script>
