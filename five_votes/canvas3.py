@@ -22,6 +22,7 @@ from google.appengine.api import images
 
 import time
 import pprint
+import urlparse
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'conf.settings'
 
@@ -181,6 +182,7 @@ class Answer(db.Model):
     user_id = db.StringProperty(required=True)
     answer_text = db.StringProperty()
     picture = db.BlobProperty()
+    video_id = db.StringProperty()
     def owner(self):
         return User.gql(u'WHERE user_id = :1', self.user_id).fetch(1)[0]
 
@@ -661,6 +663,35 @@ class AjaxHandler(BaseHandler):
 
         return result
 
+
+    def handle_add_video(self):
+        error = ''
+        success = 1
+        ans = Answer.get( self.request.get('answer_key') );
+        video_link = self.request.get('video_link');
+
+        try:
+            url_data = urlparse.urlparse( video_link )
+            query = urlparse.parse_qs(url_data.query)
+            video_id = query["v"][0]
+        except:
+            error = _("Malformed Youtube URL");
+            success = 0
+            video_id = 0
+
+        if success == 1:
+            ans.video_id = video_id
+            ans.put()
+
+        result =  {'success': success,
+                   'error': error,
+                   'answer_key': self.request.get('answer_key'),
+                   'video_id': unicode( video_id ),
+                  }
+
+        return result
+
+
     def handle_vote(self):
         answer_key = self.request.get('answer_key')
         ans = Answer.get( answer_key )
@@ -879,6 +910,9 @@ class AjaxHandler(BaseHandler):
         result_struct = { 'error' : '1' }
 
         action = self.request.get('action')
+
+        if( action == 'add_video' ):
+            result_struct = self.handle_add_video()
 
         if( action == 'get_user_questions' ):
             result_struct = self.handle_get_user_questions()

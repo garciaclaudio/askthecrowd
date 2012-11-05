@@ -1,4 +1,39 @@
 
+<adding videos>
+
+    THUMBNAIL URL: http://img.youtube.com/vi/NqdW4S8e1ho/mqdefault.jpg
+    http://stackoverflow.com/questions/2068344/how-to-get-thumbnail-of-youtube-video-link-using-youtube-api
+
+NYRO MODAL GAL:
+    <script type="text/javascript" src="js/jquery.nyroModal.custom.min.js"></script>
+
+    <a href="img/img1.jpg" id="imgFiche" class="nyroModal" title="UCLA" rel="gal">Gallery Img 1</a>
+    <a href="img/img2.jpg" class="nyroModal" title="3rd Street Promenade by Night" rel="gal">Gallery Img 2</a>
+    <a href="http://www.youtube.com/watch?v=lddUnv1R5y0" class="nyroModal" rel="gal" title="Hockey Goal fight">Youtube in gallery</a><br />
+    <a href="img/img3.jpg" class="nyroModal" title="Sunset at Santa Monica" rel="gal">Gallery Img 3</a>
+    <script type="text/javascript">
+    $(function() {
+      $('.nyroModal').nyroModal();
+    });
+    </script>
+
+NYRO MODAL SINGLE IMG:
+    <a href="img/img2.jpg" class="nyroModal" title="3rd Street Promenade">Image</a>
+    <script type="text/javascript">
+    $(function() {
+      $('.nyroModal').nyroModal();
+    });
+    </script>
+
+    1. add "add youtube video" link. 
+    2. When clicked, card becomes wider, a text area appears for the link.
+    3. When the link is submitted, it gets parsed, the video id extracted (http://www.youtube.com/watch?v=lddUnv1R5y0), and the video thumbnail image is shown (clickable, with a white triangle that changes color in the middle).
+    4. When the link is clicked, display video in nyromodal popup, as above.
+    5. That's it!!!
+
+</adding videos>
+
+
 ==> "No one ever went broke underestimating the common sense or good taste of the general public" as P.T. Barnum (I think) once said.
 
 MISSING:
@@ -36,8 +71,7 @@ You must upload at least 3 screenshots for App on Facebook
 [DONE]        You must upload at least 3 screenshots for App on Facebook
 [DONE]    * Translate app name and details to Spanish.
 [DONE]    * Delete all existing questions / data structs.
-
- ---RELEASE---
+ ---RELEASE--- HEYY!!! DID IT!!!
 [DONE]    * Ingresa con tu cuenta para votar (en pag. de resultados), debe ir acompañado de un botón de FB para loguearse.
     * Show "my votes" tab in results page.
     * Show "change my votes" link under "my votes" tab in results page. 
@@ -55,13 +89,13 @@ You must upload at least 3 screenshots for App on Facebook
 ==>1st, FINISH, then do this:
 
 <NEXT FOR DEVELOPMENT>
-
-add: country, province when logging in
 add: video playing.
+add: country, province when logging in
 add: big photo popups on click.
 add: in-app comments per answer
 add: "denunciar" button (fusilar de pinterest)
 add: category drop-down to question creation
+add: description field to elaborate on question (optional)
 add: recent questions blog-like page: created by Fulanito, from Tucumán, Argentina (photo, flag), by language, this can be the site's main landing page.
 add: popular questions landing page, blog like (most voted in the past day, 7 days, 30 days) --use a new table to aggregate voted questions per language, day, num_voters. Use this to show suggestions in the results page.
 add: index landing page, by country, province, category, showing how many pages
@@ -147,6 +181,8 @@ Nueva variante: [será bueno? quién sabe]
 
 
 <Preguntas INTERESANTES Y CHUSCAS>
+[CASI]    * ¿Tu personaje favorito de El Chavo, era?
+[CASI]    * ¿Quién de estos baladistas del recuerdo cantaba mejor? José José, Yuri, Lupita D'Alessio, Amanda Miguel, Juan Gabriel, Pedro Infante, Pedro Vargas, Lola Beltrán, Lucía Méndez, Marco Antonio Muñiz, Johnny Laboriel, Gualberto Castro, Flans, etc. 
     * Cual es la mejor cancion de Cri-Cri?
     * Cual es la mejor cancion de Joaquin Sabina?
     * ¿Cual es la mayor contribucion de Argentina al mundo?

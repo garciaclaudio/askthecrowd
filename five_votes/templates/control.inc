@@ -43,8 +43,11 @@ function bind_delete_and_uploader(data) {
          }
     });
 
-    if( ! data.has_pic ) {
-     // setup upload thingy
+    if( ! data.has_pic && ! data.has_video ) {
+
+        // show video link
+        $('#add_video_link_' + data.answer_key).show();
+        // setup upload thingy
         var uploader = new qq.FileUploader({
                 element: document.getElementById('file_uploader_' + data.answer_key),
                 action: '/ajax.html',
@@ -695,6 +698,26 @@ function show_all_questions() {
 //         'question_text' : '{{q.question_text}}',
 //      }));
     {% endfor %}
+}
+
+function add_video_link_func( ans_key ) {
+
+        $('#file_uploader_' + ans_key).hide();
+        $('#add_video_link_' + ans_key).hide();
+        $('#video_form_div_' + ans_key).show();
+        $('#answer_' + ans_key).parent().masonry({itemSelector: '.answer_card', isFitWidth: true
+                        });
+        $('#add_video_form_' + ans_key ).ajaxForm({
+             dataType:  'json', 
+             success: function(data) { 
+                 if( data.error ) {
+                    alert( data.error );
+                 } else {
+alert( 'saved! ' + data.video_id );
+alert( 'now display thumbnail, link, etc.' );
+                 }
+             }
+        });
 }
 
 {% if NOT_IN_DEV_SERVER_OLD %}
