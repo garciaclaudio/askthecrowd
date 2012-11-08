@@ -417,3 +417,21 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
     font-size: 90%;
 }
 
+.play_inset {
+  display:none;
+  padding:2px;
+  position:absolute;top:22px;right:65px;"
+  display:table-cell;
+}
+
+a.play_inset_foo img {
+filter:alpha(opacity=50);
+-moz-opacity: 0.5; 
+opacity: 0.5;
+-khtml-opacity: 0.5;}
+
+a.play_inset_foo:hover img {
+filter:alpha(opacity=100); 
+-moz-opacity: 1.0; 
+opacity: 1.0;
+-khtml-opacity: 1.0; }

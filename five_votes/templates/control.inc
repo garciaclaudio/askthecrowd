@@ -43,7 +43,7 @@ function bind_delete_and_uploader(data) {
          }
     });
 
-    if( ! data.has_pic && ! data.has_video ) {
+    if( ! data.has_pic && data.video_id == 'None' ) {
 
         // show video link
         $('#add_video_link_' + data.answer_key).show();
@@ -151,6 +151,7 @@ function get_and_display_user_questions() {
                                    'answer_key': ans[j].answer_key,
                                    'answer_text': ans[j].answer_text,
                                    'has_pic': ans[j].has_pic,
+                                   'video_id': ans[j].video_id,
                                    'num_votes': ans[j].num_votes,
                                    'visible': (ans[j].num_votes>0) ? '' : 'invisible',
                               }));
@@ -158,6 +159,17 @@ function get_and_display_user_questions() {
                          if( ans[j].has_pic ) {
                              $('#picture_' + ans[j].answer_key ).html( $("#show_pic_tmpl").tmpl({'answer_key': ans[j].answer_key}));
                          }
+                         if( ans[j].video_id != 'None') {
+                             $('#picture_' + ans[j].answer_key ).html( $("#show_video_tmpl").tmpl({'answer_key': ans[j].answer_key, 'video_id':ans[j].video_id}));
+                             $('#play_button_' + ans[j].answer_key ).show();
+                             $('#play_button_' + ans[j].answer_key + ' > a').attr('video_id', ans[j].video_id);
+                             $('#play_button_' + ans[j].answer_key + ' > a').click(  function() { 
+                                 var vid_id = $(this).attr('video_id');
+                                 alert("hello " + vid_id );
+                             });
+                         }
+
+
                       }
                  }
                  $('.delete_question_button').click( function() {
@@ -713,8 +725,15 @@ function add_video_link_func( ans_key ) {
                  if( data.error ) {
                     alert( data.error );
                  } else {
-alert( 'saved! ' + data.video_id );
-alert( 'now display thumbnail, link, etc.' );
+                    $('#video_form_div_' + ans_key).hide();
+                    $('#picture_' + data.answer_key).html( $("#show_video_tmpl").tmpl( {'answer_key': data.answer_key, 'video_id': data.video_id} ));
+
+                    var img = new Image();
+                    img.onload = function() {
+                       $('#answer_' + data.answer_key).parent().masonry({itemSelector: '.answer_card', isFitWidth: true
+                        });
+                    }
+                    img.src = "http://img.youtube.com/vi/" + data.video_id  +  "/mqdefault.jpg";
                  }
              }
         });

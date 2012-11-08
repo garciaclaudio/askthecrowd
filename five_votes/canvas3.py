@@ -817,6 +817,7 @@ class AjaxHandler(BaseHandler):
                 'answer_key' : str(ans.key()),
                 'answer_text' : unicode(ans.answer_text),
                 'has_pic' : has_pic,
+                'video_id' : str(ans.video_id),
                 'num_votes' : 0,
                 }
             ans_struct.append( ans_data )
@@ -869,6 +870,7 @@ class AjaxHandler(BaseHandler):
                     'answer_key' : str(ans.key()),
                     'answer_text' : unicode(ans.answer_text),
                     'has_pic' : has_pic,
+                    'video_id' : str(ans.video_id),
                     'num_votes' : n_votes
                     }
                 ans_struct.append( ans_data )
@@ -991,6 +993,7 @@ class QuestionHandler(BaseHandler):
                 'owner_name' : owner_name,
                 'owner_id' : ans.user_id,
                 'has_pic' : has_pic,
+                'video_id' : str(ans.video_id),
                 }
             if votes_count_hash.has_key( str(ans.key()) ):
                 ans_data['num_votes'] = votes_count_hash[ str(ans.key()) ]

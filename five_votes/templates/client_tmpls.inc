@@ -17,6 +17,10 @@
 <img class="answer_picture" src="image?answer_key=${answer_key}">
 </script>
 
+<script id="show_video_tmpl" type="text/html">
+<img class="answer_picture" width="192" src="http://img.youtube.com/vi/${video_id}/mqdefault.jpg">
+</script>
+
 <script id="show_answer_tmpl" type="text/html">
    <div class="answer_card" id="answer_${answer_key}">
 
@@ -30,7 +34,7 @@
 
   <div class="card_inset">
         <div id="picture_${answer_key}"></div>
-        <span class="answer_text">${answer_text}</span>
+        <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><img src="/images/play_button_small.png"></div>        <span class="answer_text">${answer_text}</span>
         <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
   </div>
 
@@ -162,7 +166,10 @@
 
   <div class="card_inset">
         <div id="picture_${answer_key}"></div>
+        <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><img src="/images/play_button_small.png"></div>
+
         <span class="answer_text">${answer_text}</span>
+
 
     <div id="whirly_${answer_key}" class="count_inset" style="display:none;"><img src="/images/loading.gif"></div>
     <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
@@ -247,6 +254,7 @@
   <div class="answer_card" id="answer_${answer_key}">
     <div class="card_inset">
           <div id="picture_${answer_key}"></div>
+          <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><a class="play_inset"><img src="/images/play_button_small.png"></a></div>
           <span class="answer_text">${answer_text}</span>
       <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
     </div>
@@ -266,8 +274,8 @@
    </div>
 
    <div class="card_inset">
-
         <div id="picture_${answer_key}"></div>
+        <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><img src="/images/play_button_small.png"></div>
         <span class="answer_text">${answer_text}</span>
         <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
     <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
@@ -343,6 +351,13 @@
 
    <div class="card_inset">
         <div id="picture_${answer_key}"></div>
+          <div id="play_button_${answer_key}" class="play_inset" style="display:none;">
+
+<a class="play_inset_foo">
+<img src="/images/play_button_small.png">
+</a>
+
+</div>
         <span class="answer_text">${answer_text}</span>
         <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
         <div id="add_video_link_${answer_key}" class="invisible"><a href="#" onclick="add_video_link_func('${answer_key}');return false;">{% trans "add youtube video" %}</a></div>
