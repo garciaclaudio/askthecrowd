@@ -19,6 +19,7 @@
 
 <script id="show_video_tmpl" type="text/html">
 <img class="answer_picture" width="192" src="http://img.youtube.com/vi/${video_id}/mqdefault.jpg">
+<a class="fancybox-media invisible" id="video_link_${video_id}" href="http://www.youtube.com/watch?v=${video_id}">x</a>
 </script>
 
 <script id="show_answer_tmpl" type="text/html">
@@ -34,8 +35,18 @@
 
   <div class="card_inset">
         <div id="picture_${answer_key}"></div>
-        <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><img src="/images/play_button_small.png"></div>        <span class="answer_text">${answer_text}</span>
+        <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><a class="play_inset_link"><img src="/images/play_button_small.png"></a></div>        <span class="answer_text">${answer_text}</span>
         <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
+        <div id="add_video_link_${answer_key}" class="invisible"><a href="#" onclick="add_video_link_func('${answer_key}');return false;">{% trans "add youtube video" %}</a></div>
+        <div id="video_form_div_${answer_key}" class="invisible">
+             <form id="add_video_form_${answer_key}" action="/ajax.html" method="get">
+                <input type="hidden" name="answer_key" value="${answer_key}">
+                <input type="hidden" name="action" value="add_video">
+                {% trans "Youtube video URL:" %}<input id="video_link" name="video_link" class="text" type="text" size=20>
+&nbsp;<button type="submit">{% trans "add" %}</button>
+             </form>
+        </div>
+
   </div>
 
     </div> <!-- answer_card-->
@@ -166,7 +177,7 @@
 
   <div class="card_inset">
         <div id="picture_${answer_key}"></div>
-        <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><img src="/images/play_button_small.png"></div>
+        <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><a class="play_inset_link"><img src="/images/play_button_small.png"></a></div>
 
         <span class="answer_text">${answer_text}</span>
 
@@ -254,7 +265,7 @@
   <div class="answer_card" id="answer_${answer_key}">
     <div class="card_inset">
           <div id="picture_${answer_key}"></div>
-          <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><a class="play_inset"><img src="/images/play_button_small.png"></a></div>
+          <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><a class="play_inset_link"><img src="/images/play_button_small.png"></a></div>
           <span class="answer_text">${answer_text}</span>
       <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
     </div>
@@ -275,9 +286,18 @@
 
    <div class="card_inset">
         <div id="picture_${answer_key}"></div>
-        <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><img src="/images/play_button_small.png"></div>
+        <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><a class="play_inset_link"><img src="/images/play_button_small.png"></a></div>
         <span class="answer_text">${answer_text}</span>
         <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
+        <div id="add_video_link_${answer_key}" class="invisible"><a href="#" onclick="add_video_link_func('${answer_key}');return false;">{% trans "add youtube video" %}</a></div>
+        <div id="video_form_div_${answer_key}" class="invisible">
+             <form id="add_video_form_${answer_key}" action="/ajax.html" method="get">
+                <input type="hidden" name="answer_key" value="${answer_key}">
+                <input type="hidden" name="action" value="add_video">
+                {% trans "Youtube video URL:" %}<input id="video_link" name="video_link" class="text" type="text" size=20>
+&nbsp;<button type="submit">{% trans "add" %}</button>
+             </form>
+        </div>
     <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
 
     <div class="plus_vote_div">
@@ -352,12 +372,8 @@
    <div class="card_inset">
         <div id="picture_${answer_key}"></div>
           <div id="play_button_${answer_key}" class="play_inset" style="display:none;">
-
-<a class="play_inset_foo">
-<img src="/images/play_button_small.png">
-</a>
-
-</div>
+              <a class="play_inset_link"><img src="/images/play_button_small.png"></a>
+          </div>
         <span class="answer_text">${answer_text}</span>
         <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
         <div id="add_video_link_${answer_key}" class="invisible"><a href="#" onclick="add_video_link_func('${answer_key}');return false;">{% trans "add youtube video" %}</a></div>

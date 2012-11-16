@@ -7,11 +7,17 @@ handlers:
 - url: /css
   static_dir: css
 
+- url: /fancybox
+  static_dir: fancybox
+
 - url: /js
   static_dir: js
 
 - url: /images
   static_dir: images
+
+- url: /img
+  static_dir: img
 
 - url: /channel.html
   static_files: channel.html
@@ -21,6 +27,10 @@ handlers:
 - url: /test_fb.html
   static_files: test_fb.html
   upload: test_fb.html
+
+- url: /test_fancybox.html
+  static_files: test_fancybox.html
+  upload: test_fancybox.html
 
 - url: /.*
   script: canvas3.py

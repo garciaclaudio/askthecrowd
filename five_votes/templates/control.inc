@@ -165,7 +165,7 @@ function get_and_display_user_questions() {
                              $('#play_button_' + ans[j].answer_key + ' > a').attr('video_id', ans[j].video_id);
                              $('#play_button_' + ans[j].answer_key + ' > a').click(  function() { 
                                  var vid_id = $(this).attr('video_id');
-                                 alert("hello " + vid_id );
+                                 $('#video_link_' + vid_id).trigger('click');
                              });
                          }
 
@@ -611,6 +611,17 @@ function show_question_for_voting() {
           $('#picture_' + '{{ans.answer_key}}').html( $("#show_pic_tmpl").tmpl({'answer_key': '{{ans.answer_key}}'} ));
       {% endif %}
 
+      {% if ans.video_id != 'None' %}
+          $('#picture_' + '{{ans.answer_key}}' ).html( $("#show_video_tmpl").tmpl({'answer_key': '{{ans.answer_key}}', 'video_id':'{{ans.video_id}}' }));
+          $('#play_button_' + '{{ans.answer_key}}' ).show();
+          $('#play_button_' + '{{ans.answer_key}}' + ' > a').attr('video_id', '{{ans.video_id}}');
+          $('#play_button_' + '{{ans.answer_key}}' + ' > a').click(  function() { 
+              var vid_id = $(this).attr('video_id');
+              $('#video_link_' + vid_id).trigger('click');
+          });
+      {% endif %}
+
+
       {% if ans.num_votes %}
           show_votes( '{{ans.answer_key}}', {{ans.num_votes}} );
       {% endif %}
@@ -734,6 +745,13 @@ function add_video_link_func( ans_key ) {
                         });
                     }
                     img.src = "http://img.youtube.com/vi/" + data.video_id  +  "/mqdefault.jpg";
+                    $('#picture_' + data.answer_key ).html( $("#show_video_tmpl").tmpl({'answer_key': data.answer_key, 'video_id':data.video_id}));
+                             $('#play_button_' + data.answer_key ).show();
+                             $('#play_button_' + data.answer_key + ' > a').attr('video_id', data.video_id);
+                             $('#play_button_' + data.answer_key + ' > a').click(  function() { 
+                                 var vid_id = $(this).attr('video_id');
+                                 $('#video_link_' + vid_id).trigger('click');
+                             });
                  }
              }
         });
@@ -852,6 +870,14 @@ function add_video_link_func( ans_key ) {
 
 $(function(){
 
+    $('.fancybox-media').fancybox({
+        openEffect  : 'none',
+        closeEffect : 'none',
+        helpers : {
+            media : {}
+        }
+    });
+
 {% if IN_DEV_SERVER_OLD %}
 
     {% if question %}
@@ -865,7 +891,6 @@ $(function(){
         {% endif %}
     {% endif %}
 {% endif %}
-
 });
 
 

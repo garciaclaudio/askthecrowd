@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-10-23 00:14+0200\n"
+"POT-Creation-Date: 2012-11-16 23:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,20 +17,29 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: canvas3.py:559
+#: canvas3.py:554
 msgid "Question text cannot be empty."
 msgstr ""
 
-#: canvas3.py:581
+#: canvas3.py:576
 msgid "Answer text cannot be empty."
 msgstr ""
 
-#: canvas3.py:586
+#: canvas3.py:581
 msgid "Question not found. Should not happen."
 msgstr ""
 
-#: canvas3.py:614
+#: canvas3.py:610
 msgid "Answer not found. Should not happen."
+msgstr ""
+
+#: canvas3.py:679
+msgid "Malformed Youtube URL"
+msgstr ""
+
+#: test_fancybox.html:6 templates/control.inc:311 templates/index3.html:7
+#: templates/index3.html.py:38
+msgid "Five Votes"
 msgstr ""
 
 #: conf/settings.py:8 conf/settings_foo.py:6
@@ -41,209 +50,225 @@ msgstr ""
 msgid "Spanish"
 msgstr ""
 
-#: templates/control.inc:53
-msgid "add picture"
-msgstr ""
-
-#: templates/control.inc:97
-msgid "yes, delete it"
-msgstr ""
-
-#: templates/control.inc:106
-msgid "no, cancel"
-msgstr ""
-
-#: templates/control.inc:245
-msgid "created this question on Five Votes."
-msgstr ""
-
-#: templates/control.inc:246
-msgid "Your opinion is needed!"
-msgstr ""
-
-#: templates/control.inc:281
-msgid "Zero Votes"
-msgstr ""
-
-#: templates/control.inc:284
-msgid "One Vote"
-msgstr ""
-
-#: templates/control.inc:287
-msgid "Two Votes"
-msgstr ""
-
-#: templates/control.inc:290
-msgid "Three Votes"
-msgstr ""
-
-#: templates/control.inc:293
-msgid "Four Votes"
-msgstr ""
-
-#: templates/control.inc:296 templates/index3.html:7
-#: templates/index3.html.py:446
-msgid "Five Votes"
-msgstr ""
-
-#: templates/control.inc:407
-msgid "All"
-msgstr ""
-
-#: templates/control.inc:408
-msgid "Women"
-msgstr ""
-
-#: templates/control.inc:409
-msgid "Men"
-msgstr ""
-
-#: templates/control.inc:542
-msgid "answered this question on Five Votes."
-msgstr ""
-
-#: templates/control.inc:545
-msgid "His top choice was:"
-msgstr ""
-
-#: templates/control.inc:547
-msgid "Her top choice was:"
-msgstr ""
-
-#: templates/control.inc:586 templates/index3.html:653
-#: templates/index3.html.py:752 templates/index3.html:843
-msgid "by"
-msgstr ""
-
-#: templates/control.inc:683
-msgid "Questions from all users"
-msgstr ""
-
-#: templates/index3.html:461
-msgid "Create your own questions!"
-msgstr ""
-
-#: templates/index3.html:474
-msgid "Questions by"
-msgstr ""
-
-#: templates/index3.html:481
-msgid "Questions with answers by"
-msgstr ""
-
-#: templates/index3.html:488
-msgid "Questions voted by"
-msgstr ""
-
-#: templates/index3.html:515
-msgid "Questions about this app? Leave them here:"
-msgstr ""
-
-#: templates/index3.html:530
-msgid "Create and share your own questions!"
-msgstr ""
-
-#: templates/index3.html:532
-msgid "Questions from other users"
-msgstr ""
-
-#: templates/index3.html:546 templates/lang_selector.html:11
-msgid "Select your language"
-msgstr ""
-
-#: templates/index3.html:560
+#: templates/client_tmpls.inc:10
 #, fuzzy
 msgid "To use this app, sign in with your facebook account:"
 msgstr ""
 "To sign this letter with your Facebook account, press the Connect button (if "
 "you don't have a Facebook account, you will get the option to register):"
 
-#: templates/index3.html:593
-msgid "Question created"
+#: templates/client_tmpls.inc:40 templates/client_tmpls.inc.py:292
+#: templates/client_tmpls.inc:379
+msgid "add youtube video"
 msgstr ""
 
-#: templates/index3.html:596
-msgid "Suggest inital answers:"
+#: templates/client_tmpls.inc:45 templates/client_tmpls.inc.py:297
+#: templates/client_tmpls.inc:384
+msgid "Youtube video URL:"
 msgstr ""
 
-#: templates/index3.html:603 templates/index3.html.py:673
-#: templates/index3.html:700
+#: templates/client_tmpls.inc:46 templates/client_tmpls.inc.py:68
+#: templates/client_tmpls.inc:138 templates/client_tmpls.inc.py:165
+#: templates/client_tmpls.inc:298 templates/client_tmpls.inc.py:385
 msgid "add"
 msgstr ""
 
-#: templates/index3.html:614
+#: templates/client_tmpls.inc:58
+msgid "Question created"
+msgstr ""
+
+#: templates/client_tmpls.inc:61
+msgid "Suggest inital answers:"
+msgstr ""
+
+#: templates/client_tmpls.inc:79
 msgid "done"
 msgstr ""
 
-#: templates/index3.html:615 templates/index3.html.py:684
+#: templates/client_tmpls.inc:80 templates/client_tmpls.inc.py:149
 msgid "Post to Facebook"
 msgstr ""
 
-#: templates/index3.html:626
+#: templates/client_tmpls.inc:91
 msgid "Enter your question:"
 msgstr ""
 
-#: templates/index3.html:630
+#: templates/client_tmpls.inc:95
 msgid "create"
 msgstr ""
 
-#: templates/index3.html:638
+#: templates/client_tmpls.inc:103
 msgid "You're done!"
 msgstr ""
 
-#: templates/index3.html:641
+#: templates/client_tmpls.inc:106
 msgid "Your question's URL is:"
 msgstr ""
 
-#: templates/index3.html:643
+#: templates/client_tmpls.inc:108
 msgid "create another question"
 msgstr ""
 
-#: templates/index3.html:662
+#: templates/client_tmpls.inc:118 templates/client_tmpls.inc.py:220
+#: templates/client_tmpls.inc:321 templates/control.inc:601
+msgid "by"
+msgstr ""
+
+#: templates/client_tmpls.inc:127
 msgid "suggest new answer"
 msgstr ""
 
-#: templates/index3.html:682
+#: templates/client_tmpls.inc:147
 msgid "See results"
 msgstr ""
 
-#: templates/index3.html:692
+#: templates/client_tmpls.inc:157
 msgid "Suggest another answer"
 msgstr ""
 
-#: templates/index3.html:725 templates/index3.html.py:830
+#: templates/client_tmpls.inc:193 templates/client_tmpls.inc.py:308
 msgid "vote"
 msgstr ""
 
-#: templates/index3.html:734 templates/index3.html.py:839
+#: templates/client_tmpls.inc:202 templates/client_tmpls.inc.py:317
 msgid "unvote"
 msgstr ""
 
-#: templates/index3.html:783
+#: templates/client_tmpls.inc:251
 #, fuzzy
 msgid "To vote on this question, sign in with your facebook account:"
 msgstr ""
 "To sign this letter with your Facebook account, press the Connect button (if "
 "you don't have a Facebook account, you will get the option to register):"
 
-#: templates/index3.html:790
+#: templates/client_tmpls.inc:258
 msgid "login to vote"
 msgstr ""
 
-#: templates/index3.html:858
+#: templates/client_tmpls.inc:336
 msgid "open"
 msgstr ""
 
-#: templates/index3.html:859
+#: templates/client_tmpls.inc:337
 msgid "close"
 msgstr ""
 
-#: templates/index3.html:864
+#: templates/client_tmpls.inc:342
 msgid "delete"
 msgstr ""
 
-#: templates/index3.html:871
+#: templates/client_tmpls.inc:349
 msgid "Delete this question?"
+msgstr ""
+
+#: templates/control.inc:56
+msgid "add picture"
+msgstr ""
+
+#: templates/control.inc:100
+msgid "yes, delete it"
+msgstr ""
+
+#: templates/control.inc:109
+msgid "no, cancel"
+msgstr ""
+
+#: templates/control.inc:260
+msgid "created this question on Five Votes."
+msgstr ""
+
+#: templates/control.inc:261
+msgid "Your opinion is needed!"
+msgstr ""
+
+#: templates/control.inc:296
+msgid "Zero Votes"
+msgstr ""
+
+#: templates/control.inc:299
+msgid "One Vote"
+msgstr ""
+
+#: templates/control.inc:302
+msgid "Two Votes"
+msgstr ""
+
+#: templates/control.inc:305
+msgid "Three Votes"
+msgstr ""
+
+#: templates/control.inc:308
+msgid "Four Votes"
+msgstr ""
+
+#: templates/control.inc:422
+msgid "All"
+msgstr ""
+
+#: templates/control.inc:423
+msgid "Women"
+msgstr ""
+
+#: templates/control.inc:424
+msgid "Men"
+msgstr ""
+
+#: templates/control.inc:557
+msgid "answered this question on Five Votes."
+msgstr ""
+
+#: templates/control.inc:560
+msgid "His top choice was:"
+msgstr ""
+
+#: templates/control.inc:562
+msgid "Her top choice was:"
+msgstr ""
+
+#: templates/control.inc:709
+msgid "Questions from all users"
+msgstr ""
+
+#: templates/footer.inc:9
+msgid "Create and share your own questions!"
+msgstr ""
+
+#: templates/footer.inc:11
+msgid "Questions from other users"
+msgstr ""
+
+#: templates/footer.inc:25 templates/lang_selector.html:11
+msgid "Select your language"
+msgstr ""
+
+#: templates/main_page.inc:19
+msgid "Questions about this app? Leave them here:"
+msgstr ""
+
+#: templates/priv_pol.inc:3
+msgid "Privacy Policy"
+msgstr ""
+
+#: templates/priv_pol.inc:7
+msgid ""
+"We only request Facebook basic information (name, friends, gender) from our "
+"users, and we don't share it with any third parties. "
+msgstr ""
+
+#: templates/question_page.inc:14
+msgid "Create your own questions!"
+msgstr ""
+
+#: templates/user_page.inc:9
+msgid "Questions by"
+msgstr ""
+
+#: templates/user_page.inc:16
+msgid "Questions with answers by"
+msgstr ""
+
+#: templates/user_page.inc:23
+msgid "Questions voted by"
 msgstr ""
 
 #, fuzzy

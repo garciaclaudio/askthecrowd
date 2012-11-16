@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html> 
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+                <meta property="fb:app_id" content="331909936825023"/>
+		<title>{% trans "Five Votes" %}</title>
+		<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
+                <script type="text/javascript" src="/fancybox/jquery.fancybox.pack.js"></script>
+                <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css" media="screen" />
+
+<link rel="stylesheet" href="/fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="/fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.5"></script>
+
+<link rel="stylesheet" href="/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+<script type="text/javascript" src="/fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+
+</head>
+
+
+<script type="text/javascript">
+
+alert('hey');
+
+$(document).ready(function() {
+
+        $(".fancybox").fancybox();
+
+	$('.fancybox-media').fancybox({
+		openEffect  : 'none',
+		closeEffect : 'none',
+		helpers : {
+			media : {}
+		}
+	});
+
+alert('click');
+// Launch fancyBox on first element
+
+$("#soda").trigger('click');
+
+
+});
+
+</script>
+
+
+<body>
+
+<a class="fancybox" href="/images/Logo_5votes.png"><img src="/images/Logo_5votes_16.png" alt="" /></a>
+
+<p>HELLO</p>
+
+<ul class="list">
+	<li><a class="fancybox-media" id="soda" href="http://www.youtube.com/watch?v=yRK43t6AVic&feature=relmfu">SODA</a></li>
+	<li><a class="fancybox-media" href="http://www.youtube.com/watch?v=opj24KnzrWo">Youtube</a></li>
+	<li><a class="fancybox-media" href="http://vimeo.com/36031564">Vimeo</a></li>
+	<li><a class="fancybox-media" href="http://www.metacafe.com/watch/7635964/">Metacafe</a></li>
+	<li><a class="fancybox-media" href="http://www.dailymotion.com/video/xoeylt_electric-guest-this-head-i-hold_music">Dailymotion</a></li>
+	<li><a class="fancybox-media" href="http://twitvid.com/QY7MD">Twitvid</a></li>
+	<li><a class="fancybox-media" href="http://twitpic.com/7p93st">Twitpic</a></li>
+	<li><a class="fancybox-media" href="http://instagr.am/p/IejkuUGxQn">Instagram</a></li>
+	<li>
+		Google maps
+		<ul>
+			<li><a class="fancybox-media" href="http://maps.google.com/maps?q=Eiffel+Tower,+Avenue+Gustave+Eiffel,+Paris,+France&t=h&z=17">Search results</a></li>
+			<li><a class="fancybox-media" href="http://maps.google.com/?ll=48.85796,2.295231&spn=0.003833,0.010568&t=h&z=17">Direct link</a></li>
+			<li><a class="fancybox-media" href="http://maps.google.com/?ll=48.859463,2.292626&spn=0.000965,0.002642&t=m&z=19&layer=c&cbll=48.859524,2.292532&panoid=YJ0lq28OOy3VT2IqIuVY0g&cbp=12,151.58,,0,-15.56">Street view</a></li>
+		</ul>
+	</li>
+</ul>
+
+</body>
+</html>

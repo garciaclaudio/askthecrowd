@@ -424,13 +424,13 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
   display:table-cell;
 }
 
-a.play_inset_foo img {
+a.play_inset_link img {
 filter:alpha(opacity=50);
 -moz-opacity: 0.5; 
 opacity: 0.5;
 -khtml-opacity: 0.5;}
 
-a.play_inset_foo:hover img {
+a.play_inset_link:hover img {
 filter:alpha(opacity=100); 
 -moz-opacity: 1.0; 
 opacity: 1.0;

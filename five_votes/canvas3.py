@@ -594,7 +594,8 @@ class AjaxHandler(BaseHandler):
                        'answer_text' : unicode(answer_text),
                        'answer_key' : str(new_ans.key()),
                        'owner_name' : unicode(self.user.name),
-                       'owner_id' : self.user.user_id
+                       'owner_id' : self.user.user_id,
+                       'video_id' : u'None',
                        }
         return result
 
