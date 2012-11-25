@@ -773,17 +773,6 @@ function add_video_link_func( ans_key ) {
           // response contains the user data, but we prefer to reload
           // so that a user is created
           //
-         {% if question %}
-              FB.Event.subscribe('auth.login', function(response) {
-                  // Reload the entire page
-                  top.location = 'http://apps.facebook.com/five_votes/q{{question_key_name}}';
-              });
-         {% else %}
-              FB.Event.subscribe('auth.login', function(response) {
-                  // Reload the entire page
-                  top.location = 'http://apps.facebook.com/five_votes/';
-              });
-         {% endif %}
 //
 //          FB.ui({ method: 'feed', 
 //                  message: 'Facebook for Websites is super-cool'});
@@ -832,6 +821,20 @@ function add_video_link_func( ans_key ) {
 //                  FB.XFBML.parse( document.getElementById('welcome_msg') );
               } else {
                 // the user isn't even logged in to Facebook.
+
+                  {% if question %}
+                    FB.Event.subscribe('auth.login', function(response) {
+                    // Reload the entire page
+//alert('about to reload question');
+                        top.location = 'http://apps.facebook.com/five_votes/q{{question_key_name}}';
+                    });
+                  {% else %}
+                    FB.Event.subscribe('auth.login', function(response) {
+                     // Reload the entire page
+//alert('about to reload');
+                        top.location = 'http://apps.facebook.com/five_votes/';
+                    });
+                  {% endif %}
 
                   {% if question %}
                       show_question_for_welcome();

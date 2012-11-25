@@ -1,20 +1,33 @@
 
+<IN PROGRESS (classifications)>
 
-Que bueno que te gustó! También te recominedo "Simón del Desierto", si no la has visto, con Claudio Brooke y Silvia Pinal. 
+    Make reload nicer.
+
+    Standalonify.
+
+    Questions have the following classifications.
+        Category (from pinterest, modified: música, literatura, entretenimiento, etc.)
+        Country (from user's country), Province (from user's province)
+        Language (from user's language, but can be changed at question creation time in a drop down).
+
+    Add popup to have users enter their Country and State.
+    Add fields to support this at question creation (Category, language)
+
+    Implement landing pages.
+    Implement showing these classifications in the results page.
+
+</IN PROGRESS>
 
 
+NEW IDEAS: Office/church/neighborhood barter, loan exchange for all sorts of goods.
+           Exercise step thing. With in-sole buzzer maybe, etc.
 
-Yo me refiero a las que ya vienen congeladas. Cuando pedí frescas, estaban muy buenas. Habrá que hacer un pedido de vuelta...
-
-¿Alguién más ha notado que las tortillas de Tjin's tienen un olor y sabor rancio o pasado las últimas semanas? ¿O es mi imaginación?
+Soderos: ¿Cual es la mejor canción de Cerati / Soda Stereo?
 
 <adding videos>
 
-Thickbox? Graybox? Fancybox?
+Fancybox?
 
-Fluid width VIDEO: http://css-tricks.com/NetMag/FluidWidthVideo/Article-FluidWidthVideo.php
- 
-http://css-tricks.com/NetMag/FluidWidthVideo/Article-FluidWidthVideo.php
 Playlist params:
     https://developers.google.com/youtube/player_parameters#playlist
 
@@ -25,27 +38,6 @@ fc0a6564af7d4d4784e9a22f4f69dc72
 
     THUMBNAIL URL: http://img.youtube.com/vi/NqdW4S8e1ho/mqdefault.jpg
     http://stackoverflow.com/questions/2068344/how-to-get-thumbnail-of-youtube-video-link-using-youtube-api
-
-NYRO MODAL GAL:
-    <script type="text/javascript" src="js/jquery.nyroModal.custom.min.js"></script>
-
-    <a href="img/img1.jpg" id="imgFiche" class="nyroModal" title="UCLA" rel="gal">Gallery Img 1</a>
-    <a href="img/img2.jpg" class="nyroModal" title="3rd Street Promenade by Night" rel="gal">Gallery Img 2</a>
-    <a href="http://www.youtube.com/watch?v=lddUnv1R5y0" class="nyroModal" rel="gal" title="Hockey Goal fight">Youtube in gallery</a><br />
-    <a href="img/img3.jpg" class="nyroModal" title="Sunset at Santa Monica" rel="gal">Gallery Img 3</a>
-    <script type="text/javascript">
-    $(function() {
-      $('.nyroModal').nyroModal();
-    });
-    </script>
-
-NYRO MODAL SINGLE IMG:
-    <a href="img/img2.jpg" class="nyroModal" title="3rd Street Promenade">Image</a>
-    <script type="text/javascript">
-    $(function() {
-      $('.nyroModal').nyroModal();
-    });
-    </script>
 
     1. add "add youtube video" link. 
     2. When clicked, card becomes wider, a text area appears for the link.
@@ -65,36 +57,8 @@ Image: Cover Image
 You must upload at least 3 screenshots for App on Facebook
 
 <TODO>
-[DONE]    * Clicking the logo should take you to the front page.
-[DONE]    * Tab fonts too little in results page.
-[DONE]    * Fonts in user page too big and bold.
-[DONE]    * Clicking on questions in prev-questions list should not have target=_blank
-[DONE]    * Create and share your own questions should be more prominent.
-[DONE]    * Show whirly "wait" thing when vote link is pressed.
-[DONE]    * Translate.
-[DONE]    * Test that users get the right language (from their browser) automatically.
-[DONE]    * Test that posts to FB are made in the user's language.
-[DONE]    * Silence / cleanup all debug data into the logs
-[DONE]    * move css into css file
-[DONE]    * move client templates into inc file
-[DONE]    * move usr page into inc file
-[DONE]    * move footer into inc file
-[DONE]    * move header into inc file
-[DONE]    * move main and question pages into inc files?
-[DONE]    * Privacy Policy URL?
-[DONE]    * Add logo to app description on FB side so that automatic "fulanito played five votes" messages, show the logo.
-[DONE]    * fill out app details (and logo icons): https://developers.facebook.com/apps/331909936825023/appdetails
-[DONE]        Missing translated Tagline for Español
-[DONE]        Missing translated Description for Español
-[DONE]        Missing translated Detailed Description for Español
-[DONE]        Image: 128 x 128
-[DONE]        Image: Web Banner
-[DONE]        Image: Cover Image
-[DONE]        You must upload at least 3 screenshots for App on Facebook
-[DONE]    * Translate app name and details to Spanish.
-[DONE]    * Delete all existing questions / data structs.
- ---RELEASE--- HEYY!!! DID IT!!!
-[DONE]    * Ingresa con tu cuenta para votar (en pag. de resultados), debe ir acompañado de un botón de FB para loguearse.
+    * Video questions can have a link "view as playlist" to watch all vids in playlist.
+    * Each new answer from users can generate a FB post?
     * Show "my votes" tab in results page.
     * Show "change my votes" link under "my votes" tab in results page. 
     * La liga al website desde los comentarios lleva a "http://five-votes.appspot.com/q22"...
@@ -105,15 +69,14 @@ You must upload at least 3 screenshots for App on Facebook
     * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
     * BUG: deleting an answer from prev. questions, will not rearrange cards.
     * Once tested for a while, SUBMIT app details on FB so that it gets promoted / listed.
-    * Los mejores goles de: [la historia, la selección mexicana, el mundial X, etc.]
-
 </TODO>
 
 
 ==>1st, FINISH, then do this:
 
 <NEXT FOR DEVELOPMENT>
-add: video playing.
+when redirecting after logging in, show a "please wait whirly" instead of the question form
+get standalone url www.fivevotes.com?? or similar, make it work outside FB junk frame
 add: country, province when logging in
 add: big photo popups on click.
 add: in-app comments per answer
@@ -122,7 +85,7 @@ add: category drop-down to question creation
 add: description field to elaborate on question (optional)
 add: recent questions blog-like page: created by Fulanito, from Tucumán, Argentina (photo, flag), by language, this can be the site's main landing page.
 add: popular questions landing page, blog like (most voted in the past day, 7 days, 30 days) --use a new table to aggregate voted questions per language, day, num_voters. Use this to show suggestions in the results page.
-add: index landing page, by country, province, category, showing how many pages
+add: index landing page, by language?, country, province, category, showing how many pages
 
 LOOK FOR SPONSORS?
 
@@ -131,7 +94,6 @@ When the user 1st logs in (or before voting if she doesn't have a country/provin
 Then, he is a member of his country's community. The Country's flag shows by the logo.
 
 So, I ask a question, and I belong to Mexico. 
-
   Then, the results page will show: 
 
      Friends
@@ -229,11 +191,10 @@ Nueva variante: [será bueno? quién sabe]
     * Valses mexicanos.
     * Cumbias colombianas.
     * Marimba Nandayapa.
-
+    * Los mejores goles de: [la historia, la selección mexicana, el mundial X, etc.]
 [
    Feature: make users be able to tell whether a video has bad audio, etc.??
 ]
-
 </Preguntas INTERESANTES Y CHUSCAS>
 
 
@@ -250,6 +211,37 @@ Nueva variante: [será bueno? quién sabe]
 
 
 <DONE>
+[DONE] add: video playing.
+[DONE]    * Clicking the logo should take you to the front page.
+[DONE]    * Tab fonts too little in results page.
+[DONE]    * Fonts in user page too big and bold.
+[DONE]    * Clicking on questions in prev-questions list should not have target=_blank
+[DONE]    * Create and share your own questions should be more prominent.
+[DONE]    * Show whirly "wait" thing when vote link is pressed.
+[DONE]    * Translate.
+[DONE]    * Test that users get the right language (from their browser) automatically.
+[DONE]    * Test that posts to FB are made in the user's language.
+[DONE]    * Silence / cleanup all debug data into the logs
+[DONE]    * move css into css file
+[DONE]    * move client templates into inc file
+[DONE]    * move usr page into inc file
+[DONE]    * move footer into inc file
+[DONE]    * move header into inc file
+[DONE]    * move main and question pages into inc files?
+[DONE]    * Privacy Policy URL?
+[DONE]    * Add logo to app description on FB side so that automatic "fulanito played five votes" messages, show the logo.
+[DONE]    * fill out app details (and logo icons): https://developers.facebook.com/apps/331909936825023/appdetails
+[DONE]        Missing translated Tagline for Español
+[DONE]        Missing translated Description for Español
+[DONE]        Missing translated Detailed Description for Español
+[DONE]        Image: 128 x 128
+[DONE]        Image: Web Banner
+[DONE]        Image: Cover Image
+[DONE]        You must upload at least 3 screenshots for App on Facebook
+[DONE]    * Translate app name and details to Spanish.
+[DONE]    * Delete all existing questions / data structs.
+ ---RELEASE--- HEYY!!! DID IT!!!
+[DONE]    * Ingresa con tu cuenta para votar (en pag. de resultados), debe ir acompañado de un botón de FB para loguearse.
 [DONE]    * BUG: post to FB will not show photo of highest rated pic?? it does, I think
 [DONE]  * BUG, user page, photo became too big (target="_top" missing)
 [DONE]  * BUG, user page, clicking on links won't work (has to go to the top page)
@@ -269,7 +261,6 @@ Nueva variante: [será bueno? quién sabe]
 [DONE]   * Las ligas "create and share your own questions" y "questions from others" no jalan.
 [DONE]   * La liga a la pregunta recién creada tampoco funciona.
 [DONE]   * El botón "delete this question" no funciona (si funciona pero no refresca).
-
 </DONE>
 
 * Allow longer texts as answers, with external links. Like in carta-a-femsa comments. To implement things like "Las cien cosas que...".
