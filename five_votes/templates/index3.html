@@ -1,10 +1,9 @@
-{% load i18n %}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html> 
 <head>
 		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
                 <meta property="fb:app_id" content="331909936825023"/>
-		<title>{% trans "Five Votes" %}</title>
+		<title>{% trans %}Five Votes{% endtrans %}</title>
 		<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 		<script type="text/javascript" src="js/jquery-ui-1.7.2.custom.min.js"></script>
                 <script type="text/javascript" src="js/jquery.form.js"></script>
@@ -35,8 +34,13 @@
 {% include "control.inc" %}
 
 <div id="app_logo">
-<div class="mytube"><a href="http://apps.facebook.com/five_votes/" target="_top"><span id="logo_text"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %}</span></a></div>
+<div class="mytube"><a href="{{BASE_URL}}/" target="_top"><span id="logo_text"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans %}Five Votes{% endtrans %}</span></a></div>
 </div>
+
+<p>
+NAME? {{logged_in_user.name}} <--
+NAME? {{logged_in_user.name}} <--
+</p>
 
 {% if question_page %}
 

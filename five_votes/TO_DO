@@ -1,9 +1,37 @@
 
+
+Hola Carlos! Pues podría usarse como base tecnológica para implementar alguna aplicación "a la medida" de investigación de mercados, pero como está, pues no. En Booking estamos empezando a hacer mucho en lo referente a "Big data", Hadoop, que es una herramienta para extraer información de colecciones de datos grandísimas. Lo que me gustaría implementar es algo que ayude a dar mejor uso a algún recurso físico existente, mediante colaboración en línea. Algo como las apps para conseguir un taxi cercano, o compartir objetos domésticos con el vecino, etc. Alguna idea por el estilo? Saludos!
+
+
+
+
+<Standalonify>
+
+   Create new handler with the Example.py code INSIDE canvas4.py
+   New handler has its own template, webapp2, and its own I18NRequestHandler wrapper
+   Test adding translations to new handler and template.
+
+   Jinja2 - django gettext:
+       http://jinja.pocoo.org/docs/extensions/
+       http://fgda.pl/post/3/jinja2-internationalization-in-django
+
+</Standalonify>
+
+
+
 <IN PROGRESS (classifications)>
 
-    Make reload nicer.
+   Make gender, email? be saved in User
 
-    Standalonify.
+[DONE]    Upgrade dev server. See ~/tmp/new_appengine
+       Copy all existing same name files into an "old_" dir.
+        Copy over all new files into place.
+
+    FB for non-canvas app:
+        https://github.com/pythonforfacebook/facebook-sdk/
+
+    Standalonify. Even without URL. Do it like this:
+        http://stackoverflow.com/questions/9220586/top-location-with-facebook-null-or-undefinde
 
     Questions have the following classifications.
         Category (from pinterest, modified: música, literatura, entretenimiento, etc.)
@@ -57,6 +85,7 @@ Image: Cover Image
 You must upload at least 3 screenshots for App on Facebook
 
 <TODO>
+    * BUG: when adding picture from prev-questions view, "add youtube link" does not go away.
     * Video questions can have a link "view as playlist" to watch all vids in playlist.
     * Each new answer from users can generate a FB post?
     * Show "my votes" tab in results page.
@@ -167,6 +196,8 @@ Nueva variante: [será bueno? quién sabe]
 
 
 <Preguntas INTERESANTES Y CHUSCAS>
+
+    * Violin concertos: Chaikovsky, Sibelius, Mendelhssohn, Paganini
 [CASI]    * ¿Tu personaje favorito de El Chavo, era?
 [CASI]    * ¿Quién de estos baladistas del recuerdo cantaba mejor? José José, Yuri, Lupita D'Alessio, Amanda Miguel, Juan Gabriel, Pedro Infante, Pedro Vargas, Lola Beltrán, Lucía Méndez, Marco Antonio Muñiz, Johnny Laboriel, Gualberto Castro, Flans, etc. 
     * Cual es la mejor cancion de Cri-Cri?
@@ -211,6 +242,7 @@ Nueva variante: [será bueno? quién sabe]
 
 
 <DONE>
+[DONE]    Make reload nicer.
 [DONE] add: video playing.
 [DONE]    * Clicking the logo should take you to the front page.
 [DONE]    * Tab fonts too little in results page.
@@ -264,6 +296,8 @@ Nueva variante: [será bueno? quién sabe]
 </DONE>
 
 * Allow longer texts as answers, with external links. Like in carta-a-femsa comments. To implement things like "Las cien cosas que...".
+* Márquez, Danzón Número 2
+
 
 BUGS: 
 

@@ -19,6 +19,10 @@ IN_DEV_SERVER = False
 #IN_DEV_SERVER = True
 IN_DEV_SERVER_OLD = False
 
+#BASE_URL = 'http://apps.facebook.com/five_votes'
+BASE_URL = 'http://five-votes.appspot.com'
+#BASE_URL = 'http://localhost:8080'
+
 FACEBOOK_APP_ID = '331909936825023'
 
 FACEBOOK_APP_SECRET = '9f17f1ecae197ca6bf22d809442be538'

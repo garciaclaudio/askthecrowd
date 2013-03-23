@@ -1,7 +1,19 @@
 application: five-votes
 version: 1
-runtime: python
+#runtime: python
 api_version: 1
+
+runtime: python27
+threadsafe: true
+
+libraries:
+- name: django                                                                  
+  version: latest                                                               
+- name: jinja2                                                                  
+  version: latest                                                               
+- name: markupsafe                                                              
+  version: latest 
+
 
 handlers:
 - url: /css
@@ -32,7 +44,18 @@ handlers:
   static_files: test_fancybox.html
   upload: test_fancybox.html
 
+#- url: /.*
+#  script: canvas4.py
+
+#- url: /.*
+#  script: example.py
+
 - url: /.*
-  script: canvas3.py
+  script: canvas4.app
+
+#- url: /.*
+#  script: example.app
+
+
 
 

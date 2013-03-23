@@ -6,9 +6,9 @@
       <div class="vote_link" id="all_users_questions" style="float:left;margin-top:8px;margin-left:15px;font-size:0.6em;">
 
      {% if question %}
-        <a href="http://apps.facebook.com/five_votes" target="_top">{% trans "Create and share your own questions!" %}</a>
+        <a href="{{BASE_URL}}" target="_top">{% trans "Create and share your own questions!" %}</a>
      {% else %}
-        <a href="http://apps.facebook.com/five_votes/all" target="_top">{% trans "Questions from other users" %}</a>
+        <a href="{{BASE_URL}}/all" target="_top">{% trans "Questions from other users" %}</a>
      {% endif %}
 
       </div>

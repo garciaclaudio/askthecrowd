@@ -262,7 +262,7 @@ function show_created_question(data) {
 
             var obj = {
               method: 'feed',
-              link: 'http://apps.facebook.com/five_votes/q' + new_question_key_name,
+              link: '{{BASE_URL}}' + '/q' + new_question_key_name,
               picture: pic_link,
               name: name,
               caption: caption,
@@ -564,7 +564,7 @@ function show_question_for_voting() {
 
             var obj = {
               method: 'feed',
-              link: 'http://apps.facebook.com/five_votes/q{{question_key_name}}',
+              link: '{{BASE_URL}}' + '/q{{question_key_name}}',
               picture: pic_link,
               name: name,
               caption: caption,
@@ -598,7 +598,7 @@ function show_question_for_voting() {
       var by_link = '';
 
       {% if ans.show_owner %}
-          by_link = '<div class="author_link"><a href="http://apps.facebook.com/five_votes/u{{ ans.owner_id }}">{% trans "by" %} {{ ans.owner_name }}</a></div>';
+          by_link = '<div class="author_link"><a href="{{BASE_URL}}/u{{ ans.owner_id }}">{% trans "by" %} {{ ans.owner_name }}</a></div>';
       {% endif %}
 
       $('#answers_div').append( $("#show_answer_for_voting_tmpl").tmpl( {
@@ -762,7 +762,7 @@ function add_video_link_func( ans_key ) {
         window.fbAsyncInit = function() {
           FB.init({
             appId      : '331909936825023',
-            channelUrl : '//five-votes.appspot.com/channel.html',
+//            channelUrl : '//five-votes.appspot.com/channel.html',
             status     : true, 
             cookie     : true,
             xfbml      : true
@@ -790,6 +790,21 @@ function add_video_link_func( ans_key ) {
                   // and signed request each expire
                   var uid = response.authResponse.userID;
                   var accessToken = response.authResponse.accessToken;
+
+            alert('user connected ' +  uid + ' -- ' + accessToken );
+
+alert( 'NAME? {{logged_in_user.name}} <--' );
+
+    {% if logged_in_user %}
+
+alert('make content visible...');
+
+//$('#content_here').show();
+    {% else %}
+
+alert('reloading, user not there');
+          window.location.reload();
+    {% endif %}
 
                   {% if question %}
                       show_question_for_voting();
@@ -826,13 +841,13 @@ function add_video_link_func( ans_key ) {
                     FB.Event.subscribe('auth.login', function(response) {
                     // Reload the entire page
 //alert('about to reload question');
-                        top.location = 'http://apps.facebook.com/five_votes/q{{question_key_name}}';
+                        top.location = '{{BASE_URL}}/q{{question_key_name}}';
                     });
                   {% else %}
                     FB.Event.subscribe('auth.login', function(response) {
                      // Reload the entire page
 //alert('about to reload');
-                        top.location = 'http://apps.facebook.com/five_votes/';
+                        top.location = '{{BASE_URL}}';
                     });
                   {% endif %}
 
@@ -867,11 +882,14 @@ function add_video_link_func( ans_key ) {
            d.getElementsByTagName('head')[0].appendChild(js);
          }(document));
 
-</script>
-
-<script type="text/javascript">
-
 $(function(){
+
+//if( top.location.href === location.href ) {
+//   alert('in standalone site');
+//   base_url = 'http://five-votes.appspot.com';
+//} else {
+//   alert('in iframe');
+//}
 
     $('.fancybox-media').fancybox({
         openEffect  : 'none',

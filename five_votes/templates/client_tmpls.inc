@@ -103,7 +103,7 @@
     <p>{% trans "You're done!" %}</p>
     <div class="question_text">${question_text}</div>
 
-    <p>{% trans "Your question's URL is:" %} <a target="_top" href="http://apps.facebook.com/five_votes/q${question_key_name}">http://apps.facebook.com/five_votes/q${question_key_name}</a></p>
+    <p>{% trans "Your question's URL is:" %} <a target="_top" href="{{BASE_URL}}/q${question_key_name}">{{BASE_URL}}/q${question_key_name}</a></p>
 
     <button type="submit" id="create_another_button" class="my_button">{% trans "create another question" %}</button>
 </div>
@@ -115,7 +115,7 @@
     <div class="question_text">${question_text}
     </div>
 
-    <div class="author_link" style="margin-bottom:10px;"><a href="http://apps.facebook.com/five_votes/u${owner_id}" target="_top">{% trans "by" %} ${owner_name}</a></div>
+    <div class="author_link" style="margin-bottom:10px;"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans "by" %} ${owner_name}</a></div>
 
     <div id="answers_div">
     </div>
@@ -217,7 +217,7 @@
 <div> 
     <div class="question_text">${question_text}</div>
 
-    <div class="author_link" style="margin-bottom:10px;"><a href="http://apps.facebook.com/five_votes/u${owner_id}" target="_top">{% trans "by" %} ${owner_name}</a></div>
+    <div class="author_link" style="margin-bottom:10px;"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans "by" %} ${owner_name}</a></div>
 
     <div id="selector_div">
     </div>
@@ -318,7 +318,7 @@
        </form>
    </div>
 
-    <div class="author_link"><a href="http://apps.facebook.com/five_votes/u${owner_id}" target="_top">{% trans "by" %} ${owner_name}</a></div>
+    <div class="author_link"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans "by" %} ${owner_name}</a></div>
 
   </div>
 
@@ -329,7 +329,7 @@
 <script id="prev_questions_tmpl" type="text/html">
     <div class="prev_question_class" id="prev_question_${question_key_name}">
         <div class="mytube" style="float:left;">
-             <div class="question_link"><a href="http://apps.facebook.com/five_votes/q${question_key_name}" target="_top">${question_text}</a></div>
+             <div class="question_link"><a href="{{BASE_URL}}/q${question_key_name}" target="_top">${question_text}</a></div>
         </div>
 
         <div class="mytube" style="float:right;">
@@ -395,7 +395,7 @@
 <script id="all_questions_question_tmpl" type="text/html">
     <div class="prev_question_class" id="prev_question_${question_key_name}">
         <div class="mytube" style="float:left;">
-             <div class="question_link"><a target="_top" href="http://apps.facebook.com/five_votes/q${question_key_name}">${question_text}</a></div>
+             <div class="question_link"><a target="_top" href="{{BASE_URL}}/q${question_key_name}">${question_text}</a></div>
         </div>
     </div>
 </script>

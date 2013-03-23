@@ -1,0 +1,140 @@
+#!/usr/bin/env python
+#
+# Copyright 2010 Facebook
+#
+# Licensed under the Apache License, Version 2.0 (the "License"); you may
+# not use this file except in compliance with the License. You may obtain
+# a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+# License for the specific language governing permissions and limitations
+# under the License.
+
+"""
+A barebones AppEngine application that uses Facebook for login.
+Make sure you add a copy of facebook.py (from python-sdk/src/) into this
+directory so it can be imported.
+"""
+
+FACEBOOK_APP_ID = '331909936825023'
+FACEBOOK_APP_SECRET = '9f17f1ecae197ca6bf22d809442be538'
+
+import facebook
+import webapp2
+import os.path
+import wsgiref.handlers
+import logging
+import urllib2
+import os, sys
+import pprint
+from webapp2_extras import sessions
+
+config = {}
+config['webapp2_extras.sessions'] = dict(secret_key='fbar1sas26786345barfoobfdsazbar67asdasd32')
+
+from google.appengine.ext import db
+from google.appengine.ext import webapp
+from google.appengine.ext.webapp import util
+from google.appengine.ext.webapp import template
+from google.appengine.api.urlfetch import fetch
+
+
+class XUser(db.Model):
+    id = db.StringProperty(required=True)
+    created = db.DateTimeProperty(auto_now_add=True)
+    updated = db.DateTimeProperty(auto_now=True)
+    name = db.StringProperty(required=True)
+    profile_url = db.StringProperty(required=True)
+    access_token = db.StringProperty(required=True)
+
+
+class BaseHandler(webapp2.RequestHandler):
+    """Provides access to the active Facebook user in self.current_user
+
+    The property is lazy-loaded on first access, using the cookie saved
+    by the Facebook JavaScript SDK to determine the user ID of the active
+    user. See http://developers.facebook.com/docs/authentication/ for
+    more information.
+    """
+    @property
+    def current_user(self):
+        if self.session.get("user"):
+            # User is logged in
+            return self.session.get("user")
+        else:
+            cookie = facebook.get_user_from_cookie(
+                self.request.cookies, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET)
+
+            if cookie:
+                # Okay so user logged in.
+                # Now, check to see if existing user
+                user = User.get_by_key_name(cookie["uid"])
+                if not user:
+                    # Not an existing user so get user info
+                    graph = facebook.GraphAPI(cookie["access_token"])
+                    profile = graph.get_object("me")
+                    user = User(
+                        key_name=str(profile["id"]),
+                        id=str(profile["id"]),
+                        name=profile["name"],
+                        profile_url=profile["link"],
+                        access_token=cookie["access_token"]
+                    )
+                    user.put()
+                elif user.access_token != cookie["access_token"]:
+                    user.access_token = cookie["access_token"]
+                    user.put()
+                # User is now logged in
+                self.session["user"] = dict(
+                    name=user.name,
+                    profile_url=user.profile_url,
+                    id=user.id,
+                    access_token=user.access_token
+                )
+                return self.session.get("user")
+        return None
+
+    def dispatch(self):
+        """
+        This snippet of code is taken from the webapp2 framework documentation.
+        See more at
+        http://webapp-improved.appspot.com/api/webapp2_extras/sessions.html
+
+        """
+        self.session_store = sessions.get_store(request=self.request)
+        try:
+            webapp2.RequestHandler.dispatch(self)
+        finally:
+            self.session_store.save_sessions(self.response)
+
+class HomeHandler(BaseHandler):
+    def get(self):
+        path = os.path.join(os.path.dirname(__file__), "example.html")
+        args = dict(current_user=self.current_user,
+                    facebook_app_id=FACEBOOK_APP_ID)
+        self.response.out.write(template.render(path, args))
+
+    def post(self):
+        url = self.request.get('url')
+        file = urllib2.urlopen(url)
+        graph = facebook.GraphAPI(self.current_user.access_token)
+        graph.put_photo(file, "Test Image")
+
+
+#def main():
+#    logging.getLogger().setLevel(logging.DEBUG)
+#    util.run_wsgi_app(webapp.WSGIApplication([(r"/", HomeHandler)]))
+#
+#
+#if __name__ == "__main__":
+#    main()
+
+app = webapp2.WSGIApplication(
+    [('/', HomeHandler)],
+    debug=True,
+    config=config
+)

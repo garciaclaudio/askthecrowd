@@ -18,11 +18,20 @@ import os, sys
 # Introduces bug...
 #reload(sys); 
 #sys.setdefaultencoding('utf-8')
-from google.appengine.api import images
 
+import facebook
+import webapp2
+import jinja2
+from webapp2_extras import sessions
+
+config = {}
+config['webapp2_extras.sessions'] = dict(secret_key='fbar1sas26786345barfoobfdsazbar67asdasd32')
+
+from google.appengine.api import images
 import time
 import pprint
 import urlparse
+import traceback
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'conf.settings'
 
@@ -30,19 +39,20 @@ from google.appengine.dist import use_library
 use_library('django', '1.2')
 
 # see https://docs.djangoproject.com/en/1.2/topics/i18n/internationalization/
-from django.utils.translation import ugettext as _
+from django.utils.translation import ungettext, ugettext as _
 
 # Force Django to reload settings
 from django.conf import settings
 settings._target = None
 
-from util import I18NRequestHandler
+from util import I18NRequestHandler,Cookies
+from django.utils import translation
 
 from django.template.defaultfilters import register
 from django.utils import simplejson as json
 from functools import wraps
 from google.appengine.api import urlfetch, taskqueue
-from google.appengine.ext import db, webapp
+from google.appengine.ext import db
 from google.appengine.ext.webapp import util, template
 from google.appengine.runtime import DeadlineExceededError
 from random import randrange
@@ -62,8 +72,21 @@ import time
 import traceback
 import urllib
 
+FACEBOOK_APP_ID = '331909936825023'
+FACEBOOK_APP_SECRET = '9f17f1ecae197ca6bf22d809442be538'
+import facebook
+
 # bring in the lang2name tag
 template.register_template_library('templatetags.myfilters')
+
+
+class JinjaTranslations:
+    def gettext(self, message): 
+        return _(message)
+
+    def ngettext(self, singular, plural, number): 
+        return ungettext(singular, plural, number)
+
 
 
 def numeric_compare(x, y):
@@ -122,27 +145,38 @@ def select_random(lst, limit):
             final.append(elem)
     return final
 
-_USER_FIELDS = u'name,email,picture,friends,gender'
-class User(db.Model):
-    user_id = db.StringProperty(required=True)
-    access_token = db.StringProperty(required=True)
-    name = db.StringProperty(required=True)
-    picture = db.StringProperty(required=True)
-    email = db.StringProperty()
-    gender = db.StringProperty()
-    friends = db.StringListProperty()
-    dirty = db.BooleanProperty()
 
-    def refresh_data(self):
-        """Refresh this user's data using the Facebook Graph API"""
-        me = Facebook().api(u'/me',
-            {u'fields': _USER_FIELDS, u'access_token': self.access_token})
-        self.dirty = False
-        self.name = me[u'name']
-        self.email = me.get(u'email')
-        self.picture = me[u'picture'][u'data'][u'url']
-        self.friends = [user[u'id'] for user in me[u'friends'][u'data']]
-        return self.put()
+
+
+_USER_FIELDS = u'name,created,updated,profile_url,access_token'
+class User(db.Model):
+    id = db.StringProperty(required=True)
+    created = db.DateTimeProperty(auto_now_add=True)
+    updated = db.DateTimeProperty(auto_now=True)
+    name = db.StringProperty(required=True)
+    profile_url = db.StringProperty(required=True)
+    access_token = db.StringProperty(required=True)
+
+#    user_id = db.StringProperty(required=True)
+#    access_token = db.StringProperty(required=True)
+#    name = db.StringProperty(required=True)
+#    picture = db.StringProperty(required=True)
+#    email = db.StringProperty()
+#    gender = db.StringProperty()
+#    friends = db.StringListProperty()
+#    dirty = db.BooleanProperty()
+
+#    # no se usa mas... se necesita un reemplazo
+#    def refresh_data(self):
+#        """Refresh this user's data using the Facebook Graph API"""
+#        me = Facebook().api(u'/me',
+#            {u'fields': _USER_FIELDS, u'access_token': self.access_token})
+#        self.dirty = False
+#        self.name = me[u'name']
+#        self.email = me.get(u'email')
+##        self.picture = me[u'picture'][u'data'][u'url']
+#        self.friends = [user[u'id'] for user in me[u'friends'][u'data']]
+#        return self.put()
 
 
 class Counter(db.Model):
@@ -314,31 +348,73 @@ class CsrfException(Exception):
 
 
 class BaseHandler(I18NRequestHandler):
-    facebook = None
-    user = None
-    csrf_protect = False
-
     def initialize(self, request, response):
         """General initialization for every request"""
+        super(BaseHandler, self).initialize(request, response)
+        try:
+            self.init_lang()
+        except Exception, ex:
+            self.log_exception(ex)
+            raise
 
+
+    def initialize_GONER(self, request, response):
+        """General initialization for every request"""
         super(BaseHandler, self).initialize(request, response)
 
-        if settings.IN_DEV_SERVER_OLD:
-#            print >> sys.stderr, '[[[[ IN DEV SERVER ]]]]'
-            self.user = User.get_by_key_name('518261219')
-            self.csrf_token = '12345'
-            self.init_lang()
-            return
+        print >> sys.stderr, '==========================>URL??'
+        pprint.pprint( self.request.url, sys.stderr);
+        print >> sys.stderr, '==========================>URL END'
+
+        self.user = None
+
+        print >> sys.stderr, '==========================>COOKIES??'
+        pprint.pprint( self.request.cookies, sys.stderr);
+        print >> sys.stderr, '==========================>COOKIES END'
+
+        cookie = facebook.get_user_from_cookie(
+            self.request.cookies, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET)
+
+        if cookie:
+            print >> sys.stderr, '==========================>FB COOKIE??'
+            pprint.pprint( cookie, sys.stderr);
+            print >> sys.stderr, '==========================>FB COOKI END'
+
+            # Store a local instance of the user data so we don't need
+            # a round-trip to Facebook on every request
+            user = User.get_by_key_name(cookie["uid"])
+            if not user:
+                graph = facebook.GraphAPI(cookie["access_token"])
+
+                profile = graph.get_object("me")
+
+                print >> sys.stderr, '==========================>ME ME ME ME ME'
+                pprint.pprint( profile, sys.stderr);
+                print >> sys.stderr, '==========================>ME ME ME ME ME END'
+
+                user = User(key_name=str(profile["id"]),
+                            user_id=str(profile["id"]),
+                            name=profile["name"],
+                            profile_url=profile["link"],
+                            access_token=cookie["access_token"])
+                user.put()
+            elif user.access_token != cookie["access_token"]:
+                user.access_token = cookie["access_token"]
+                user.put()
+            self.user = user 
+
+            print >> sys.stderr, '==========================>RETRIEVED USER'
+            pprint.pprint( self.user, sys.stderr);
+            print >> sys.stderr, '==========================>RETRIEVED USER END'
+
 
         try:
-            self.init_facebook()
-            self.init_csrf()
-            self.response.headers[u'P3P'] = u'CP=HONK'  # iframe cookies in IE
             self.init_lang()
 
         except Exception, ex:
             self.log_exception(ex)
             raise
+
 
     def handle_exception(self, ex, debug_mode):
         """Invoked for unhandled exceptions by webapp"""
@@ -376,6 +452,9 @@ class BaseHandler(I18NRequestHandler):
 
     def render(self, name, **data):
         """Render a template"""
+
+        print >> sys.stderr, '==========> IN RENDER, RENDERING name:' + name
+
         if not data:
             data = {}
 
@@ -386,14 +465,17 @@ class BaseHandler(I18NRequestHandler):
             u'canvasName': settings.FACEBOOK_CANVAS_NAME,
             u'userIdOnServer': self.user.user_id if self.user else None,
         })
+
+        print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET'
+        pprint.pprint( self.user, sys.stderr);
+        print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET END'
+
         data[u'logged_in_user'] = self.user
-        data[u'message'] = self.get_message()
-        data[u'csrf_token'] = self.csrf_token
+#        data[u'message'] = self.get_message() XXX not used, what is it???
 
         data[u'locale'] = self.locale
         data[u'language_' + self.selected_lang] = 1
 
-        data[u'csrf_token'] = self.csrf_token
         data[u'canvas_name'] = settings.FACEBOOK_CANVAS_NAME
 
         data[u'IN_DEV_SERVER_OLD'] = settings.IN_DEV_SERVER_OLD
@@ -402,11 +484,17 @@ class BaseHandler(I18NRequestHandler):
         data[u'NOT_IN_DEV_SERVER'] = not settings.IN_DEV_SERVER
         data[u'BASE_URL'] = settings.BASE_URL
 
+#        print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET 2'
+#        pprint.pprint( data[u'logged_in_user'] );
+#        print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET 2 END'
+
+
         self.response.out.write(template.render(
             os.path.join(
                 os.path.dirname(__file__), 'templates', name + '.html'),
             data))
 
+    # no se usa mas
     def init_facebook(self):
         """Sets up the request specific Facebook and User instance"""
         facebook = Facebook()
@@ -461,7 +549,8 @@ class BaseHandler(I18NRequestHandler):
                     user = User(key_name=facebook.user_id,
                         user_id=facebook.user_id, friends=friends,
                         access_token=facebook.access_token, name=me[u'name'],
-                        email=me.get(u'email'), picture=me[u'picture'][u'data'][u'url'],
+                        email=me.get(u'email'),
+#                        picture=me[u'picture'][u'data'][u'url'],
                         gender=me[u'gender'])
                     user.put()
 #                    pprint.pprint( user, sys.stderr);
@@ -535,6 +624,8 @@ def user_required(fn):
 
 class MainPage(BaseHandler):
     def get(self):
+        print >> sys.stderr, '========  AT MAIN HANDLER ==============='
+
         user_name = ''
         if self.user:
             user_name = self.user.name
@@ -893,6 +984,7 @@ class AjaxHandler(BaseHandler):
 
 
     def post(self):
+        print >> sys.stderr, '========  AT AJAX HANDLER POST==============='
         result_struct = { 'error' : '1' }
         action = self.request.get('action')
 
@@ -911,6 +1003,7 @@ class AjaxHandler(BaseHandler):
 
 
     def get(self):
+        print >> sys.stderr, '========  AT AJAX HANDLER ==============='
         result_struct = { 'error' : '1' }
 
         action = self.request.get('action')
@@ -1065,8 +1158,8 @@ class UsrHandler(BaseHandler):
         questions_struct = []
         questions_dict = {}
         for q in questions:
-            questions_dict[ q.key().name() ] = 1
-            questions_struct.append( {
+           questions_dict[ q.key().name() ] = 1
+           questions_struct.append( {
                     'question_key_name' : str(q.key().name()),
                     'question_text' : unicode(q.question_text),
                     })
@@ -1120,6 +1213,200 @@ class PrivPolHandler(BaseHandler):
         self.get()
 
 
+class I18NRequestHandler2(webapp2.RequestHandler):
+
+    def init_lang(self):
+        """language handling"""
+        try:
+            self.selected_lang = self.request.COOKIES['django_language']
+        except:
+            self.selected_lang = self.request.LANGUAGE_CODE
+
+        lang = self.request.get('lang')
+
+#        print >> sys.stderr, 'LANG PARAM' + str(lang)
+
+        if lang:
+            if lang == 'unset':
+                del self.request.COOKIES['django_language']
+            else:
+                self.request.COOKIES['django_language'] = lang
+                self.reset_language()
+                self.selected_lang = lang
+
+         # needed for the like button
+        self.locale = 'en_US'
+        if self.selected_lang == 'es':
+            self.locale = 'es_ES'
+
+#        print >> sys.stderr, 'SELECTED LANG' + str(self.selected_lang)
+#        print >> sys.stderr, 'DJANGO LANG' + str(self.request.LANGUAGE_CODE)
+
+
+    def __init__(self, request, response):
+        # Set self.request, self.response and self.app.
+        self.initialize(request, response)
+        self.request.COOKIES = Cookies(self)
+        self.request.META = os.environ
+        self.reset_language()
+        self.init_lang()
+
+    def reset_language(self):
+
+        # Decide the language from Cookies/Headers
+        language = translation.get_language_from_request(self.request)
+        translation.activate(language)
+        self.request.LANGUAGE_CODE = translation.get_language()
+
+        # Set headers in response
+        self.response.headers['Content-Language'] = translation.get_language()
+        #    translation.deactivate()
+
+# End of I18NRequestHandler2
+
+class BaseHandler2(I18NRequestHandler2):
+    """Provides access to the active Facebook user in self.current_user
+
+    The property is lazy-loaded on first access, using the cookie saved
+    by the Facebook JavaScript SDK to determine the user ID of the active
+    user. See http://developers.facebook.com/docs/authentication/ for
+    more information.
+    """
+    @property
+    def current_user(self):
+        if self.session.get("user"):
+            # User is logged in
+            return self.session.get("user")
+        else:
+            # Either used just logged in or just saw the first page
+            # We'll see here
+            cookie = facebook.get_user_from_cookie(self.request.cookies,
+                                                   FACEBOOK_APP_ID,
+                                                   FACEBOOK_APP_SECRET)
+            if cookie:
+                # Okay so user logged in.
+                # Now, check to see if existing user
+                print >> sys.stderr, '==========================>COOKIE??'
+                pprint.pprint( cookie, sys.stderr);
+                print >> sys.stderr, '==========================>COOKIE END'
+
+                user = User.get_by_key_name(cookie["uid"])
+                if not user:
+                    # Not an existing user so get user info
+                    graph = facebook.GraphAPI(cookie["access_token"])
+                    profile = graph.get_object("me")
+                    user = User(
+                        key_name=str(profile["id"]),
+                        id=str(profile["id"]),
+                        name=profile["name"],
+                        profile_url=profile["link"],
+                        access_token=cookie["access_token"]
+                    )
+                    user.put()
+                elif user.access_token != cookie["access_token"]:
+                    user.access_token = cookie["access_token"]
+                    user.put()
+                # User is now logged in
+                self.session["user"] = dict(
+                    name=user.name,
+                    profile_url=user.profile_url,
+                    id=user.id,
+                    access_token=user.access_token
+                )
+                return self.session.get("user")
+        return None
+
+    def dispatch(self):
+        """
+        This snippet of code is taken from the webapp2 framework documentation.
+        See more at
+        http://webapp-improved.appspot.com/api/webapp2_extras/sessions.html
+
+        """
+        self.session_store = sessions.get_store(request=self.request)
+        try:
+            webapp2.RequestHandler.dispatch(self)
+        finally:
+            self.session_store.save_sessions(self.response)
+
+    @webapp2.cached_property
+    def session(self):
+        """
+        This snippet of code is taken from the webapp2 framework documentation.
+        See more at
+        http://webapp-improved.appspot.com/api/webapp2_extras/sessions.html
+
+        """
+        return self.session_store.get_session()
+
+
+    def render(self, name, **data):
+        """Render a template"""
+
+        print >> sys.stderr, '==========> IN RENDER, RENDERING name:' + name
+
+        if not data:
+            data = {}
+
+        data[u'js_conf'] = json.dumps({
+            u'appId': settings.FACEBOOK_APP_ID,
+            u'canvasName': settings.FACEBOOK_CANVAS_NAME,
+            u'userIdOnServer': self.current_user.id if self.current_user else None,
+        })
+
+        print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET'
+        pprint.pprint( self.current_user, sys.stderr);
+        print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET END'
+
+        data[u'facebook_app_id'] = facebook_app_id=FACEBOOK_APP_ID
+        data[u'logged_in_user'] = self.current_user
+#        data[u'message'] = self.get_message() XXX not used, what is it???
+
+        data[u'locale'] = self.locale
+        data[u'language_' + self.selected_lang] = 1
+
+        data[u'canvas_name'] = settings.FACEBOOK_CANVAS_NAME
+
+        data[u'IN_DEV_SERVER_OLD'] = settings.IN_DEV_SERVER_OLD
+        data[u'NOT_IN_DEV_SERVER_OLD'] = not settings.IN_DEV_SERVER_OLD
+        data[u'IN_DEV_SERVER'] = settings.IN_DEV_SERVER
+        data[u'NOT_IN_DEV_SERVER'] = not settings.IN_DEV_SERVER
+        data[u'BASE_URL'] = settings.BASE_URL
+
+#        print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET 2'
+#        pprint.pprint( data[u'logged_in_user'] );
+#        print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET 2 END'
+
+        template = jinja_environment.get_template('templates/' + name + '.html')
+
+        self.response.out.write( template.render( data ) )
+
+
+
+class MainPage2(BaseHandler2):
+    def get(self):
+        print >> sys.stderr, '========  AT MAIN HANDLER ==============='
+        user_name = ''
+        if self.current_user:
+            user_name = self.current_user.name
+
+        self.render(u'index3',
+                    main_page=1,
+                    user_name=user_name)
+    def post(self):
+        self.get()
+
+
+
+class LogoutHandler(BaseHandler):
+    def get(self):
+        if self.current_user is not None:
+            self.session['user'] = None
+
+        self.redirect('/')
+
+
+
 def main():
     routes = [
         ('/image', GetImage),
@@ -1134,6 +1421,21 @@ def main():
         debug=os.environ.get('SERVER_SOFTWARE', '').startswith('Dev'))
     util.run_wsgi_app(application)
 
+jinja_environment = jinja2.Environment(
+    extensions=['jinja2.ext.i18n'],
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__))
+)
 
-if __name__ == u'__main__':
-    main()
+jinja_environment.install_gettext_translations(JinjaTranslations(), newstyle=False)
+
+
+app = webapp2.WSGIApplication(
+    [('/', MainPage2),
+    ('/logout', LogoutHandler)],  # implement
+    debug=True,
+    config=config
+)
+
+
+#if __name__ == u'__main__':
+#    main()
