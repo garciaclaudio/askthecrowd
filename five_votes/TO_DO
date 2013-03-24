@@ -15,6 +15,13 @@ Hola Carlos! Pues podría usarse como base tecnológica para implementar alguna ap
        http://jinja.pocoo.org/docs/extensions/
        http://fgda.pl/post/3/jinja2-internationalization-in-django
 
+Changed git config (from->to):
+    url = git@github.com:garciaclaudio/askthecrowd.git
+        url = https://garciaclaudio@github.com/garciaclaudio/askthecrowd.git
+
+Escaping curlies:
+    http://stackoverflow.com/questions/7772001/how-to-escape-or-in-django-template
+
 </Standalonify>
 
 

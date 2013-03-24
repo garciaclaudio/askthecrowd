@@ -1,4 +1,3 @@
-{% load i18n %}
 <!-- JS TEMPLATES START -->
 
 <script id="logged_in_faces_tmpl">
@@ -7,7 +6,7 @@
 
 <script id="welcome_msg_tmpl">
 <div class="mytube">
-<div id="welcome_msg"><p>{% trans "To use this app, sign in with your facebook account:" %}</p>
+<div id="welcome_msg"><p>{% trans %}To use this app, sign in with your facebook account:{% endtrans %}</p>
 <fb:login-button show-faces="true"></fb:login-button>
 </div>
 </div>
@@ -37,13 +36,13 @@
         <div id="picture_${answer_key}"></div>
         <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><a class="play_inset_link"><img src="/images/play_button_small.png"></a></div>        <span class="answer_text">${answer_text}</span>
         <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
-        <div id="add_video_link_${answer_key}" class="invisible"><a href="#" onclick="add_video_link_func('${answer_key}');return false;">{% trans "add youtube video" %}</a></div>
+        <div id="add_video_link_${answer_key}" class="invisible"><a href="#" onclick="add_video_link_func('${answer_key}');return false;">{% trans %}add youtube video{% endtrans %}</a></div>
         <div id="video_form_div_${answer_key}" class="invisible">
              <form id="add_video_form_${answer_key}" action="/ajax.html" method="get">
                 <input type="hidden" name="answer_key" value="${answer_key}">
                 <input type="hidden" name="action" value="add_video">
-                {% trans "Youtube video URL:" %}<input id="video_link" name="video_link" class="text" type="text" size=20>
-&nbsp;<button type="submit">{% trans "add" %}</button>
+                {% trans %}Youtube video URL:{% endtrans %}<input id="video_link" name="video_link" class="text" type="text" size=20>
+&nbsp;<button type="submit">{% trans %}add{% endtrans %}</button>
              </form>
         </div>
 
@@ -55,17 +54,17 @@
 <script id="question_created_tmpl" type="text/html">
 <div class="mytube">
 <div id="question_created"> 
-    <p>{% trans "Question created" %}</p>
+    <p>{% trans %}Question created{% endtrans %}</p>
     <div class="question_text">${question_text}</div>
 
-    <p>{% trans "Suggest inital answers:" %}</p>
+    <p>{% trans %}Suggest inital answers:{% endtrans %}</p>
     <div id="answers_form_div">
          <form id="new_answer_form" action="/ajax.html" method="get">
             <input type="hidden" name="question_key_name" value="${question_key_name}">
             <input type="hidden" name="action" value="add_answer">
 
             <input id="new_answer" name="answer_text" class="text" type="text" size=30>
-&nbsp;<button id="new_answer" type="submit">{% trans "add" %}</button>
+&nbsp;<button id="new_answer" type="submit">{% trans %}add{% endtrans %}</button>
 
          </form>
     </div>
@@ -76,8 +75,8 @@
     </div>
 
     <div style="clear:both">
-        <br /><button id="done_button" class="my_button">{% trans "done" %}</button>
-        <input type="checkbox" name="post_to_fb" value="post_to_fb" checked>{% trans "Post to Facebook" %}<br>
+        <br /><button id="done_button" class="my_button">{% trans %}done{% endtrans %}</button>
+        <input type="checkbox" name="post_to_fb" value="post_to_fb" checked>{% trans %}Post to Facebook{% endtrans %}<br>
     </div>
 </div>
 </div>
@@ -88,11 +87,11 @@
     <div id="question_form_div">
         <form id="question_form" action="/ajax.html" method="get">
               <input type="hidden" name="action" value="create_question">
-              <label for="question">{% trans "Enter your question:" %}</label><br /><br />
+              <label for="question">{% trans %}Enter your question:{% endtrans %}</label><br /><br />
 <div>              <input name="question" id="question" size=45 class="text" type="text">
 </div>
 <br />
-            <button type="submit" id="create_question_button" class="my_button">{% trans "create" %}</button>
+            <button type="submit" id="create_question_button" class="my_button">{% trans %}create{% endtrans %}</button>
         </form>
     </div>
 </div>
@@ -100,12 +99,12 @@
 
 <script id="done_question_tmpl" type="text/html">
 <div class="mytube">
-    <p>{% trans "You're done!" %}</p>
+    <p>{% trans %}You're done!{% endtrans %}</p>
     <div class="question_text">${question_text}</div>
 
-    <p>{% trans "Your question's URL is:" %} <a target="_top" href="{{BASE_URL}}/q${question_key_name}">{{BASE_URL}}/q${question_key_name}</a></p>
+    <p>{% trans %}Your question's URL is:{% endtrans %} <a target="_top" href="{{BASE_URL}}/q${question_key_name}">{{BASE_URL}}/q${question_key_name}</a></p>
 
-    <button type="submit" id="create_another_button" class="my_button">{% trans "create another question" %}</button>
+    <button type="submit" id="create_another_button" class="my_button">{% trans %}create another question{% endtrans %}</button>
 </div>
 </script>
 
@@ -115,7 +114,7 @@
     <div class="question_text">${question_text}
     </div>
 
-    <div class="author_link" style="margin-bottom:10px;"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans "by" %} ${owner_name}</a></div>
+    <div class="author_link" style="margin-bottom:10px;"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans %}by{% endtrans %} ${owner_name}</a></div>
 
     <div id="answers_div">
     </div>
@@ -124,7 +123,7 @@
 
     <div class="vote_link add_ans_class add_ans_link">
       <div class="mytube">
-        <a href="#" onclick="add_ans_link_func();return false;">{% trans "suggest new answer" %}</a>
+        <a href="#" onclick="add_ans_link_func();return false;">{% trans %}suggest new answer{% endtrans %}</a>
       </div>
     </div>
 
@@ -135,7 +134,7 @@
             <input type="hidden" name="action" value="add_answer">
 
             <input id="new_answer" name="answer_text" class="text" type="text" size=20>
-&nbsp;<button id="new_answer" type="submit">{% trans "add" %}</button>
+&nbsp;<button id="new_answer" type="submit">{% trans %}add{% endtrans %}</button>
          </form>
       </div>
     </div>
@@ -144,9 +143,9 @@
 
 
     <div id="see_results_div" style="clear:both;display:none;padding-bottom:20px;">
-        <button id="see_results_button" class="my_button">{% trans "See results" %}</button>
+        <button id="see_results_button" class="my_button">{% trans %}See results{% endtrans %}</button>
 
-<input type="checkbox" name="post_to_fb" value="post_to_fb" checked>{% trans "Post to Facebook" %}<br>
+<input type="checkbox" name="post_to_fb" value="post_to_fb" checked>{% trans %}Post to Facebook{% endtrans %}<br>
 
     </div>
 
@@ -154,7 +153,7 @@
 </script>
 
 <script id="suggest_another_answer_tmpl" type="text/html">
-    <p>{% trans "Suggest another answer" %}</p>
+    <p>{% trans %}Suggest another answer{% endtrans %}</p>
 
     <div id="answers_form_div">
          <form id="new_answer_form" action="/ajax.html" method="get">
@@ -162,7 +161,7 @@
             <input type="hidden" name="action" value="add_answer">
 
             <input id="new_answer" name="answer_text" class="text" type="text" size=30>
-&nbsp;<button id="new_answer" type="submit">{% trans "add" %}</button>
+&nbsp;<button id="new_answer" type="submit">{% trans %}add{% endtrans %}</button>
 
          </form>
     </div>
@@ -190,7 +189,7 @@
             <input type="hidden" name="answer_key" value="${answer_key}">
             <input type="hidden" name="action" value="vote">
             <input type="hidden" name="vote_val" value="1">
-<span class="vote_link"><a href="#" onclick="$('#plus_vote_form_${answer_key}').submit();return false;">{% trans "vote" %}</a>
+<span class="vote_link"><a href="#" onclick="$('#plus_vote_form_${answer_key}').submit();return false;">{% trans %}vote{% endtrans %}</a>
        </form>
    </div>
 
@@ -199,7 +198,7 @@
             <input type="hidden" name="answer_key" value="${answer_key}">
             <input type="hidden" name="action" value="vote">
             <input type="hidden" name="vote_val" value="-1">
-<span class="vote_link"><a href="#" onclick="$('#minus_vote_form_${answer_key}').submit();return false;">{% trans "unvote" %}</a>
+<span class="vote_link"><a href="#" onclick="$('#minus_vote_form_${answer_key}').submit();return false;">{% trans %}unvote{% endtrans %}</a>
        </form>
    </div>
 
@@ -217,7 +216,7 @@
 <div> 
     <div class="question_text">${question_text}</div>
 
-    <div class="author_link" style="margin-bottom:10px;"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans "by" %} ${owner_name}</a></div>
+    <div class="author_link" style="margin-bottom:10px;"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans %}by{% endtrans %} ${owner_name}</a></div>
 
     <div id="selector_div">
     </div>
@@ -248,14 +247,14 @@
 <script id="welcome_question_tmpl" type="text/html">
 <div class="mytube">
   <div> 
-      <div id="welcome_msg"><p>{% trans "To vote on this question, sign in with your facebook account:" %}</p> <fb:login-button show-faces="true"></fb:login-button>
+      <div id="welcome_msg"><p>{% trans %}To vote on this question, sign in with your facebook account:{% endtrans %}</p> <fb:login-button show-faces="true"></fb:login-button>
       </div>
       <div class="question_text">${question_text}</div>
 <br />
       <div id="answers_div">
       </div>
 
-      <div id="second_login_button" class="add_ans_class" style="padding:15px;font-size:110%;clear:both;">{%trans "login to vote" %} <br /><br /> <fb:login-button show-faces="true"></fb:login-button></div>
+      <div id="second_login_button" class="add_ans_class" style="padding:15px;font-size:110%;clear:both;">{%trans %}login to vote{% endtrans %} <br /><br /> <fb:login-button show-faces="true"></fb:login-button></div>
   </div>
 </div>
 </script>
@@ -289,13 +288,13 @@
         <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><a class="play_inset_link"><img src="/images/play_button_small.png"></a></div>
         <span class="answer_text">${answer_text}</span>
         <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
-        <div id="add_video_link_${answer_key}" class="invisible"><a href="#" onclick="add_video_link_func('${answer_key}');return false;">{% trans "add youtube video" %}</a></div>
+        <div id="add_video_link_${answer_key}" class="invisible"><a href="#" onclick="add_video_link_func('${answer_key}');return false;">{% trans %}add youtube video{% endtrans %}</a></div>
         <div id="video_form_div_${answer_key}" class="invisible">
              <form id="add_video_form_${answer_key}" action="/ajax.html" method="get">
                 <input type="hidden" name="answer_key" value="${answer_key}">
                 <input type="hidden" name="action" value="add_video">
-                {% trans "Youtube video URL:" %}<input id="video_link" name="video_link" class="text" type="text" size=20>
-&nbsp;<button type="submit">{% trans "add" %}</button>
+                {% trans %}Youtube video URL:{% endtrans %}<input id="video_link" name="video_link" class="text" type="text" size=20>
+&nbsp;<button type="submit">{% trans %}add{% endtrans %}</button>
              </form>
         </div>
     <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
@@ -305,7 +304,7 @@
             <input type="hidden" name="answer_key" value="${answer_key}">
             <input type="hidden" name="action" value="vote">
             <input type="hidden" name="vote_val" value="1">
-<span class="vote_link"><a href="#" onclick="$('#plus_vote_form_${answer_key}').submit();return false;">{% trans "vote" %}</a>
+<span class="vote_link"><a href="#" onclick="$('#plus_vote_form_${answer_key}').submit();return false;">{% trans %}vote{% endtrans %}</a>
        </form>
    </div>
 
@@ -314,11 +313,11 @@
             <input type="hidden" name="answer_key" value="${answer_key}">
             <input type="hidden" name="action" value="vote">
             <input type="hidden" name="vote_val" value="-1">
-<span class="vote_link"><a href="#" onclick="$('#minus_vote_form_${answer_key}').submit();return false;">{% trans "unvote" %}</a>
+<span class="vote_link"><a href="#" onclick="$('#minus_vote_form_${answer_key}').submit();return false;">{% trans %}unvote{% endtrans %}</a>
        </form>
    </div>
 
-    <div class="author_link"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans "by" %} ${owner_name}</a></div>
+    <div class="author_link"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans %}by{% endtrans %} ${owner_name}</a></div>
 
   </div>
 
@@ -333,7 +332,7 @@
         </div>
 
         <div class="mytube" style="float:right;">
-            <div id="more_link_${question_key_name}" q_key="${question_key_name}" class="vote_link"><a href="#" onclick="return false;">[{% trans "open" %}]</a></div>
+            <div id="more_link_${question_key_name}" q_key="${question_key_name}" class="vote_link"><a href="#" onclick="return false;">[{% trans %}open{% endtrans %}]</a></div>
             <div id="less_link_${question_key_name}" q_key="${question_key_name}" class="vote_link invisible"><a href="#" onclick="return false;">[{% trans "close" %}]</a></div>
         </div>
 
