@@ -202,7 +202,8 @@
        </form>
    </div>
 
-{% templatetag openbrace %}{% templatetag openbrace %}html by_link{% templatetag closebrace %}{% templatetag closebrace %}
+
+{{ "{{html by_link}" }}}
 
   </div>
 
