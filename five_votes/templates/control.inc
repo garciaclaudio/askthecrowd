@@ -1,5 +1,3 @@
-{% load i18n %}
-
 <div id="fb-root"></div>
 
 <script>
@@ -53,7 +51,7 @@ function bind_delete_and_uploader(data) {
                 action: '/ajax.html',
                 debug: true,
                 sizeLimit: 2*2088576, // 4 MB
-                uploadText: '{% trans "add picture" %}',
+                uploadText: '{% trans %}add picture{% endtrans %}',
                 allowedExtensions: ['jpg', 'jpeg', 'gif', 'png'],
                 onComplete: function(id, file_name, data){
                     $('#file_uploader_' + data.answer_key).remove();
@@ -97,7 +95,7 @@ function get_and_display_user_questions() {
                              height:220,
                              modal: true,
                              buttons: {
-				"{% trans "yes, delete it" %}": function() {
+				"{% trans %}yes, delete it{% endtrans %}": function() {
 
                                     $.getJSON("ajax.html?action=delete_question;question_key_name=" + question_key_name_to_delete, function(data){
                                             $('#prev_question_' + data.deleted_question_key).hide();
@@ -106,7 +104,7 @@ function get_and_display_user_questions() {
                                     $( this ).dialog( "close" );
                                     return false;
 				},
-				"{% trans "no, cancel" %}": function() {
+				"{% trans %}no, cancel{% endtrans %}": function() {
 					$( this ).dialog( "close" );
                                         return false;
 				}
@@ -257,8 +255,8 @@ function show_created_question(data) {
 //alert('pic link: ' + pic_link );
 
             name = new_question_text;
-            caption = "{{user_name}} " + ' {% trans "created this question on Five Votes." %}';
-            var desc = '{% trans "Your opinion is needed!" %} ';
+            caption = "{{user_name}} " + ' {% trans %}created this question on Five Votes.{% endtrans %}';
+            var desc = '{% trans %}Your opinion is needed!{% endtrans %} ';
 
             var obj = {
               method: 'feed',
@@ -293,22 +291,22 @@ function show_created_question(data) {
 
 function update_votes_header( votes_left ) {
     if( votes_left == 0 ) {
-       $('#logo_text').html('<div class="mytube">{% trans "Zero Votes" %}</div>');
+       $('#logo_text').html('<div class="mytube">{% trans %}Zero Votes{% endtrans %}</div>');
     }
     else if( votes_left == 1 ) {
-       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;</span> {% trans "One Vote" %}</div>');
+       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;</span> {% trans %}One Vote{% endtrans %}</div>');
     }
     else if( votes_left == 2 ) {
-       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;</span> {% trans "Two Votes" %} <span style="color:red;">&#10003;</span> </div>');
+       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;</span> {% trans %}Two Votes{% endtrans %} <span style="color:red;">&#10003;</span> </div>');
     }
     else if( votes_left == 3 ) {
-       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;</span> {% trans "Three Votes" %} <span style="color:red;">&#10003;</span> </div>');
+       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;</span> {% trans %}Three Votes{% endtrans %} <span style="color:red;">&#10003;</span> </div>');
     }
      else if( votes_left == 4 ) {
-       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;</span> {% trans "Four Votes" %} <span style="color:red;">&#10003;&#10003;</span> </div>');
+       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;</span> {% trans %}Four Votes{% endtrans %} <span style="color:red;">&#10003;&#10003;</span> </div>');
     }
      else if( votes_left == 5 ) {
-       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;</span> {% trans "Five Votes" %} <span style="color:red;">&#10003;&#10003;</span> </div>');
+       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;</span> {% trans %}Five Votes{% endtrans %} <span style="color:red;">&#10003;&#10003;</span> </div>');
     }
 }
 
@@ -419,9 +417,9 @@ function show_results( data ) {
             'question_key_name': data.question_key_name,
           }));
 
-    show_selector(data, 'all', '{% trans "All" %}', 1 );
-    show_selector(data, 'female', '{% trans "Women" %}', 0 );
-    show_selector(data, 'male', '{% trans "Men" %}', 0 );
+    show_selector(data, 'all', '{% trans %}All{% endtrans %}', 1 );
+    show_selector(data, 'female', '{% trans %}Women{% endtrans %}', 0 );
+    show_selector(data, 'male', '{% trans %}Men{% endtrans %}', 0 );
 
     for (var i = 0; i < data.friends_with_votes.length; i++) {
         friend_id = 'friend_' + data.friends_with_votes[i].user_id;
@@ -522,7 +520,7 @@ function show_question_for_voting() {
      }
 
     $('#main_container').html( $("#answer_question_tmpl").tmpl({
-             'question_text': "{{question.question_text}}",
+             'question_text': "{{question_foo.question_text}}",
              'owner_name': "{{owner_name}}",
              'owner_id': "{{owner_id}}",
              'question_key_name': "{{question_key_name}}",
@@ -554,12 +552,12 @@ function show_question_for_voting() {
 //alert('pic link: ' + pic_link );
 
             name = "{{question.question_text}}";
-            caption = "{{user_name}} " + ' {% trans "answered this question on Five Votes." %}';
+            caption = "{{user_name}} " + ' {% trans %}answered this question on Five Votes.{% endtrans %}';
 
 {% if  user_is_male %}
-            var desc = '{% trans "His top choice was:" %} ' + selected_answer_text;
+            var desc = '{% trans %}His top choice was:{% endtrans %} ' + selected_answer_text;
 {% else %}
-            var desc = '{% trans "Her top choice was:" %} ' + selected_answer_text;
+            var desc = '{% trans %}Her top choice was:{% endtrans %} ' + selected_answer_text;
 {% endif %}
 
             var obj = {
@@ -598,7 +596,7 @@ function show_question_for_voting() {
       var by_link = '';
 
       {% if ans.show_owner %}
-          by_link = '<div class="author_link"><a href="{{BASE_URL}}/u{{ ans.owner_id }}">{% trans "by" %} {{ ans.owner_name }}</a></div>';
+          by_link = '<div class="author_link"><a href="{{BASE_URL}}/u{{ ans.owner_id }}">{% trans %}by{% endtrans %} {{ ans.owner_name }}</a></div>';
       {% endif %}
 
       $('#answers_div').append( $("#show_answer_for_voting_tmpl").tmpl( {
@@ -706,7 +704,7 @@ function show_all_questions() {
 
      $('#all_users_questions').hide();
 
-     $('#main_container').html( '<h3>{% trans "Questions from all users"%}</h3>' );
+     $('#main_container').html( '<h3>{% trans %}Questions from all users{% endtrans %}</h3>' );
 
     {% for q in questions %}
       $('#prev_questions').append( $("#all_questions_question_tmpl").tmpl( {
@@ -806,7 +804,7 @@ alert('reloading, user not there');
           window.location.reload();
     {% endif %}
 
-                  {% if question %}
+                  {% if question_foo is defined %}
                       show_question_for_voting();
                       $('.answer_picture').imagesLoaded(
                           function(){ 
@@ -837,7 +835,7 @@ alert('reloading, user not there');
               } else {
                 // the user isn't even logged in to Facebook.
 
-                  {% if question %}
+                  {% if question_foo is defined %}
                     FB.Event.subscribe('auth.login', function(response) {
                     // Reload the entire page
 //alert('about to reload question');
@@ -851,7 +849,7 @@ alert('reloading, user not there');
                     });
                   {% endif %}
 
-                  {% if question %}
+                  {% if question_foo is defined %}
                       show_question_for_welcome();
                       $('.answer_picture').imagesLoaded(
                           function(){ 
@@ -901,7 +899,7 @@ $(function(){
 
 {% if IN_DEV_SERVER_OLD %}
 
-    {% if question %}
+    {% if question_foo is defined %}
         show_question_for_voting();
     {% else %}
         {% if all_questions %}

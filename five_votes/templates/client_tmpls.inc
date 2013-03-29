@@ -334,19 +334,19 @@
 
         <div class="mytube" style="float:right;">
             <div id="more_link_${question_key_name}" q_key="${question_key_name}" class="vote_link"><a href="#" onclick="return false;">[{% trans %}open{% endtrans %}]</a></div>
-            <div id="less_link_${question_key_name}" q_key="${question_key_name}" class="vote_link invisible"><a href="#" onclick="return false;">[{% trans "close" %}]</a></div>
+            <div id="less_link_${question_key_name}" q_key="${question_key_name}" class="vote_link invisible"><a href="#" onclick="return false;">[{% trans %}close{% endtrans %}]</a></div>
         </div>
 
         <div class="mytube invisible" id="prev_answers_div_${question_key_name}" style="clear:both;">
              <div id="inner_prev_answers_div_${question_key_name}"></div>
-             <div style="clear:both;text-align:center;"><button class="my_button delete_question_button" q_key="${question_key_name}">{% trans "delete" %}</button></div>
+             <div style="clear:both;text-align:center;"><button class="my_button delete_question_button" q_key="${question_key_name}">{% trans %}delete{% endtrans %}</button></div>
        </div>
    </div>
 </script>
 
 <script id="prev_questions_header_tmpl" type="text/html">
 
-    <div id="dialog-confirm" class="invisible" title="{% trans "Delete this question?" %}">
+    <div id="dialog-confirm" class="invisible" title="{% trans %}Delete this question?{% endtrans %}">
 	<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
         <span id="confirm_delete_question_div"></span>
 </p>
@@ -376,13 +376,13 @@
           </div>
         <span class="answer_text">${answer_text}</span>
         <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
-        <div id="add_video_link_${answer_key}" class="invisible"><a href="#" onclick="add_video_link_func('${answer_key}');return false;">{% trans "add youtube video" %}</a></div>
+        <div id="add_video_link_${answer_key}" class="invisible"><a href="#" onclick="add_video_link_func('${answer_key}');return false;">{% trans %}add youtube video{% endtrans %}</a></div>
         <div id="video_form_div_${answer_key}" class="invisible">
              <form id="add_video_form_${answer_key}" action="/ajax.html" method="get">
                 <input type="hidden" name="answer_key" value="${answer_key}">
                 <input type="hidden" name="action" value="add_video">
-                {% trans "Youtube video URL:" %}<input id="video_link" name="video_link" class="text" type="text" size=20>
-&nbsp;<button type="submit">{% trans "add" %}</button>
+                {% trans %}Youtube video URL:{% endtrans %}<input id="video_link" name="video_link" class="text" type="text" size=20>
+&nbsp;<button type="submit">{% trans %}add{% endtrans %}</button>
              </form>
         </div>
 
