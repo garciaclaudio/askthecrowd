@@ -32,8 +32,6 @@
 <body>
 {% include "templates/client_tmpls.inc" %}
 
-
-
 {% include "templates/control.inc" %}
 
 <div id="app_logo">
@@ -47,23 +45,23 @@ NAME? {{logged_in_user.name}} <--
 
 {% if question_page %}
 
-    {% include "question_page.inc" %}
+    {% include "templates/question_page.inc" %}
 
 {% else %}
 
     {% if usr_page %}
 
-        {% include "user_page.inc" %}
+        {% include "templates/user_page.inc" %}
 
     {% else %}    
 
         {% if priv_pol %}
 
-            {% include "priv_pol.inc" %}
+            {% include "templates/priv_pol.inc" %}
 
         {% else %}    
 
-            {% include "main_page.inc" %}
+            {% include "templates/main_page.inc" %}
 
         {% endif  %}
 
@@ -71,7 +69,7 @@ NAME? {{logged_in_user.name}} <--
 
 {% endif  %}
 
-{% include "footer.inc" %}
+{% include "templates/footer.inc" %}
 
 </body>
 </html>

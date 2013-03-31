@@ -1,14 +1,12 @@
-{% load i18n %}
-
   <div id="footer">
     <div class="mytube">
 
       <div class="vote_link" id="all_users_questions" style="float:left;margin-top:8px;margin-left:15px;font-size:0.6em;">
 
      {% if question %}
-        <a href="{{BASE_URL}}" target="_top">{% trans "Create and share your own questions!" %}</a>
+        <a href="{{BASE_URL}}" target="_top">{% trans %}Create and share your own questions!{% endtrans %}</a>
      {% else %}
-        <a href="{{BASE_URL}}/all" target="_top">{% trans "Questions from other users" %}</a>
+        <a href="{{BASE_URL}}/all" target="_top">{% trans %}Questions from other users{% endtrans %}</a>
      {% endif %}
 
       </div>
@@ -22,6 +20,6 @@
         </select>
         </form>
     </div>
-    <div style="float:right;margin-top:9px;">{% trans "Select your language" %}:&nbsp;</div>
+    <div style="float:right;margin-top:9px;">{% trans %}Select your language{% endtrans %}:&nbsp;</div>
     </div>
   </div>

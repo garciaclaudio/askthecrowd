@@ -1,5 +1,3 @@
-{% load i18n %}
-
 <div id="contentwrapper">
 <div id="contentcolumn">
   <div id="super_top_container" class="innertube">
@@ -16,7 +14,7 @@
   <div id="right_col">
      <div class="mytube">
          <div style="text-align:left;" id="faces_div"></div>
-         <p class="tiny">{% trans "Questions about this app? Leave them here:"%}</p>
+         <p class="tiny">{% trans %}Questions about this app? Leave them here:{% endtrans %}</p>
          <div class="fb-comments" data-href="http://five-votes.appspot.com" data-num-posts="4" data-width="305"></div>
      </div>
   </div>
