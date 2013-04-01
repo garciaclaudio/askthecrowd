@@ -15,8 +15,8 @@
     <div style="float:right;margin-top:5px;margin-bottom:10px;">
         <form method="get">
         <select name="lang" onChange="submit()">
-              <option value="en" {% if language_en %}selected="selected"{% endif %}>{% lang2name "en" %}</option>
-              <option value="es" {% if language_es %}selected="selected"{% endif %}>{% lang2name "es" %}</option>
+              <option value="en" {% if language_en %}selected="selected"{% endif %}>English</option>
+              <option value="es" {% if language_es %}selected="selected"{% endif %}>Español</option>
         </select>
         </form>
     </div>

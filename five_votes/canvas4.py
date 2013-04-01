@@ -1388,7 +1388,10 @@ class MainPage2(BaseHandler2):
         print >> sys.stderr, '========  AT MAIN HANDLER ==============='
         user_name = ''
         if self.current_user:
-            user_name = self.current_user.name
+            print >> sys.stderr, '========  GETTING NAME 1 ==============='
+            pprint.pprint( self.current_user )
+            print >> sys.stderr, '========  GETTING NAME 2: ' + self.current_user['name']
+            user_name = self.current_user['name']
 
         self.render(u'index3',
                     main_page=1,
