@@ -1351,7 +1351,7 @@ class BaseHandler2(I18NRequestHandler2):
         data[u'js_conf'] = json.dumps({
             u'appId': settings.FACEBOOK_APP_ID,
             u'canvasName': settings.FACEBOOK_CANVAS_NAME,
-            u'userIdOnServer': self.current_user.id if self.current_user else None,
+            u'userIdOnServer': self.current_user['id'] if self.current_user else None,
         })
 
         print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET'
