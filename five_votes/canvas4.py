@@ -637,7 +637,364 @@ class MainPage(BaseHandler):
         self.get()
 
 
-class AjaxHandler(BaseHandler):
+#
+#
+# http://localhost:8080/image?answer_key=agpmaXZlLXZvdGVzcg0LEgZBbnN3ZXIYgAEM
+
+class GetImage(BaseHandler):
+    def get(self):
+        ans = Answer.get( self.request.get('answer_key') );
+        if (ans and ans.picture):
+            self.response.headers['Content-Type'] = 'image/jpg'
+            self.response.out.write(ans.picture)
+        else:
+            self.error(404)
+
+class QuestionHandler(BaseHandler):
+    def get(self, question_key_name):
+        question = Question.get_by_key_name( question_key_name );
+        answers = Answer.gql( 'where question = :1', question )
+
+        tot_votes = 0
+        votes_count_hash = {}
+
+        user_name = ''
+        user_is_male = 0
+        if self.user:
+            user_name = self.user.name
+            if self.user.gender == 'male':
+                user_is_male = 1
+            # obtain votes by this user to this questions
+            all_my_voted = Vote.gql( 'where question = :1 AND user_id = :2 AND num_votes>0', question , self.user.user_id )
+
+            tot_votes = 0
+            for vote in all_my_voted:
+                votes_count_hash[ str(vote.answer.key()) ] = vote.num_votes
+                tot_votes += vote.num_votes
+
+        ans_struct = []
+        for ans in answers:
+            if ans.picture:
+                has_pic = 1
+            else:
+                has_pic = 0
+
+            show_owner = 0
+            owner_name = ''
+            if question.user_id != ans.user_id:
+                show_owner = 1
+                owner_name = unicode(ans.owner().name)
+
+            ans_data = {
+                'answer_key' : str(ans.key()),
+                'answer_text' : unicode(ans.answer_text),
+                'show_owner' : show_owner,
+                'owner_name' : owner_name,
+                'owner_id' : ans.user_id,
+                'has_pic' : has_pic,
+                'video_id' : str(ans.video_id),
+                }
+            if votes_count_hash.has_key( str(ans.key()) ):
+                ans_data['num_votes'] = votes_count_hash[ str(ans.key()) ]
+
+            ans_struct.append( ans_data )
+
+        self.render(u'index3',
+                    user_is_male=user_is_male,
+                    user_name=user_name,
+                    question=question,
+                    owner_name=unicode(question.owner().name),
+                    owner_id= question.owner().user_id,
+                    question_key_name=str(question.key().name()),
+                    answers=ans_struct,
+                    votes_left= 5-tot_votes,
+                    question_page=1
+                    )
+
+    def post(self, question_key_name):
+        self.get(question_key_name)
+
+
+class AllHandler(BaseHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
+# IDEALLY
+#
+# 1st. Show all questions user friends have voted for.
+#      And the user has not voted for already.
+# 2nd. Show all questions the user has voted for.
+# 3rd. Show all questions in the user's language.
+# 4th. Show EN questions.
+# 5th. Show all other questions.
+#
+# FOR THE MOMENT:
+# 1st. Show all questions, from newest to oldest.
+#
+        questions_struct = []
+
+        q_query = Question.all()
+        questions = q_query.fetch(50);
+        for q in questions:
+            questions_struct.append( {
+                    'question_key_name' : str(q.key().name()),
+                    'question_text' : unicode(q.question_text),
+                    })
+        self.render(u'index3',
+                    all_questions=1,
+                    questions=questions_struct
+                    )
+
+    def post(self, question_key_name):
+        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
+        self.render(u'index3')
+
+
+class UsrHandler(BaseHandler):
+    def get(self, user_id):
+
+#        print >> sys.stderr, '=========> USR: ' + str(user_id)
+        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
+        user = User.get_by_key_name(user_id)
+
+#        print >> sys.stderr, '=========> USR NAM: ' + unicode(user.name)
+        questions = Question.gql( 'where user_id = :1', user.user_id );
+
+        questions_struct = []
+        questions_dict = {}
+        for q in questions:
+           questions_dict[ q.key().name() ] = 1
+           questions_struct.append( {
+                    'question_key_name' : str(q.key().name()),
+                    'question_text' : unicode(q.question_text),
+                    })
+
+#        print >> sys.stderr, '=========> LOOKING FOR ANSWERS BY: ' + unicode(user_id)
+        answers = Answer.gql( 'where user_id = :1', user_id );
+        answers_struct = []
+        answers_dict = {}
+        for a in answers:
+            aq = a.question.key().name()
+#            print >> sys.stderr, '=========> FOUND ANSWER: ' + unicode(aq)
+            if not questions_dict.has_key(aq) and not answers_dict.has_key(aq):
+                answers_dict[aq] = 1
+                answers_struct.append( {
+                        'question_key_name' : str(a.question.key().name()),
+                        'question_text' : unicode(a.question.question_text),
+                        })
+
+        votes_struct = []
+        votes_dict = {}
+        votes_questions = UserVotedQuestions.gql( 'where user_id = :1', user_id )
+        for v in votes_questions:
+            vq = v.question.key().name()
+            if not questions_dict.has_key(vq) and not answers_dict.has_key(vq) and not votes_dict.has_key(vq):
+                votes_struct.append( {
+                        'question_key_name' : str(v.question.key().name()),
+                        'question_text' : unicode(v.question.question_text),
+                        })
+
+        self.render(u'index3',
+                    usr_page=1,
+                    questions = questions_struct,
+                    num_questions = len(questions_struct),
+                    ans_questions = answers_struct,
+                    num_ans_questions = len(answers_struct),
+                    voted_questions = votes_struct,
+                    num_voted_questions = len(votes_struct),
+                    user=user
+                    )
+
+    def post(self, question_key_name):
+        self.get(question_key_name)
+
+
+class PrivPolHandler(BaseHandler):
+    def get(self):
+        self.render(u'index3',
+                    priv_pol=1
+                    )
+    def post(self):
+        self.get()
+
+
+class I18NRequestHandler2(webapp2.RequestHandler):
+
+    def init_lang(self):
+        """language handling"""
+        try:
+            self.selected_lang = self.request.COOKIES['django_language']
+        except:
+            self.selected_lang = self.request.LANGUAGE_CODE
+
+        lang = self.request.get('lang')
+
+        if lang:
+            if lang == 'unset':
+                del self.request.COOKIES['django_language']
+            else:
+                self.request.COOKIES['django_language'] = lang
+                self.reset_language()
+                self.selected_lang = lang
+
+         # needed for the like button
+        self.locale = 'en_US'
+        if self.selected_lang == 'es':
+            self.locale = 'es_ES'
+
+#        print >> sys.stderr, 'SELECTED LANG' + str(self.selected_lang)
+#        print >> sys.stderr, 'DJANGO LANG' + str(self.request.LANGUAGE_CODE)
+
+
+    def __init__(self, request, response):
+        # Set self.request, self.response and self.app.
+        self.initialize(request, response)
+        self.request.COOKIES = Cookies(self)
+        self.request.META = os.environ
+        self.reset_language()
+        self.init_lang()
+
+    def reset_language(self):
+
+        # Decide the language from Cookies/Headers
+        language = translation.get_language_from_request(self.request)
+        translation.activate(language)
+        self.request.LANGUAGE_CODE = translation.get_language()
+
+        # Set headers in response
+        self.response.headers['Content-Language'] = translation.get_language()
+        #    translation.deactivate()
+
+# End of I18NRequestHandler2
+
+class BaseHandler2(I18NRequestHandler2):
+    """Provides access to the active Facebook user in self.current_user
+
+    The property is lazy-loaded on first access, using the cookie saved
+    by the Facebook JavaScript SDK to determine the user ID of the active
+    user. See http://developers.facebook.com/docs/authentication/ for
+    more information.
+    """
+    @property
+    def current_user(self):
+        if self.session.get("user"):
+            # User is logged in
+            return self.session.get("user")
+        else:
+            # Either used just logged in or just saw the first page
+            # We'll see here
+            cookie = facebook.get_user_from_cookie(self.request.cookies,
+                                                   FACEBOOK_APP_ID,
+                                                   FACEBOOK_APP_SECRET)
+            if cookie:
+                # Okay so user logged in.
+                # Now, check to see if existing user
+                user = User.get_by_key_name(cookie["uid"])
+                if not user:
+                    # Not an existing user so get user info
+                    graph = facebook.GraphAPI(cookie["access_token"])
+                    profile = graph.get_object("me")
+                    user = User(
+                        key_name=str(profile["id"]),
+                        id=str(profile["id"]),
+                        name=profile["name"],
+                        profile_url=profile["link"],
+                        access_token=cookie["access_token"]
+                    )
+                    user.put()
+                elif user.access_token != cookie["access_token"]:
+                    user.access_token = cookie["access_token"]
+                    user.put()
+                # User is now logged in
+                self.session["user"] = dict(
+                    name=user.name,
+                    profile_url=user.profile_url,
+                    id=user.id,
+                    access_token=user.access_token
+                )
+                return self.session.get("user")
+        return None
+
+    def dispatch(self):
+        """
+        This snippet of code is taken from the webapp2 framework documentation.
+        See more at
+        http://webapp-improved.appspot.com/api/webapp2_extras/sessions.html
+
+        """
+        self.session_store = sessions.get_store(request=self.request)
+        try:
+            webapp2.RequestHandler.dispatch(self)
+        finally:
+            self.session_store.save_sessions(self.response)
+
+    @webapp2.cached_property
+    def session(self):
+        """
+        This snippet of code is taken from the webapp2 framework documentation.
+        See more at
+        http://webapp-improved.appspot.com/api/webapp2_extras/sessions.html
+
+        """
+        return self.session_store.get_session()
+
+
+    def render(self, name, **data):
+        """Render a template"""
+
+        if not data:
+            data = {}
+
+        data[u'js_conf'] = json.dumps({
+            u'appId': settings.FACEBOOK_APP_ID,
+            u'canvasName': settings.FACEBOOK_CANVAS_NAME,
+            u'userIdOnServer': self.current_user['id'] if self.current_user else None,
+        })
+
+        data[u'facebook_app_id'] = facebook_app_id=FACEBOOK_APP_ID
+        data[u'logged_in_user'] = self.current_user
+#        data[u'message'] = self.get_message() XXX not used, what is it???
+
+        data[u'locale'] = self.locale
+        data[u'language_' + self.selected_lang] = 1
+
+        data[u'canvas_name'] = settings.FACEBOOK_CANVAS_NAME
+
+        data[u'IN_DEV_SERVER_OLD'] = settings.IN_DEV_SERVER_OLD
+        data[u'NOT_IN_DEV_SERVER_OLD'] = not settings.IN_DEV_SERVER_OLD
+        data[u'IN_DEV_SERVER'] = settings.IN_DEV_SERVER
+        data[u'NOT_IN_DEV_SERVER'] = not settings.IN_DEV_SERVER
+        data[u'BASE_URL'] = settings.BASE_URL
+
+        template = jinja_environment.get_template('templates/' + name + '.html')
+
+        self.response.out.write( template.render( data ) )
+
+
+
+class MainPage2(BaseHandler2):
+    def get(self):
+        user_name = ''
+        if self.current_user:
+            pprint.pprint( self.current_user )
+            user_name = self.current_user['name']
+
+        self.render(u'index3',
+                    main_page=1,
+                    user_name=user_name)
+    def post(self):
+        self.get()
+
+
+
+class LogoutHandler(BaseHandler):
+    def get(self):
+        if self.current_user is not None:
+            self.session['user'] = None
+
+        self.redirect('/')
+
+
+class AjaxHandler(BaseHandler2):
 
     def handle_new_question(self):
         question_text =  sanitize_html( self.request.get('question') )
@@ -1033,380 +1390,6 @@ class AjaxHandler(BaseHandler):
         seri = json.dumps( result_struct )
         self.response.out.write(seri)
 
-#
-#
-# http://localhost:8080/image?answer_key=agpmaXZlLXZvdGVzcg0LEgZBbnN3ZXIYgAEM
-
-class GetImage(BaseHandler):
-    def get(self):
-        ans = Answer.get( self.request.get('answer_key') );
-        if (ans and ans.picture):
-            self.response.headers['Content-Type'] = 'image/jpg'
-            self.response.out.write(ans.picture)
-        else:
-            self.error(404)
-
-class QuestionHandler(BaseHandler):
-    def get(self, question_key_name):
-        question = Question.get_by_key_name( question_key_name );
-        answers = Answer.gql( 'where question = :1', question )
-
-        tot_votes = 0
-        votes_count_hash = {}
-
-        user_name = ''
-        user_is_male = 0
-        if self.user:
-            user_name = self.user.name
-            if self.user.gender == 'male':
-                user_is_male = 1
-            # obtain votes by this user to this questions
-            all_my_voted = Vote.gql( 'where question = :1 AND user_id = :2 AND num_votes>0', question , self.user.user_id )
-
-            tot_votes = 0
-            for vote in all_my_voted:
-                votes_count_hash[ str(vote.answer.key()) ] = vote.num_votes
-                tot_votes += vote.num_votes
-
-        ans_struct = []
-        for ans in answers:
-            if ans.picture:
-                has_pic = 1
-            else:
-                has_pic = 0
-
-            show_owner = 0
-            owner_name = ''
-            if question.user_id != ans.user_id:
-                show_owner = 1
-                owner_name = unicode(ans.owner().name)
-
-            ans_data = {
-                'answer_key' : str(ans.key()),
-                'answer_text' : unicode(ans.answer_text),
-                'show_owner' : show_owner,
-                'owner_name' : owner_name,
-                'owner_id' : ans.user_id,
-                'has_pic' : has_pic,
-                'video_id' : str(ans.video_id),
-                }
-            if votes_count_hash.has_key( str(ans.key()) ):
-                ans_data['num_votes'] = votes_count_hash[ str(ans.key()) ]
-
-            ans_struct.append( ans_data )
-
-        self.render(u'index3',
-                    user_is_male=user_is_male,
-                    user_name=user_name,
-                    question=question,
-                    owner_name=unicode(question.owner().name),
-                    owner_id= question.owner().user_id,
-                    question_key_name=str(question.key().name()),
-                    answers=ans_struct,
-                    votes_left= 5-tot_votes,
-                    question_page=1
-                    )
-
-    def post(self, question_key_name):
-        self.get(question_key_name)
-
-
-class AllHandler(BaseHandler):
-    def get(self):
-        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
-# IDEALLY
-#
-# 1st. Show all questions user friends have voted for.
-#      And the user has not voted for already.
-# 2nd. Show all questions the user has voted for.
-# 3rd. Show all questions in the user's language.
-# 4th. Show EN questions.
-# 5th. Show all other questions.
-#
-# FOR THE MOMENT:
-# 1st. Show all questions, from newest to oldest.
-#
-        questions_struct = []
-
-        q_query = Question.all()
-        questions = q_query.fetch(50);
-        for q in questions:
-            questions_struct.append( {
-                    'question_key_name' : str(q.key().name()),
-                    'question_text' : unicode(q.question_text),
-                    })
-        self.render(u'index3',
-                    all_questions=1,
-                    questions=questions_struct
-                    )
-
-    def post(self, question_key_name):
-        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
-        self.render(u'index3')
-
-
-class UsrHandler(BaseHandler):
-    def get(self, user_id):
-
-#        print >> sys.stderr, '=========> USR: ' + str(user_id)
-        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
-        user = User.get_by_key_name(user_id)
-
-#        print >> sys.stderr, '=========> USR NAM: ' + unicode(user.name)
-        questions = Question.gql( 'where user_id = :1', user.user_id );
-
-        questions_struct = []
-        questions_dict = {}
-        for q in questions:
-           questions_dict[ q.key().name() ] = 1
-           questions_struct.append( {
-                    'question_key_name' : str(q.key().name()),
-                    'question_text' : unicode(q.question_text),
-                    })
-
-#        print >> sys.stderr, '=========> LOOKING FOR ANSWERS BY: ' + unicode(user_id)
-        answers = Answer.gql( 'where user_id = :1', user_id );
-        answers_struct = []
-        answers_dict = {}
-        for a in answers:
-            aq = a.question.key().name()
-#            print >> sys.stderr, '=========> FOUND ANSWER: ' + unicode(aq)
-            if not questions_dict.has_key(aq) and not answers_dict.has_key(aq):
-                answers_dict[aq] = 1
-                answers_struct.append( {
-                        'question_key_name' : str(a.question.key().name()),
-                        'question_text' : unicode(a.question.question_text),
-                        })
-
-        votes_struct = []
-        votes_dict = {}
-        votes_questions = UserVotedQuestions.gql( 'where user_id = :1', user_id )
-        for v in votes_questions:
-            vq = v.question.key().name()
-            if not questions_dict.has_key(vq) and not answers_dict.has_key(vq) and not votes_dict.has_key(vq):
-                votes_struct.append( {
-                        'question_key_name' : str(v.question.key().name()),
-                        'question_text' : unicode(v.question.question_text),
-                        })
-
-        self.render(u'index3',
-                    usr_page=1,
-                    questions = questions_struct,
-                    num_questions = len(questions_struct),
-                    ans_questions = answers_struct,
-                    num_ans_questions = len(answers_struct),
-                    voted_questions = votes_struct,
-                    num_voted_questions = len(votes_struct),
-                    user=user
-                    )
-
-    def post(self, question_key_name):
-        self.get(question_key_name)
-
-
-class PrivPolHandler(BaseHandler):
-    def get(self):
-        self.render(u'index3',
-                    priv_pol=1
-                    )
-    def post(self):
-        self.get()
-
-
-class I18NRequestHandler2(webapp2.RequestHandler):
-
-    def init_lang(self):
-        """language handling"""
-        try:
-            self.selected_lang = self.request.COOKIES['django_language']
-        except:
-            self.selected_lang = self.request.LANGUAGE_CODE
-
-        lang = self.request.get('lang')
-
-#        print >> sys.stderr, 'LANG PARAM' + str(lang)
-
-        if lang:
-            if lang == 'unset':
-                del self.request.COOKIES['django_language']
-            else:
-                self.request.COOKIES['django_language'] = lang
-                self.reset_language()
-                self.selected_lang = lang
-
-         # needed for the like button
-        self.locale = 'en_US'
-        if self.selected_lang == 'es':
-            self.locale = 'es_ES'
-
-#        print >> sys.stderr, 'SELECTED LANG' + str(self.selected_lang)
-#        print >> sys.stderr, 'DJANGO LANG' + str(self.request.LANGUAGE_CODE)
-
-
-    def __init__(self, request, response):
-        # Set self.request, self.response and self.app.
-        self.initialize(request, response)
-        self.request.COOKIES = Cookies(self)
-        self.request.META = os.environ
-        self.reset_language()
-        self.init_lang()
-
-    def reset_language(self):
-
-        # Decide the language from Cookies/Headers
-        language = translation.get_language_from_request(self.request)
-        translation.activate(language)
-        self.request.LANGUAGE_CODE = translation.get_language()
-
-        # Set headers in response
-        self.response.headers['Content-Language'] = translation.get_language()
-        #    translation.deactivate()
-
-# End of I18NRequestHandler2
-
-class BaseHandler2(I18NRequestHandler2):
-    """Provides access to the active Facebook user in self.current_user
-
-    The property is lazy-loaded on first access, using the cookie saved
-    by the Facebook JavaScript SDK to determine the user ID of the active
-    user. See http://developers.facebook.com/docs/authentication/ for
-    more information.
-    """
-    @property
-    def current_user(self):
-        if self.session.get("user"):
-            # User is logged in
-            return self.session.get("user")
-        else:
-            # Either used just logged in or just saw the first page
-            # We'll see here
-            cookie = facebook.get_user_from_cookie(self.request.cookies,
-                                                   FACEBOOK_APP_ID,
-                                                   FACEBOOK_APP_SECRET)
-            if cookie:
-                # Okay so user logged in.
-                # Now, check to see if existing user
-                print >> sys.stderr, '==========================>COOKIE??'
-                pprint.pprint( cookie, sys.stderr);
-                print >> sys.stderr, '==========================>COOKIE END'
-
-                user = User.get_by_key_name(cookie["uid"])
-                if not user:
-                    # Not an existing user so get user info
-                    graph = facebook.GraphAPI(cookie["access_token"])
-                    profile = graph.get_object("me")
-                    user = User(
-                        key_name=str(profile["id"]),
-                        id=str(profile["id"]),
-                        name=profile["name"],
-                        profile_url=profile["link"],
-                        access_token=cookie["access_token"]
-                    )
-                    user.put()
-                elif user.access_token != cookie["access_token"]:
-                    user.access_token = cookie["access_token"]
-                    user.put()
-                # User is now logged in
-                self.session["user"] = dict(
-                    name=user.name,
-                    profile_url=user.profile_url,
-                    id=user.id,
-                    access_token=user.access_token
-                )
-                return self.session.get("user")
-        return None
-
-    def dispatch(self):
-        """
-        This snippet of code is taken from the webapp2 framework documentation.
-        See more at
-        http://webapp-improved.appspot.com/api/webapp2_extras/sessions.html
-
-        """
-        self.session_store = sessions.get_store(request=self.request)
-        try:
-            webapp2.RequestHandler.dispatch(self)
-        finally:
-            self.session_store.save_sessions(self.response)
-
-    @webapp2.cached_property
-    def session(self):
-        """
-        This snippet of code is taken from the webapp2 framework documentation.
-        See more at
-        http://webapp-improved.appspot.com/api/webapp2_extras/sessions.html
-
-        """
-        return self.session_store.get_session()
-
-
-    def render(self, name, **data):
-        """Render a template"""
-
-        print >> sys.stderr, '==========> IN RENDER, RENDERING name:' + name
-
-        if not data:
-            data = {}
-
-        data[u'js_conf'] = json.dumps({
-            u'appId': settings.FACEBOOK_APP_ID,
-            u'canvasName': settings.FACEBOOK_CANVAS_NAME,
-            u'userIdOnServer': self.current_user['id'] if self.current_user else None,
-        })
-
-        print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET'
-        pprint.pprint( self.current_user, sys.stderr);
-        print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET END'
-
-        data[u'facebook_app_id'] = facebook_app_id=FACEBOOK_APP_ID
-        data[u'logged_in_user'] = self.current_user
-#        data[u'message'] = self.get_message() XXX not used, what is it???
-
-        data[u'locale'] = self.locale
-        data[u'language_' + self.selected_lang] = 1
-
-        data[u'canvas_name'] = settings.FACEBOOK_CANVAS_NAME
-
-        data[u'IN_DEV_SERVER_OLD'] = settings.IN_DEV_SERVER_OLD
-        data[u'NOT_IN_DEV_SERVER_OLD'] = not settings.IN_DEV_SERVER_OLD
-        data[u'IN_DEV_SERVER'] = settings.IN_DEV_SERVER
-        data[u'NOT_IN_DEV_SERVER'] = not settings.IN_DEV_SERVER
-        data[u'BASE_URL'] = settings.BASE_URL
-
-#        print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET 2'
-#        pprint.pprint( data[u'logged_in_user'] );
-#        print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET 2 END'
-
-        template = jinja_environment.get_template('templates/' + name + '.html')
-
-        self.response.out.write( template.render( data ) )
-
-
-
-class MainPage2(BaseHandler2):
-    def get(self):
-        print >> sys.stderr, '========  AT MAIN HANDLER ==============='
-        user_name = ''
-        if self.current_user:
-            print >> sys.stderr, '========  GETTING NAME 1 ==============='
-            pprint.pprint( self.current_user )
-            print >> sys.stderr, '========  GETTING NAME 2: ' + self.current_user['name']
-            user_name = self.current_user['name']
-
-        self.render(u'index3',
-                    main_page=1,
-                    user_name=user_name)
-    def post(self):
-        self.get()
-
-
-
-class LogoutHandler(BaseHandler):
-    def get(self):
-        if self.current_user is not None:
-            self.session['user'] = None
-
-        self.redirect('/')
 
 
 
@@ -1434,9 +1417,10 @@ jinja_environment.install_gettext_translations(JinjaTranslations(), newstyle=Fal
 
 app = webapp2.WSGIApplication(
     [('/', MainPage2),
-    ('/logout', LogoutHandler)],  # implement
-    debug=True,
-    config=config
+     ('/ajax.html', AjaxHandler),
+     ('/logout', LogoutHandler)],  # implement
+     debug=True,
+     config=config
 )
 
 
