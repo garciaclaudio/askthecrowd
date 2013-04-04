@@ -1007,7 +1007,7 @@ class AjaxHandler(BaseHandler2):
             new_question_id = Counter.get_next_question_id()
             new_question = Question(
                 key_name = str(new_question_id),
-                user_id=self.user.user_id,
+                user_id=self.current_user['id'],
                 question_text = unicode(question_text),
                 language_code=str(self.selected_lang),
             )
@@ -1035,15 +1035,15 @@ class AjaxHandler(BaseHandler2):
         else:
             new_ans = Answer(
                 question=question,
-                user_id=self.user.user_id,
+                user_id=self.current_user['id'],
                 answer_text = unicode(answer_text),
             )
             new_ans.save()
             result = { 'error' : 0,
                        'answer_text' : unicode(answer_text),
                        'answer_key' : str(new_ans.key()),
-                       'owner_name' : unicode(self.user.name),
-                       'owner_id' : self.user.user_id,
+                       'owner_name' : unicode(self.current_user['name']),
+                       'owner_id' : self.current_user['id'],
                        'video_id' : u'None',
                        }
         return result
