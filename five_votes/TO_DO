@@ -7,9 +7,12 @@ Hola Carlos! Pues podría usarse como base tecnológica para implementar alguna ap
 
 <Standalonify>
 
-   Create new handler with the Example.py code INSIDE canvas4.py
-   New handler has its own template, webapp2, and its own I18NRequestHandler wrapper
-   Test adding translations to new handler and template.
+  Logout sends the thing on an infinite loop
+  Gender, is it retrieved fine from FB?
+
+[DONE]  Create new handler with the Example.py code INSIDE canvas4.py
+[DONE]  New handler has its own template, webapp2, and its own I18NRequestHandler wrapper
+[DONE]  Test adding translations to new handler and template.
 
    Jinja2 - django gettext:
        http://jinja.pocoo.org/docs/extensions/

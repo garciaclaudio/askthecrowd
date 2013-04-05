@@ -642,18 +642,18 @@ function add_video_link_func( ans_key ) {
                   var uid = response.authResponse.userID;
                   var accessToken = response.authResponse.accessToken;
 
-            alert('user connected ' +  uid + ' -- ' + accessToken );
+//            alert('user connected ' +  uid + ' -- ' + accessToken );
 
-alert( 'NAME? {{logged_in_user.name}} <--' );
+//alert( 'NAME? {{logged_in_user.name}} <--' );
 
     {% if logged_in_user %}
 
-alert('make content visible...');
+//alert('make content visible...');
 
 //$('#content_here').show();
     {% else %}
 
-alert('reloading, user not there');
+//alert('reloading, user not there');
           window.location.reload();
     {% endif %}
 

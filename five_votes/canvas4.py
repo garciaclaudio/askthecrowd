@@ -156,6 +156,7 @@ class User(db.Model):
     name = db.StringProperty(required=True)
     profile_url = db.StringProperty(required=True)
     access_token = db.StringProperty(required=True)
+    gender = db.StringProperty(required=True)
 
 #    user_id = db.StringProperty(required=True)
 #    access_token = db.StringProperty(required=True)
@@ -636,84 +637,9 @@ class MainPage(BaseHandler):
     def post(self):
         self.get()
 
-
 #
 #
 # http://localhost:8080/image?answer_key=agpmaXZlLXZvdGVzcg0LEgZBbnN3ZXIYgAEM
-
-class GetImage(BaseHandler):
-    def get(self):
-        ans = Answer.get( self.request.get('answer_key') );
-        if (ans and ans.picture):
-            self.response.headers['Content-Type'] = 'image/jpg'
-            self.response.out.write(ans.picture)
-        else:
-            self.error(404)
-
-class QuestionHandler(BaseHandler):
-    def get(self, question_key_name):
-        question = Question.get_by_key_name( question_key_name );
-        answers = Answer.gql( 'where question = :1', question )
-
-        tot_votes = 0
-        votes_count_hash = {}
-
-        user_name = ''
-        user_is_male = 0
-        if self.user:
-            user_name = self.user.name
-            if self.user.gender == 'male':
-                user_is_male = 1
-            # obtain votes by this user to this questions
-            all_my_voted = Vote.gql( 'where question = :1 AND user_id = :2 AND num_votes>0', question , self.user.user_id )
-
-            tot_votes = 0
-            for vote in all_my_voted:
-                votes_count_hash[ str(vote.answer.key()) ] = vote.num_votes
-                tot_votes += vote.num_votes
-
-        ans_struct = []
-        for ans in answers:
-            if ans.picture:
-                has_pic = 1
-            else:
-                has_pic = 0
-
-            show_owner = 0
-            owner_name = ''
-            if question.user_id != ans.user_id:
-                show_owner = 1
-                owner_name = unicode(ans.owner().name)
-
-            ans_data = {
-                'answer_key' : str(ans.key()),
-                'answer_text' : unicode(ans.answer_text),
-                'show_owner' : show_owner,
-                'owner_name' : owner_name,
-                'owner_id' : ans.user_id,
-                'has_pic' : has_pic,
-                'video_id' : str(ans.video_id),
-                }
-            if votes_count_hash.has_key( str(ans.key()) ):
-                ans_data['num_votes'] = votes_count_hash[ str(ans.key()) ]
-
-            ans_struct.append( ans_data )
-
-        self.render(u'index3',
-                    user_is_male=user_is_male,
-                    user_name=user_name,
-                    question=question,
-                    owner_name=unicode(question.owner().name),
-                    owner_id= question.owner().user_id,
-                    question_key_name=str(question.key().name()),
-                    answers=ans_struct,
-                    votes_left= 5-tot_votes,
-                    question_page=1
-                    )
-
-    def post(self, question_key_name):
-        self.get(question_key_name)
-
 
 class AllHandler(BaseHandler):
     def get(self):
@@ -897,6 +823,7 @@ class BaseHandler2(I18NRequestHandler2):
                         key_name=str(profile["id"]),
                         id=str(profile["id"]),
                         name=profile["name"],
+                        gender=profile["gender"],
                         profile_url=profile["link"],
                         access_token=cookie["access_token"]
                     )
@@ -986,12 +913,22 @@ class MainPage2(BaseHandler2):
 
 
 
-class LogoutHandler(BaseHandler):
+class LogoutHandler(BaseHandler2):
     def get(self):
         if self.current_user is not None:
             self.session['user'] = None
 
         self.redirect('/')
+
+
+class GetImage(BaseHandler2):
+    def get(self):
+        ans = Answer.get( self.request.get('answer_key') );
+        if (ans and ans.picture):
+            self.response.headers['Content-Type'] = 'image/jpg'
+            self.response.out.write(ans.picture)
+        else:
+            self.error(404)
 
 
 class AjaxHandler(BaseHandler2):
@@ -1289,7 +1226,7 @@ class AjaxHandler(BaseHandler2):
 
 
     def handle_get_user_questions(self):
-        questions = Question.gql( 'where user_id = :1', self.user.user_id )
+        questions = Question.gql( 'where user_id = :1', self.current_user['id'] )
         questions_struct = []
 
         for question in questions:
@@ -1392,6 +1329,72 @@ class AjaxHandler(BaseHandler2):
 
 
 
+class QuestionHandler(BaseHandler2):
+    def get(self, question_key_name):
+        question = Question.get_by_key_name( question_key_name );
+        answers = Answer.gql( 'where question = :1', question )
+
+        tot_votes = 0
+        votes_count_hash = {}
+
+        user_name = ''
+        user_is_male = 0
+        if self.current_user:
+            user_name = self.current_user['name']
+            if self.current_user['gender'] == 'male':
+                user_is_male = 1
+            # obtain votes by this user to this questions
+            all_my_voted = Vote.gql( 'where question = :1 AND user_id = :2 AND num_votes>0', question , self.user.user_id )
+
+            tot_votes = 0
+            for vote in all_my_voted:
+                votes_count_hash[ str(vote.answer.key()) ] = vote.num_votes
+                tot_votes += vote.num_votes
+
+        ans_struct = []
+        for ans in answers:
+            if ans.picture:
+                has_pic = 1
+            else:
+                has_pic = 0
+
+            show_owner = 0
+            owner_name = ''
+            if question.user_id != ans.user_id:
+                show_owner = 1
+                owner_name = unicode(ans.owner().name)
+
+            ans_data = {
+                'answer_key' : str(ans.key()),
+                'answer_text' : unicode(ans.answer_text),
+                'show_owner' : show_owner,
+                'owner_name' : owner_name,
+                'owner_id' : ans.user_id,
+                'has_pic' : has_pic,
+                'video_id' : str(ans.video_id),
+                }
+            if votes_count_hash.has_key( str(ans.key()) ):
+                ans_data['num_votes'] = votes_count_hash[ str(ans.key()) ]
+
+            ans_struct.append( ans_data )
+
+        self.render(u'index3',
+                    user_is_male=user_is_male,
+                    user_name=user_name,
+                    question=question,
+                    owner_name=unicode(question.owner().name),
+                    owner_id= question.owner().user_id,
+                    question_key_name=str(question.key().name()),
+                    answers=ans_struct,
+                    votes_left= 5-tot_votes,
+                    question_page=1
+                    )
+
+    def post(self, question_key_name):
+        self.get(question_key_name)
+
+
+
 
 def main():
     routes = [
@@ -1416,9 +1419,12 @@ jinja_environment.install_gettext_translations(JinjaTranslations(), newstyle=Fal
 
 
 app = webapp2.WSGIApplication(
-    [('/', MainPage2),
+    [('/image', GetImage),
+     ('/q(.*)', QuestionHandler),
      ('/ajax.html', AjaxHandler),
-     ('/logout', LogoutHandler)],  # implement
+     ('/logout', LogoutHandler),
+     ('/', MainPage2)
+    ],  # implement
      debug=True,
      config=config
 )
