@@ -1,14 +1,11 @@
 
 
-Hola Carlos! Pues podría usarse como base tecnológica para implementar alguna aplicación "a la medida" de investigación de mercados, pero como está, pues no. En Booking estamos empezando a hacer mucho en lo referente a "Big data", Hadoop, que es una herramienta para extraer información de colecciones de datos grandísimas. Lo que me gustaría implementar es algo que ayude a dar mejor uso a algún recurso físico existente, mediante colaboración en línea. Algo como las apps para conseguir un taxi cercano, o compartir objetos domésticos con el vecino, etc. Alguna idea por el estilo? Saludos!
-
-
-
 
 <Standalonify>
 
-  Logout sends the thing on an infinite loop
   Gender, is it retrieved fine from FB?
+  Logout sends the thing on an infinite loop
+
 
 [DONE]  Create new handler with the Example.py code INSIDE canvas4.py
 [DONE]  New handler has its own template, webapp2, and its own I18NRequestHandler wrapper

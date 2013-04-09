@@ -479,8 +479,6 @@ class BaseHandler(I18NRequestHandler):
 
         data[u'canvas_name'] = settings.FACEBOOK_CANVAS_NAME
 
-        data[u'IN_DEV_SERVER_OLD'] = settings.IN_DEV_SERVER_OLD
-        data[u'NOT_IN_DEV_SERVER_OLD'] = not settings.IN_DEV_SERVER_OLD
         data[u'IN_DEV_SERVER'] = settings.IN_DEV_SERVER
         data[u'NOT_IN_DEV_SERVER'] = not settings.IN_DEV_SERVER
         data[u'BASE_URL'] = settings.BASE_URL
@@ -886,8 +884,6 @@ class BaseHandler2(I18NRequestHandler2):
 
         data[u'canvas_name'] = settings.FACEBOOK_CANVAS_NAME
 
-        data[u'IN_DEV_SERVER_OLD'] = settings.IN_DEV_SERVER_OLD
-        data[u'NOT_IN_DEV_SERVER_OLD'] = not settings.IN_DEV_SERVER_OLD
         data[u'IN_DEV_SERVER'] = settings.IN_DEV_SERVER
         data[u'NOT_IN_DEV_SERVER'] = not settings.IN_DEV_SERVER
         data[u'BASE_URL'] = settings.BASE_URL

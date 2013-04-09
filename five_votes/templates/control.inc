@@ -608,123 +608,75 @@ function add_video_link_func( ans_key ) {
         });
 }
 
-{% if NOT_IN_DEV_SERVER_OLD %}
 
-        window.fbAsyncInit = function() {
-          FB.init({
-            appId      : '331909936825023',
-//            channelUrl : '//five-votes.appspot.com/channel.html',
-            status     : true, 
-            cookie     : true,
-            xfbml      : true
-          });
 
-          //
-          // when the user clicks the login button, this event is fired,
-          // response contains the user data, but we prefer to reload
-          // so that a user is created
-          //
-//
-//          FB.ui({ method: 'feed', 
-//                  message: 'Facebook for Websites is super-cool'});
 
-            FB.getLoginStatus(function(response) {
+window.fbAsyncInit = function() {
 
-              if (response.status === 'connected') {
-                  $('#faces_div').html( $("#logged_in_faces_tmpl").tmpl({}) );
-                  FB.XFBML.parse( document.getElementById('faces_div') );
+    FB.init({appId: '{{ facebook_app_id }}', status: true, cookie: true, xfbml: true});
 
-                  // the user is logged in and connected to your
-                  // app, and response.authResponse supplies
-                  // the user's ID, a valid access token, a signed
-                  // request, and the time the access token 
-                  // and signed request each expire
-                  var uid = response.authResponse.userID;
-                  var accessToken = response.authResponse.accessToken;
+    FB.Event.subscribe('{% if current_user %}auth.logout{% else %}auth.login{% endif %}', function(response) {
+      {% if current_user %}
+ 
+          window.location = "/logout"
+ 
+      {% else %}
 
-//            alert('user connected ' +  uid + ' -- ' + accessToken );
+         {% if question is defined %}
+             window.location = '{{BASE_URL}}/q{{question_key_name}}';
+         {% else %}
+             window.location = '{{BASE_URL}}';
+         {% endif %}
 
-//alert( 'NAME? {{logged_in_user.name}} <--' );
+      {% endif %}
+    });
 
-    {% if logged_in_user %}
+    {% if current_user %}
 
-//alert('make content visible...');
+        $('#faces_div').html( $("#logged_in_faces_tmpl").tmpl({}) );
+        FB.XFBML.parse( document.getElementById('faces_div') );
 
-//$('#content_here').show();
+        {% if question is defined %}
+            show_question_for_voting();
+            $('.answer_picture').imagesLoaded(
+                function(){ 
+                     $('#answers_div').masonry({
+                          itemSelector: '.answer_card',
+                          isFitWidth: true
+                     });
+                }
+            );
+        {% else %}
+            {% if all_questions %}
+                show_all_questions()
+            {% endif %}
+            {% if main_page %}
+                show_new_question();
+            {% endif %}
+        {% endif %}
     {% else %}
 
-//alert('reloading, user not there');
-          window.location.reload();
+        {% if question is defined %}
+            show_question_for_welcome();
+            $('.answer_picture').imagesLoaded(
+                function(){ 
+                    $('#answers_div').masonry({
+                                       itemSelector: '.answer_card',
+                                       isFitWidth: true
+                    });
+                }
+            );
+        {% else %}
+
+            $('#main_container').html( $("#welcome_msg_tmpl").tmpl({}));
+
+        {% endif %}
+   
+        FB.XFBML.parse( document.getElementById('welcome_msg') );
+        FB.XFBML.parse( document.getElementById('second_login_button') );
+
     {% endif %}
-
-                  {% if question is defined %}
-                      show_question_for_voting();
-                      $('.answer_picture').imagesLoaded(
-                          function(){ 
-                              $('#answers_div').masonry({
-                                   itemSelector: '.answer_card',
-                                   isFitWidth: true
-                              });
-                           }
-                      );
-
-                  {% else %}
-
-                      {% if all_questions %}
-                           show_all_questions()
-                      {% endif %}
-                      {% if main_page %}
-                          show_new_question();
-                      {% endif %}
-
-                  {% endif %}
-
-//              } else if (response.status === 'not_authorized') {
-//                  // the user is logged in to Facebook, 
-//                  //but not connected to the app
-//
-//                  $('#main_container').html( $("#welcome_msg_tmpl").tmpl({}));
-//                  FB.XFBML.parse( document.getElementById('welcome_msg') );
-              } else {
-                // the user isn't even logged in to Facebook.
-
-                  {% if question is defined %}
-                    FB.Event.subscribe('auth.login', function(response) {
-                    // Reload the entire page
-//alert('about to reload question');
-                        top.location = '{{BASE_URL}}/q{{question_key_name}}';
-                    });
-                  {% else %}
-                    FB.Event.subscribe('auth.login', function(response) {
-                     // Reload the entire page
-//alert('about to reload');
-                        top.location = '{{BASE_URL}}';
-                    });
-                  {% endif %}
-
-                  {% if question is defined %}
-                      show_question_for_welcome();
-                      $('.answer_picture').imagesLoaded(
-                          function(){ 
-                              $('#answers_div').masonry({
-                                   itemSelector: '.answer_card',
-                                   isFitWidth: true
-                              });
-                           }
-                      );
-                  {% else %}
-                      $('#main_container').html( $("#welcome_msg_tmpl").tmpl({}));
-                  {% endif %}
-            
-                  FB.XFBML.parse( document.getElementById('welcome_msg') );
-                  FB.XFBML.parse( document.getElementById('second_login_button') );
-            
-              }
-            
-            });
-        };
-
-{% endif %}
+};
 
         (function(d){
            var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
@@ -734,14 +686,6 @@ function add_video_link_func( ans_key ) {
          }(document));
 
 $(function(){
-
-//if( top.location.href === location.href ) {
-//   alert('in standalone site');
-//   base_url = 'http://five-votes.appspot.com';
-//} else {
-//   alert('in iframe');
-//}
-
     $('.fancybox-media').fancybox({
         openEffect  : 'none',
         closeEffect : 'none',
@@ -749,20 +693,6 @@ $(function(){
             media : {}
         }
     });
-
-{% if IN_DEV_SERVER_OLD %}
-
-    {% if question is defined %}
-        show_question_for_voting();
-    {% else %}
-        {% if all_questions %}
-            show_all_questions()
-        {% endif %}
-        {% if main_page %}
-           show_new_question();
-        {% endif %}
-    {% endif %}
-{% endif %}
 });
 
 
@@ -772,7 +702,6 @@ $(window).load(function(){
     isFitWidth: true
   });
 });
-
 
 </script>
 
