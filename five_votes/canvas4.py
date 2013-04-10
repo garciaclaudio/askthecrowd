@@ -876,7 +876,7 @@ class BaseHandler2(I18NRequestHandler2):
         })
 
         data[u'facebook_app_id'] = facebook_app_id=FACEBOOK_APP_ID
-        data[u'logged_in_user'] = self.current_user
+        data[u'current_user'] = self.current_user
 #        data[u'message'] = self.get_message() XXX not used, what is it???
 
         data[u'locale'] = self.locale

@@ -654,6 +654,7 @@ window.fbAsyncInit = function() {
                 show_new_question();
             {% endif %}
         {% endif %}
+
     {% else %}
 
         {% if question is defined %}
