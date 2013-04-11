@@ -832,6 +832,7 @@ class BaseHandler2(I18NRequestHandler2):
                 # User is now logged in
                 self.session["user"] = dict(
                     name=user.name,
+                    gender=user.gender,
                     profile_url=user.profile_url,
                     id=user.id,
                     access_token=user.access_token
@@ -1337,6 +1338,10 @@ class QuestionHandler(BaseHandler2):
         user_is_male = 0
         if self.current_user:
             user_name = self.current_user['name']
+
+            print >> sys.stderr, '======= CURRENT USR ==================='
+            pprint.pprint( self.current_user, sys.stderr);
+
             if self.current_user['gender'] == 'male':
                 user_is_male = 1
             # obtain votes by this user to this questions
