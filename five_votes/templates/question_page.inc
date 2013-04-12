@@ -1,5 +1,3 @@
-{% load i18n %}
-
 <div id="main_container">
 </div> <!-- main container -->
 
@@ -11,6 +9,6 @@
 
 <div class="vote_link add_ans_class add_ans_link">
     <div class="mytube">
-       <a href="{{BASE_URL}}" target="_top">{% trans "Create your own questions!" %}</a>
+       <a href="{{BASE_URL}}" target="_top">{% trans %}Create your own questions!{% endtrans %}</a>
     </div>
 </div>

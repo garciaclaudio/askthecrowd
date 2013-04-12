@@ -203,7 +203,7 @@ class Question(db.Model):
     language_code = db.StringProperty()
 
     def owner(self):
-        return User.gql(u'WHERE user_id = :1', self.user_id).fetch(1)[0]
+        return User.gql(u'WHERE id = :1', self.user_id).fetch(1)[0]
 
     @staticmethod
     def find_by_user_ids(question, user_ids, limit=50):
@@ -1088,7 +1088,7 @@ class AjaxHandler(BaseHandler2):
     
 #        time.sleep(1)
 
-        all_my_voted_ideas = Vote.gql( 'where question = :1 AND user_id = :2 AND num_votes>0', ans.question , self.user.user_id )
+        all_my_voted_ideas = Vote.gql( 'where question = :1 AND user_id = :2 AND num_votes>0', ans.question , self.current_user['id'] )
 
         votes_cast=0
         for vote in all_my_voted_ideas:
@@ -1100,7 +1100,7 @@ class AjaxHandler(BaseHandler2):
 
         votes_left = 5 - votes_cast
 
-        vote_query = Vote.gql( 'where user_id = :1 and answer = :2',  self.user.user_id, ans )
+        vote_query = Vote.gql( 'where user_id = :1 and answer = :2',  self.current_user['id'], ans )
         my_vote = vote_query.get()
 
         results_query = ResultsSummary.gql( 'where question = :1 and answer = :2', ans.question , ans )
@@ -1119,7 +1119,7 @@ class AjaxHandler(BaseHandler2):
                     my_vote.num_votes = my_vote.num_votes + 1
                     my_vote.put()
                     votes_left = votes_left-1
-                    if self.user.gender == 'male':
+                    if self.current_user['gender'] == 'male':
                         results_summary.male_votes = results_summary.male_votes + 1
                     else:
                         results_summary.female_votes = results_summary.female_votes + 1
@@ -1131,25 +1131,25 @@ class AjaxHandler(BaseHandler2):
                     my_vote.num_votes = new_count
                     my_vote.put()
                     votes_left = votes_left + 1
-                    if self.user.gender == 'male':
+                    if self.current_user['gender'] == 'male':
                         results_summary.male_votes = results_summary.male_votes - 1
                     else:
                         results_summary.female_votes = results_summary.female_votes - 1
                     results_summary.put()
         else:
 #            print >> sys.stderr, 'Vote not there '
-            my_vote = Vote(user_id = self.user.user_id)
+            my_vote = Vote(user_id = self.current_user['id'])
             my_vote.question = ans.question
             my_vote.answer = ans
             my_vote.num_votes = 1
             my_vote.put()
             votes_left = votes_left-1
-            if self.user.gender == 'male':
+            if self.current_user['gender'] == 'male':
                 results_summary.male_votes = results_summary.male_votes + 1
             else:
                 results_summary.female_votes = results_summary.female_votes + 1
             results_summary.put()
-            UserVotedQuestions.add(self.user.user_id,ans.question)
+            UserVotedQuestions.add(self.current_user['id'],ans.question)
 
         result_struct = { 'answer_key': answer_key, 'new_count' : my_vote.num_votes, 'votes_left' : votes_left }
         return result_struct
@@ -1345,7 +1345,7 @@ class QuestionHandler(BaseHandler2):
             if self.current_user['gender'] == 'male':
                 user_is_male = 1
             # obtain votes by this user to this questions
-            all_my_voted = Vote.gql( 'where question = :1 AND user_id = :2 AND num_votes>0', question , self.user.user_id )
+            all_my_voted = Vote.gql( 'where question = :1 AND user_id = :2 AND num_votes>0', question , self.current_user['id'] )
 
             tot_votes = 0
             for vote in all_my_voted:
@@ -1384,7 +1384,7 @@ class QuestionHandler(BaseHandler2):
                     user_name=user_name,
                     question=question,
                     owner_name=unicode(question.owner().name),
-                    owner_id= question.owner().user_id,
+                    owner_id= question.owner().id,
                     question_key_name=str(question.key().name()),
                     answers=ans_struct,
                     votes_left= 5-tot_votes,
