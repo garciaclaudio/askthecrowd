@@ -157,7 +157,8 @@ class User(db.Model):
     profile_url = db.StringProperty(required=True)
     access_token = db.StringProperty(required=True)
     gender = db.StringProperty(required=True)
-
+    friends = db.StringListProperty()
+ 
 #    user_id = db.StringProperty(required=True)
 #    access_token = db.StringProperty(required=True)
 #    name = db.StringProperty(required=True)
@@ -817,13 +818,17 @@ class BaseHandler2(I18NRequestHandler2):
                     # Not an existing user so get user info
                     graph = facebook.GraphAPI(cookie["access_token"])
                     profile = graph.get_object("me")
+                    friends = graph.get_connections("me", "friends")
+                    friends_list = [ usr1[u'id'] for usr1 in friends[u'data'] ]
+
                     user = User(
                         key_name=str(profile["id"]),
                         id=str(profile["id"]),
                         name=profile["name"],
                         gender=profile["gender"],
                         profile_url=profile["link"],
-                        access_token=cookie["access_token"]
+                        access_token=cookie["access_token"],
+                        friends=friends_list,
                     )
                     user.put()
                 elif user.access_token != cookie["access_token"]:
@@ -835,7 +840,8 @@ class BaseHandler2(I18NRequestHandler2):
                     gender=user.gender,
                     profile_url=user.profile_url,
                     id=user.id,
-                    access_token=user.access_token
+                    access_token=user.access_token,
+#                    friends = ",".join(user.friends) THIS IS THE PROBLEM
                 )
                 return self.session.get("user")
         return None
