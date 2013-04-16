@@ -834,6 +834,9 @@ class BaseHandler2(I18NRequestHandler2):
                 elif user.access_token != cookie["access_token"]:
                     user.access_token = cookie["access_token"]
                     user.put()
+
+                friends = ",".join(user.friends)
+
                 # User is now logged in
                 self.session["user"] = dict(
                     name=user.name,
@@ -841,7 +844,7 @@ class BaseHandler2(I18NRequestHandler2):
                     profile_url=user.profile_url,
                     id=user.id,
                     access_token=user.access_token,
-#                    friends = ",".join(user.friends) THIS IS THE PROBLEM
+                    friends=friends
                 )
                 return self.session.get("user")
         return None
@@ -905,7 +908,6 @@ class MainPage2(BaseHandler2):
     def get(self):
         user_name = ''
         if self.current_user:
-            pprint.pprint( self.current_user )
             user_name = self.current_user['name']
 
         self.render(u'index3',
@@ -1345,8 +1347,8 @@ class QuestionHandler(BaseHandler2):
         if self.current_user:
             user_name = self.current_user['name']
 
-            print >> sys.stderr, '======= CURRENT USR ==================='
-            pprint.pprint( self.current_user, sys.stderr);
+#            print >> sys.stderr, '======= CURRENT USR ==================='
+#            pprint.pprint( self.current_user, sys.stderr);
 
             if self.current_user['gender'] == 'male':
                 user_is_male = 1
