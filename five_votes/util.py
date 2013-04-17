@@ -55,7 +55,11 @@ class Cookies(UserDict.DictMixin):
             if max_age is not None:
                 cookies[key]['expires'] = max_age
         header_value = cookies[key].output(header='').lstrip()
-        self.response.headers._headers.append(('Set-Cookie', header_value))
+
+#        self.response.headers._headers.append(('Set-Cookie', header_value))
+
+        self.response.headers.add('Set-Cookie', header_value)
+
     def delete_cookie(self, key, path='/', domain=None):
         """
         Delete a cookie from the client.  Note that path and domain must match

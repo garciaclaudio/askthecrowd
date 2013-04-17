@@ -674,64 +674,6 @@ class AllHandler(BaseHandler):
         self.render(u'index3')
 
 
-class UsrHandler(BaseHandler):
-    def get(self, user_id):
-
-#        print >> sys.stderr, '=========> USR: ' + str(user_id)
-        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
-        user = User.get_by_key_name(user_id)
-
-#        print >> sys.stderr, '=========> USR NAM: ' + unicode(user.name)
-        questions = Question.gql( 'where user_id = :1', user.user_id );
-
-        questions_struct = []
-        questions_dict = {}
-        for q in questions:
-           questions_dict[ q.key().name() ] = 1
-           questions_struct.append( {
-                    'question_key_name' : str(q.key().name()),
-                    'question_text' : unicode(q.question_text),
-                    })
-
-#        print >> sys.stderr, '=========> LOOKING FOR ANSWERS BY: ' + unicode(user_id)
-        answers = Answer.gql( 'where user_id = :1', user_id );
-        answers_struct = []
-        answers_dict = {}
-        for a in answers:
-            aq = a.question.key().name()
-#            print >> sys.stderr, '=========> FOUND ANSWER: ' + unicode(aq)
-            if not questions_dict.has_key(aq) and not answers_dict.has_key(aq):
-                answers_dict[aq] = 1
-                answers_struct.append( {
-                        'question_key_name' : str(a.question.key().name()),
-                        'question_text' : unicode(a.question.question_text),
-                        })
-
-        votes_struct = []
-        votes_dict = {}
-        votes_questions = UserVotedQuestions.gql( 'where user_id = :1', user_id )
-        for v in votes_questions:
-            vq = v.question.key().name()
-            if not questions_dict.has_key(vq) and not answers_dict.has_key(vq) and not votes_dict.has_key(vq):
-                votes_struct.append( {
-                        'question_key_name' : str(v.question.key().name()),
-                        'question_text' : unicode(v.question.question_text),
-                        })
-
-        self.render(u'index3',
-                    usr_page=1,
-                    questions = questions_struct,
-                    num_questions = len(questions_struct),
-                    ans_questions = answers_struct,
-                    num_ans_questions = len(answers_struct),
-                    voted_questions = votes_struct,
-                    num_voted_questions = len(votes_struct),
-                    user=user
-                    )
-
-    def post(self, question_key_name):
-        self.get(question_key_name)
-
 
 class PrivPolHandler(BaseHandler):
     def get(self):
@@ -786,7 +728,7 @@ class I18NRequestHandler2(webapp2.RequestHandler):
         self.request.LANGUAGE_CODE = translation.get_language()
 
         # Set headers in response
-        self.response.headers['Content-Language'] = translation.get_language()
+        self.response.headers['Content-Language'] = str(translation.get_language())
         #    translation.deactivate()
 
 # End of I18NRequestHandler2
@@ -1166,8 +1108,7 @@ class AjaxHandler(BaseHandler2):
     def handle_get_results(self):
         friends = {}
         friend_ids = []
-        for friend in select_random(
-            User.get_by_key_name(self.user.friends), 300):
+        for friend in select_random(User.get_by_key_name(self.current_user['friends'].split(u',')), 300):
             friends[friend.user_id] = { 'name' : friend.name, 'user_id' : friend.user_id }
             friend_ids.append( str(friend.user_id) )
 #            print >> sys.stderr, 'ADDING FRIEND ID: ' + str(friend.user_id)
@@ -1225,7 +1166,7 @@ class AjaxHandler(BaseHandler2):
                           'answers_hash':ans_hash,
                           'friends_with_votes':friends_with_votes,
                           'owner_name':unicode(question.owner().name),
-                          'owner_id':question.owner().user_id
+                          'owner_id':question.owner().id
                           }
         return result_struct
 
@@ -1404,6 +1345,66 @@ class QuestionHandler(BaseHandler2):
 
 
 
+class UsrHandler(BaseHandler2):
+    def get(self, user_id):
+
+#        print >> sys.stderr, '=========> USR: ' + str(user_id)
+        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
+        user = User.get_by_key_name(user_id)
+
+#        print >> sys.stderr, '=========> USR NAM: ' + unicode(user.name)
+        questions = Question.gql( 'where user_id = :1', user.id );
+
+        questions_struct = []
+        questions_dict = {}
+        for q in questions:
+           questions_dict[ q.key().name() ] = 1
+           questions_struct.append( {
+                    'question_key_name' : str(q.key().name()),
+                    'question_text' : unicode(q.question_text),
+                    })
+
+#        print >> sys.stderr, '=========> LOOKING FOR ANSWERS BY: ' + unicode(user_id)
+        answers = Answer.gql( 'where user_id = :1', user_id );
+        answers_struct = []
+        answers_dict = {}
+        for a in answers:
+            aq = a.question.key().name()
+#            print >> sys.stderr, '=========> FOUND ANSWER: ' + unicode(aq)
+            if not questions_dict.has_key(aq) and not answers_dict.has_key(aq):
+                answers_dict[aq] = 1
+                answers_struct.append( {
+                        'question_key_name' : str(a.question.key().name()),
+                        'question_text' : unicode(a.question.question_text),
+                        })
+
+        votes_struct = []
+        votes_dict = {}
+        votes_questions = UserVotedQuestions.gql( 'where user_id = :1', user_id )
+        for v in votes_questions:
+            vq = v.question.key().name()
+            if not questions_dict.has_key(vq) and not answers_dict.has_key(vq) and not votes_dict.has_key(vq):
+                votes_struct.append( {
+                        'question_key_name' : str(v.question.key().name()),
+                        'question_text' : unicode(v.question.question_text),
+                        })
+
+        self.render(u'index3',
+                    usr_page=1,
+                    questions = questions_struct,
+                    num_questions = len(questions_struct),
+                    ans_questions = answers_struct,
+                    num_ans_questions = len(answers_struct),
+                    voted_questions = votes_struct,
+                    num_voted_questions = len(votes_struct),
+                    user=user
+                    )
+
+    def post(self, question_key_name):
+        self.get(question_key_name)
+
+
+
 
 def main():
     routes = [
@@ -1430,6 +1431,7 @@ jinja_environment.install_gettext_translations(JinjaTranslations(), newstyle=Fal
 app = webapp2.WSGIApplication(
     [('/image', GetImage),
      ('/q(.*)', QuestionHandler),
+     ('/u(.*)', UsrHandler),
      ('/ajax.html', AjaxHandler),
      ('/logout', LogoutHandler),
      ('/', MainPage2)
