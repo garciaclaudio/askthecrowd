@@ -3,9 +3,8 @@
 
 <Standalonify>
 
-  Gender, is it retrieved fine from FB?
-  Logout sends the thing on an infinite loop
-
+[DONE]  Gender, is it retrieved fine from FB?
+[DONE]  Logout sends the thing on an infinite loop
 
 [DONE]  Create new handler with the Example.py code INSIDE canvas4.py
 [DONE]  New handler has its own template, webapp2, and its own I18NRequestHandler wrapper
@@ -27,6 +26,8 @@ Escaping curlies:
 
 
 <IN PROGRESS (classifications)>
+
+   Cleanup a little
 
    Make gender, email? be saved in User
 

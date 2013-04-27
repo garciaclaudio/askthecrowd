@@ -349,339 +349,11 @@ class CsrfException(Exception):
     pass
 
 
-class BaseHandler(I18NRequestHandler):
-    def initialize(self, request, response):
-        """General initialization for every request"""
-        super(BaseHandler, self).initialize(request, response)
-        try:
-            self.init_lang()
-        except Exception, ex:
-            self.log_exception(ex)
-            raise
-
-
-    def initialize_GONER(self, request, response):
-        """General initialization for every request"""
-        super(BaseHandler, self).initialize(request, response)
-
-        print >> sys.stderr, '==========================>URL??'
-        pprint.pprint( self.request.url, sys.stderr);
-        print >> sys.stderr, '==========================>URL END'
-
-        self.user = None
-
-        print >> sys.stderr, '==========================>COOKIES??'
-        pprint.pprint( self.request.cookies, sys.stderr);
-        print >> sys.stderr, '==========================>COOKIES END'
-
-        cookie = facebook.get_user_from_cookie(
-            self.request.cookies, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET)
-
-        if cookie:
-            print >> sys.stderr, '==========================>FB COOKIE??'
-            pprint.pprint( cookie, sys.stderr);
-            print >> sys.stderr, '==========================>FB COOKI END'
-
-            # Store a local instance of the user data so we don't need
-            # a round-trip to Facebook on every request
-            user = User.get_by_key_name(cookie["uid"])
-            if not user:
-                graph = facebook.GraphAPI(cookie["access_token"])
-
-                profile = graph.get_object("me")
-
-                print >> sys.stderr, '==========================>ME ME ME ME ME'
-                pprint.pprint( profile, sys.stderr);
-                print >> sys.stderr, '==========================>ME ME ME ME ME END'
-
-                user = User(key_name=str(profile["id"]),
-                            user_id=str(profile["id"]),
-                            name=profile["name"],
-                            profile_url=profile["link"],
-                            access_token=cookie["access_token"])
-                user.put()
-            elif user.access_token != cookie["access_token"]:
-                user.access_token = cookie["access_token"]
-                user.put()
-            self.user = user 
-
-            print >> sys.stderr, '==========================>RETRIEVED USER'
-            pprint.pprint( self.user, sys.stderr);
-            print >> sys.stderr, '==========================>RETRIEVED USER END'
-
-
-        try:
-            self.init_lang()
-
-        except Exception, ex:
-            self.log_exception(ex)
-            raise
-
-
-    def handle_exception(self, ex, debug_mode):
-        """Invoked for unhandled exceptions by webapp"""
-        self.log_exception(ex)
-        self.render(u'error',
-            trace=traceback.format_exc(), debug_mode=debug_mode)
-
-    def log_exception(self, ex):
-        """Internal logging handler to reduce some App Engine noise in errors"""
-        msg = ((str(ex) or ex.__class__.__name__) +
-                u': \n' + traceback.format_exc())
-        if isinstance(ex, urlfetch.DownloadError) or \
-           isinstance(ex, DeadlineExceededError) or \
-           isinstance(ex, CsrfException) or \
-           isinstance(ex, taskqueue.TransientError):
-            logging.warn(msg)
-        else:
-            logging.error(msg)
-
-    def set_cookie(self, name, value, expires=None):
-        """Set a cookie"""
-        if value is None:
-            value = 'deleted'
-            expires = datetime.timedelta(minutes=-50000)
-        jar = Cookie.SimpleCookie()
-        jar[name] = value
-        jar[name]['path'] = u'/'
-        if expires:
-            if isinstance(expires, datetime.timedelta):
-                expires = datetime.datetime.now() + expires
-            if isinstance(expires, datetime.datetime):
-                expires = expires.strftime('%a, %d %b %Y %H:%M:%S')
-            jar[name]['expires'] = expires
-        self.response.headers.add_header(*jar.output().split(u': ', 1))
-
-    def render(self, name, **data):
-        """Render a template"""
-
-        print >> sys.stderr, '==========> IN RENDER, RENDERING name:' + name
-
-        if not data:
-            data = {}
-
-        pprint.pprint( self.user, sys.stderr);
-
-        data[u'js_conf'] = json.dumps({
-            u'appId': settings.FACEBOOK_APP_ID,
-            u'canvasName': settings.FACEBOOK_CANVAS_NAME,
-            u'userIdOnServer': self.user.user_id if self.user else None,
-        })
-
-        print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET'
-        pprint.pprint( self.user, sys.stderr);
-        print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET END'
-
-        data[u'logged_in_user'] = self.user
-#        data[u'message'] = self.get_message() XXX not used, what is it???
-
-        data[u'locale'] = self.locale
-        data[u'language_' + self.selected_lang] = 1
-
-        data[u'canvas_name'] = settings.FACEBOOK_CANVAS_NAME
-
-        data[u'IN_DEV_SERVER'] = settings.IN_DEV_SERVER
-        data[u'NOT_IN_DEV_SERVER'] = not settings.IN_DEV_SERVER
-        data[u'BASE_URL'] = settings.BASE_URL
-
-#        print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET 2'
-#        pprint.pprint( data[u'logged_in_user'] );
-#        print >> sys.stderr, '==========================>RETRIEVED USER AT DATA SET 2 END'
-
-
-        self.response.out.write(template.render(
-            os.path.join(
-                os.path.dirname(__file__), 'templates', name + '.html'),
-            data))
-
-    # no se usa mas
-    def init_facebook(self):
-        """Sets up the request specific Facebook and User instance"""
-        facebook = Facebook()
-        user = None
-
-        # initial facebook request comes in as a POST with a signed_request
-        if u'signed_request' in self.request.POST:
-            facebook.load_signed_request(self.request.get('signed_request'))
-            # we reset the method to GET because a request from facebook with a
-            # signed_request uses POST for security reasons, despite it
-            # actually being a GET. in webapp causes loss of request.POST data.
-            self.request.method = u'GET'
-            self.set_cookie(
-                'u', facebook.user_cookie, datetime.timedelta(minutes=1440))
-        elif 'u' in self.request.cookies:
-            facebook.load_signed_request(self.request.cookies.get('u'))
-
-        # try to load or create a user object
-        if facebook.user_id:
-            print >> sys.stderr, 'getting user: ' + str(facebook.user_id)
-            user = User.get_by_key_name(facebook.user_id)
-            if user:
-                # update stored access_token
-                if facebook.access_token and \
-                        facebook.access_token != user.access_token:
-                    user.access_token = facebook.access_token
-                    user.put()
-                # refresh data if we failed in doing so after a realtime ping
-                if user.dirty:
-                    user.refresh_data()
-                # restore stored access_token if necessary
-                if not facebook.access_token:
-                    facebook.access_token = user.access_token
-
-            if not user and facebook.access_token:
-                me = facebook.api(u'/me', {u'fields': _USER_FIELDS})
-                try:
-
-                    if me.has_key( u'friends' ):
-                        friends = [ usr1[u'id'] for usr1 in me[u'friends'][u'data'] ]
-                    else:
-                        friends = []
-
-#                    print >> sys.stderr, 'CREATING USER: ' + str(facebook.user_id)
-#                    print >> sys.stderr, 'NAME: ' + str( me[u'name'].encode('ascii', 'ignore') )
-#                    print >> sys.stderr, 'GENDER: ' + str( me[u'gender'] )
-#                    if me.has_key( u'friends' ):
-#                        for user in me[u'friends'][u'data']:
-#                            print >> sys.stderr, '  Friend: ' + str( user[u'id'] ) + ' -' + str( user[u'name'].encode('ascii', 'ignore') )
-#                    pprint.pprint( me, sys.stderr);
-
-                    user = User(key_name=facebook.user_id,
-                        user_id=facebook.user_id, friends=friends,
-                        access_token=facebook.access_token, name=me[u'name'],
-                        email=me.get(u'email'),
-#                        picture=me[u'picture'][u'data'][u'url'],
-                        gender=me[u'gender'])
-                    user.put()
-#                    pprint.pprint( user, sys.stderr);
-
-                except KeyError, ex:
-                    raise # ignore if can't get the minimum fields
-
-        self.facebook = facebook
-        self.user = user
-
-    def init_csrf(self):
-        """Issue and handle CSRF token as necessary"""
-        self.csrf_token = self.request.cookies.get(u'c')
-        if not self.csrf_token:
-            self.csrf_token = str(uuid4())[:8]
-            self.set_cookie('c', self.csrf_token)
-        if self.request.method == u'POST' and self.csrf_protect and \
-                self.csrf_token != self.request.POST.get(u'_csrf_token'):
-            raise CsrfException(u'Missing or invalid CSRF token.')
-
-    def init_lang(self):
-        """language handling"""
-        try:
-            self.selected_lang = self.request.COOKIES['django_language']
-        except:
-            self.selected_lang = self.request.LANGUAGE_CODE
-
-        lang = self.request.get('lang')
-
-#        print >> sys.stderr, 'LANG PARAM' + str(lang)
-
-        if lang:
-            if lang == 'unset':
-                del self.request.COOKIES['django_language']
-            else:
-                self.request.COOKIES['django_language'] = lang
-                self.reset_language()
-                self.selected_lang = lang
-
-         # needed for the like button
-        self.locale = 'en_US'
-        if self.selected_lang == 'es':
-            self.locale = 'es_ES'
-
-#        print >> sys.stderr, 'SELECTED LANG' + str(self.selected_lang)
-#        print >> sys.stderr, 'DJANGO LANG' + str(self.request.LANGUAGE_CODE)
-
-
-    def set_message(self, **obj):
-        """Simple message support"""
-        self.set_cookie('m', base64.b64encode(json.dumps(obj)) if obj else None)
-
-    def get_message(self):
-        """Get and clear the current message"""
-        message = self.request.cookies.get(u'm')
-        if message:
-            self.set_message()  # clear the current cookie
-            return json.loads(base64.b64decode(message))
-
-
-def user_required(fn):
-    """Decorator to ensure a user is present"""
-    @wraps(fn)
-    def wrapper(*args, **kwargs):
-        handler = args[0]
-        if handler.user:
-            return fn(*args, **kwargs)
-        handler.redirect(u'/')
-    return wrapper
-
-
-class MainPage(BaseHandler):
-    def get(self):
-        print >> sys.stderr, '========  AT MAIN HANDLER ==============='
-
-        user_name = ''
-        if self.user:
-            user_name = self.user.name
-
-        self.render(u'index3',
-                    main_page=1,
-                    user_name=user_name)
-    def post(self):
-        self.get()
-
 #
 #
 # http://localhost:8080/image?answer_key=agpmaXZlLXZvdGVzcg0LEgZBbnN3ZXIYgAEM
 
-class AllHandler(BaseHandler):
-    def get(self):
-        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
-# IDEALLY
-#
-# 1st. Show all questions user friends have voted for.
-#      And the user has not voted for already.
-# 2nd. Show all questions the user has voted for.
-# 3rd. Show all questions in the user's language.
-# 4th. Show EN questions.
-# 5th. Show all other questions.
-#
-# FOR THE MOMENT:
-# 1st. Show all questions, from newest to oldest.
-#
-        questions_struct = []
 
-        q_query = Question.all()
-        questions = q_query.fetch(50);
-        for q in questions:
-            questions_struct.append( {
-                    'question_key_name' : str(q.key().name()),
-                    'question_text' : unicode(q.question_text),
-                    })
-        self.render(u'index3',
-                    all_questions=1,
-                    questions=questions_struct
-                    )
-
-    def post(self, question_key_name):
-        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
-        self.render(u'index3')
-
-
-
-class PrivPolHandler(BaseHandler):
-    def get(self):
-        self.render(u'index3',
-                    priv_pol=1
-                    )
-    def post(self):
-        self.get()
 
 
 class I18NRequestHandler2(webapp2.RequestHandler):
@@ -743,10 +415,15 @@ class BaseHandler2(I18NRequestHandler2):
     """
     @property
     def current_user(self):
+
+        print >> sys.stderr, '################### AT CURRENT_USR 1'
+
         if self.session.get("user"):
             # User is logged in
+            print >> sys.stderr, '################### AT CURRENT_USR 2'
             return self.session.get("user")
         else:
+            print >> sys.stderr, '################### AT CURRENT_USR 3'
             # Either used just logged in or just saw the first page
             # We'll see here
             cookie = facebook.get_user_from_cookie(self.request.cookies,
@@ -786,7 +463,7 @@ class BaseHandler2(I18NRequestHandler2):
                     profile_url=user.profile_url,
                     id=user.id,
                     access_token=user.access_token,
-                    friends=friends
+#                    friends=friends           <====== Da PRobs, remover PERMANENTEMENTE
                 )
                 return self.session.get("user")
         return None
@@ -1108,10 +785,13 @@ class AjaxHandler(BaseHandler2):
     def handle_get_results(self):
         friends = {}
         friend_ids = []
-        for friend in select_random(User.get_by_key_name(self.current_user['friends'].split(u',')), 300):
+
+        usr = User.get_by_key_name(self.current_user['id'])
+
+        for friend in select_random(User.get_by_key_name(usr.friends), 300):
             friends[friend.user_id] = { 'name' : friend.name, 'user_id' : friend.user_id }
             friend_ids.append( str(friend.user_id) )
-#            print >> sys.stderr, 'ADDING FRIEND ID: ' + str(friend.user_id)
+            print >> sys.stderr, 'ADDING FRIEND ID: ' + str(friend.user_id)
 
         question = Question.get_by_key_name( self.request.get('question_key_name') );
 
@@ -1172,8 +852,13 @@ class AjaxHandler(BaseHandler2):
 
 
     def handle_get_user_questions(self):
-        questions = Question.gql( 'where user_id = :1', self.current_user['id'] )
+
         questions_struct = []
+
+        if self.current_user:
+            questions = Question.gql( 'where user_id = :1', self.current_user['id'] )
+        else:
+            return questions_struct
 
         for question in questions:
             summaries = ResultsSummary.gql( 'where question = :1', question )
@@ -1404,21 +1089,49 @@ class UsrHandler(BaseHandler2):
         self.get(question_key_name)
 
 
+class AllHandler(BaseHandler2):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
+# IDEALLY
+#
+# 1st. Show all questions user friends have voted for.
+#      And the user has not voted for already.
+# 2nd. Show all questions the user has voted for.
+# 3rd. Show all questions in the user's language.
+# 4th. Show EN questions.
+# 5th. Show all other questions.
+#
+# FOR THE MOMENT:
+# 1st. Show all questions, from newest to oldest.
+#
+        questions_struct = []
+
+        q_query = Question.all()
+        questions = q_query.fetch(50);
+        for q in questions:
+            questions_struct.append( {
+                    'question_key_name' : str(q.key().name()),
+                    'question_text' : unicode(q.question_text),
+                    })
+        self.render(u'index3',
+                    all_questions=1,
+                    questions=questions_struct
+                    )
+
+    def post(self, question_key_name):
+        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
+        self.render(u'index3')
 
 
-def main():
-    routes = [
-        ('/image', GetImage),
-        ('/ajax.html', AjaxHandler),
-        ('/q(.*)', QuestionHandler),
-        ('/u(.*)', UsrHandler),
-        ('/all', AllHandler),
-        ('/privacy_policy', PrivPolHandler),
-        (r'/', MainPage),
-    ]
-    application = webapp.WSGIApplication(routes,
-        debug=os.environ.get('SERVER_SOFTWARE', '').startswith('Dev'))
-    util.run_wsgi_app(application)
+class PrivPolHandler(BaseHandler2):
+    def get(self):
+        self.render(u'index3',
+                    priv_pol=1
+                    )
+    def post(self):
+        self.get()
+
+
 
 jinja_environment = jinja2.Environment(
     extensions=['jinja2.ext.i18n'],
@@ -1434,6 +1147,8 @@ app = webapp2.WSGIApplication(
      ('/u(.*)', UsrHandler),
      ('/ajax.html', AjaxHandler),
      ('/logout', LogoutHandler),
+     ('/all', AllHandler),
+     ('/privacy_policy', PrivPolHandler),
      ('/', MainPage2)
     ],  # implement
      debug=True,
