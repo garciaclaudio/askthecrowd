@@ -1,5 +1,15 @@
 
 
+1. Finish "as is"
+
+2. Put in its own URL.
+
+3. Then continue.
+
+
+<FEATURE CREEP!>
+Add "folders" directories, subdirectories, etc.
+</FEATURE CREEP>
 
 <Standalonify>
 
@@ -10,46 +20,24 @@
 [DONE]  New handler has its own template, webapp2, and its own I18NRequestHandler wrapper
 [DONE]  Test adding translations to new handler and template.
 
-   Jinja2 - django gettext:
-       http://jinja.pocoo.org/docs/extensions/
-       http://fgda.pl/post/3/jinja2-internationalization-in-django
-
-Changed git config (from->to):
-    url = git@github.com:garciaclaudio/askthecrowd.git
-        url = https://garciaclaudio@github.com/garciaclaudio/askthecrowd.git
-
-Escaping curlies:
-    http://stackoverflow.com/questions/7772001/how-to-escape-or-in-django-template
-
 </Standalonify>
-
 
 
 <IN PROGRESS (classifications)>
 
-   Cleanup a little
-
-   Make gender, email? be saved in User
-
-[DONE]    Upgrade dev server. See ~/tmp/new_appengine
-       Copy all existing same name files into an "old_" dir.
-        Copy over all new files into place.
-
-    FB for non-canvas app:
-        https://github.com/pythonforfacebook/facebook-sdk/
-
-    Standalonify. Even without URL. Do it like this:
-        http://stackoverflow.com/questions/9220586/top-location-with-facebook-null-or-undefinde
-
     Questions have the following classifications.
         Category (from pinterest, modified: música, literatura, entretenimiento, etc.)
         Country (from user's country), Province (from user's province)
+            https://github.com/LawnGnome/jQuery-geoselector#readme
+            http://crackerworld.blogspot.nl/2013/03/jquery-for-select-country-and-state.html
         Language (from user's language, but can be changed at question creation time in a drop down).
 
     Add popup to have users enter their Country and State.
+
     Add fields to support this at question creation (Category, language)
 
-    Implement landing pages.
+    Implement landing pages (recent questions, LATER: popular questions, index (by classification) ).
+
     Implement showing these classifications in the results page.
 
 </IN PROGRESS>
@@ -170,6 +158,31 @@ http://angel.co
 [Very good, read again] http://intertwingly.net/blog/1761.html
 [Very good] http://stackoverflow.com/questions/960330/how-to-set-google-app-engine-java-content-type-to-utf-8
 
+<links about standaloneifying>
+Jinja2 - django gettext:
+       http://jinja.pocoo.org/docs/extensions/
+       http://fgda.pl/post/3/jinja2-internationalization-in-django
+
+Changed git config (from->to):
+    url = git@github.com:garciaclaudio/askthecrowd.git
+        url = https://garciaclaudio@github.com/garciaclaudio/askthecrowd.git
+
+Escaping curlies:
+    http://stackoverflow.com/questions/7772001/how-to-escape-or-in-django-template
+</links about standaloneifying>
+
+
+
+<MISC>
+
+    FB for non-canvas app:
+        https://github.com/pythonforfacebook/facebook-sdk/
+
+    Standalonify. Even without URL. Do it like this:
+        http://stackoverflow.com/questions/9220586/top-location-with-facebook-null-or-undefinde
+
+</MISC>
+
 
 ¿Qué es lo mejor que Argentina le ha dado al mundo?
 
@@ -250,6 +263,11 @@ Nueva variante: [será bueno? quién sabe]
 
 
 <DONE>
+[DONE]   Make gender, email? be saved in User
+[DONE]   Cleanup a little
+[DONE]    Upgrade dev server. See ~/tmp/new_appengine
+[DONE]       Copy all existing same name files into an "old_" dir.
+[DONE]        Copy over all new files into place.
 [DONE]    Make reload nicer.
 [DONE] add: video playing.
 [DONE]    * Clicking the logo should take you to the front page.

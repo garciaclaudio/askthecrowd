@@ -35,8 +35,8 @@ import traceback
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'conf.settings'
 
-from google.appengine.dist import use_library
-use_library('django', '1.2')
+#from google.appengine.dist import use_library
+#use_library('django', '1.2')
 
 # see https://docs.djangoproject.com/en/1.2/topics/i18n/internationalization/
 from django.utils.translation import ungettext, ugettext as _

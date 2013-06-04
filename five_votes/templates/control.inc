@@ -610,7 +610,6 @@ function add_video_link_func( ans_key ) {
 
 
 
-
 window.fbAsyncInit = function() {
 
     FB.init({appId: '{{ facebook_app_id }}', status: true, cookie: true, xfbml: true});
@@ -625,13 +624,16 @@ window.fbAsyncInit = function() {
          {% if question is defined %}
              window.location = '{{BASE_URL}}/q{{question_key_name}}';
          {% else %}
+             //alert('about to reload...');
              window.location = '{{BASE_URL}}';
          {% endif %}
 
       {% endif %}
     });
 
+
     {% if current_user %}
+        $('#whole_page').show();
 
         $('#faces_div').html( $("#logged_in_faces_tmpl").tmpl({}) );
         FB.XFBML.parse( document.getElementById('faces_div') );
@@ -656,6 +658,15 @@ window.fbAsyncInit = function() {
         {% endif %}
 
     {% else %}
+
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                //alert('connected, reload will happen, do not show content');
+            } else {
+                //alert('not authorized or not loggeg in, reload will NOT happen, show content');
+                $('#whole_page').show();
+            } 
+        });
 
         {% if question is defined %}
             show_question_for_welcome();

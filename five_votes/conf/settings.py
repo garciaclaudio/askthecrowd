@@ -15,12 +15,13 @@ LANGUAGE_CODE = 'es'
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-#IN_DEV_SERVER = False
-IN_DEV_SERVER = True
+IN_DEV_SERVER = False
+#IN_DEV_SERVER = True
 
 #BASE_URL = 'http://apps.facebook.com/five_votes'
 #BASE_URL = 'http://five-votes.appspot.com'
 BASE_URL = 'http://localhost:8080'
+#BASE_URL = 'http://www.cincovotos.com'
 
 FACEBOOK_APP_ID = '331909936825023'
 
