@@ -1,5 +1,16 @@
 <!-- JS TEMPLATES START -->
 
+<script id="country_popup_tmpl">
+<p>SELECT!</p>
+<div id="country_popup" class="country_popup_class">
+</div>
+</script>
+
+<script id="country_popup_elem">
+<p>${name}</p>
+<p>${cc1}</p>
+</script>
+
 <script id="logged_in_faces_tmpl">
 <fb:login-button show-faces="true"></fb:login-button>
 </script>

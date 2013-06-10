@@ -1,4 +1,14 @@
 
+<country-province selector>
+
+    After login:
+        if user has no country or province defined
+           show popup with flags - provinces
+          "other" link will show the full list of countries, with no flags
+           only one submit, with both country and province selected
+
+
+</country-province selector>
 
 1. Finish "as is"
 
@@ -8,7 +18,8 @@
 
 
 <FEATURE CREEP!>
-Add "folders" directories, subdirectories, etc.
+   Add "folders" directories, subdirectories, etc.
+   Can this be added later? YES
 </FEATURE CREEP>
 
 <Standalonify>
@@ -25,23 +36,34 @@ Add "folders" directories, subdirectories, etc.
 
 <IN PROGRESS (classifications)>
 
-    Questions have the following classifications.
+    Add popup to have users enter their Country and State (allow changing from user's page), the first time they vote or add a question.
+        Países iniciales: México, E.U., Colombia, Chile, Venezuela, Argentina, Bolivia, Uruguay, Costa Rica, España, Otro, etc.
+        Después del login, si no está ya seleccionado por el usuario, mostrar popup con banderas, y luego provincias.
+
+    Implement: add extended description to question and to answers. Wider cards for this?
+
+    Implement: click to see photo.
+
+    Add setting the following at question creation time:.
         Category (from pinterest, modified: música, literatura, entretenimiento, etc.)
-        Country (from user's country), Province (from user's province)
+        Country (default: user's country), Province (default: user's province) -- not needed
             https://github.com/LawnGnome/jQuery-geoselector#readme
             http://crackerworld.blogspot.nl/2013/03/jquery-for-select-country-and-state.html
         Language (from user's language, but can be changed at question creation time in a drop down).
 
-    Add popup to have users enter their Country and State.
+    Remove comments side bar from questions page (add mailto: link).
 
-    Add fields to support this at question creation (Category, language)
-
-    Implement landing pages (recent questions, LATER: popular questions, index (by classification) ).
+    Implement recent questions landing page. Make default...!
 
     Implement showing these classifications in the results page.
 
+    Agregar link a pagina del usuario, con el nombre del usuario, en la esq. sup. der.
+
 </IN PROGRESS>
 
+Implement landing pages (recent questions, LATER: popular questions, index (by classification) ).
+
+Implement: in-answer comments? nooot now
 
 NEW IDEAS: Office/church/neighborhood barter, loan exchange for all sorts of goods.
            Exercise step thing. With in-sole buzzer maybe, etc.

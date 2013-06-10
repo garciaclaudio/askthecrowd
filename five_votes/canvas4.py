@@ -158,27 +158,8 @@ class User(db.Model):
     access_token = db.StringProperty(required=True)
     gender = db.StringProperty(required=True)
     friends = db.StringListProperty()
- 
-#    user_id = db.StringProperty(required=True)
-#    access_token = db.StringProperty(required=True)
-#    name = db.StringProperty(required=True)
-#    picture = db.StringProperty(required=True)
-#    email = db.StringProperty()
-#    gender = db.StringProperty()
-#    friends = db.StringListProperty()
-#    dirty = db.BooleanProperty()
-
-#    # no se usa mas... se necesita un reemplazo
-#    def refresh_data(self):
-#        """Refresh this user's data using the Facebook Graph API"""
-#        me = Facebook().api(u'/me',
-#            {u'fields': _USER_FIELDS, u'access_token': self.access_token})
-#        self.dirty = False
-#        self.name = me[u'name']
-#        self.email = me.get(u'email')
-##        self.picture = me[u'picture'][u'data'][u'url']
-#        self.friends = [user[u'id'] for user in me[u'friends'][u'data']]
-#        return self.put()
+    cc1 = db.StringProperty()
+    province = db.StringProperty()
 
 
 class Counter(db.Model):
@@ -463,7 +444,8 @@ class BaseHandler2(I18NRequestHandler2):
                     profile_url=user.profile_url,
                     id=user.id,
                     access_token=user.access_token,
-#                    friends=friends           <====== Da PRobs, remover PERMANENTEMENTE
+                    cc1=user.cc1,
+                    province=user.province,
                 )
                 return self.session.get("user")
         return None
@@ -907,6 +889,12 @@ class AjaxHandler(BaseHandler2):
 
         return sorted_questions
 
+    def handle_get_countries(self):
+        json_data=open('data/countries.json')
+#        pprint.pprint( json_data, sys.stderr);
+        data = json.load(json_data)
+        json_data.close()
+        return data
 
     def post(self):
         print >> sys.stderr, '========  AT AJAX HANDLER POST==============='
@@ -953,6 +941,10 @@ class AjaxHandler(BaseHandler2):
 
         if( action == 'get_results' ):
             result_struct = self.handle_get_results()
+
+        if( action == 'get_countries' ):
+            result_struct = self.handle_get_countries()
+
 
         self.response.headers['Content-Type'] = 'application/json'
         seri = json.dumps( result_struct )

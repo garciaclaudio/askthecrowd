@@ -657,6 +657,13 @@ window.fbAsyncInit = function() {
             {% endif %}
         {% endif %}
 
+
+        {% if not current_user.cc1 %}
+
+            show_countries_modal();
+
+        {% endif %}
+
     {% else %}
 
         FB.getLoginStatus(function(response) {

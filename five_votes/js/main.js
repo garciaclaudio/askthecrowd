@@ -1,48 +1,91 @@
-$.fn.centerInClient = function(options) {
-    /// <summary>Centers the selected items in the browser window. Takes into account scroll position.
-    /// Ideally the selected set should only match a single element.
-    /// </summary>    
-    /// <param name="fn" type="Function">Optional function called when centering is complete. Passed DOM element as parameter</param>    
-    /// <param name="forceAbsolute" type="Boolean">if true forces the element to be removed from the document flow 
-    ///  and attached to the body element to ensure proper absolute positioning. 
-    /// Be aware that this may cause ID hierachy for CSS styles to be affected.
-    /// </param>
-    /// <returns type="jQuery" />
-    var opt = { forceAbsolute: false,
-                container: window,    // selector of element to center in
-                completeHandler: null
-              };
-    $.extend(opt, options);
-   
-    return this.each(function(i) {
-        var el = $(this);
-        var jWin = $(opt.container);
-        var isWin = opt.container == window;
+var modal = (function(){
+    var 
+    method = {},
+    $overlay,
+    $modal,
+    $content,
+    $close;
 
-        // force to the top of document to ENSURE that 
-        // document absolute positioning is available
-        if (opt.forceAbsolute) {
-            if (isWin)
-                el.remove().appendTo("body");
-            else
-                el.remove().appendTo(jWin.get(0));
-        }
+    // Center the modal in the viewport
+    method.center = function () {
+     var top, left;
 
-        // have to make absolute
-        el.css("position", "absolute");
+     top = Math.max($(window).height() - $modal.outerHeight(), 0) / 2;
+     left = Math.max($(window).width() - $modal.outerWidth(), 0) / 2;
 
-        // height is off a bit so fudge it
-        var heightFudge = isWin ? 2.0 : 1.8;
+     $modal.css({
+      top:top + $(window).scrollTop(), 
+      left:left + $(window).scrollLeft()
+     });
+    };
 
-        var x = (isWin ? jWin.width() : jWin.outerWidth()) / 2 - el.outerWidth() / 2;
-        var y = (isWin ? jWin.height() : jWin.outerHeight()) / heightFudge - el.outerHeight() / 2;
+    // Open the modal
+    method.open = function (settings) {
+     $content.empty().append(settings.content);
 
-        el.css("left", x + jWin.scrollLeft());
-        el.css("top", y + jWin.scrollTop());
+     $modal.css({
+      width: settings.width || 'auto', 
+      height: settings.height || 'auto'
+     });
 
-        // if specified make callback and pass element
-        if (opt.completeHandler)
-            opt.completeHandler(this);
+     method.center();
+     $(window).bind('resize.modal', method.center);
+     $modal.show();
+     $overlay.show();
+    };
+
+    // Close the modal
+    method.close = function () {
+     $modal.hide();
+     $overlay.hide();
+     $content.empty();
+     $(window).unbind('resize.modal');
+    };
+
+    // Generate the HTML and add it to the document
+    $overlay = $('<div id="modal_overlay"></div>');
+    $modal = $('<div id="modal"></div>');
+    $content = $('<div id="modal_content"></div>');
+    $close = $('<a id="modal_close" href="#">close</a>');
+
+    $modal.hide();
+    $overlay.hide();
+    $modal.append($content, $close);
+
+    $(document).ready(function(){
+     $('body').append($overlay, $modal);      
     });
+
+    $close.click(function(e){
+     e.preventDefault();
+     method.close();
+    });
+
+    return method;
+}());
+
+
+function show_countries_modal() {
+
+    modal.open({content: $("#country_popup_tmpl").tmpl({}) });
+ 
+    $.getJSON("ajax.html?action=get_countries",
+        function(data){
+
+            $('#country_popup').append(
+               $("#country_popup_elem").tmpl( {
+                      'cc1': 'mx',
+                      'name': 'Mexico',
+             }));
+
+
+//            alert( 'AF? ' + data['countries']['AF']  );
+//
+//            for (var i = 0; i < data['divisions']['MX'].length; i++) {
+//                alert('estado? ' + data['divisions']['MX'][i]);
+//            }
+
+        }
+    );
 }
 

@@ -535,6 +535,7 @@ def user_required(fn):
 
 class MainPage(BaseHandler):
     def get(self):
+
         user_name = ''
         if self.user:
             user_name = self.user.name
