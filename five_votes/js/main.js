@@ -34,6 +34,25 @@ var modal = (function(){
      $overlay.show();
     };
 
+    // Open the modal
+    method.create = function (settings) {
+     $content.empty().append(settings.content);
+
+     $modal.css({
+      width: settings.width || 'auto', 
+      height: settings.height || 'auto'
+     });
+
+     method.center();
+     $(window).bind('resize.modal', method.center);
+    };
+
+    method.display = function () { 
+     method.center();
+     $modal.show();
+     $overlay.show();
+    };
+
     // Close the modal
     method.close = function () {
      $modal.hide();
@@ -67,16 +86,20 @@ var modal = (function(){
 
 function show_countries_modal() {
 
-    modal.open({content: $("#country_popup_tmpl").tmpl({}) });
- 
+    modal.create({content: $("#country_popup_tmpl").tmpl({}) });
+
     $.getJSON("ajax.html?action=get_countries",
         function(data){
-
-            $('#country_popup').append(
-               $("#country_popup_elem").tmpl( {
-                      'cc1': 'mx',
-                      'name': 'Mexico',
-             }));
+            var targetCCs = [ "AR", "MX", "VE", "US" ];
+            var content='';
+            for (var i=0; i<targetCCs.length; ++i) {
+                var cc1 = targetCCs[i];
+                $('#country_popup').append($("#country_popup_elem").tmpl( {
+                      'cc1': cc1,
+                      'name': data['countries'][cc1],
+                }));
+            }
+            modal.display();
 
 
 //            alert( 'AF? ' + data['countries']['AF']  );
@@ -89,3 +112,7 @@ function show_countries_modal() {
     );
 }
 
+
+function select_country(cc1) {
+    alert( 'CC: ' + cc1 );
+}

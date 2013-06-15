@@ -2,13 +2,14 @@
 
 <script id="country_popup_tmpl">
 <p>SELECT!</p>
-<div id="country_popup" class="country_popup_class">
+<div class="country_popup_class">
+<ul id="country_popup">
+</ul>
 </div>
 </script>
 
 <script id="country_popup_elem">
-<p>${name}</p>
-<p>${cc1}</p>
+   <li><a href="#" onclick="select_country('${cc1}');return false;">${name}</a></li>
 </script>
 
 <script id="logged_in_faces_tmpl">
