@@ -84,12 +84,37 @@ var modal = (function(){
 }());
 
 
+
+function show_all_countries() {
+    $('#country_popup').hide();
+    $('#all_countries_select_box').show();
+    $('#other_ccs_link').hide();
+}
+
+
+function keys(obj)
+{
+    var keys = [];
+    for(var key in obj)
+    {
+        if(obj.hasOwnProperty(key))
+        {
+            keys.push(key);
+        }
+    }
+    return keys;
+}
+
+
+var countries_data;
+
 function show_countries_modal() {
 
     modal.create({content: $("#country_popup_tmpl").tmpl({}) });
 
     $.getJSON("ajax.html?action=get_countries",
         function(data){
+            countries_data = data;
             var targetCCs = [ "AR", "MX", "VE", "US" ];
             var content='';
             for (var i=0; i<targetCCs.length; ++i) {
@@ -99,20 +124,37 @@ function show_countries_modal() {
                       'name': data['countries'][cc1],
                 }));
             }
+
+            var ccs = keys(data['countries']).sort();
+
+            for (var i=0; i<ccs.length; ++i) {
+               $("#all_countries_select").append('<option value="' + ccs[i] + '">' + data['countries'][ccs[i]] +'</option>');
+            }
+
             modal.display();
-
-
-//            alert( 'AF? ' + data['countries']['AF']  );
-//
-//            for (var i = 0; i < data['divisions']['MX'].length; i++) {
-//                alert('estado? ' + data['divisions']['MX'][i]);
-//            }
-
         }
     );
 }
 
+var selected_country = '';;
 
 function select_country(cc1) {
-    alert( 'CC: ' + cc1 );
+    $('#country_popup').hide();
+    $('#all_countries_select_box').hide();
+    $('#other_ccs_link').hide();
+
+    selected_country = cc1;
+
+    for (var i = 0; i < countries_data['divisions'][cc1].length; i++) {
+        $('#provinces_popup').append($("#provinces_popup_elem").tmpl( {
+            'province': countries_data['divisions'][cc1][i],
+        }));
+    }
+
+    //re-center
+    modal.display();
+}
+
+function select_province(province) {
+    alert( province + ', ' + selected_country );
 }

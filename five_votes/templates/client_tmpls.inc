@@ -3,14 +3,27 @@
 <script id="country_popup_tmpl">
 <p>SELECT!</p>
 <div class="country_popup_class">
-<ul id="country_popup">
-</ul>
+    <ul id="country_popup">
+    </ul>
+    <div id="other_ccs_link"><a href="#" onclick="show_all_countries();return false;">{%trans%}other...{%endtrans%}</a></div>
+    <div id="all_countries_select_box" style="display:none;">
+        <select id="all_countries_select">
+            <option>{%trans%}select{%endtrans%}</option>
+        </select>
+    </div>
+    <ul id="provinces_popup" style="display:hidden">
+    </ul>
 </div>
 </script>
 
 <script id="country_popup_elem">
    <li><a href="#" onclick="select_country('${cc1}');return false;">${name}</a></li>
 </script>
+
+<script id="provinces_popup_elem">
+   <li><a href="#" onclick="select_province('${province}');return false;">${province}</a></li>
+</script>
+
 
 <script id="logged_in_faces_tmpl">
 <fb:login-button show-faces="true"></fb:login-button>
