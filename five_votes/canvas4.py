@@ -461,6 +461,7 @@ class BaseHandler2(I18NRequestHandler2):
         try:
             webapp2.RequestHandler.dispatch(self)
         finally:
+            print >> sys.stderr, '############ SAVING SESSION #######'
             self.session_store.save_sessions(self.response)
 
     @webapp2.cached_property
@@ -510,6 +511,10 @@ class MainPage2(BaseHandler2):
         user_name = ''
         if self.current_user:
             user_name = self.current_user['name']
+
+        print >> sys.stderr, '############ CURR USR'
+        pprint.pprint( self.current_user, sys.stderr);
+        print >> sys.stderr, '############ CURR USR2'
 
         self.render(u'index3',
                     main_page=1,
@@ -896,6 +901,31 @@ class AjaxHandler(BaseHandler2):
         json_data.close()
         return data
 
+    def handle_set_cc_and_province(self):
+        user = User.get_by_key_name(self.current_user['id'])
+        user.cc1 = self.request.get('cc')
+        user.province = self.request.get('province')
+        user.put()
+
+        # store session again
+        self.session["user"] = dict(
+            name=user.name,
+            gender=user.gender,
+            profile_url=user.profile_url,
+            id=user.id,
+            access_token=user.access_token,
+            cc1=user.cc1,
+            province=user.province,
+            )
+
+        print >> sys.stderr, '############ CURR USR SET??????'
+        pprint.pprint( self.session.get("user"), sys.stderr );
+
+        result = { 'error' : 0 }
+
+        return result
+
+
     def post(self):
         print >> sys.stderr, '========  AT AJAX HANDLER POST==============='
         result_struct = { 'error' : '1' }
@@ -944,6 +974,9 @@ class AjaxHandler(BaseHandler2):
 
         if( action == 'get_countries' ):
             result_struct = self.handle_get_countries()
+
+        if( action == 'set_cc_and_province' ):
+            result_struct = self.handle_set_cc_and_province()
 
 
         self.response.headers['Content-Type'] = 'application/json'

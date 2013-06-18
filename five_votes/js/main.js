@@ -144,17 +144,22 @@ function select_country(cc1) {
     $('#other_ccs_link').hide();
 
     selected_country = cc1;
-
     for (var i = 0; i < countries_data['divisions'][cc1].length; i++) {
         $('#provinces_popup').append($("#provinces_popup_elem").tmpl( {
             'province': countries_data['divisions'][cc1][i],
         }));
     }
 
+    $('#provinces_popup').show();
+    $('#back_ccs_link').show();
     //re-center
     modal.display();
 }
 
 function select_province(province) {
-    alert( province + ', ' + selected_country );
+    $.getJSON( "ajax.html?action=set_cc_and_province",
+              { cc:selected_country, province:province } )
+    .done( function(data) {
+        alert('saved!');
+    });
 }

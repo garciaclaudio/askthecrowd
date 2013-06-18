@@ -11,8 +11,9 @@
             <option>{%trans%}select{%endtrans%}</option>
         </select>
     </div>
-    <ul id="provinces_popup" style="display:hidden">
+    <ul id="provinces_popup" style="display:none;">
     </ul>
+    <div id="back_ccs_link" style="display:none;"><a href="#" onclick="show_countries_modal();return false;">{%trans%}back...{%endtrans%}</a></div>
 </div>
 </script>
 
