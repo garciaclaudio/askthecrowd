@@ -3,8 +3,8 @@
 <script id="country_popup_tmpl">
 <p>SELECT!</p>
 <div class="country_popup_class">
-    <ul id="country_popup">
-    </ul>
+    <table id="country_popup">
+    </table>
     <div id="other_ccs_link"><a href="#" onclick="show_all_countries();return false;">{%trans%}other...{%endtrans%}</a></div>
     <div id="all_countries_select_box" style="display:none;">
         <select id="all_countries_select">
@@ -18,7 +18,9 @@
 </script>
 
 <script id="country_popup_elem">
-   <li><a href="#" onclick="select_country('${cc1}');return false;">${name}</a></li>
+   <tr><td><a href="#" onclick="select_country('${cc1}');return false;">${name1}</a></td>
+       <td><a href="#" onclick="select_country('${cc2}');return false;">${name2}</a></td>
+   </tr>
 </script>
 
 <script id="provinces_popup_elem">

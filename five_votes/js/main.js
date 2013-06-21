@@ -115,13 +115,27 @@ function show_countries_modal() {
     $.getJSON("ajax.html?action=get_countries",
         function(data){
             countries_data = data;
-            var targetCCs = [ "AR", "MX", "VE", "US" ];
+   
+            var targetCCs = [['AR', 'GT'], 
+                             ['BO', 'HN'], 
+                             ['CL', 'MX'],
+                             ['CO', 'PA'],
+                             ['CR', 'PY'],
+                             ['CU', 'PE'],
+                             ['DO', 'PR'],
+                             ['EC', 'SV'],
+                             ['ES', 'UY'],
+                             ['US', 'VE']];
+
             var content='';
             for (var i=0; i<targetCCs.length; ++i) {
-                var cc1 = targetCCs[i];
+                var cc1 = targetCCs[i][0];
+                var cc2 = targetCCs[i][1];
                 $('#country_popup').append($("#country_popup_elem").tmpl( {
                       'cc1': cc1,
-                      'name': data['countries'][cc1],
+                      'name1': data['countries'][cc1],
+                      'cc2': cc2,
+                      'name2': data['countries'][cc2],
                 }));
             }
 

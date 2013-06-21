@@ -50,6 +50,9 @@ handlers:
 #- url: /.*
 #  script: example.py
 
+#- url: /.*
+#  script: test_app.app
+
 - url: /.*
   script: canvas4.app
 
