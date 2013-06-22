@@ -154,23 +154,35 @@ var selected_country = '';;
 
 function select_country(cc1) {
     $('#country_popup').hide();
+    $('#country_message').hide();
     $('#all_countries_select_box').hide();
     $('#other_ccs_link').hide();
 
+    if( ! cc1 ) {
+        cc1 = $('#all_countries_select').val();
+    }
+
     selected_country = cc1;
-    for (var i = 0; i < countries_data['divisions'][cc1].length; i++) {
+    for (var i = 0; i < countries_data['divisions'][cc1].length; i = i + 2) {
         $('#provinces_popup').append($("#provinces_popup_elem").tmpl( {
-            'province': countries_data['divisions'][cc1][i],
+            'name1': countries_data['divisions'][cc1][i],
+            'name2': countries_data['divisions'][cc1][i+1],
         }));
     }
 
     $('#provinces_popup').show();
+    $('#province_message').show();
     $('#back_ccs_link').show();
     //re-center
     modal.display();
 }
 
 function select_province(province) {
+
+    alert('not saving for now');
+    modal.close();
+    return false;
+
     $.getJSON( "ajax.html?action=set_cc_and_province",
               { cc:selected_country, province:province } )
     .done( function(data) {

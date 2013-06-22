@@ -1,19 +1,20 @@
 <!-- JS TEMPLATES START -->
 
 <script id="country_popup_tmpl">
-<p>SELECT!</p>
 <div class="country_popup_class">
+    <p id="country_message">{% trans %}Select your country:{% endtrans %}</p>
+    <p id="province_message" style="display:none;">{% trans %}Select your state:{% endtrans %}</p>
     <table id="country_popup">
     </table>
-    <div id="other_ccs_link"><a href="#" onclick="show_all_countries();return false;">{%trans%}other...{%endtrans%}</a></div>
+    <div id="other_ccs_link"><br /><a href="#" onclick="show_all_countries();return false;">{%trans%}other...{%endtrans%}</a></div>
     <div id="all_countries_select_box" style="display:none;">
-        <select id="all_countries_select">
+        <select id="all_countries_select" onclick="select_country();return false;">
             <option>{%trans%}select{%endtrans%}</option>
         </select>
     </div>
-    <ul id="provinces_popup" style="display:none;">
-    </ul>
-    <div id="back_ccs_link" style="display:none;"><a href="#" onclick="show_countries_modal();return false;">{%trans%}back...{%endtrans%}</a></div>
+    <table id="provinces_popup" style="display:none;">
+    </table>
+    <div id="back_ccs_link" style="display:none;"><br /><a href="#" onclick="show_countries_modal();return false;">{%trans%}back...{%endtrans%}</a></div>
 </div>
 </script>
 
@@ -24,7 +25,9 @@
 </script>
 
 <script id="provinces_popup_elem">
-   <li><a href="#" onclick="select_province('${province}');return false;">${province}</a></li>
+   <tr><td><a href="#" onclick="select_province('${name1}');return false;">${name1}</a></td>
+       <td><a href="#" onclick="select_province('${name2}');return false;">${name2}</a></td>
+   </tr>
 </script>
 
 
