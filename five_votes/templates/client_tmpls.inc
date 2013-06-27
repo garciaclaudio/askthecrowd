@@ -19,8 +19,8 @@
 </script>
 
 <script id="country_popup_elem">
-   <tr><td><a href="#" onclick="select_country('${cc1}');return false;">${name1}</a></td>
-       <td><a href="#" onclick="select_country('${cc2}');return false;">${name2}</a></td>
+   <tr><td><img src="/images/flags/${cc1_lc}.png"><a href="#" onclick="select_country('${cc1}');return false;">${name1}</a></td>
+       <td><img src="/images/flags/${cc2_lc}.png"><a href="#" onclick="select_country('${cc2}');return false;">${name2}</a></td>
    </tr>
 </script>
 

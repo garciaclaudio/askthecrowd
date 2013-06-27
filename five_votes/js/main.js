@@ -133,8 +133,10 @@ function show_countries_modal() {
                 var cc2 = targetCCs[i][1];
                 $('#country_popup').append($("#country_popup_elem").tmpl( {
                       'cc1': cc1,
+                      'cc1_lc': cc1.toLowerCase(),
                       'name1': data['countries'][cc1],
                       'cc2': cc2,
+                      'cc2_lc': cc2.toLowerCase(),
                       'name2': data['countries'][cc2],
                 }));
             }

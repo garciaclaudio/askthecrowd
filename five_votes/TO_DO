@@ -1,4 +1,29 @@
 
+
+<IN PROGRESS (classifications)>
+
+    Add popup to have users enter their Country and State (allow changing from user's page), the first time they vote or add a question.
+        Países iniciales: México, E.U., Colombia, Chile, Venezuela, Argentina, etc.
+        Después del login, si no está ya seleccionado por el usuario, mostrar popup con banderas, y luego provincias.
+
+    Make results page show counts by country / province.
+
+    Implement: add extended description to question and to answers. Wider cards for this?
+
+    Add setting the following at question creation time:.
+        Category (from pinterest, modified: música, literatura, entretenimiento, etc.)
+
+    Remove comments side bar from questions page (add mailto: link).
+
+    Implement recent questions landing page. Make default...!
+
+    Implement showing these classifications in the results page.
+
+    Agregar link a pagina del usuario, con el nombre del usuario, en la esq. sup. der.
+
+</IN PROGRESS>
+
+
 <country-province selector>
 
     After login:
@@ -34,32 +59,13 @@
 </Standalonify>
 
 
-<IN PROGRESS (classifications)>
 
-    Add popup to have users enter their Country and State (allow changing from user's page), the first time they vote or add a question.
-        Países iniciales: México, E.U., Colombia, Chile, Venezuela, Argentina, Bolivia, Uruguay, Costa Rica, España, Otro, etc.
-        Después del login, si no está ya seleccionado por el usuario, mostrar popup con banderas, y luego provincias.
+== PUT LIVE ==
 
-    Implement: add extended description to question and to answers. Wider cards for this?
-
+<NEXT>
     Implement: click to see photo.
+</NEXT>
 
-    Add setting the following at question creation time:.
-        Category (from pinterest, modified: música, literatura, entretenimiento, etc.)
-        Country (default: user's country), Province (default: user's province) -- not needed
-            https://github.com/LawnGnome/jQuery-geoselector#readme
-            http://crackerworld.blogspot.nl/2013/03/jquery-for-select-country-and-state.html
-        Language (from user's language, but can be changed at question creation time in a drop down).
-
-    Remove comments side bar from questions page (add mailto: link).
-
-    Implement recent questions landing page. Make default...!
-
-    Implement showing these classifications in the results page.
-
-    Agregar link a pagina del usuario, con el nombre del usuario, en la esq. sup. der.
-
-</IN PROGRESS>
 
 Implement landing pages (recent questions, LATER: popular questions, index (by classification) ).
 
@@ -69,6 +75,8 @@ NEW IDEAS: Office/church/neighborhood barter, loan exchange for all sorts of goo
            Exercise step thing. With in-sole buzzer maybe, etc.
 
 Soderos: ¿Cual es la mejor canción de Cerati / Soda Stereo?
+
+Soderos: Todos los álbumes de Soda / Cerati. ¿Botón para marcar un video como inservible?
 
 <adding videos>
 
