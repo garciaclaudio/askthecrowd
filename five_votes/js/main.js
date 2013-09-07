@@ -76,8 +76,9 @@ var modal = (function(){
     });
 
     $close.click(function(e){
-     e.preventDefault();
-     method.close();
+//        alert('helo');
+//     e.preventDefault();
+//     method.close();
     });
 
     return method;
@@ -146,7 +147,6 @@ function show_countries_modal() {
             for (var i=0; i<ccs.length; ++i) {
                $("#all_countries_select").append('<option value="' + ccs[i] + '">' + data['countries'][ccs[i]] +'</option>');
             }
-
             modal.display();
         }
     );
@@ -181,13 +181,14 @@ function select_country(cc1) {
 
 function select_province(province) {
 
-    alert('not saving for now');
-    modal.close();
-    return false;
+//    alert('not saving for now');
+//    modal.close();
+//    return false;
 
     $.getJSON( "ajax.html?action=set_cc_and_province",
               { cc:selected_country, province:province } )
     .done( function(data) {
-        alert('saved!');
+        modal.close();
+        return false;
     });
 }

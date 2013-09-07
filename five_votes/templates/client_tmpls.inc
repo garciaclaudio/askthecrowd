@@ -4,7 +4,7 @@
 <div class="country_popup_class">
     <p id="country_message">{% trans %}Select your country:{% endtrans %}</p>
     <p id="province_message" style="display:none;">{% trans %}Select your state:{% endtrans %}</p>
-    <table id="country_popup">
+    <table style="border-spacing:5px;" id="country_popup">
     </table>
     <div id="other_ccs_link"><br /><a href="#" onclick="show_all_countries();return false;">{%trans%}other...{%endtrans%}</a></div>
     <div id="all_countries_select_box" style="display:none;">
@@ -12,15 +12,15 @@
             <option>{%trans%}select{%endtrans%}</option>
         </select>
     </div>
-    <table id="provinces_popup" style="display:none;">
+    <table style="border-spacing:5px;" id="provinces_popup" style="display:none;">
     </table>
     <div id="back_ccs_link" style="display:none;"><br /><a href="#" onclick="show_countries_modal();return false;">{%trans%}back...{%endtrans%}</a></div>
 </div>
 </script>
 
 <script id="country_popup_elem">
-   <tr><td><img src="/images/flags/${cc1_lc}.png"><a href="#" onclick="select_country('${cc1}');return false;">${name1}</a></td>
-       <td><img src="/images/flags/${cc2_lc}.png"><a href="#" onclick="select_country('${cc2}');return false;">${name2}</a></td>
+   <tr><td><a href="#" onclick="select_country('${cc1}');return false;"><img style="vertical-align:top" width="40" height="30" src="/images/flags/${cc1_lc}.png"><span>${name1}</span></a></td>
+       <td><a href="#" onclick="select_country('${cc2}');return false;"><img style="vertical-align:top" width="40" height="30" src="/images/flags/${cc2_lc}.png">${name2}</a></td>
    </tr>
 </script>
 
