@@ -236,6 +236,14 @@ class Vote(db.Model):
         else:
             return []
 
+class LocationSummary(db.Model):
+    answer = db.ReferenceProperty(Answer)
+    question = db.ReferenceProperty(Question)
+    cc1 = db.StringProperty()
+    province = db.StringProperty()
+    num_votes = db.IntegerProperty()
+
+
 class ResultsSummary(db.Model):
     answer = db.ReferenceProperty(Answer)
     question = db.ReferenceProperty(Question)
@@ -601,6 +609,7 @@ class AjaxHandler(BaseHandler2):
         error = ''
         ans = Answer.get( answer_key )
         summaries = ResultsSummary.gql( 'where answer = :1', ans )
+        loc_summaries = LocationSummary.gql( 'where answer = :1', ans )
         votes = Vote.gql( 'where answer = :1', ans )
 
         if( ans is None ): 
@@ -610,6 +619,8 @@ class AjaxHandler(BaseHandler2):
             result = { 'error' : error }
         else:
             for sum in summaries:
+                sum.delete()
+            for sum in loc_summaries:
                 sum.delete()
             for vote in votes:
                 vote.delete()
@@ -726,6 +737,19 @@ class AjaxHandler(BaseHandler2):
                                               male_votes = 0,
                                               female_votes = 0, )
 
+        cc1 = self.current_user['cc1'] or 'XX'
+        province = self.current_user['province'] or 'XX'
+
+        loc_query = LocationSummary.gql( 'where question = :1 and answer = :2 and cc1 = :3 and province = :4', ans.question , ans, cc1, province )
+        loc_summary = loc_query.get()
+
+        if loc_summary is None:
+            loc_summary = LocationSummary( question = ans.question,
+                                           answer = ans,
+                                           cc1 = cc1,
+                                           province = province,
+                                           num_votes = 0, )
+
         if my_vote:
 #            print >> sys.stderr, 'Vote there, update the count'
             if vote_val == "1":
@@ -738,7 +762,9 @@ class AjaxHandler(BaseHandler2):
                     else:
                         results_summary.female_votes = results_summary.female_votes + 1
                     results_summary.put()
-                    
+
+                    loc_summary.num_votes = loc_summary.num_votes + 1;
+                    loc_summary.put()                    
             elif vote_val == "-1":
                 new_count = my_vote.num_votes - 1
                 if new_count >= 0:
@@ -750,6 +776,10 @@ class AjaxHandler(BaseHandler2):
                     else:
                         results_summary.female_votes = results_summary.female_votes - 1
                     results_summary.put()
+
+                    if loc_summary.num_votes > 0:
+                        loc_summary.num_votes = loc_summary.num_votes - 1;
+                    loc_summary.put()
         else:
 #            print >> sys.stderr, 'Vote not there '
             my_vote = Vote(user_id = self.current_user['id'])
@@ -763,11 +793,12 @@ class AjaxHandler(BaseHandler2):
             else:
                 results_summary.female_votes = results_summary.female_votes + 1
             results_summary.put()
+            loc_summary.num_votes = loc_summary.num_votes + 1;
+            loc_summary.put()                    
             UserVotedQuestions.add(self.current_user['id'],ans.question)
 
         result_struct = { 'answer_key': answer_key, 'new_count' : my_vote.num_votes, 'votes_left' : votes_left }
         return result_struct
-
 
     def handle_get_results(self):
         friends = {}
@@ -775,7 +806,7 @@ class AjaxHandler(BaseHandler2):
 
         usr = User.get_by_key_name(self.current_user['id'])
 
-        for friend in select_random(User.get_by_key_name(usr.friends), 300):
+        for friend in select_random(User.get_by_key_name(usr.friends), 600):
             friends[friend.user_id] = { 'name' : friend.name, 'user_id' : friend.user_id }
             friend_ids.append( str(friend.user_id) )
             print >> sys.stderr, 'ADDING FRIEND ID: ' + str(friend.user_id)
