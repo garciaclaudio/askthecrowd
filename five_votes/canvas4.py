@@ -80,6 +80,18 @@ import facebook
 template.register_template_library('templatetags.myfilters')
 
 
+
+class AutoVivification(dict):
+    """Implementation of perl's autovivification feature."""
+    def __getitem__(self, item):
+        try:
+            return dict.__getitem__(self, item)
+        except KeyError:
+            value = self[item] = type(self)()
+            return value
+
+
+
 class JinjaTranslations:
     def gettext(self, message): 
         return _(message)
@@ -816,6 +828,7 @@ class AjaxHandler(BaseHandler2):
         summaries = ResultsSummary.gql( 'where question = :1', question )
 
         tot_votes = 0
+
         results = { 'all':[], 'male':[], 'female':[] }
 
         for summary in summaries:
@@ -834,6 +847,38 @@ class AjaxHandler(BaseHandler2):
                 friends_with_votes.append(friends[fv.user_id])
 
             results['friend_'+str(fv.user_id)].append([ str(fv.answer.key()), fv.num_votes ])
+
+
+        loc_summaries = LocationSummary.gql( 'where question = :1', question )
+
+        cc1_totals = {}
+        for loc_summary in loc_summaries:
+            cc1 = loc_summary.cc1
+            province = loc_summary.province
+            num_votes = loc_summary.num_votes
+            answer_key = str(loc_summary.answer.key())
+            if not results.has_key( 'province' ):
+                results['province'] = {}
+            if not results['province'].has_key( cc1 ):
+                results['province'][cc1] = {}
+            if not results['province'][cc1].has_key( province ):
+                results['province'][cc1][province] = []
+            results['province'][cc1][province].append([ answer_key, num_votes ])
+
+            if not cc1_totals.has_key( cc1 ):
+                cc1_totals[cc1] = {}
+            if not cc1_totals[cc1].has_key( answer_key ):
+                cc1_totals[cc1][answer_key] = 0
+            cc1_totals[cc1][answer_key] += num_votes;
+
+        for cc1 in cc1_totals:
+            for answer_key in cc1_totals[cc1]:
+                num_votes = cc1_totals[cc1][answer_key]
+                if not results.has_key( 'country' ):
+                    results['country'] = {}
+                if not results['country'].has_key( cc1 ):
+                    results['country'][cc1] = []
+                results['country'][cc1].append([ answer_key, num_votes ])
 
         answers = Answer.gql( 'where question = :1', question )
 

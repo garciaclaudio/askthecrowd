@@ -425,6 +425,10 @@ function show_results( data ) {
     show_selector(data, 'female', '{% trans %}Women{% endtrans %}', 0 );
     show_selector(data, 'male', '{% trans %}Men{% endtrans %}', 0 );
 
+    for (var i = 0; i < 51; i++) {
+    show_selector(data, 'male', '{% trans %}Men{% endtrans %}', 0 );
+    }
+
     for (var i = 0; i < data.friends_with_votes.length; i++) {
         friend_id = 'friend_' + data.friends_with_votes[i].user_id;
         show_selector(data, friend_id, data.friends_with_votes[i].name, 0 );
