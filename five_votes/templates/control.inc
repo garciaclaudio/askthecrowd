@@ -347,11 +347,9 @@ function _set_results_width() {
     }
 }
 
-function show_data( data, id ) {
+function show_data( data, results ) {
 
     $('#result_answers_div').html('');
-
-    results = data.results[id];
 
     results.sort(dynamicSort(1));
 
@@ -379,7 +377,7 @@ function show_data( data, id ) {
 
 
 var selected_tab = 'all';
-function show_selector( data, id, text, selected ) {
+function show_selector( data, results, id, text, selected ) {
      if( selected ) {
          text_visible = 'visible';
          link_visible = 'hidden';
@@ -406,7 +404,8 @@ function show_selector( data, id, text, selected ) {
           $('#selector_link_' + id).hide();
           $('#selector_text_' + id).show();
           selected_tab = id;
-          show_data( data, id );
+
+          show_data( data, results );
      } );
 }
 
@@ -421,20 +420,22 @@ function show_results( data ) {
             'question_key_name': data.question_key_name,
           }));
 
-    show_selector(data, 'all', '{% trans %}All{% endtrans %}', 1 );
-    show_selector(data, 'female', '{% trans %}Women{% endtrans %}', 0 );
-    show_selector(data, 'male', '{% trans %}Men{% endtrans %}', 0 );
+    show_selector(data, data.results['all'], 'all', '{% trans %}All{% endtrans %}', 1 );
+    show_selector(data, data.results['female'], 'female', '{% trans %}Women{% endtrans %}', 0 );
+    show_selector(data, data.results['male'], 'male', '{% trans %}Men{% endtrans %}', 0 );
 
-    for (var i = 0; i < 51; i++) {
-    show_selector(data, 'male', '{% trans %}Men{% endtrans %}', 0 );
+    show_selector(data, data.results['country']['MX'], 'cc1_MX', '{% trans %}Mexicanos{% endtrans %}', 0 );
+
+    for (var i = 0; i < 5; i++) {
+        show_selector(data, data.results['male'], 'male_'+i , '{% trans %}Men{% endtrans %}', 0 );
     }
 
     for (var i = 0; i < data.friends_with_votes.length; i++) {
         friend_id = 'friend_' + data.friends_with_votes[i].user_id;
-        show_selector(data, friend_id, data.friends_with_votes[i].name, 0 );
+        show_selector(data, data.results[friend_id], friend_id, data.friends_with_votes[i].name, 0 );
     }
 
-    show_data( data, 'all');
+    show_data( data, data.results['all'] );
 
 // foreach all, women, men, friend list
 //   add and bind a result_selector link
