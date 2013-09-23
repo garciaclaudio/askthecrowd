@@ -79,16 +79,8 @@ import facebook
 # bring in the lang2name tag
 template.register_template_library('templatetags.myfilters')
 
-
-
-class AutoVivification(dict):
-    """Implementation of perl's autovivification feature."""
-    def __getitem__(self, item):
-        try:
-            return dict.__getitem__(self, item)
-        except KeyError:
-            value = self[item] = type(self)()
-            return value
+# GLOBAL VARS
+country_data = ''
 
 
 
@@ -880,6 +872,11 @@ class AjaxHandler(BaseHandler2):
                     results['country'][cc1] = []
                 results['country'][cc1].append([ answer_key, num_votes ])
 
+
+        patro_test = self.patronimic('MX', 'es');
+
+        print >> sys.stderr, 'PATRONIMIC: ' + unicode(patro_test)
+
         answers = Answer.gql( 'where question = :1', question )
 
         ans_struct = []
@@ -969,6 +966,23 @@ class AjaxHandler(BaseHandler2):
         sorted_questions = sorted(questions_struct, key=lambda k: k['question_key_name'], cmp=numeric_compare, reverse=False) 
 
         return sorted_questions
+
+    def patronimic(self, cc1, lang):
+        global country_data
+        if not country_data:
+            json_data=open('data/countries.json')
+#        pprint.pprint( json_data, sys.stderr);
+            global country_data
+            country_data = json.load(json_data)
+            json_data.close()
+
+        patronimic = ''
+        try:
+            patronimic = country_data['patronimics'][lang][cc1]
+        except KeyError:
+            patronimic = ''
+
+        return patronimic
 
     def handle_get_countries(self):
         json_data=open('data/countries.json')
