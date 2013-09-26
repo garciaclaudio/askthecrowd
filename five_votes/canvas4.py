@@ -980,8 +980,8 @@ class AjaxHandler(BaseHandler2):
         try:
             patronimic = country_data['patronimics'][lang][cc1]
         except KeyError:
-            patronimic = ''
-
+            country =  country_data['countries'][cc1]
+            patronimic = _("from %(country)s") % { 'country': unicode(country) }
         return patronimic
 
     def handle_get_countries(self):
