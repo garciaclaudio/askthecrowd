@@ -863,7 +863,9 @@ class AjaxHandler(BaseHandler2):
                 cc1_totals[cc1][answer_key] = 0
             cc1_totals[cc1][answer_key] += num_votes;
 
+        patro_hash = {}
         for cc1 in cc1_totals:
+            patro_hash[ str(cc1) ] = self.patronimic(cc1)
             for answer_key in cc1_totals[cc1]:
                 num_votes = cc1_totals[cc1][answer_key]
                 if not results.has_key( 'country' ):
@@ -872,10 +874,7 @@ class AjaxHandler(BaseHandler2):
                     results['country'][cc1] = []
                 results['country'][cc1].append([ answer_key, num_votes ])
 
-
-        patro_test = self.patronimic('MX', 'es');
-
-        print >> sys.stderr, 'PATRONIMIC: ' + unicode(patro_test)
+#        print >> sys.stderr, 'PATRONIMIC: ' + unicode(patro_test)
 
         answers = Answer.gql( 'where question = :1', question )
 
@@ -904,6 +903,7 @@ class AjaxHandler(BaseHandler2):
                           'total_votes': tot_votes,
                           'results': results,
                           'answers_hash':ans_hash,
+                          'patronimics':patro_hash,
                           'friends_with_votes':friends_with_votes,
                           'owner_name':unicode(question.owner().name),
                           'owner_id':question.owner().id
@@ -967,7 +967,7 @@ class AjaxHandler(BaseHandler2):
 
         return sorted_questions
 
-    def patronimic(self, cc1, lang):
+    def patronimic(self, cc1):
         global country_data
         if not country_data:
             json_data=open('data/countries.json')
@@ -978,7 +978,7 @@ class AjaxHandler(BaseHandler2):
 
         patronimic = ''
         try:
-            patronimic = country_data['patronimics'][lang][cc1]
+            patronimic = country_data['patronimics'][self.selected_lang][cc1]
         except KeyError:
             country =  country_data['countries'][cc1]
             patronimic = _("from %(country)s") % { 'country': unicode(country) }

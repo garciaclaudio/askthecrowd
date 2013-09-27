@@ -424,11 +424,13 @@ function show_results( data ) {
     show_selector(data, data.results['female'], 'female', '{% trans %}Women{% endtrans %}', 0 );
     show_selector(data, data.results['male'], 'male', '{% trans %}Men{% endtrans %}', 0 );
 
-    show_selector(data, data.results['country']['MX'], 'cc1_MX', '{% trans %}Mexicanos{% endtrans %}', 0 );
-
-    for (var i = 0; i < 5; i++) {
-        show_selector(data, data.results['male'], 'male_'+i , '{% trans %}Men{% endtrans %}', 0 );
+    for (var cc1 in data.results['country']) {
+       show_selector(data, data.results['country'][cc1], 'cc1_' + cc1, data.patronimics[cc1], 0 );
     }
+
+//    for (var i = 0; i < 5; i++) {
+//        show_selector(data, data.results['male'], 'male_'+i , '{% trans %}Men{% endtrans %}', 0 );
+//    }
 
     for (var i = 0; i < data.friends_with_votes.length; i++) {
         friend_id = 'friend_' + data.friends_with_votes[i].user_id;
