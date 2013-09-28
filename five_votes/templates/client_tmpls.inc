@@ -250,8 +250,12 @@
 
     <div class="author_link" style="margin-bottom:10px;"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans %}by{% endtrans %} ${owner_name}</a></div>
 
-    <div id="selector_div">
+    <div id="selector_div" class="selector_class">
     </div>
+
+    <div id="province_selector_div" class="selector_class">
+    </div>
+
     <div id="result_answers_div">
     </div>
 </div>    

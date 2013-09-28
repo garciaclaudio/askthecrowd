@@ -404,10 +404,60 @@ function show_selector( data, results, id, text, selected ) {
           $('#selector_link_' + id).hide();
           $('#selector_text_' + id).show();
           selected_tab = id;
+         if( id.substr(0,4) == 'cc1_' ) {
+              $('#province_selector_div').html('<p>{% trans %}By state or province:{% endtrans %}</p>');
+              var cc1 = id.substr(4,2);
+
+              show_province_selector(data, data.results['country'][cc1], 'all_provinces', '{% trans %}All{% endtrans %}', 1 );
+              var province_id = 0;
+              for (var province in data.results['province'][cc1]) {
+                  province_id++;
+                  show_province_selector(data, data.results['province'][cc1][province], 'province_' + province_id, province, 0 );
+              }
+
+         } else {
+             // not a country, remove provinces from view
+             $('#province_selector_div').html('');
+         }
+          show_data( data, results );
+     } );
+}
+
+
+var selected_province = '';
+function show_province_selector( data, results, id, text, selected ) {
+     if( selected ) {
+         selected_province = id;
+         text_visible = 'visible';
+         link_visible = 'hidden';
+         selected_result = 'selected_result';
+     } else  {
+         text_visible = 'hidden';
+         link_visible = 'visible';
+         selected_result = '';
+     }
+
+     $('#province_selector_div').append( $("#res_selector_tmpl").tmpl( {
+            'id' : id,
+            'text' : text,
+            'text_visible' : text_visible,
+            'link_visible' : link_visible,
+            'selected_result' : selected_result,
+     }));
+
+     $('#selector_link_' + id).click(function() {
+          $("#selector_" + selected_province).removeClass('selected_result');
+          $("#selector_link_" + selected_province).show();
+          $("#selector_text_" + selected_province).hide();
+          $("#selector_" + id).addClass('selected_result');
+          $('#selector_link_' + id).hide();
+          $('#selector_text_' + id).show();
+          selected_province = id;
 
           show_data( data, results );
      } );
 }
+
 
 
 function show_results( data ) {
@@ -424,13 +474,14 @@ function show_results( data ) {
     show_selector(data, data.results['female'], 'female', '{% trans %}Women{% endtrans %}', 0 );
     show_selector(data, data.results['male'], 'male', '{% trans %}Men{% endtrans %}', 0 );
 
+//    for (var i = 0; i < 20; i++) {
+//        show_selector(data, data.results['male'], 'male_'+i , '{% trans %}Men{% endtrans %}', 0 );
+//    }
+
     for (var cc1 in data.results['country']) {
        show_selector(data, data.results['country'][cc1], 'cc1_' + cc1, data.patronimics[cc1], 0 );
     }
 
-//    for (var i = 0; i < 5; i++) {
-//        show_selector(data, data.results['male'], 'male_'+i , '{% trans %}Men{% endtrans %}', 0 );
-//    }
 
     for (var i = 0; i < data.friends_with_votes.length; i++) {
         friend_id = 'friend_' + data.friends_with_votes[i].user_id;

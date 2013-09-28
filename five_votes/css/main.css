@@ -264,13 +264,14 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
   margin-bottom: 5px;
 }
 
-#selector_div {
+.selector_class {
     padding:00px;
     display:table;
     text-align: center;
     margin-left:auto; 
     margin-right:auto;
     margin-bottom:10px;
+    clear:both;
 }
 
 .result_selector {
