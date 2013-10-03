@@ -114,15 +114,24 @@
 </script>
 
 <script id="new_question_tmpl" type="text/html">
-<div class="mytube">
-    <div id="question_form_div">
+    <div id="question_form_div" class="results_card" style="width:350px;">
+      <div style="margin:20px;">
         <form id="question_form" action="/ajax.html" method="get">
               <input type="hidden" name="action" value="create_question">
-              <label for="question">{% trans %}Enter your question:{% endtrans %}</label><br /><br />
-<div>              <input name="question" id="question" size=45 class="text" type="text">
-</div>
-<br />
-            <button type="submit" id="create_question_button" class="my_button">{% trans %}create{% endtrans %}</button>
+
+<div style="text-align:center;"><strong>{% trans %}Create a question{% endtrans %}</strong></div>
+
+
+              <p>{% trans %}Question:{% endtrans %}<input name="question" id="question" type="text" style="width:100%"></p>
+
+              <p>{% trans %}Description (optional):{% endtrans %}
+              <textarea name="question_desc" id="question_desc" rows=2 style="width:100%"></textarea>
+              </p>
+
+              <div style="text-align:center;">
+                  <button type="submit" id="create_question_button" class="my_button">{% trans %}create{% endtrans %}</button>
+             </div>
+
         </form>
     </div>
 </div>

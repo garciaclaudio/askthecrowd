@@ -1,5 +1,34 @@
 
 
+<FRICTION DRIVE>
+Hub motor cheap alternative, for bikes. Requires a lot of reading-up about motors and drives. But foremost is about how to transfer energy to the wheel cheaply from a small motor. Idea is to be able to make a bike short-range electric for very cheap, some 100-200 W motor. BETTER: Some contraption to transfer power to front-wheel, held in place with some kind of rack/carrier.>
+
+http://www.hobbyking.com/hobbyking/store/__14740__Turnigy_L3040A_480G_Brushless_Motor.html
+
+http://www.electricbike.com/diy-mid-drive/
+http://www.electricbike.com/mid-drive-build-part/
+http://www.electricbike.com/kepler-super-commuter/
+http://www.electricbike.com/category/build/masterwork/
+
+http://endless-sphere.com/forums/viewtopic.php?f=31&t=20491
+
+http://www.commuterbooster.com/performance
+http://www.endless-sphere.com/forums/viewtopic.php?f=28&t=22187&start=1155
+http://www.hobbyking.com/hobbyking/store/uh_viewItem.asp?idproduct=9174
+http://www.hobbyking.com/hobbyking/store/__16367__Turnigy_dlux_100A_SBEC_Brushless_Speed_Controller_w_Data_Logging.html
+
+http://www.electricbike.com/cycle-analyst-v3/
+http://www.electricbike.com/stealth-bomber-review/
+
+Design must have variable engagement (more friction/pressure against tire when more torque applied) for better battery economy. Slippery conditions, allow to manually increase pressure for less slipping).
+
+http://www.rchelicopterfun.com/rc-lipo-batteries.html
+
+http://bumblebeebolton.com/frontwheelbike.html
+
+<FRICTION DRIVE>
+
+
 Pasajeros por año: el aeropuerto de Mty: 6 millones
 
 Costo por milla en UK: 
@@ -96,12 +125,15 @@ Chocolates Héroes y Villanos (redondos o cuadrados, forrados de aluminio impreso
 
 Typeweriter OS. SO que sólo te permite editar archivos de texto. Sin internet, sin fotos, sin nada. On a USB stick.
 
-Hub motor cheap alternative, for bikes. Requires a lot of reading-up about motors and drives. But foremost is about how to transfer energy to the wheel cheaply from a small motor. Idea is to be able to make a bike short-range electric for very cheap, some 100-200 W motor. BETTER: Some contraption to transfer power to front-wheel, held in place with some kind of rack/carrier.
-
 Escribir a favor de la bici en Mty: http://www.bostonglobe.com/metro/2013/09/21/bicycling-dutch-way/kFRT0ABSPtUnXMIUj5zONM/story.html. Hacer un plan específico, mostrando que calles deben cerrarse al tráfico vehicular, o tener carriles separados de bici.
 
 Abrir México a la inmigración por inteligencia. En los consulados y embajadas mexicanos, que cualquiera pueda tomar un exámen equivalente al GRE y recibir un pasaporte mexicano por altos puntajes.
 
+Lotería holandesa. Como la lotería mexicana, con dibujitos similares, pero con objetos / personajes holandeses. Para vender en tiendas de souvenirs y jugueterías. Con una calidad y empaque excepcionales.
+
+Teléfono de plan (Simyo).
+
+Plan para resbaladerote en el westerpark con costales de yute o henequén.
 
 DISIPÁNDOTE POR COMPLETO
 
@@ -124,14 +156,18 @@ Claudio García
 
 <IN PROGRESS (classifications)>
 
-    Make results page show counts by country / province.
+    Implement: add extended description to question and to answers.
 
-    Implement: add extended description to question and to answers. Wider cards for this?
+Ya está:
+        1. Agregar link bajo la pregunta recién creada "add description", igual al de la pág de pregunta, que se convierte en un campo de texto.
+        2. Agregar link en respuestas recién creadas "add description".
+        3. En Pág de preguntas, permitir comentarios de los usuarios en cada respuesta (con checkbox "compartir en FB").
+        4. Categories: 
 
     Add setting the following at question creation time:.
         Category (from pinterest, modified: música, literatura, entretenimiento, etc.)
 
-    Remove comments side bar from questions page (add mailto: link).
+    Remove comments side bar from questions page, move it to own page, add link to it
 
     Implement recent questions landing page. Make default...!
 
@@ -141,7 +177,18 @@ Claudio García
 
     Mostrar fotos y videos en la pág de resultados.
 
+    Botón para reproducir todos los videos contenidos en la pág (cuando > 1 video en la pág).
+
+    Test!
+
+    Forget, do my motor thing!
+
 </IN PROGRESS>
+
+
+<bugs>
+    If no answer is added, and an answer is added in the question page, the "add new answer" link disappears behind the first answer card.
+</bugs>
 
 
 <country-province selector>
@@ -413,6 +460,7 @@ Nueva variante: [será bueno? quién sabe]
 
 
 <DONE>
+[DONE]    Make results page show counts by country / province.
 [DONE]    Add popup to have users enter their Country and State (allow changing from user's page), the first time they vote or add a question.
 [DONE]        Países iniciales: México, E.U., Colombia, Chile, Venezuela, Argentina, etc.
 [DONE]        Después del login, si no está ya seleccionado por el usuario, mostrar popup con banderas, y luego provincias.
