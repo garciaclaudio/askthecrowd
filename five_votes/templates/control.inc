@@ -125,6 +125,7 @@ function get_and_display_user_questions() {
                           $("#prev_questions_tmpl").tmpl( {
                                'question_key_name': q.question_key_name,
                                'question_text': q.question_text,
+                               'question_desc': q.question_desc,
                      }));
 
                      $('#more_link_' + q.question_key_name).click( function() {
@@ -220,12 +221,14 @@ function show_created_question(data) {
 
     // save for feed posting
     new_question_text = data.question_text;
+    new_question_desc = data.question_desc;
     new_question_key_name = data.question_key_name;
 
     $('#main_container').fadeOut('fast');
     $('#main_container').html( $("#question_created_tmpl").tmpl(
        {
          'question_text': data.question_text,
+         'question_desc': data.question_desc,
          'question_key_name': data.question_key_name,
        }));
 
@@ -276,6 +279,7 @@ function show_created_question(data) {
         $('#main_container').fadeOut('fast');
         $('#main_container').html( $("#done_question_tmpl").tmpl({
              'question_text': data.question_text,
+             'question_desc': data.question_desc,
              'question_key_name': data.question_key_name,
            }));
         // bind add-another button

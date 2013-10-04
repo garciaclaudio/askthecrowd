@@ -63,7 +63,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 .question_text {
     display:table;
-    background-color:#ffffff;
+/*    background-color:#ffffff; */
     color:black;
     text-align: center;
     font-size: 130%;
@@ -473,3 +473,18 @@ opacity: 1.0;
 	top:-7px;
 	right:-7px;
 }
+
+.question_card {
+  background-color: #EEEEEE;
+  border: 1px solid #CCCCCC;
+    margin:5px;
+    padding:0px;
+    text-align: left;
+    max-width:400px;
+    display: inline-block;
+    /* IE7 bs */
+    *display: inline;
+    zoom: 1;
+}
+
+

@@ -83,11 +83,12 @@
 </script>
 
 <script id="question_created_tmpl" type="text/html">
-<div class="mytube">
 <div id="question_created"> 
-    <p>{% trans %}Question created{% endtrans %}</p>
-    <div class="question_text">${question_text}</div>
-
+    <p>{% trans %}Question created!{% endtrans %}</p>
+    <div class="results_card" style="max-width:60%;padding:15px;">
+            <div style="font-size: 130%;margin-bottom:10px;">${question_text}</div>
+            <div style="font-size:90%;color:#555555;font-style:italic;">${question_desc}</div>
+    </div>
     <p>{% trans %}Suggest inital answers:{% endtrans %}</p>
     <div id="answers_form_div">
          <form id="new_answer_form" action="/ajax.html" method="get">
@@ -109,7 +110,6 @@
         <br /><button id="done_button" class="my_button">{% trans %}done{% endtrans %}</button>
         <input type="checkbox" name="post_to_fb" value="post_to_fb" checked>{% trans %}Post to Facebook{% endtrans %}<br>
     </div>
-</div>
 </div>
 </script>
 
@@ -140,7 +140,10 @@
 <script id="done_question_tmpl" type="text/html">
 <div class="mytube">
     <p>{% trans %}You're done!{% endtrans %}</p>
-    <div class="question_text">${question_text}</div>
+    <div class="results_card" style="max-width:60%;padding:15px;">
+            <div style="font-size: 130%;margin-bottom:10px;">${question_text}</div>
+            <div style="font-size:90%;color:#555555;font-style:italic;">${question_desc}</div>
+    </div>
 
     <p>{% trans %}Your question's URL is:{% endtrans %} <a target="_top" href="{{BASE_URL}}/q${question_key_name}">{{BASE_URL}}/q${question_key_name}</a></p>
 
@@ -151,7 +154,9 @@
 
 <script id="answer_question_tmpl" type="text/html">
 
-    <div class="question_text">${question_text}
+    <div class="question_card" style="max-width:80%;padding:15px;">
+            <div style="font-size: 130%;margin-bottom:10px;">${question_text}</div>
+            <div style="font-size:90%;color:#555555;font-style:italic;">${question_desc}</div>
     </div>
 
     <div class="author_link" style="margin-bottom:10px;"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans %}by{% endtrans %} ${owner_name}</a></div>
@@ -382,6 +387,7 @@
         </div>
 
         <div class="mytube invisible" id="prev_answers_div_${question_key_name}" style="clear:both;">
+             <div style="font-size:90%;color:#555555;font-style:italic;margin-bottom:5px;margin-left:5px;">${question_desc}</div>
              <div id="inner_prev_answers_div_${question_key_name}"></div>
              <div style="clear:both;text-align:center;"><button class="my_button delete_question_button" q_key="${question_key_name}">{% trans %}delete{% endtrans %}</button></div>
        </div>

@@ -186,6 +186,7 @@ class Question(db.Model):
     user_id = db.StringProperty(required=True)
     created = db.DateTimeProperty(auto_now=True)
     question_text = db.StringProperty()
+    question_desc = db.StringProperty()
     language_code = db.StringProperty()
 
     def owner(self):
@@ -558,6 +559,7 @@ class AjaxHandler(BaseHandler2):
 
     def handle_new_question(self):
         question_text =  sanitize_html( self.request.get('question') )
+        question_desc =  sanitize_html( self.request.get('question_desc') )
         error = ''
         if question_text == "":
             error = '* ' + _("Question text cannot be empty.");
@@ -569,11 +571,13 @@ class AjaxHandler(BaseHandler2):
                 key_name = str(new_question_id),
                 user_id=self.current_user['id'],
                 question_text = unicode(question_text),
+                question_desc = unicode(question_desc),
                 language_code=str(self.selected_lang),
             )
             new_question.put()
             result = { 'error' : 0,
                        'question_text' : unicode(question_text),
+                       'question_desc' : unicode(question_desc),
                        'question_key_name' : str(new_question.key().name())
                        }
         return result
@@ -899,6 +903,7 @@ class AjaxHandler(BaseHandler2):
 
         result_struct = { 'question_key_name': unicode(question.key().name()),
                           'question_text': unicode(question.question_text),
+                          'question_desc': unicode(question.question_desc),
                           'answers': sorted_ans,
                           'total_votes': tot_votes,
                           'results': results,
@@ -957,6 +962,7 @@ class AjaxHandler(BaseHandler2):
             sorted_ans = sorted(ans_struct, key=lambda k: k['num_votes'], reverse=True) 
             result_struct = { 'question_key_name': str(question.key().name()),
                               'question_text': unicode(question.question_text),
+                              'question_desc': unicode(question.question_desc),
                               'answers': sorted_ans,
                               'total_votes': tot_votes,
                               'answers_hash':ans_hash,
