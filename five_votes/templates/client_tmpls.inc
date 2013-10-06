@@ -234,7 +234,7 @@
             <input type="hidden" name="answer_key" value="${answer_key}">
             <input type="hidden" name="action" value="vote">
             <input type="hidden" name="vote_val" value="1">
-<span class="vote_link"><a href="#" onclick="$('#plus_vote_form_${answer_key}').submit();return false;">{% trans %}vote{% endtrans %}</a>
+            <span class="vote_link"><a href="#" onclick="$('#plus_vote_form_${answer_key}').submit();return false;">{% trans %}vote{% endtrans %}</a></span>
        </form>
    </div>
 
@@ -248,7 +248,12 @@
    </div>
 
 
+<div class="author_link"><a href="/u1">{% trans %}comment link, move to bottom with some css{% endtrans %}</a></div>
+
+
 {{ "{{html by_link}" }}}
+
+
 
   </div>
 
