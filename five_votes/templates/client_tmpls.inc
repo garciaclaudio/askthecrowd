@@ -223,7 +223,12 @@
         <div id="picture_${answer_key}"></div>
         <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><a class="play_inset_link"><img src="/images/play_button_small.png"></a></div>
 
-        <span class="answer_text">${answer_text}</span>
+        <div class="answer_text">${answer_text}</div>
+
+<div class="author_link" style="margin-top:10px;float:right;"><a href="/u1">{% trans %}foo{% endtrans %}</a></div>
+<div class="author_link" style="margin-top:10px;float:left;"><a href="/u1">{% trans %}bar{% endtrans %}</a></div>
+
+
 
 
     <div id="whirly_${answer_key}" class="count_inset" style="display:none;"><img src="/images/loading.gif"></div>
@@ -248,7 +253,6 @@
    </div>
 
 
-<div class="author_link"><a href="/u1">{% trans %}comment link, move to bottom with some css{% endtrans %}</a></div>
 
 
 {{ "{{html by_link}" }}}

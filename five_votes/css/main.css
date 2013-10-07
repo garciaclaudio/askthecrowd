@@ -184,6 +184,11 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
   position:absolute;bottom:7px;right:15px;"
 }
 
+.comment_div {
+  position:absolute;bottom:7px;"
+}
+
+
 
 .prev_questions_count_inset {
   opacity: .78;
