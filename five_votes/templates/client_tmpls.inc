@@ -225,12 +225,6 @@
 
         <div class="answer_text">${answer_text}</div>
 
-<div class="author_link" style="margin-top:10px;float:right;"><a href="/u1">{% trans %}foo{% endtrans %}</a></div>
-<div class="author_link" style="margin-top:10px;float:left;"><a href="/u1">{% trans %}bar{% endtrans %}</a></div>
-
-
-
-
     <div id="whirly_${answer_key}" class="count_inset" style="display:none;"><img src="/images/loading.gif"></div>
     <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
 
@@ -251,6 +245,9 @@
 <span class="vote_link"><a href="#" onclick="$('#minus_vote_form_${answer_key}').submit();return false;">{% trans %}unvote{% endtrans %}</a>
        </form>
    </div>
+
+
+   <div class="author_link comment_div"><a href="/u1">{% trans %}comment{% endtrans %}</a></div>
 
 
 

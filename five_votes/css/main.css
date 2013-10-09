@@ -92,7 +92,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
   background-color: #e5f6fd;
   border: 1px solid #b3e7fa;
   padding-top: 10px;
-  padding-bottom: 30px;
+  padding-bottom: 10px;
   padding-left: 10px;
   padding-right: 10px;
 /*  -moz-border-radius: 3px;
@@ -177,15 +177,19 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 
 .minus_vote_div {
   display:none;
-  position:absolute;bottom:7px;left:15px;"
+  margin-top:10px;
+  float:left;
+  margin-left:5px;
 }
 
 .plus_vote_div {
-  position:absolute;bottom:7px;right:15px;"
+    margin-top:10px;
+    float:right;
+    margin-right:5px;
 }
 
 .comment_div {
-  position:absolute;bottom:7px;"
+    clear:both;
 }
 
 
