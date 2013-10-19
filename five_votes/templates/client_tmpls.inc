@@ -94,10 +94,8 @@
          <form id="new_answer_form" action="/ajax.html" method="get">
             <input type="hidden" name="question_key_name" value="${question_key_name}">
             <input type="hidden" name="action" value="add_answer">
-
-            <input id="new_answer" name="answer_text" class="text" type="text" size=30>
-&nbsp;<button id="new_answer" type="submit">{% trans %}add{% endtrans %}</button>
-
+            <textarea rows=2 id="new_answer" name="answer_text"></textarea>
+            &nbsp;<button type="submit">{% trans %}add{% endtrans %}</button>
          </form>
     </div>
 
@@ -178,8 +176,9 @@
             <input type="hidden" name="question_key_name" value="${question_key_name}">
             <input type="hidden" name="action" value="add_answer">
 
-            <input id="new_answer" name="answer_text" class="text" type="text" size=20>
-&nbsp;<button id="new_answer" type="submit">{% trans %}add{% endtrans %}</button>
+<textarea rows=1 id="new_answer" name="answer_text"></textarea>
+
+&nbsp;<button type="submit">{% trans %}add{% endtrans %}</button>
          </form>
       </div>
     </div>
@@ -246,15 +245,12 @@
        </form>
    </div>
 
+<!--   <div class="author_link comment_div"><a href="#" answer_id="${answer_id}">{% trans %}comment{% endtrans %}</a></div><div><img style="width:15%;" src="http://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/41650_518261219_2789_q.jpg"> <textarea name="comment_text" rows=2 style="width:80%"></textarea> -->
 
-   <div class="author_link comment_div"><a href="/u1">{% trans %}comment{% endtrans %}</a></div>
-
-
+</div>
 
 
 {{ "{{html by_link}" }}}
-
-
 
   </div>
 
@@ -266,8 +262,10 @@
 <script id="show_results_tmpl" type="text/html">
 <div class="mytube">
 <div> 
-    <div class="question_text">${question_text}</div>
-
+    <div class="question_card" style="max-width:80%;padding:15px;">
+        <div style="font-size: 130%;margin-bottom:10px;">${question_text}</div>
+        <div style="font-size:90%;color:#555555;font-style:italic;">${question_desc}</div>
+    </div>
     <div class="author_link" style="margin-bottom:10px;"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans %}by{% endtrans %} ${owner_name}</a></div>
 
     <div id="selector_div" class="selector_class">

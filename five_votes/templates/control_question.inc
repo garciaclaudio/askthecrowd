@@ -19,6 +19,8 @@ function show_question_for_voting() {
              'owner_id': "{{owner_id}}",
              'question_key_name': "{{question_key_name}}",
 	     }));
+
+    $('#new_answer').autosize();
              
     $('#see_results_button').click( function() {
 

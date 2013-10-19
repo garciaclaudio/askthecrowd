@@ -1,4 +1,15 @@
 
+
+Estimado Jorge,
+
+Gracias por un buen artículo hoy en El Norte. Te sugiero una sexta idea que podría obviar la necesidad de un segundo aeropuerto en el D.F.: Una red de trenes de alta velocidad, conectando las 100 principales ciudades mexicanas. Diseñado y construído en México por ingenieros mexicanos. La marca México debería incluir esa faceta nuestra, la de ser un país de Ingenieros.
+
+Atentamente,
+
+Claudio García
+Ámsterdam
+
+
 <FRICTION DRIVE>
 Hub motor cheap alternative, for bikes. Requires a lot of reading-up about motors and drives. But foremost is about how to transfer energy to the wheel cheaply from a small motor. Idea is to be able to make a bike short-range electric for very cheap, some 100-200 W motor. BETTER: Some contraption to transfer power to front-wheel, held in place with some kind of rack/carrier.>
 
@@ -73,6 +84,11 @@ Construir y operar un ferrocarril de alta velocidad conllevaría un gran esfuerzo
 
 A 250 KPH, de México a Monterrey se harían 4 horas, del centro al centro de ambas ciudades. De México a Guadalajara,  2 horas y media. Entonces, el tráfico aéreo en el AICM disminuiría grandemente, y la necesidad de un segundo aeropuerto en la ciudad de México sería menos apremiante. El tráfico vehicular en las autopistas bajaría, con los consecuentes beneficios.
 
+================================================================================
+Pasos para reducir la desigualdad en México, EXHORTO
+================================================================================
+
+
 ===========
 PROPUESTA?
 ===========
@@ -116,9 +132,9 @@ Consola para LPs y laptop.
 
 Vitrales
 
-Standup desk minimalist exercise system. Standup desk two step generator system. Some kind of lever, or pulley system that will make a generator spin when stepping on a surface. Two steps, one comes down, the other comes up. Weigh is put alternately on each side. The generated energy is put is stored in a battery, or what to do with it?
+Standup desk minimalist exercise system. Standup desk two step generator system. Some kind of lever, or pulley system that will make a generator spin when stepping on a surface. Two steps, one comes down, the other comes up. Weigh is put alternately on each side. The generated energy is put is stored in a battery, or what to do with it? Make it run a fan, or similar gadget. 
 
-Chocolates Héroes y Villanos (redondos o cuadrados, forrados de aluminio impreso, con Hidalgo, Juárez, Díaz, Santa Anna, Madero, Villa, Zapata, Moctezuma, Cortés, Cuauhtémoc, La Malinche, La Corregidora, Xavier Mina, Padre Mier). Poetas: Díaz  Mirón, Amado Nervo, López Velarde (que incluya poemas en el reverso del empaque).
+Chocolates Héroes y Villanos (redondos o cuadrados, forrados de aluminio impreso, con Hidalgo, Juárez, Díaz, Santa Anna, Madero, Villa, Zapata, Moctezuma, Cortés, Cuauhtémoc, La Malinche, La Corregidora, Xavier Mina, Padre Mier). Poetas: Díaz  Mirón, Amado Nervo, López Velarde (que incluya poemas en el reverso del empaque). Iniciar negocio en México desde aquí en Holanda.
 
 [DONE] ¡Terminar algo! Cambiar teclado de mini-laptop a Español, actualizar SO. http://www.itcsales.co.uk/acatalog/Contact_Us.html
 
@@ -136,6 +152,7 @@ Plan para resbaladerote en el westerpark con costales de yute o henequén. (http:
 
 Poster de compositores, con liga a "lo mejor de <compositor>" bajo cada foto, en cinco votos. Verdi, Puccini, etc.. Que sea gratis, de modo que sirva como vehículo publicitario para cincovotos.com. (http://www.onlineprinters.nl/Posters,-DIN-A0.htm?websale8=diedruckerei.06-aa&pi=PPLA040&ci=001827)
 
+Website (o pág en cincovotos): Bring Don Porfirio back (Plan para repatriar los restos de P. Díaz y ponerlos en un monumento en Reforma). Echar un rollo acerca de como, además de tirano, fue héroe.
 
 
 DISIPÁNDOTE POR COMPLETO
@@ -156,27 +173,13 @@ Kind regards,
 Claudio García
 
 
-
 <IN PROGRESS (classifications)>
 
-    Implement: add extended description to question and to answers.
+    Implement recent questions landing page. Make default...! add: recent questions blog-like page: created by Fulanito, from Tucumán, Argentina (photo, flag), by language, this can be the site's main landing page.
 
-Ya está:
-        1. Agregar link bajo la pregunta recién creada "add description", igual al de la pág de pregunta, que se convierte en un campo de texto.
-        2. Agregar link en respuestas recién creadas "add description".
-        3. En Pág de preguntas, permitir comentarios de los usuarios en cada respuesta (con checkbox "compartir en FB").
-        4. Categories: 
-
-    Choose countries/flags to be displayed in country selector based on IP address of visitor. Europe / Spanish / Etc..
-
-    Add setting the following at question creation time:.
-        Category (from pinterest, modified: música, literatura, entretenimiento, etc.)
-
-    Remove comments side bar from questions page, move it to own page, add link to it
-
-    Implement recent questions landing page. Make default...!
-
-    Implement showing these classifications in the results page.
+        [Banderita] Esta es la pregunta? 
+                    Descripción
+                    X número de respuestas, X número de votos
 
     Agregar link a pagina del usuario, con el nombre del usuario, en la esq. sup. der.
 
@@ -184,9 +187,9 @@ Ya está:
 
     Botón para reproducir todos los videos contenidos en la pág (cuando > 1 video en la pág).
 
-    Test!
+    Remove comments side bar from questions page, move it to own page, add link to it
 
-    Forget, do my motor thing!
+    Then, he is a member of his country's community. The Country's flag shows by the logo.
 
 </IN PROGRESS>
 
@@ -195,17 +198,6 @@ Ya está:
     If no answer is added, and an answer is added in the question page, the "add new answer" link disappears behind the first answer card.
 </bugs>
 
-
-<country-province selector>
-
-    After login:
-        if user has no country or province defined
-           show popup with flags - provinces
-          "other" link will show the full list of countries, with no flags
-           only one submit, with both country and province selected
-
-
-</country-province selector>
 
 1. Finish "as is"
 
@@ -219,29 +211,42 @@ Ya está:
    Can this be added later? YES
 </FEATURE CREEP>
 
-<Standalonify>
-
-[DONE]  Gender, is it retrieved fine from FB?
-[DONE]  Logout sends the thing on an infinite loop
-
-[DONE]  Create new handler with the Example.py code INSIDE canvas4.py
-[DONE]  New handler has its own template, webapp2, and its own I18NRequestHandler wrapper
-[DONE]  Test adding translations to new handler and template.
-
-</Standalonify>
-
-
 
 == PUT LIVE ==
 
-<NEXT>
-    Implement: click to see photo.
-</NEXT>
+<TODO (prioritize)>
+    *  Add setting the following at question creation time:.
+       Category (from pinterest, modified: música, literatura, entretenimiento, etc.)
+    * Allow comments in answers, as in Pinterest. (En Pág de preguntas, permitir comentarios de los usuarios en cada respuesta (con checkbox "compartir en FB").
+    * Implement: click to see photo.
+    * URLs in questions and answers should be clickable.
+    * In results page: bundle all friends together, make it a sub-selector, like with provinces.
+    * BUG: when adding picture from prev-questions view, "add youtube link" does not go away.
+    * Video questions can have a link "view as playlist" to watch all vids in playlist.
+    * Show "my votes" tab in results page, allow modifying votes.
+    * Show "change my votes" link under "my votes" tab in results page. 
+    * La liga al website desde los comentarios lleva a "http://five-votes.appspot.com/q22"...
+    * La pág. de resultados no debe decir "cero votos", debe volver a decir "five votes".
+    * Photos should be stored as images (they load slowly).
+    * Questions from all users should be replaced by the planned recent-questions landing page.
+    * Photos in results page look distorted (square).
+    * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
+    * BUG: deleting an answer from prev. questions, will not rearrange cards.
+    * Once tested for a while, SUBMIT app details on FB so that it gets promoted / listed.
+</TODO>
+
+
+<POSTP>
+    [POSTP]    * After voting for one question, show other questions the user may be interested in, not answered yet (from friends / same lang / all ). Use summary table for popular questions landing page.
+    [POSTP]    * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
+    [POSTP] * Show friend photos in results page.
+    [POSTP]   * BUG: friends must be refreshed when users log in. This can be done every few weeks or so. Or via the real time api. See: http://developers.facebook.com/docs/samples/canvas/ (real time updates).
+    [POSTP] * Offer users to notify them when voters vote on their question (once per day or so, by FB post). They need to grant additional permissions for this.
+    [POSTP]    * Show "welcome Claudio" in white in the header, centered, when a user is logged in, with pic.
+</POSTP>
 
 
 Implement landing pages (recent questions, LATER: popular questions, index (by classification) ).
-
-Implement: in-answer comments? nooot now
 
 NEW IDEAS: Office/church/neighborhood barter, loan exchange for all sorts of goods.
            Exercise step thing. With in-sole buzzer maybe, etc.
@@ -282,26 +287,12 @@ Image: Web Banner
 Image: Cover Image
 You must upload at least 3 screenshots for App on Facebook
 
-<TODO>
-    * BUG: when adding picture from prev-questions view, "add youtube link" does not go away.
-    * Video questions can have a link "view as playlist" to watch all vids in playlist.
-    * Each new answer from users can generate a FB post?
-    * Show "my votes" tab in results page.
-    * Show "change my votes" link under "my votes" tab in results page. 
-    * La liga al website desde los comentarios lleva a "http://five-votes.appspot.com/q22"...
-    * La pág. de resultados no debe decir "cero votos", debe volver a decir "five votes".
-    * Photos should be stored as images (they load slowly).
-    * Questions from all users should be replaced by the planned recent-questions landing page.
-    * Photos in results page look distorted (square).
-    * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
-    * BUG: deleting an answer from prev. questions, will not rearrange cards.
-    * Once tested for a while, SUBMIT app details on FB so that it gets promoted / listed.
-</TODO>
-
-
 ==>1st, FINISH, then do this:
 
 <NEXT FOR DEVELOPMENT>
+Choose countries/flags to be displayed in country selector based on IP address of visitor. Europe / Spanish / Etc..
+Each new answer from users can generate a FB post?
+En Pág de preguntas, permitir comentarios de los usuarios en cada respuesta (con checkbox "compartir en FB").
 when redirecting after logging in, show a "please wait whirly" instead of the question form
 get standalone url www.fivevotes.com?? or similar, make it work outside FB junk frame
 add: country, province when logging in
@@ -452,19 +443,16 @@ Nueva variante: [será bueno? quién sabe]
 </Preguntas INTERESANTES Y CHUSCAS>
 
 
-<POSTP>
-
-[POSTP]    * After voting for one question, show other questions the user may be interested in, not answered yet (from friends / same lang / all ). Use summary table for popular questions landing page.
-[POSTP]    * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
-[POSTP] * Show friend photos in results page.
-[POSTP]   * BUG: friends must be refreshed when users log in. This can be done every few weeks or so. Or via the real time api. See: http://developers.facebook.com/docs/samples/canvas/ (real time updates).
-[POSTP] * Offer users to notify them when voters vote on their question (once per day or so, by FB post). They need to grant additional permissions for this.
-[POSTP]    * Show "welcome Claudio" in white in the header, centered, when a user is logged in, with pic.
-
-</POSTP>
-
 
 <DONE>
+[DONE]  Make extended description show in results page, other pages where questions are displayed.
+[DONE]  Make answers be added in an auto-grow textarea. So long answers are possible.
+[DONE]  Implement: add extended description to question and to answers.
+[DONE]  Gender, is it retrieved fine from FB?
+[DONE]  Logout sends the thing on an infinite loop
+[DONE]  Create new handler with the Example.py code INSIDE canvas4.py
+[DONE]  New handler has its own template, webapp2, and its own I18NRequestHandler wrapper
+[DONE]  Test adding translations to new handler and template.
 [DONE]    Make results page show counts by country / province.
 [DONE]    Add popup to have users enter their Country and State (allow changing from user's page), the first time they vote or add a question.
 [DONE]        Países iniciales: México, E.U., Colombia, Chile, Venezuela, Argentina, etc.

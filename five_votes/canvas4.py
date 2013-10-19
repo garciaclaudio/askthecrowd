@@ -104,6 +104,8 @@ def truncate( value ):
 # http://djangosnippets.org/snippets/1655/
 #
 def sanitize_html(value):
+    # remove newlines
+    value = " ".join(value.split())
     valid_tags = 'em strong h1 h2 h3'.split()
     valid_attrs = 'href src'.split()
     soup = BeautifulSoup(value)
@@ -186,7 +188,7 @@ class Question(db.Model):
     user_id = db.StringProperty(required=True)
     created = db.DateTimeProperty(auto_now=True)
     question_text = db.StringProperty()
-    question_desc = db.StringProperty()
+    question_desc = db.StringProperty(multiline=True)
     language_code = db.StringProperty()
 
     def owner(self):
@@ -202,7 +204,7 @@ class Question(db.Model):
 class Answer(db.Model):
     question = db.ReferenceProperty(Question)
     user_id = db.StringProperty(required=True)
-    answer_text = db.StringProperty()
+    answer_text = db.StringProperty(multiline=True)
     picture = db.BlobProperty()
     video_id = db.StringProperty()
     def owner(self):
@@ -520,6 +522,23 @@ class BaseHandler2(I18NRequestHandler2):
 
 
 class MainPage2(BaseHandler2):
+    def get(self):
+        user_name = ''
+        if self.current_user:
+            user_name = self.current_user['name']
+
+        print >> sys.stderr, '############ CURR USR'
+        pprint.pprint( self.current_user, sys.stderr);
+        print >> sys.stderr, '############ CURR USR2'
+
+        self.render(u'index3',
+                    main_page=1,
+                    user_name=user_name)
+    def post(self):
+        self.get()
+
+
+class RecentQuestions(BaseHandler2):
     def get(self):
         user_name = ''
         if self.current_user:
@@ -1270,7 +1289,8 @@ app = webapp2.WSGIApplication(
      ('/logout', LogoutHandler),
      ('/all', AllHandler),
      ('/privacy_policy', PrivPolHandler),
-     ('/', MainPage2)
+     ('/add', MainPage2),
+     ('/', RecentQuestions)
     ],  # implement
      debug=True,
      config=config

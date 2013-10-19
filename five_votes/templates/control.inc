@@ -200,6 +200,7 @@ function show_new_question() {
          }
      });
     $('#question').focus();
+    $('#question_desc').autosize(); 
     get_and_display_user_questions();
 }
 
@@ -231,6 +232,8 @@ function show_created_question(data) {
          'question_desc': data.question_desc,
          'question_key_name': data.question_key_name,
        }));
+
+     $('#new_answer').autosize();
 
      // bind "add" click (form submit)
      $('#new_answer_form').ajaxForm({
@@ -471,6 +474,7 @@ function show_results( data ) {
             'owner_id' : data.owner_id,
             'owner_name' : data.owner_name,
             'question_text': data.question_text,
+            'question_desc': data.question_desc,
             'question_key_name': data.question_key_name,
           }));
 
