@@ -540,19 +540,33 @@ class MainPage2(BaseHandler2):
 
 class RecentQuestions(BaseHandler2):
     def get(self):
-        user_name = ''
-        if self.current_user:
-            user_name = self.current_user['name']
 
-        print >> sys.stderr, '############ CURR USR'
-        pprint.pprint( self.current_user, sys.stderr);
-        print >> sys.stderr, '############ CURR USR2'
+#        print >> sys.stderr, '=========> USR: ' + str(user_id)
+        self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
 
+#        print >> sys.stderr, '=========> USR NAM: ' + unicode(user.name)
+        questions = Question.all()
+        questions.order('-created')
+
+        questions_struct = []
+        questions_dict = {}
+        for q in questions.run(limit=5):
+           questions_dict[ q.key().name() ] = 1
+           questions_struct.append( {
+                    'question_key_name' : str(q.key().name()),
+                    'question_text' : unicode(q.question_text),
+                    })
+
+        # XXX HERE I AM
         self.render(u'index3',
-                    main_page=1,
-                    user_name=user_name)
-    def post(self):
-        self.get()
+                    usr_page=1,
+                    questions = questions_struct,
+                    num_questions = len(questions_struct),
+                    user=self.current_user
+                    )
+
+    def post(self, question_key_name):
+        self.get(question_key_name)
 
 
 
