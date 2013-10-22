@@ -557,9 +557,8 @@ class RecentQuestions(BaseHandler2):
                     'question_text' : unicode(q.question_text),
                     })
 
-        # XXX HERE I AM
         self.render(u'index3',
-                    usr_page=1,
+                    recent_questions_page=1,
                     questions = questions_struct,
                     num_questions = len(questions_struct),
                     user=self.current_user

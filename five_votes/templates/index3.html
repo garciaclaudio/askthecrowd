@@ -60,13 +60,21 @@ NAME? {{current_user.name}} <--
 
     {% else %}    
 
-        {% if priv_pol %}
+        {% if recent_questions_page %}
 
-            {% include "templates/priv_pol.inc" %}
+            {% include "templates/recent_page.inc" %}
 
         {% else %}    
 
-            {% include "templates/main_page.inc" %}
+            {% if priv_pol %}
+
+                {% include "templates/priv_pol.inc" %}
+
+            {% else %}    
+
+                {% include "templates/main_page.inc" %}
+
+            {% endif  %}
 
         {% endif  %}
 
