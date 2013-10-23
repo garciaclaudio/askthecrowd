@@ -82,6 +82,21 @@ template.register_template_library('templatetags.myfilters')
 # GLOBAL VARS
 country_data = ''
 
+def read_cc_data():
+    global country_data
+    if not country_data:
+        json_data=open('data/countries.json')
+#        pprint.pprint( json_data, sys.stderr);
+        global country_data
+        country_data = json.load(json_data)
+        json_data.close()
+
+
+def country_name(cc1):
+    global country_data
+    read_cc_data()
+    country = country_data['countries'][cc1]
+    return unicode(country)
 
 
 class JinjaTranslations:
@@ -555,6 +570,10 @@ class RecentQuestions(BaseHandler2):
            questions_struct.append( {
                     'question_key_name' : str(q.key().name()),
                     'question_text' : unicode(q.question_text),
+                    'owner_name':unicode(q.owner().name),
+                    'cc1':unicode(q.owner().cc1),
+                    'cc_name':unicode(country_name(q.owner().cc1)),
+                    'province':unicode(q.owner().province),
                     })
 
         self.render(u'index3',
@@ -1007,12 +1026,7 @@ class AjaxHandler(BaseHandler2):
 
     def patronimic(self, cc1):
         global country_data
-        if not country_data:
-            json_data=open('data/countries.json')
-#        pprint.pprint( json_data, sys.stderr);
-            global country_data
-            country_data = json.load(json_data)
-            json_data.close()
+        read_cc_data()
 
         patronimic = ''
         try:
