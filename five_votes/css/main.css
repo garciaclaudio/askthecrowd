@@ -501,4 +501,22 @@ opacity: 1.0;
 }
 
 
+.recent_question_card {
+  background-color: #e5f6fd;
+  border: 1px solid #b3e7fa;
+    margin:5px;
+    padding:10px;
+    text-align: left;
+    max-width:400px;
+    display: inline-block;
+    /* IE7 bs */
+    *display: inline;
+    zoom: 1;
+}
+
+.rec_q_link A:link {color:#0000FF;text-decoration:none;}      /* unvisited link */
+.rec_q_link A:visited {color:#0000FF;text-decoration:none;}  /* visited link */
+.rec_q_link A:hover {text-decoration:underline;}  /* mouse over link */
+
+
 
