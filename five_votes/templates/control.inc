@@ -721,6 +721,13 @@ window.fbAsyncInit = function() {
             {% if main_page %}
                 show_new_question();
             {% endif %}
+            {% if recent_questions_page %}
+              set_recent_questions_width();
+              $(window).on("debouncedresize", function( event ) {
+                  set_recent_questions_width();
+              });
+
+            {% endif %}
         {% endif %}
 
 

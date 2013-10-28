@@ -192,3 +192,14 @@ function select_province(province) {
         return false;
     });
 }
+
+
+function set_recent_questions_width() {
+//    alert('resizing...');
+    var parent_width = $('#main_container').width();
+    if( parent_width > 450 ) {
+       $('.recent_question_card').width(450);
+    } else {
+       $('.recent_question_card').width(parent_width-40);
+    }
+}

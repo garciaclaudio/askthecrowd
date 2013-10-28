@@ -571,7 +571,7 @@ class RecentQuestions(BaseHandler2):
                     'question_key_name' : str(q.key().name()),
                     'question_text' : unicode(q.question_text),
                     'owner_name':unicode(q.owner().name),
-                    'cc1':unicode(q.owner().cc1),
+                    'cc1':unicode(q.owner().cc1.lower()),
                     'cc_name':unicode(country_name(q.owner().cc1)),
                     'province':unicode(q.owner().province),
                     })
