@@ -177,12 +177,11 @@ Claudio García
 
 <IN PROGRESS (classifications)>
 
-XXX, here I am
-    Implement recent questions landing page. Make default...! add: recent questions blog-like page: created by Fulanito, from Tucumán, Argentina (photo, flag), by language, this can be the site's main landing page.
+[DONE]    Implement recent questions landing page. Make default...! add: recent questions blog-like page: created by Fulanito, from Tucumán, Argentina (photo, flag), by language, this can be the site's main landing page.
 
         [Banderita] Esta es la pregunta? 
                     Descripción
-                    X número de respuestas, X número de votos
+
 
     Remove comments side bar from questions page, move it to own page, add link to it from the footer.
 
@@ -218,6 +217,7 @@ XXX, here I am
 == PUT LIVE ==
 
 <TODO (prioritize)>
+    * Agregar: "X número de respuestas, X número de votos" a preguntas recientes.
     *  Add setting the following at question creation time:.
        Category (from pinterest, modified: música, literatura, entretenimiento, etc.)
     * Allow comments in answers, as in Pinterest. (En Pág de preguntas, permitir comentarios de los usuarios en cada respuesta (con checkbox "compartir en FB").

@@ -87,7 +87,7 @@
     <p>{% trans %}Question created!{% endtrans %}</p>
     <div class="results_card" style="max-width:60%;padding:15px;">
             <div style="font-size: 130%;margin-bottom:10px;">${question_text}</div>
-            <div style="font-size:90%;color:#555555;font-style:italic;">${question_desc}</div>
+            <div class="question_desc">${question_desc}</div>
     </div>
     <p>{% trans %}Suggest inital answers:{% endtrans %}</p>
     <div id="answers_form_div">
@@ -140,7 +140,7 @@
     <p>{% trans %}You're done!{% endtrans %}</p>
     <div class="results_card" style="max-width:60%;padding:15px;">
             <div style="font-size: 130%;margin-bottom:10px;">${question_text}</div>
-            <div style="font-size:90%;color:#555555;font-style:italic;">${question_desc}</div>
+            <div class="question_desc">${question_desc}</div>
     </div>
 
     <p>{% trans %}Your question's URL is:{% endtrans %} <a target="_top" href="{{BASE_URL}}/q${question_key_name}">{{BASE_URL}}/q${question_key_name}</a></p>
@@ -154,7 +154,7 @@
 
     <div class="question_card" style="max-width:80%;padding:15px;">
             <div style="font-size: 130%;margin-bottom:10px;">${question_text}</div>
-            <div style="font-size:90%;color:#555555;font-style:italic;">${question_desc}</div>
+            <div class="question_desc">${question_desc}</div>
     </div>
 
     <div class="author_link" style="margin-bottom:10px;"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans %}by{% endtrans %} ${owner_name}</a></div>
@@ -264,7 +264,7 @@
 <div> 
     <div class="question_card" style="max-width:80%;padding:15px;">
         <div style="font-size: 130%;margin-bottom:10px;">${question_text}</div>
-        <div style="font-size:90%;color:#555555;font-style:italic;">${question_desc}</div>
+        <div class="question_desc">${question_desc}</div>
     </div>
     <div class="author_link" style="margin-bottom:10px;"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans %}by{% endtrans %} ${owner_name}</a></div>
 

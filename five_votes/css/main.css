@@ -519,4 +519,6 @@ opacity: 1.0;
 .rec_q_link A:hover {text-decoration:underline;}  /* mouse over link */
 
 
-
+.question_desc {
+    font-size:90%;color:#555555;font-style:italic;
+}
