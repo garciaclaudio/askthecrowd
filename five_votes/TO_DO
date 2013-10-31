@@ -175,25 +175,11 @@ Kind regards,
 Claudio García
 
 
-<IN PROGRESS (classifications)>
+<IN_PROGRESS (classifications)>
 
-[DONE]    Implement recent questions landing page. Make default...! add: recent questions blog-like page: created by Fulanito, from Tucumán, Argentina (photo, flag), by language, this can be the site's main landing page.
+    Agregar link a pagina del usuario, con el nombre del usuario (y su foto), en la esq. sup. der.
 
-        [Banderita] Esta es la pregunta? 
-                    Descripción
-
-
-    Remove comments side bar from questions page, move it to own page, add link to it from the footer.
-
-    Agregar link a pagina del usuario, con el nombre del usuario, en la esq. sup. der.
-
-    Mostrar fotos y videos en la pág de resultados.
-
-    Botón para reproducir todos los videos contenidos en la pág (cuando > 1 video en la pág).
-
-    Then, he is a member of his country's community. The Country's flag shows by the logo.
-
-</IN PROGRESS>
+</IN_PROGRESS>
 
 
 <bugs>
@@ -217,6 +203,7 @@ Claudio García
 == PUT LIVE ==
 
 <TODO (prioritize)>
+    *  Remove comments side bar from questions page, move it to own page, add link to it from the footer.
     * Agregar: "X número de respuestas, X número de votos" a preguntas recientes.
     *  Add setting the following at question creation time:.
        Category (from pinterest, modified: música, literatura, entretenimiento, etc.)
@@ -448,6 +435,7 @@ Nueva variante: [será bueno? quién sabe]
 
 
 <DONE>
+[DONE]    Implement recent questions landing page. Make default...! add: recent questions blog-like page: created by Fulanito, from Tucumán, Argentina (photo, flag), by language, this can be the site's main landing page.
 [DONE]  Make extended description show in results page, other pages where questions are displayed.
 [DONE]  Make answers be added in an auto-grow textarea. So long answers are possible.
 [DONE]  Implement: add extended description to question and to answers.

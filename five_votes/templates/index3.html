@@ -37,16 +37,10 @@
 {% include "templates/control.inc" %}
 
 <div id="app_logo">
-<div class="mytube"><a href="{{BASE_URL}}/" target="_top"><span id="logo_text"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans %}Five Votes{% endtrans %}</span></a></div>
+    <div class="mytube" style="float:left;"><a href="{{BASE_URL}}/" target="_top"><span id="logo_text"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans %}Five Votes{% endtrans %}</span></a></div>
+
+    <div class="mytube" style="float:right;"><a href="{{BASE_URL}}/u{{current_user.id}}" target="_top"><span id="logo_text" style="font-size:80%;font-style:normal;font-family:arial;">{% trans %}welcome{% endtrans %} {{current_user.name}}</span></a></div>
 </div>
-
-<p>
-
-<fb:login-button autologoutlink="true" scope="publish_stream"></fb:login-button>
-
-NAME? {{current_user.name}} <--
-
-</p>
 
 {% if question_page %}
 

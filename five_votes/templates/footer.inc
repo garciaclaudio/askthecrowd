@@ -20,6 +20,6 @@
         </select>
         </form>
     </div>
-    <div style="float:right;margin-top:9px;">{% trans %}Select your language{% endtrans %}:&nbsp;</div>
+    <div style="float:right;margin-top:9px;"> <fb:login-button autologoutlink="true" scope="publish_stream"></fb:login-button> {% trans %}Select your language{% endtrans %}:&nbsp;</div>
     </div>
   </div>
