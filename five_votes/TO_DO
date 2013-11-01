@@ -177,8 +177,6 @@ Claudio García
 
 <IN_PROGRESS (classifications)>
 
-    Agregar link a pagina del usuario, con el nombre del usuario (y su foto), en la esq. sup. der.
-
 </IN_PROGRESS>
 
 
@@ -200,9 +198,26 @@ Claudio García
 </FEATURE CREEP>
 
 
-== PUT LIVE ==
+[DONE] == PUT LIVE ==
 
 <TODO (prioritize)>
+    <focus question page>         (make more beautiful)
+        whirly thing not centered
+        vote link obstructed by count when no image
+        unaligned text and bad margins in header
+        question box too close to header
+        comments box too wide
+        "crea tus preguntas" links not pointing to add page
+        ugly footer alignment and styles
+        I liked input text better as answer box (instead of autogrow textarea).
+        "agregar imagen", "agregar video" looks ugly, make beautiful. After img added, video link must disappear.
+    </focus question page>
+    <focus results page>
+        Show videos
+        Show photos in correct aspect ratio
+        Sort questions by votes count, alphabetical
+    </focus results page>
+
     *  Remove comments side bar from questions page, move it to own page, add link to it from the footer.
     * Agregar: "X número de respuestas, X número de votos" a preguntas recientes.
     *  Add setting the following at question creation time:.
@@ -435,7 +450,8 @@ Nueva variante: [será bueno? quién sabe]
 
 
 <DONE>
-[DONE]    Implement recent questions landing page. Make default...! add: recent questions blog-like page: created by Fulanito, from Tucumán, Argentina (photo, flag), by language, this can be the site's main landing page.
+[DONE]  Agregar link a pagina del usuario, con el nombre del usuario (y su foto), en la esq. sup. der.
+[DONE]  Implement recent questions landing page. Make default...! add: recent questions blog-like page: created by Fulanito, from Tucumán, Argentina (photo, flag), by language, this can be the site's main landing page.
 [DONE]  Make extended description show in results page, other pages where questions are displayed.
 [DONE]  Make answers be added in an auto-grow textarea. So long answers are possible.
 [DONE]  Implement: add extended description to question and to answers.
