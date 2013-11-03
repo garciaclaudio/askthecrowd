@@ -224,7 +224,8 @@
 
         <div class="answer_text">${answer_text}</div>
 
-    <div id="whirly_${answer_key}" class="count_inset" style="display:none;"><img src="/images/loading.gif"></div>
+    <div id="whirly_${answer_key}" class="count_inset" style="display:none;"><div class="whirly_box"><img src="/images/loading.gif"></div></div>
+
     <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
 
     <div class="plus_vote_div">

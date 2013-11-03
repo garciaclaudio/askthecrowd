@@ -137,7 +137,7 @@ Vitrales
 
 Standup desk minimalist exercise system. Standup desk two step generator system. Some kind of lever, or pulley system that will make a generator spin when stepping on a surface. Two steps, one comes down, the other comes up. Weigh is put alternately on each side. The generated energy is put is stored in a battery, or what to do with it? Make it run a fan, or similar gadget. 
 
-Chocolates Héroes y Villanos (redondos o cuadrados, forrados de aluminio impreso, con Hidalgo, Juárez, Díaz, Santa Anna, Madero, Villa, Zapata, Moctezuma, Cortés, Cuauhtémoc, La Malinche, La Corregidora, Xavier Mina, Padre Mier). Poetas: Díaz  Mirón, Amado Nervo, López Velarde (que incluya poemas en el reverso del empaque). Iniciar negocio en México desde aquí en Holanda.
+Chocolates Héroes y Villanos (redondos o cuadrados, forrados de aluminio impreso, con Hidalgo, Juárez, Díaz, Santa Anna, Madero, Villa, Zapata, Moctezuma, Cortés, Cuauhtémoc, La Malinche, La Corregidora, Xavier Mina, Padre Mier). Poetas: Díaz  Mirón, Amado Nervo, López Velarde (que incluya poemas en el reverso del empaque). Iniciar negocio en México desde aquí en Holanda. Conseguir proveedor en Italia, exportar a México, Argentina?, Colombia, Brasil, etc..
 
 [DONE] ¡Terminar algo! Cambiar teclado de mini-laptop a Español, actualizar SO. http://www.itcsales.co.uk/acatalog/Contact_Us.html
 
@@ -156,6 +156,13 @@ Plan para resbaladerote en el westerpark con costales de yute o henequén. (http:
 Poster de compositores, con liga a "lo mejor de <compositor>" bajo cada foto, en cinco votos. Verdi, Puccini, etc.. Que sea gratis, de modo que sirva como vehículo publicitario para cincovotos.com. (http://www.onlineprinters.nl/Posters,-DIN-A0.htm?websale8=diedruckerei.06-aa&pi=PPLA040&ci=001827)
 
 Website (o pág en cincovotos): Bring Don Porfirio back (Plan para repatriar los restos de P. Díaz y ponerlos en un monumento en Reforma). Echar un rollo acerca de como, además de tirano, fue héroe.
+
+Curso de meditación en Booking
+
+Public speaking
+
+Socialism: directly transfer 30% of PIB to all citizens. (in Mex: a minimum guaranteed income of 3,000 USD per year)
+
 
 
 DISIPÁNDOTE POR COMPLETO
@@ -192,17 +199,12 @@ Claudio García
 3. Then continue.
 
 
-<FEATURE CREEP!>
-   Add "folders" directories, subdirectories, etc.
-   Can this be added later? YES
-</FEATURE CREEP>
-
-
 [DONE] == PUT LIVE ==
 
 <TODO (prioritize)>
+
     <focus question page>         (make more beautiful)
-        whirly thing not centered
+[DONE]        whirly thing not centered
         vote link obstructed by count when no image
         unaligned text and bad margins in header
         question box too close to header
@@ -212,11 +214,34 @@ Claudio García
         I liked input text better as answer box (instead of autogrow textarea).
         "agregar imagen", "agregar video" looks ugly, make beautiful. After img added, video link must disappear.
     </focus question page>
+
     <focus results page>
         Show videos
         Show photos in correct aspect ratio
         Sort questions by votes count, alphabetical
+        Add "my votes" tab, allow changing votes.
     </focus results page>
+
+    <music focus>
+        Music page:
+            Ask for:
+            Artist or Mix (multiple artists)
+               Artist name (if artist page)
+            Page name (optional if artist added)
+            genre (clásica, pop, rock, folk/regional, jazz) default pop
+            language (default usr's lang)
+            country (default usr's cc)
+        Allow users to add answers? (yes/no)
+        Add play all videos / play top 10 videos link (only on results page)
+    </music focus>
+
+    Artist directory page
+
+    <social_discovery>
+        Questions popular with your friends you haven't voted on (10 of your friends have voted on this question) (list, with friend names and pictures).
+        Questions you have voted on, but that have new votes from your friends
+    </social_discovery>
+
 
     *  Remove comments side bar from questions page, move it to own page, add link to it from the footer.
     * Agregar: "X número de respuestas, X número de votos" a preguntas recientes.
@@ -247,8 +272,14 @@ Claudio García
     [POSTP] * Show friend photos in results page.
     [POSTP]   * BUG: friends must be refreshed when users log in. This can be done every few weeks or so. Or via the real time api. See: http://developers.facebook.com/docs/samples/canvas/ (real time updates).
     [POSTP] * Offer users to notify them when voters vote on their question (once per day or so, by FB post). They need to grant additional permissions for this.
-    [POSTP]    * Show "welcome Claudio" in white in the header, centered, when a user is logged in, with pic.
+    [DONE]    * Show "welcome Claudio" in white in the header, centered, when a user is logged in, with pic.
 </POSTP>
+
+<FEATURE CREEP!>
+   Add "folders" directories, subdirectories, etc.
+   Can this be added later? YES
+</FEATURE CREEP>
+
 
 
 Implement landing pages (recent questions, LATER: popular questions, index (by classification) ).
