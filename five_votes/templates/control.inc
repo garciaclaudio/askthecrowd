@@ -302,22 +302,22 @@ function show_created_question(data) {
 
 function update_votes_header( votes_left ) {
     if( votes_left == 0 ) {
-       $('#logo_text').html('<div class="mytube">{% trans %}Zero Votes{% endtrans %}</div>');
+       $('#logo_text').html('{% trans %}Zero Votes{% endtrans %}');
     }
     else if( votes_left == 1 ) {
-       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;</span> {% trans %}One Vote{% endtrans %}</div>');
+       $('#logo_text').html('<span style="color:red;">&#10003;</span> {% trans %}One Vote{% endtrans %}');
     }
     else if( votes_left == 2 ) {
-       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;</span> {% trans %}Two Votes{% endtrans %} <span style="color:red;">&#10003;</span> </div>');
+       $('#logo_text').html('<span style="color:red;">&#10003;</span> {% trans %}Two Votes{% endtrans %} <span style="color:red;">&#10003;</span>');
     }
     else if( votes_left == 3 ) {
-       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;</span> {% trans %}Three Votes{% endtrans %} <span style="color:red;">&#10003;</span> </div>');
+       $('#logo_text').html('<span style="color:red;">&#10003;&#10003;</span> {% trans %}Three Votes{% endtrans %} <span style="color:red;">&#10003;</span>');
     }
      else if( votes_left == 4 ) {
-       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;</span> {% trans %}Four Votes{% endtrans %} <span style="color:red;">&#10003;&#10003;</span> </div>');
+       $('#logo_text').html('<span style="color:red;">&#10003;&#10003;</span> {% trans %}Four Votes{% endtrans %} <span style="color:red;">&#10003;&#10003;</span>');
     }
      else if( votes_left == 5 ) {
-       $('#logo_text').html('<div class="mytube"><span style="color:red;">&#10003;&#10003;&#10003;</span> {% trans %}Five Votes{% endtrans %} <span style="color:red;">&#10003;&#10003;</span> </div>');
+       $('#logo_text').html('<span style="color:red;">&#10003;&#10003;&#10003;</span> {% trans %}Five Votes{% endtrans %} <span style="color:red;">&#10003;&#10003;</span>');
     }
 }
 

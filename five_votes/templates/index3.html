@@ -39,7 +39,7 @@
 <div id="app_logo">
     <div class="mytube" style="float:left;"><a href="{{BASE_URL}}/" target="_top"><span id="logo_text"><span style="color:red;">&#10003;&#10003;&#10003;&#10003;&#10003;</span> {% trans %}Five Votes{% endtrans %}</span></a></div>
 
-    <div class="mytube" style="float:right;"><a href="{{BASE_URL}}/u{{current_user.id}}" target="_top"><span id="logo_text" style="font-size:80%;font-style:normal;font-family:arial;">{% trans %}welcome{% endtrans %} {{current_user.name}}</span></a></div>
+    <div class="mytube" style="float:right;"><a href="{{BASE_URL}}/u{{current_user.id}}" target="_top"><span style="font-size:80%;font-style:normal;font-family:arial;">{% trans %}welcome{% endtrans %} {{current_user.name}}</span></a></div>
 </div>
 
 {% if question_page %}

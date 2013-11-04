@@ -205,8 +205,8 @@ Claudio García
 
     <focus question page>         (make more beautiful)
 [DONE]        whirly thing not centered
-        vote link obstructed by count when no image
-        unaligned text and bad margins in header
+[DONE]        vote link obstructed by count when no image
+[DONE]        unaligned text and bad margins in header
         question box too close to header
         comments box too wide
         "crea tus preguntas" links not pointing to add page
