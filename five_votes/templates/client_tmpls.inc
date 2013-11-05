@@ -152,7 +152,7 @@
 
 <script id="answer_question_tmpl" type="text/html">
 
-    <div class="question_card" style="max-width:80%;padding:15px;">
+    <div class="question_card" style="max-width:80%;padding-top:10px;">
             <div style="font-size: 130%;margin-bottom:10px;">${question_text}</div>
             <div class="question_desc">${question_desc}</div>
     </div>
@@ -182,9 +182,6 @@
          </form>
       </div>
     </div>
-
-<br />
-
 
     <div id="see_results_div" style="clear:both;display:none;padding-bottom:20px;">
         <button id="see_results_button" class="my_button">{% trans %}See results{% endtrans %}</button>
