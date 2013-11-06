@@ -1,8 +1,8 @@
 <div id="usr_page_div">
 
-<p>
-<img src="{{user.picture}}">
-</p>
+<img src="http://graph.facebook.com/{{user.id}}/picture?type=square"><BR />
+<fb:login-button autologoutlink="true" scope="publish_stream"></fb:login-button>
+
     {% if num_questions %}
 <h4>{% trans %}Questions by{% endtrans %} {{user.name}}</h4>
       {% for q in questions %}

@@ -8,8 +8,8 @@
 
 </div>
 
-<div class="vote_link add_ans_class add_ans_link">
+<div class="vote_link add_ans_class add_ans_link" style="margin-bottom:20px;">
     <div class="mytube">
-       <a href="{{BASE_URL}}" target="_top">{% trans %}Create your own questions!{% endtrans %}</a>
+       <a href="{{BASE_URL}}/add" target="_top">{% trans %}Create your own questions!{% endtrans %}</a>
     </div>
 </div>

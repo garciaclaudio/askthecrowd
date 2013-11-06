@@ -207,8 +207,8 @@ Claudio García
 [DONE]        unaligned text and bad margins in header
 [DONE]        question box too close to header
 [DONE]        comments box too wide
-        "crea tus preguntas" links not pointing to add page
-        ugly footer alignment and styles
+[DONE]        "crea tus preguntas" links not pointing to add page
+[DONE]        ugly footer alignment and styles
         I liked input text better as answer box (instead of autogrow textarea).
         "agregar imagen", "agregar video" looks ugly, make beautiful. After img added, video link must disappear.
     </focus question page>
