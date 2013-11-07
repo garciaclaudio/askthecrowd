@@ -1,4 +1,13 @@
 
+<para El Norte>
+
+    Permitir comentarios con cuenta de FB (incluso en columnas) Darles prioridad.
+ 
+
+
+</para El Norte>
+
+
 Estimado Jorge,
 
 Gracias por un buen artículo hoy en El Norte. Te sugiero una sexta idea que podría obviar la necesidad de un segundo aeropuerto en el D.F.: Una red de trenes de alta velocidad, conectando las 100 principales ciudades mexicanas. Diseñado y construído en México por ingenieros mexicanos. La marca México debería incluir esa faceta nuestra, la de ser un país de Ingenieros.
@@ -209,8 +218,9 @@ Claudio García
 [DONE]        comments box too wide
 [DONE]        "crea tus preguntas" links not pointing to add page
 [DONE]        ugly footer alignment and styles
-        I liked input text better as answer box (instead of autogrow textarea).
         "agregar imagen", "agregar video" looks ugly, make beautiful. After img added, video link must disappear.
+        make images be margin-less, like pinterest
+        X for deleting answers could look a little nicer
     </focus question page>
 
     <focus results page>
@@ -265,6 +275,7 @@ Claudio García
 
 
 <POSTP>
+    [POSTP] I liked input text better as answer box (instead of autogrow textarea). But this allows larger answers. POSTP.
     [POSTP]    * After voting for one question, show other questions the user may be interested in, not answered yet (from friends / same lang / all ). Use summary table for popular questions landing page.
     [POSTP]    * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
     [POSTP] * Show friend photos in results page.
