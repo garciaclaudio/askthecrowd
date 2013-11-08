@@ -508,6 +508,8 @@ qq.FileUploader = function(o){
         listElement: null,
                 
         template: '<div class="qq-uploader">' + 
+//
+// CG: no upload area needed (only takes up space)
                 '<div class="qq-upload-drop-area"><span>Drop files here to upload</span></div>' +
                 '<a href="#" class="qq-upload-button">' + this._options.uploadText + '</a>' +
                 '<ul class="qq-upload-list"></ul>' + 

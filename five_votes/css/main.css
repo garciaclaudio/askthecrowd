@@ -538,3 +538,12 @@ opacity: 1.0;
 }
 
 
+
+.video_link {
+  font-size: 0.8em;
+}
+
+a.video_link:link {color:#0000FF; text-decoration:none;}      /* unvisited link */
+a.video_link:visited {color:#0000FF;}  /* visited link */
+a.video_link:hover {text-decoration:underline;}  /* mouse over link */
+
