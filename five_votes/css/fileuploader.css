@@ -1,19 +1,19 @@
 .qq-uploader { position:relative; width: 100%;}
 
 .qq-upload-button {
-    display:block; 
-    text-align:center; 
-    text-decoration:none;
+/*    display:block;  */
+/*    text-align:center;  */
+/*    text-decoration:none; */
     font-size: 0.8em;
     color:#0000FF;
 /*    width: 105px; padding: 7px 0;  */
 /*    background:#880000; border-bottom:1px solid #ddd;color:#fff; */
 }
 
-.qq-upload-button A:link {color:#0000FF;text-decoration:none;}     /* unvisited link */
-.qq-upload-button A:visited {color:#0000FF;text-decoration:none;}  /* visited link */
-.qq-upload-button A:hover {text-decoration:underline;}             /* mouse over link */
-.qq-upload-button-hover {text-decoration:underline;}
+a.qq-upload-button:link {color:#0000FF;text-decoration:none;}     /* unvisited link */
+a.qq-upload-button:visited {color:#0000FF;text-decoration:none;}  /* visited link */
+a.qq-upload-button:hover {text-decoration:underline;}             /* mouse over link */
+
 
 /*
 .qq-upload-button-focus {outline:1px dotted black;}

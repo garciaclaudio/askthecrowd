@@ -54,6 +54,7 @@ function bind_delete_and_uploader(data) {
                 element: document.getElementById('file_uploader_' + data.answer_key),
                 action: '/ajax.html',
                 debug: true,
+                multiple: false,
                 sizeLimit: 2*2088576, // 4 MB
                 uploadText: '{% trans %}add picture{% endtrans %}',
                 allowedExtensions: ['jpg', 'jpeg', 'gif', 'png'],
@@ -66,7 +67,6 @@ function bind_delete_and_uploader(data) {
                         $(window).scrollTop($('#picture_' + data.answer_key ).offset().top - 100);
                        $('#answer_' + data.answer_key).parent().masonry({itemSelector: '.answer_card', isFitWidth: true
                         });
-
                     }
                     img.src = "image?answer_key=" + data.answer_key;
 
