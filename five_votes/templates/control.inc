@@ -58,10 +58,11 @@ function bind_delete_and_uploader(data) {
                 sizeLimit: 2*2088576, // 4 MB
                 uploadText: '{% trans %}add picture{% endtrans %}',
                 allowedExtensions: ['jpg', 'jpeg', 'gif', 'png'],
-                onSubmit: function(id, file_name){
-                   alert('id: ' + id + ' name: ' + file_name );
-                },
+//                onSubmit: function(id, file_name){
+//                   alert('id: ' + id + ' name: ' + file_name );
+//                },
                 onComplete: function(id, file_name, data){
+                    $('#add_video_link_' + data.answer_key).remove();
                     $('#file_uploader_' + data.answer_key).remove();
                     $('#picture_' + data.answer_key).html( $("#show_pic_tmpl").tmpl({'answer_key': data.answer_key} ));
                     // pic uploaded, do a masonry reload when the image is loaded!

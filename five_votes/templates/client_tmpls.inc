@@ -225,30 +225,31 @@
 
     <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
 
-    <div class="plus_vote_div">
-        <form method="post" id="plus_vote_form_${answer_key}" action="/ajax.html">
-            <input type="hidden" name="answer_key" value="${answer_key}">
-            <input type="hidden" name="action" value="vote">
-            <input type="hidden" name="vote_val" value="1">
-            <span class="vote_link"><a href="#" onclick="$('#plus_vote_form_${answer_key}').submit();return false;">{% trans %}vote{% endtrans %}</a></span>
-       </form>
-   </div>
 
-    <div id="minus_vote_link_${answer_key}" class="minus_vote_div">
-        <form method="post" id="minus_vote_form_${answer_key}" action="/ajax.html">
-            <input type="hidden" name="answer_key" value="${answer_key}">
-            <input type="hidden" name="action" value="vote">
-            <input type="hidden" name="vote_val" value="-1">
-<span class="vote_link"><a href="#" onclick="$('#minus_vote_form_${answer_key}').submit();return false;">{% trans %}unvote{% endtrans %}</a>
-       </form>
-   </div>
+    {{ "{{html by_link}" }}}
 
+    <div style="clear:both;">
+        <div class="plus_vote_div">
+            <form method="post" id="plus_vote_form_${answer_key}" action="/ajax.html">
+                <input type="hidden" name="answer_key" value="${answer_key}">
+                <input type="hidden" name="action" value="vote">
+                <input type="hidden" name="vote_val" value="1">
+                <span class="vote_link"><a href="#" onclick="$('#plus_vote_form_${answer_key}').submit();return false;">{% trans %}vote{% endtrans %}</a></span>
+           </form>
+       </div>
+
+        <div id="minus_vote_link_${answer_key}" class="minus_vote_div">
+            <form method="post" id="minus_vote_form_${answer_key}" action="/ajax.html">
+                <input type="hidden" name="answer_key" value="${answer_key}">
+                <input type="hidden" name="action" value="vote">
+                <input type="hidden" name="vote_val" value="-1">
+    <span class="vote_link"><a href="#" onclick="$('#minus_vote_form_${answer_key}').submit();return false;">{% trans %}unvote{% endtrans %}</a>
+           </form>
+       </div>
+   </div>
 <!--   <div class="author_link comment_div"><a href="#" answer_id="${answer_id}">{% trans %}comment{% endtrans %}</a></div><div><img style="width:15%;" src="http://fbcdn-profile-a.akamaihd.net/hprofile-ak-prn1/41650_518261219_2789_q.jpg"> <textarea name="comment_text" rows=2 style="width:80%"></textarea> -->
 
 </div>
-
-
-{{ "{{html by_link}" }}}
 
   </div>
 
@@ -351,25 +352,28 @@
         </div>
     <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
 
-    <div class="plus_vote_div">
-        <form method="post" id="plus_vote_form_${answer_key}" action="/ajax.html">
-            <input type="hidden" name="answer_key" value="${answer_key}">
-            <input type="hidden" name="action" value="vote">
-            <input type="hidden" name="vote_val" value="1">
-<span class="vote_link"><a href="#" onclick="$('#plus_vote_form_${answer_key}').submit();return false;">{% trans %}vote{% endtrans %}</a>
-       </form>
-   </div>
-
-    <div id="minus_vote_link_${answer_key}" class="minus_vote_div">
-        <form method="post" id="minus_vote_form_${answer_key}" action="/ajax.html">
-            <input type="hidden" name="answer_key" value="${answer_key}">
-            <input type="hidden" name="action" value="vote">
-            <input type="hidden" name="vote_val" value="-1">
-<span class="vote_link"><a href="#" onclick="$('#minus_vote_form_${answer_key}').submit();return false;">{% trans %}unvote{% endtrans %}</a>
-       </form>
-   </div>
-
     <div class="author_link"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans %}by{% endtrans %} ${owner_name}</a></div>
+
+    <div style="clear:both;">
+        <div class="plus_vote_div">
+            <form method="post" id="plus_vote_form_${answer_key}" action="/ajax.html">
+                <input type="hidden" name="answer_key" value="${answer_key}">
+                <input type="hidden" name="action" value="vote">
+                <input type="hidden" name="vote_val" value="1">
+    <span class="vote_link"><a href="#" onclick="$('#plus_vote_form_${answer_key}').submit();return false;">{% trans %}vote{% endtrans %}</a>
+           </form>
+       </div>
+
+        <div id="minus_vote_link_${answer_key}" class="minus_vote_div">
+            <form method="post" id="minus_vote_form_${answer_key}" action="/ajax.html">
+                <input type="hidden" name="answer_key" value="${answer_key}">
+                <input type="hidden" name="action" value="vote">
+                <input type="hidden" name="vote_val" value="-1">
+    <span class="vote_link"><a href="#" onclick="$('#minus_vote_form_${answer_key}').submit();return false;">{% trans %}unvote{% endtrans %}</a>
+           </form>
+       </div>
+   </div>
+
 
   </div>
 
