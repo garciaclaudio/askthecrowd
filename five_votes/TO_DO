@@ -175,9 +175,9 @@ Sistema contra secuestro (y otros delitos graves): Recompensas anónimas en tarje
 
 Regadera recicla-agua caliente.
 
-Olla térmicamente aislada para ahorro de energía. Un cilindro aislado en las paredes y con una pieza de hierro vaciado (o piedra) en la base para almacenar energía. Una base separada, aislada. Una tapa superior aislada. Se usa como una olla normal. Cuando el contenido hierve, se remueve de fuego y se pone sobre la base aislada y se abrocha. La tapa también se abrocha. Si conserva una temperatura > 80C por 5 horas, ya está. NUEVO DISEÑO: Un tortillero de poliestireno, con una olla interna y una resistencia de inmersión que mantenga el contenido a 80-90C (y que se apague automáticamente al evaporarse el agua). Seguramente consumiría mucha menos energía que una olla en la estufa. 
+Olla térmicamente aislada para ahorro de energía. Un cilindro aislado en las paredes y con una pieza de hierro vaciado (o piedra) en la base para almacenar energía. Una base separada, aislada. Una tapa superior aislada. Se usa como una olla normal. Cuando el contenido hierve, se remueve de fuego y se pone sobre la base aislada y se abrocha. La tapa también se abrocha. Si conserva una temperatura > 80C por 5 horas, ya está. NUEVO DISEÑO: Un "tortillerote" de poliestireno expandido, con una olla interna y una resistencia de inmersión que mantenga el contenido a 80-90C (y que se apague automáticamente al evaporarse el agua). Seguramente consumiría mucha menos energía que una olla en la estufa.  (see: http://achfoam.com/FabricatedEPS.aspx) Calcular: cuanto se ahorraría por uso por año (si la olla se usa para cocer frijoles 2 o 3 veces por semana, por ejemplo).  GAS: 0.64 EUR / m3
 
-
+Consumo de gas: 0.15 m3 per hour. Cocer frijoles: 3 horas, 0.5 m3 = 30 eurocents = 
 
 
 
@@ -230,15 +230,14 @@ Claudio García
 [DONE]        ugly footer alignment and styles
 [DONE]        "agregar imagen", "agregar video" looks ugly, make beautiful. After img added, video link must disappear.
 [DONE]        BUG: "by Claudio Garcia" in answers added in questions page is shifted after unvote link appears.
-        make images be margin-less, like pinterest
-        X for deleting answers could look a little nicer
     </focus question page>
 
     <focus results page>
         Show videos
         Show photos in correct aspect ratio
         Sort questions by votes count, alphabetical
-        Add "my votes" tab, allow changing votes.
+        Add "my votes" tab
+        Allow changing votes.
     </focus results page>
 
     <music focus>
@@ -286,6 +285,8 @@ Claudio García
 
 
 <POSTP>
+    [POSTP]        make images be margin-less, like pinterest
+    [POSTP]        X for deleting answers could look a little nicer
     [POSTP] I liked input text better as answer box (instead of autogrow textarea). But this allows larger answers. POSTP.
     [POSTP]    * After voting for one question, show other questions the user may be interested in, not answered yet (from friends / same lang / all ). Use summary table for popular questions landing page.
     [POSTP]    * Show whirly "wait" thing after show-results (and post-to-fb feed dialog) is pressed.
@@ -310,6 +311,10 @@ NEW IDEAS: Office/church/neighborhood barter, loan exchange for all sorts of goo
 Soderos: ¿Cual es la mejor canción de Cerati / Soda Stereo?
 
 Soderos: Todos los álbumes de Soda / Cerati. ¿Botón para marcar un video como inservible?
+
+Los peores dictadores de la historia (votos negativos, implementar, "tomatazos").
+
+Las mejores canciones infantiles.
 
 <adding videos>
 
