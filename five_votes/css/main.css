@@ -249,6 +249,7 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 .results_card {
   background-color: #e5f6fd;
   border: 1px solid #b3e7fa;
+  position: relative;
     margin:5px;
     padding:0px;
     text-align: left;
@@ -442,6 +443,14 @@ margin: 7px; /*Margins for inner DIV inside each column (to provide padding)*/
   position:absolute;top:22px;right:65px;"
   display:table-cell;
 }
+
+.results_play_inset {
+  display:none;
+  padding:2px;
+  position:absolute;top:22px;right:251px;"
+  display:table-cell;
+}
+
 
 a.play_inset_link img {
 filter:alpha(opacity=50);

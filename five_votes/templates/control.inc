@@ -375,6 +375,17 @@ function show_data( data, results ) {
             'num_votes' : num_votes,
          }));
 
+        if(ans.video_id != 'None') {
+
+            $('#picture_' + ans.answer_key ).html( $("#show_video_tmpl").tmpl({'answer_key': ans.answer_key, 'video_id':ans.video_id}));
+                             $('#play_button_' + ans.answer_key ).show();
+            $('#play_button_' + ans.answer_key + ' > a').attr('video_id', ans.video_id);
+            $('#play_button_' + ans.answer_key + ' > a').click(  function() { 
+                var vid_id = $(this).attr('video_id');
+                $('#video_link_' + vid_id).trigger('click');
+            });
+        }
+
         if( ans.has_pic ) {
            $('#picture_' + ans.answer_key ).html( $("#show_result_pic_tmpl").tmpl({'answer_key': ans.answer_key}));
         }               

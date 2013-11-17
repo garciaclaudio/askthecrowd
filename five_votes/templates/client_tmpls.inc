@@ -285,15 +285,17 @@
 
 <script id="show_answer_for_results_tmpl" type="text/html">
   <div class="results_card" id="answer_${answer_key}">
-      <div class="results_count_text">${num_votes} &#10003;</div>
-      <div class="results_pic" id="picture_${answer_key}"></div>
-      <div class="results_text">${answer_text}</div>
+          <div class="results_count_text">${num_votes} &#10003;</div>
+          <div class="results_pic" id="picture_${answer_key}"></div>
+          <div id="play_button_${answer_key}" class="results_play_inset" style="display:none;"><a class="play_inset_link"><img src="/images/play_button_small.png"></a></div> 
+
+          <div class="results_text">${answer_text}</div>
   </div><br />
 </script>
 
 
 <script id="show_result_pic_tmpl" type="text/html">
-<img class="answer_picture" width="100" height="100" src="image?answer_key=${answer_key}">
+<img class="answer_picture" src="image?answer_key=${answer_key}">
 </script>
 
 
