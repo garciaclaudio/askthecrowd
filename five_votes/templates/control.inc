@@ -342,9 +342,14 @@ function show_votes( answer_key, num_votes ) {
 }
 
 
-function dynamicSort(property) {
+function dynamicSort(ans_hash) {
     return function (a,b) {
-        return (b[property] < a[property]) ? -1 : (b[property] > a[property]) ? 1 : 0;
+
+        ans_txt_b = ans_hash[ b[0] ].answer_text;
+        ans_txt_a = ans_hash[ a[0] ].answer_text;
+
+        return (b[1] < a[1]) ? -1 : (b[1] > a[1]) ? 1 : 
+               (ans_txt_b < ans_txt_a) ? -1 : (ans_txt_b > ans_txt_a) ? 1 : 0;
     }
 }
 
@@ -362,7 +367,7 @@ function show_data( data, results ) {
 
     $('#result_answers_div').html('');
 
-    results.sort(dynamicSort(1));
+    results.sort( dynamicSort(data.answers_hash) );
 
     for (var i = 0; i < results.length; i++) {
         ans_key = results[i][0];
