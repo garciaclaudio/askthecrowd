@@ -117,8 +117,23 @@
         <form id="question_form" action="/ajax.html" method="get">
               <input type="hidden" name="action" value="create_question">
 
-<div style="text-align:center;"><strong>{% trans %}Create a question{% endtrans %}</strong></div>
+              <div style="text-align:center;"><strong>{% trans %}Create a page{% endtrans %}</strong></div>
+              <p>
+                  <select id="page_type_select" >
+                      <option>{%trans%}Question page{%endtrans%}</option>
+                      <option>{%trans%}Music page{%endtrans%}</option>
+                  </select>
+              </p>
 
+              <p style="">
+
+                 {%trans%}Artist or mix?{%endtrans%}
+
+                  <select id="artixt_or_mix_select" >
+                      <option>{%trans%}One artist{%endtrans%}</option>
+                      <option>{%trans%}Mix (videos from more than one artist){%endtrans%}</option>
+                  </select>
+              </p>
 
               <p>{% trans %}Question:{% endtrans %}<input name="question" id="question" type="text" style="width:100%"></p>
 

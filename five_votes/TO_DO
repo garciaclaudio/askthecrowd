@@ -280,12 +280,13 @@ Claudio García
     <focus results page>
 [DONE]        Show videos
 [DONE]        Show photos in correct aspect ratio
-        Sort questions by votes count, alphabetical
+[DONE]        Sort questions by votes count, alphabetical
 [POSTP]        Allow changing votes.
     </focus results page>
 
     <music focus>
-        Music page:
+        (THIS IS THE LAST THING I IMPLEMENT, BEFORE PUTTING LIVE)
+        Music videos page:
             Ask for:
             Artist or Mix (multiple artists)
                Artist name (if artist page)
@@ -294,8 +295,20 @@ Claudio García
             language (default usr's lang)
             country (default usr's cc)
         Allow users to add answers? (yes/no)
+
         Add play all videos / play top 10 videos link (only on results page)
+
+        Keep track of country-genre counts for index display (a summary table).
+
+        Add Music landing page.
+           1st version: it's a datatables table.
+           for later: in-page selectors (cc, genre) allow for filtering away data in the table
+           (these selectors get created from the country-genre summary table.
+
     </music focus>
+
+
+    Classifications are missing in Youtube.
 
     Artist directory page
 
@@ -303,7 +316,6 @@ Claudio García
         Questions popular with your friends you haven't voted on (10 of your friends have voted on this question) (list, with friend names and pictures).
         Questions you have voted on, but that have new votes from your friends
     </social_discovery>
-
 
     *  Remove comments side bar from questions page, move it to own page, add link to it from the footer.
     * Agregar: "X número de respuestas, X número de votos" a preguntas recientes.
