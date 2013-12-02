@@ -292,7 +292,7 @@ Claudio García
                Artist name (if artist page)
             Page name (optional if artist added)
             genre (clásica, pop, rock, folk/regional, jazz) default pop
-            language (default usr's lang)
+[NOPE]      language (default usr's lang)
             country (default usr's cc)
         Allow users to add answers? (yes/no)
 
@@ -307,6 +307,11 @@ Claudio García
 
     </music focus>
 
+    <proyecto: "las canciones mas famosas de mi país">
+        Landing page. Comisionar personas en cada país del mundo para seleccionar las canciones.
+        Iberoamérica.
+        
+    </proyecto: "las canciones mas famosas de mi país">
 
     Classifications are missing in Youtube.
 
