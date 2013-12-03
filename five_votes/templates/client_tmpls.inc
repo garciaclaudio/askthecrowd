@@ -153,6 +153,10 @@
               <p style="">
                  {%trans%}Country:{%endtrans%}<br/>
                   <select name="music_cc" id="music_country_select">
+{% for cc1 in countries %}
+                     <option>{{cc1}}</option>
+{% endfor %}
+
                      <option>{%trans%}Select{%endtrans%}</option>
                   </select>
               </p>

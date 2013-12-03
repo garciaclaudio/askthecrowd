@@ -546,7 +546,11 @@ class MainPage2(BaseHandler2):
         pprint.pprint( self.current_user, sys.stderr);
         print >> sys.stderr, '############ CURR USR2'
 
+        global country_data
+        read_cc_data()
+
         self.render(u'index3',
+                    countries = country_data['countries'].keys(),
                     main_page=1,
                     user_name=user_name)
     def post(self):
