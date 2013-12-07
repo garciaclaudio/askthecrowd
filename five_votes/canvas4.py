@@ -551,7 +551,9 @@ class MainPage2(BaseHandler2):
 
         self.render(u'index3',
                     countries = country_data['countries'].keys(),
+                    country_data = country_data,
                     main_page=1,
+                    user=self.current_user,
                     user_name=user_name)
     def post(self):
         self.get()

@@ -126,41 +126,40 @@
                   </select>
               </p>
 
-              <p style="">
-                 {%trans%}Artist or mix?{%endtrans%}<br/>
-                  <select id="artixt_or_mix_select" >
-                      <option>{%trans%}One artist{%endtrans%}</option>
-                      <option>{%trans%}Mix (videos from more than one artist){%endtrans%}</option>
-                  </select>
-              </p>
-
-              <p style="">
-                 {%trans%}Page name (optional):{%endtrans%}<br/>
-                 {%trans%}Page name:{%endtrans%}<br/>
-                 <input name="page_name" id="page_name" type="text" style="width:100%">
-              </p>
-
-              <p style="">
-                 {%trans%}Genre:{%endtrans%}<br/>
-                  <select id="genre" >
-                      <option>{%trans%}Select{%endtrans%}</option>
-                      <option>{%trans%}Pop{%endtrans%}</option>
-                      <option>{%trans%}Classical{%endtrans%}</option>
-                      <option>{%trans%}Other{%endtrans%}</option>
-                  </select>
-              </p>
-
-              <p style="">
-                 {%trans%}Country:{%endtrans%}<br/>
-                  <select name="music_cc" id="music_country_select">
-{% for cc1 in countries %}
-                     <option>{{cc1}}</option>
-{% endfor %}
-
-                     <option>{%trans%}Select{%endtrans%}</option>
-                  </select>
-              </p>
-
+              <div id="music_section" style="display:none;">
+                  <p style="">
+                     {%trans%}Artist or mix?{%endtrans%}<br/>
+                      <select id="artixt_or_mix_select" >
+                          <option>{%trans%}One artist{%endtrans%}</option>
+                          <option>{%trans%}Mix (videos from more than one artist){%endtrans%}</option>
+                      </select>
+                  </p>
+    
+                  <p style="">
+                     {%trans%}Page name (optional):{%endtrans%}<br/>
+                     {%trans%}Page name:{%endtrans%}<br/>
+                     <input name="page_name" id="page_name" type="text" style="width:100%">
+                  </p>
+    
+                  <p style="">
+                     {%trans%}Genre:{%endtrans%}<br/>
+                      <select id="genre" >
+                          <option>{%trans%}Select{%endtrans%}</option>
+                          <option>{%trans%}Pop{%endtrans%}</option>
+                          <option>{%trans%}Classical{%endtrans%}</option>
+                          <option>{%trans%}Other{%endtrans%}</option>
+                      </select>
+                  </p>
+    
+                  <p style="">
+                     {%trans%}Country:{%endtrans%}<br/>
+                      <select name="music_cc" id="music_country_select">
+                         {% for cc1 in countries %}
+                             <option cc1 {% if cc1 == user['cc1'] %}selected{% endif %}>{{country_data['countries'][cc1]}}</option>
+                         {% endfor %}
+                      </select>
+                  </p>
+              </div> <!-- music_section -->    
 
               <p>{% trans %}Question:{% endtrans %}<input name="question" id="question" type="text" style="width:100%"></p>
 

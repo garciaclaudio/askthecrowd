@@ -193,6 +193,9 @@ function get_and_display_user_questions() {
 function show_new_question() {
     $('#main_container').html( $("#new_question_tmpl").tmpl({}));
     $('#main_container').fadeIn('fast');
+
+    $('#page_type_select').on('change', function() { alert('here I am, toggle music_section'); } );
+
     $('#question_form').ajaxForm({
          dataType:  'json', 
          success: function(data) { 
