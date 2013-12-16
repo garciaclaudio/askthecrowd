@@ -1,5 +1,7 @@
 
 
+
+
 From: http://www.entrepreneur.com/article/229813
 
 Small-business owners waste their time on what I call $10 an hour work, like running to get office supplies. Meanwhile, they forgo the activities that earn $1,000 an hour, such as sending the right email to the right person, or negotiating a lucrative contract, or convincing a client to do more business with you.
@@ -285,6 +287,8 @@ Claudio García
 [NOPE]      language (default usr's lang)
             country (default usr's cc)
         Allow users to add answers? (yes/no)
+
+        Allow links, so that clickable answer names take you to a new board (to create a 100 composers page linking to composer pages).
 
         Add play all videos / play top 10 videos link (only on results page)
 

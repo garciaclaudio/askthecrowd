@@ -205,6 +205,10 @@ class Question(db.Model):
     question_text = db.StringProperty()
     question_desc = db.StringProperty(multiline=True)
     language_code = db.StringProperty()
+    question_type = db.IntegerProperty()
+    genre = db.StringProperty()
+    music_cc = db.StringProperty()
+    is_mix = db.IntegerProperty()
 
     def owner(self):
         return User.gql(u'WHERE id = :1', self.user_id).fetch(1)[0]
@@ -618,9 +622,16 @@ class AjaxHandler(BaseHandler2):
     def handle_new_question(self):
         question_text =  sanitize_html( self.request.get('question') )
         question_desc =  sanitize_html( self.request.get('question_desc') )
+        page_type = self.request.get('page_type')
         error = ''
+
+        if page_type == "music_page":
+            genre = self.request.get('genre')
+            if genre == "missing":
+                error = '* ' + _("Music genre cannot be empty.") + ' '
+
         if question_text == "":
-            error = '* ' + _("Question text cannot be empty.");
+            error = error + '* ' + _("Question text cannot be empty.");
         if error:
             result = { 'error' : error }
         else:

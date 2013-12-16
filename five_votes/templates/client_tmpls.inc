@@ -120,34 +120,28 @@
               <div style="text-align:center;"><strong>{% trans %}Create a page{% endtrans %}</strong></div>
               <p>
                  {%trans%}Page type:{%endtrans%}<br/>
-                  <select id="page_type_select" >
-                      <option>{%trans%}Question page{%endtrans%}</option>
-                      <option>{%trans%}Music page{%endtrans%}</option>
+                  <select id="page_type_select" name="page_type">
+                      <option value="question_page" selected>{%trans%}Question page{%endtrans%}</option>
+                      <option value="music_page">{%trans%}Music videos page{%endtrans%}</option>
                   </select>
               </p>
 
               <div id="music_section" style="display:none;">
-                  <p style="">
+                  <p>
                      {%trans%}Artist or mix?{%endtrans%}<br/>
-                      <select id="artixt_or_mix_select" >
+                      <select id="artist_or_mix_select" name="artist_or_mix">
                           <option>{%trans%}One artist{%endtrans%}</option>
                           <option>{%trans%}Mix (videos from more than one artist){%endtrans%}</option>
                       </select>
                   </p>
-    
-                  <p style="">
-                     {%trans%}Page name (optional):{%endtrans%}<br/>
-                     {%trans%}Page name:{%endtrans%}<br/>
-                     <input name="page_name" id="page_name" type="text" style="width:100%">
-                  </p>
-    
+
                   <p style="">
                      {%trans%}Genre:{%endtrans%}<br/>
-                      <select id="genre" >
-                          <option>{%trans%}Select{%endtrans%}</option>
-                          <option>{%trans%}Pop{%endtrans%}</option>
-                          <option>{%trans%}Classical{%endtrans%}</option>
-                          <option>{%trans%}Other{%endtrans%}</option>
+                      <select id="genre" name="genre">
+                          <option value="missing">{%trans%}Select{%endtrans%}</option>
+                          <option value="pop">{%trans%}Pop{%endtrans%}</option>
+                          <option value="classical">{%trans%}Classical{%endtrans%}</option>
+                          <option value="other">{%trans%}Other{%endtrans%}</option>
                       </select>
                   </p>
     
@@ -161,7 +155,9 @@
                   </p>
               </div> <!-- music_section -->    
 
-              <p>{% trans %}Question:{% endtrans %}<input name="question" id="question" type="text" style="width:100%"></p>
+              <p><span id="question_label">{% trans %}Question:{% endtrans %}</span>
+
+                     <span id="page_name_label" style="display:none;">{%trans%}Page / Artist name:{%endtrans%}</span><input name="question" id="question" type="text" style="width:100%"></p>
 
               <p>{% trans %}Description (optional):{% endtrans %}
               <textarea name="question_desc" id="question_desc" rows=2 style="width:100%"></textarea>
