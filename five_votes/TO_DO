@@ -295,9 +295,11 @@ Claudio García
         Keep track of country-genre counts for index display (a summary table).
 
         Add Music landing page.
-           1st version: it's a datatables table.
+           1st version: it's a datatables table (loading all stuff not mobile friendly ...)
            for later: in-page selectors (cc, genre) allow for filtering away data in the table
            (these selectors get created from the country-genre summary table.
+
+        Mechanize script to find artist videos on youtube. Sorting criteria: likes / views ratio. Outputs csv files that can be uploaded to create artist pages.
 
     </music focus>
 

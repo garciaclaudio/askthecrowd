@@ -624,11 +624,21 @@ class AjaxHandler(BaseHandler2):
         question_desc =  sanitize_html( self.request.get('question_desc') )
         page_type = self.request.get('page_type')
         error = ''
+        artist_or_mix = ''
+        genre = ''
+        music_cc = ''
 
+        # try to validate, WIP
         if page_type == "music_page":
             genre = self.request.get('genre')
             if genre == "missing":
                 error = '* ' + _("Music genre cannot be empty.") + ' '
+            artist_or_mix = self.request.get('artist_or_mix')            
+            if artist_or_mix != "mix":
+                artist_or_mix = "artist"
+            
+        else:
+            page_type = "question_page"
 
         if question_text == "":
             error = error + '* ' + _("Question text cannot be empty.");

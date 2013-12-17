@@ -130,8 +130,8 @@
                   <p>
                      {%trans%}Artist or mix?{%endtrans%}<br/>
                       <select id="artist_or_mix_select" name="artist_or_mix">
-                          <option>{%trans%}One artist{%endtrans%}</option>
-                          <option>{%trans%}Mix (videos from more than one artist){%endtrans%}</option>
+                          <option value="artist">{%trans%}One artist{%endtrans%}</option>
+                          <option value="mix">{%trans%}Mix (videos from more than one artist){%endtrans%}</option>
                       </select>
                   </p>
 
