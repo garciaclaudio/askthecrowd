@@ -149,7 +149,7 @@
                      {%trans%}Country:{%endtrans%}<br/>
                       <select name="music_cc" id="music_country_select">
                          {% for cc1 in countries %}
-                             <option cc1 {% if cc1 == user['cc1'] %}selected{% endif %}>{{country_data['countries'][cc1]}}</option>
+                             <option value="{{ cc1 }}" {% if cc1 == user['cc1'] %}selected{% endif %}>{{country_data['countries'][cc1]}}</option>
                          {% endfor %}
                       </select>
                   </p>
