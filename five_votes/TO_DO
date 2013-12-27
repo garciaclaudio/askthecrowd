@@ -1,5 +1,7 @@
 
 
+
+
 From: http://www.entrepreneur.com/article/229813
 
 Small-business owners waste their time on what I call $10 an hour work, like running to get office supplies. Meanwhile, they forgo the activities that earn $1,000 an hour, such as sending the right email to the right person, or negotiating a lucrative contract, or convincing a client to do more business with you.
@@ -16,17 +18,7 @@ http://labstuff.nl/contents/nl/d117.html
 </para El Norte>
 
 
-Estimado Jorge,
-
-Gracias por un buen artículo hoy en El Norte. Te sugiero una sexta idea que podría obviar la necesidad de un segundo aeropuerto en el D.F.: Una red de trenes de alta velocidad, conectando las 100 principales ciudades mexicanas. Diseñado y construído en México por ingenieros mexicanos. La marca México debería incluir esa faceta nuestra, la de ser un país de Ingenieros.
-
-Atentamente,
-
-Claudio García
-Ámsterdam
-
 FB User photos:
-
 
 
 <FRICTION DRIVE>
@@ -155,6 +147,8 @@ Standup desk minimalist exercise system. Standup desk two step generator system.
 
 Chocolates Héroes y Villanos (redondos o cuadrados, forrados de aluminio impreso, con Hidalgo, Juárez, Díaz, Santa Anna, Madero, Villa, Zapata, Moctezuma, Cortés, Cuauhtémoc, La Malinche, La Corregidora, Xavier Mina, Padre Mier). Poetas: Díaz  Mirón, Amado Nervo, López Velarde (que incluya poemas en el reverso del empaque). Iniciar negocio en México desde aquí en Holanda. Conseguir proveedor en Italia, exportar a México, Argentina?, Colombia, Brasil, etc..
 
+Idea similar: Toallas de playa con estampado de billetes viejos: http://commons.wikimedia.org/wiki/File:Billete100_Pesos_Venustiano_Carranza.jpg (para toda latinoamérica.
+
 [DONE] ¡Terminar algo! Cambiar teclado de mini-laptop a Español, actualizar SO. http://www.itcsales.co.uk/acatalog/Contact_Us.html
 
 Typeweriter OS. SO que sólo te permite editar archivos de texto. Sin internet, sin fotos, sin nada. On a USB stick.
@@ -280,22 +274,95 @@ Claudio García
     <focus results page>
 [DONE]        Show videos
 [DONE]        Show photos in correct aspect ratio
-        Sort questions by votes count, alphabetical
+[DONE]        Sort questions by votes count, alphabetical
 [POSTP]        Allow changing votes.
     </focus results page>
 
     <music focus>
-        Music page:
+
+        (THIS IS THE LAST THING I IMPLEMENT, BEFORE PUTTING LIVE)
+
+<comment out>
+        Music videos page:
             Ask for:
             Artist or Mix (multiple artists)
                Artist name (if artist page)
             Page name (optional if artist added)
             genre (clásica, pop, rock, folk/regional, jazz) default pop
-            language (default usr's lang)
+[NOPE]      language (default usr's lang)
             country (default usr's cc)
+        Only ask for video links in music video answers.
+        Keep track of country-genre counts for index display (a summary table).
+        Add Music landing page.
+           1st version: it's a datatables table (loading all stuff not mobile friendly ...)
+           for later: in-page selectors (cc, genre) allow for filtering away data in the table
+           (these selectors get created from the country-genre summary table.
+        Populate genres.
+
+Revert commits?
+commit ef76e77cc4571b303642e23d7397397067ff8aa6
+Author: Claudio Garcia <claudio.garcia@booking.com>
+Date:   Wed Dec 18 22:11:44 2013 +0100
+
+    WIP
+
+commit b72f40e976b587879d49431038477c6d088d2b09
+Author: Claudio Garcia <claudio.garcia@booking.com>
+Date:   Tue Dec 17 23:27:22 2013 +0100
+
+    WIP
+
+commit 1f89feb733e3a07d8e84ada301e023e17300f456
+Author: Claudio Garcia <claudio.garcia@booking.com>
+Date:   Mon Dec 16 22:57:48 2013 +0100
+
+    WIP
+
+commit cff89f24bf1ed890f1160ee1f379d6deef63d29d
+Author: Claudio Garcia <claudio.garcia@booking.com>
+Date:   Sat Dec 7 12:01:28 2013 +0100
+
+    WIP
+
+commit 3bbba8eca648e2471bc25d6d88850b4318d6a354
+Author: Claudio Garcia <claudio.garcia@booking.com>
+Date:   Tue Dec 3 22:50:43 2013 +0100
+
+    WIP
+
+commit 3c026bccf08a94fb7b3e778b98735a65300eb4b5
+Author: Claudio Garcia <claudio.garcia@booking.com>
+Date:   Mon Dec 2 23:28:01 2013 +0100
+
+    WIP
+
+commit a9bfb2b1c517ca54983d75d09f0b65183a2f060f
+Author: Claudio Garcia <claudio.garcia@booking.com>
+Date:   Sun Dec 1 23:37:13 2013 +0100
+
+    WIP
+
+</comment out>
+
+        Remove music-video page form (revert commits?)
+
+        Instead, allow links. The 'add link' link appears below the question title, even after a video or image has been added. The question name will become a link to the URL. If an image is present, the image also becomes clickable. Clicked links replace current window. (Allow links, so that clickable answer names take you to a new board (to create a 100 composers page linking to composer pages)).
+
         Allow users to add answers? (yes/no)
+
         Add play all videos / play top 10 videos link (only on results page)
+
+        Mechanize/youtube API script to find artist videos on youtube. Sorting criteria: likes / views ratio. Outputs csv files that can be uploaded to create artist pages.
+
     </music focus>
+
+    <proyecto: "las canciones mas famosas de mi país">
+        Landing page. Comisionar personas en cada país del mundo para seleccionar las canciones.
+        Iberoamérica.
+        
+    </proyecto: "las canciones mas famosas de mi país">
+
+    Classifications are missing in Youtube.
 
     Artist directory page
 
@@ -303,7 +370,6 @@ Claudio García
         Questions popular with your friends you haven't voted on (10 of your friends have voted on this question) (list, with friend names and pictures).
         Questions you have voted on, but that have new votes from your friends
     </social_discovery>
-
 
     *  Remove comments side bar from questions page, move it to own page, add link to it from the footer.
     * Agregar: "X número de respuestas, X número de votos" a preguntas recientes.
