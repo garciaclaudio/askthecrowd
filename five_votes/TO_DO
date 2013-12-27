@@ -1,7 +1,5 @@
 
 
-
-
 From: http://www.entrepreneur.com/article/229813
 
 Small-business owners waste their time on what I call $10 an hour work, like running to get office supplies. Meanwhile, they forgo the activities that earn $1,000 an hour, such as sending the right email to the right person, or negotiating a lucrative contract, or convincing a client to do more business with you.
@@ -18,7 +16,17 @@ http://labstuff.nl/contents/nl/d117.html
 </para El Norte>
 
 
+Estimado Jorge,
+
+Gracias por un buen artículo hoy en El Norte. Te sugiero una sexta idea que podría obviar la necesidad de un segundo aeropuerto en el D.F.: Una red de trenes de alta velocidad, conectando las 100 principales ciudades mexicanas. Diseñado y construído en México por ingenieros mexicanos. La marca México debería incluir esa faceta nuestra, la de ser un país de Ingenieros.
+
+Atentamente,
+
+Claudio García
+Ámsterdam
+
 FB User photos:
+
 
 
 <FRICTION DRIVE>
@@ -272,44 +280,22 @@ Claudio García
     <focus results page>
 [DONE]        Show videos
 [DONE]        Show photos in correct aspect ratio
-[DONE]        Sort questions by votes count, alphabetical
+        Sort questions by votes count, alphabetical
 [POSTP]        Allow changing votes.
     </focus results page>
 
     <music focus>
-        (THIS IS THE LAST THING I IMPLEMENT, BEFORE PUTTING LIVE)
-        Music videos page:
+        Music page:
             Ask for:
             Artist or Mix (multiple artists)
                Artist name (if artist page)
             Page name (optional if artist added)
             genre (clásica, pop, rock, folk/regional, jazz) default pop
-[NOPE]      language (default usr's lang)
+            language (default usr's lang)
             country (default usr's cc)
         Allow users to add answers? (yes/no)
-
-        Allow links, so that clickable answer names take you to a new board (to create a 100 composers page linking to composer pages).
-
         Add play all videos / play top 10 videos link (only on results page)
-
-        Keep track of country-genre counts for index display (a summary table).
-
-        Add Music landing page.
-           1st version: it's a datatables table (loading all stuff not mobile friendly ...)
-           for later: in-page selectors (cc, genre) allow for filtering away data in the table
-           (these selectors get created from the country-genre summary table.
-
-        Mechanize script to find artist videos on youtube. Sorting criteria: likes / views ratio. Outputs csv files that can be uploaded to create artist pages.
-
     </music focus>
-
-    <proyecto: "las canciones mas famosas de mi país">
-        Landing page. Comisionar personas en cada país del mundo para seleccionar las canciones.
-        Iberoamérica.
-        
-    </proyecto: "las canciones mas famosas de mi país">
-
-    Classifications are missing in Youtube.
 
     Artist directory page
 
@@ -317,6 +303,7 @@ Claudio García
         Questions popular with your friends you haven't voted on (10 of your friends have voted on this question) (list, with friend names and pictures).
         Questions you have voted on, but that have new votes from your friends
     </social_discovery>
+
 
     *  Remove comments side bar from questions page, move it to own page, add link to it from the footer.
     * Agregar: "X número de respuestas, X número de votos" a preguntas recientes.

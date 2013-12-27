@@ -117,47 +117,10 @@
         <form id="question_form" action="/ajax.html" method="get">
               <input type="hidden" name="action" value="create_question">
 
-              <div style="text-align:center;"><strong>{% trans %}Create a page{% endtrans %}</strong></div>
-              <p>
-                 {%trans%}Page type:{%endtrans%}<br/>
-                  <select id="page_type_select" name="page_type">
-                      <option value="question_page" selected>{%trans%}Question page{%endtrans%}</option>
-                      <option value="music_page">{%trans%}Music videos page{%endtrans%}</option>
-                  </select>
-              </p>
+<div style="text-align:center;"><strong>{% trans %}Create a question{% endtrans %}</strong></div>
 
-              <div id="music_section" style="display:none;">
-                  <p>
-                     {%trans%}Artist or mix?{%endtrans%}<br/>
-                      <select id="artist_or_mix_select" name="artist_or_mix">
-                          <option value="artist">{%trans%}One artist{%endtrans%}</option>
-                          <option value="mix">{%trans%}Mix (videos from more than one artist){%endtrans%}</option>
-                      </select>
-                  </p>
 
-                  <p style="">
-                     {%trans%}Genre:{%endtrans%}<br/>
-                      <select id="genre" name="genre">
-                          <option value="missing">{%trans%}Select{%endtrans%}</option>
-                          <option value="pop">{%trans%}Pop{%endtrans%}</option>
-                          <option value="classical">{%trans%}Classical{%endtrans%}</option>
-                          <option value="other">{%trans%}Other{%endtrans%}</option>
-                      </select>
-                  </p>
-    
-                  <p style="">
-                     {%trans%}Country:{%endtrans%}<br/>
-                      <select name="music_cc" id="music_country_select">
-                         {% for cc1 in countries %}
-                             <option value="{{ cc1 }}" {% if cc1 == user['cc1'] %}selected{% endif %}>{{country_data['countries'][cc1]}}</option>
-                         {% endfor %}
-                      </select>
-                  </p>
-              </div> <!-- music_section -->    
-
-              <p><span id="question_label">{% trans %}Question:{% endtrans %}</span>
-
-                     <span id="page_name_label" style="display:none;">{%trans%}Page / Artist name:{%endtrans%}</span><input name="question" id="question" type="text" style="width:100%"></p>
+              <p>{% trans %}Question:{% endtrans %}<input name="question" id="question" type="text" style="width:100%"></p>
 
               <p>{% trans %}Description (optional):{% endtrans %}
               <textarea name="question_desc" id="question_desc" rows=2 style="width:100%"></textarea>

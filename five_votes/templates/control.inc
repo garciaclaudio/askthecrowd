@@ -193,19 +193,6 @@ function get_and_display_user_questions() {
 function show_new_question() {
     $('#main_container').html( $("#new_question_tmpl").tmpl({}));
     $('#main_container').fadeIn('fast');
-
-    $('#page_type_select').on('change', function() { 
-        if($(this).val() == 'music_page') {
-            $('#music_section').show();
-            $('#question_label').hide();
-            $('#page_name_label').show();
-        } else {
-            $('#music_section').hide();
-            $('#page_name_label').hide();
-            $('#question_label').show();
-        }
-    });
-
     $('#question_form').ajaxForm({
          dataType:  'json', 
          success: function(data) { 

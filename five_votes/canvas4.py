@@ -205,10 +205,6 @@ class Question(db.Model):
     question_text = db.StringProperty()
     question_desc = db.StringProperty(multiline=True)
     language_code = db.StringProperty()
-    is_music_page = db.IntegerProperty()
-    genre = db.StringProperty()
-    music_cc = db.StringProperty()
-    is_mix = db.IntegerProperty()
 
     def owner(self):
         return User.gql(u'WHERE id = :1', self.user_id).fetch(1)[0]
@@ -550,14 +546,8 @@ class MainPage2(BaseHandler2):
         pprint.pprint( self.current_user, sys.stderr);
         print >> sys.stderr, '############ CURR USR2'
 
-        global country_data
-        read_cc_data()
-
         self.render(u'index3',
-                    countries = country_data['countries'].keys(),
-                    country_data = country_data,
                     main_page=1,
-                    user=self.current_user,
                     user_name=user_name)
     def post(self):
         self.get()
@@ -623,42 +613,18 @@ class AjaxHandler(BaseHandler2):
         question_text =  sanitize_html( self.request.get('question') )
         question_desc =  sanitize_html( self.request.get('question_desc') )
         error = ''
-        is_mix = 0
-        genre = ''
-        music_cc = ''
-        is_music_page = 0
-
-        page_type = self.request.get('page_type')
-
-        # do some validation
-        if page_type == "music_page":
-            is_music_page = 1
-            genre = self.request.get('genre')
-            if genre == "missing":
-                error = '* ' + _("Music genre cannot be empty.") + ' '
-            artist_or_mix = self.request.get('artist_or_mix')   
-            if artist_or_mix == "mix":
-                is_mix = 1
-            music_cc = self.request.get('music_cc')
-            if len(music_cc) != 2:
-                music_cc = ''
-
         if question_text == "":
-            error = error + '* ' + _("Question text cannot be empty.");
+            error = '* ' + _("Question text cannot be empty.");
         if error:
             result = { 'error' : error }
         else:
             new_question_id = Counter.get_next_question_id()
             new_question = Question(
                 key_name = str(new_question_id),
-                user_id = self.current_user['id'],
+                user_id=self.current_user['id'],
                 question_text = unicode(question_text),
                 question_desc = unicode(question_desc),
-                language_code = str(self.selected_lang),
-                is_music_page = is_music_page,
-                genre = str(genre),
-                music_cc = str(music_cc),
-                is_mix = is_mix
+                language_code=str(self.selected_lang),
             )
             new_question.put()
             result = { 'error' : 0,
