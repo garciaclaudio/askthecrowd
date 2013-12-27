@@ -660,6 +660,29 @@ function show_all_questions() {
     {% endfor %}
 }
 
+function add_link_func( ans_key ) {
+    $('#add_link_' + ans_key).hide();
+    $('#link_form_div_' + ans_key).show();
+    $('#answer_' + ans_key).parent().masonry({itemSelector: '.answer_card', isFitWidth: true
+                        });
+
+    $('#add_link_form_' + ans_key ).ajaxForm({
+         dataType:  'json', 
+         success: function(data) { 
+             if( data.error ) {
+                alert( data.error );
+             } else {
+                $('#link_form_div_' + ans_key).hide();
+
+                $('#ans_txt_' + data.answer_key).html('hello!');
+                alert('saved link: ' + data.link);
+             }
+         }
+    });
+
+//    alert('add link ' + ans_key );
+}
+
 function add_video_link_func( ans_key ) {
 
         $('#file_uploader_' + ans_key).hide();

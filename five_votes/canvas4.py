@@ -222,6 +222,7 @@ class Answer(db.Model):
     answer_text = db.StringProperty(multiline=True)
     picture = db.BlobProperty()
     video_id = db.StringProperty()
+    link = db.StringProperty()
     def owner(self):
         return User.gql(u'WHERE user_id = :1', self.user_id).fetch(1)[0]
 
@@ -733,6 +734,32 @@ class AjaxHandler(BaseHandler2):
         return result
 
 
+    def handle_add_link(self):
+        error = ''
+        success = 1
+        ans = Answer.get( self.request.get('answer_key') );
+        link_link = self.request.get('link_link');
+
+        try:
+            url_data = urlparse.urlparse( link_link )
+        except:
+            error = _("Malformed URL");
+            success = 0
+            video_id = 0
+
+        if success == 1:
+            ans.link = link_link
+            ans.put()
+
+        result =  {'success': success,
+                   'error': error,
+                   'answer_key': self.request.get('answer_key'),
+                   'link': unicode( link_link ),
+                  }
+
+        return result
+
+
     def handle_add_video(self):
         error = ''
         success = 1
@@ -1093,6 +1120,9 @@ class AjaxHandler(BaseHandler2):
         result_struct = { 'error' : '1' }
 
         action = self.request.get('action')
+
+        if( action == 'add_link' ):
+            result_struct = self.handle_add_link()
 
         if( action == 'add_video' ):
             result_struct = self.handle_add_video()

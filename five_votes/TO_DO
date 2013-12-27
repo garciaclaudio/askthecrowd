@@ -299,62 +299,26 @@ Claudio García
            (these selectors get created from the country-genre summary table.
         Populate genres.
 
-Revert commits?
-commit ef76e77cc4571b303642e23d7397397067ff8aa6
-Author: Claudio Garcia <claudio.garcia@booking.com>
-Date:   Wed Dec 18 22:11:44 2013 +0100
-
-    WIP
-
-commit b72f40e976b587879d49431038477c6d088d2b09
-Author: Claudio Garcia <claudio.garcia@booking.com>
-Date:   Tue Dec 17 23:27:22 2013 +0100
-
-    WIP
-
-commit 1f89feb733e3a07d8e84ada301e023e17300f456
-Author: Claudio Garcia <claudio.garcia@booking.com>
-Date:   Mon Dec 16 22:57:48 2013 +0100
-
-    WIP
-
-commit cff89f24bf1ed890f1160ee1f379d6deef63d29d
-Author: Claudio Garcia <claudio.garcia@booking.com>
-Date:   Sat Dec 7 12:01:28 2013 +0100
-
-    WIP
-
-commit 3bbba8eca648e2471bc25d6d88850b4318d6a354
-Author: Claudio Garcia <claudio.garcia@booking.com>
-Date:   Tue Dec 3 22:50:43 2013 +0100
-
-    WIP
-
-commit 3c026bccf08a94fb7b3e778b98735a65300eb4b5
-Author: Claudio Garcia <claudio.garcia@booking.com>
-Date:   Mon Dec 2 23:28:01 2013 +0100
-
-    WIP
-
-commit a9bfb2b1c517ca54983d75d09f0b65183a2f060f
-Author: Claudio Garcia <claudio.garcia@booking.com>
-Date:   Sun Dec 1 23:37:13 2013 +0100
-
-    WIP
-
+[DONE] Revert commits
 </comment out>
 
-        Remove music-video page form (revert commits?)
+[DONE]  Remove music-video page form (revert commits?)
 
         Instead, allow links. The 'add link' link appears below the question title, even after a video or image has been added. The question name will become a link to the URL. If an image is present, the image also becomes clickable. Clicked links replace current window. (Allow links, so that clickable answer names take you to a new board (to create a 100 composers page linking to composer pages)).
 
         Allow users to add answers? (yes/no)
 
+        Owner can edit added answers.
+
         Add play all videos / play top 10 videos link (only on results page)
 
         Mechanize/youtube API script to find artist videos on youtube. Sorting criteria: likes / views ratio. Outputs csv files that can be uploaded to create artist pages.
 
+        Allow csv / structured file uploaded input.
+
     </music focus>
+
+    Test on ipad...
 
     <proyecto: "las canciones mas famosas de mi país">
         Landing page. Comisionar personas en cada país del mundo para seleccionar las canciones.
