@@ -753,6 +753,7 @@ class AjaxHandler(BaseHandler2):
 
         result =  {'success': success,
                    'error': error,
+                   'answer_text' : unicode(ans.answer_text),
                    'answer_key': self.request.get('answer_key'),
                    'link': unicode( link_link ),
                   }
