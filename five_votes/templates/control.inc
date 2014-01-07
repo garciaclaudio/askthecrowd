@@ -149,7 +149,6 @@ function get_and_display_user_questions() {
                               $('#more_link_' + key).show();
                               $('#less_link_' + key).hide();
                       });
-
                       var ans = q.answers;
                       for (var j = 0; j < ans.length; j++) {
 //                        alert( q.question_text + ' -- has pic:' + ans[j].has_pic );
@@ -157,6 +156,7 @@ function get_and_display_user_questions() {
                               $("#show_answer_for_prev_questions_tmpl").tmpl( {
                                    'answer_key': ans[j].answer_key,
                                    'answer_text': ans[j].answer_text,
+                                   'link': ans[j].link,
                                    'has_pic': ans[j].has_pic,
                                    'video_id': ans[j].video_id,
                                    'num_votes': ans[j].num_votes,

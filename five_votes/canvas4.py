@@ -1032,6 +1032,7 @@ class AjaxHandler(BaseHandler2):
                 ans_data = {
                     'answer_key' : str(ans.key()),
                     'answer_text' : unicode(ans.answer_text),
+                    'link':  ans.link,
                     'has_pic' : has_pic,
                     'video_id' : str(ans.video_id),
                     'num_votes' : n_votes

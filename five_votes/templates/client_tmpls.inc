@@ -455,8 +455,11 @@
           <div id="play_button_${answer_key}" class="play_inset" style="display:none;">
               <a class="play_inset_link"><img src="/images/play_button_small.png"></a>
           </div>
-        <span class="answer_text" id="ans_txt_${answer_key}">${answer_text}</span>
+        <span class="answer_text" id="ans_txt_${answer_key}">{{ "{{if link}" }}}<a href="${link}">${answer_text}</a>{{ "{{else}" }}}${answer_text}{{ "{{/if}" }}}</span>
+
+    {{ "{{if link}" }}}{{ "{{else}" }}}
         <div id="add_link_${answer_key}"><a href="#" class="video_link" onclick="add_link_func('${answer_key}');return false;">{% trans %}add link{% endtrans %}</a></div>
+
 
         <div id="link_form_div_${answer_key}" class="invisible">
              <form id="add_link_form_${answer_key}" action="/ajax.html" method="get">
@@ -466,6 +469,7 @@
 &nbsp;<button type="submit">{% trans %}add{% endtrans %}</button>
              </form>
         </div>
+    {{ "{{/if}" }}}
 
         <div id="file_uploader_${answer_key}"><noscript><p>Please enable JavaScript to use file uploader.</p><!-- or put a simple form for upload here --></noscript></div>
 
