@@ -99,6 +99,7 @@ function show_question_for_voting() {
          'by_link' : by_link,
          'answer_key' : '{{ans.answer_key}}',
          'answer_text' : '{{ans.answer_text}}',
+         'link' : '{{ans.link}}',
       }));
 
       {% if ans.has_pic %}

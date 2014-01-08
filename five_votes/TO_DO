@@ -306,6 +306,8 @@ Claudio García
 
         Instead, allow links. The 'add link' link appears below the question title, even after a video or image has been added. The question name will become a link to the URL. If an image is present, the image also becomes clickable. Clicked links replace current window. (Allow links, so that clickable answer names take you to a new board (to create a 100 composers page linking to composer pages)).
 
+        Add links to results page.
+
         Allow users to add answers? (yes/no)
 
         Owner can edit added answers.
@@ -315,6 +317,8 @@ Claudio García
         Mechanize/youtube API script to find artist videos on youtube. Sorting criteria: likes / views ratio. Outputs csv files that can be uploaded to create artist pages.
 
         Allow csv / structured file uploaded input.
+
+        Style 'add link' links to not have underline.
 
     </music focus>
 

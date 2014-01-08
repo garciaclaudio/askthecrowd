@@ -230,7 +230,7 @@
         <div id="picture_${answer_key}"></div>
         <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><a class="play_inset_link"><img src="/images/play_button_small.png"></a></div>
 
-        <div class="answer_text">${answer_text}</div>
+        <div class="answer_text">{{ "{{if link}" }}}<a href="${link}">${answer_text}</a>{{ "{{else}" }}}${answer_text}{{ "{{/if}" }}}</div>
 
     <div id="whirly_${answer_key}" class="count_inset" style="display:none;"><div class="whirly_box"><img src="/images/loading.gif"></div></div>
 

@@ -1202,6 +1202,7 @@ class QuestionHandler(BaseHandler2):
             ans_data = {
                 'answer_key' : str(ans.key()),
                 'answer_text' : unicode(ans.answer_text),
+                'link':  ans.link,
                 'show_owner' : show_owner,
                 'owner_name' : owner_name,
                 'owner_id' : ans.user_id,
