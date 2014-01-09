@@ -318,8 +318,11 @@ Claudio García
 
         Allow csv / structured file uploaded input.
 
-        Style 'add link' links to not have underline.
+[DONE]        Style 'add link' links to not have underline.
 
+        BUG: when logged out, the question page looks broken, the main page looks empty.
+
+        Show links in welcome page.
     </music focus>
 
     Test on ipad...

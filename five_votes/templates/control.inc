@@ -375,6 +375,7 @@ function show_data( data, results ) {
         ans = data.answers_hash[ans_key];
 
         $('#result_answers_div').append( $("#show_answer_for_results_tmpl").tmpl( {
+            'link' : ans.link,
             'answer_key' : ans.answer_key,
             'answer_text' : ans.answer_text,
             'num_votes' : num_votes,

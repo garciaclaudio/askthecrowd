@@ -299,8 +299,7 @@
           <div class="results_count_text">${num_votes} &#10003;</div>
           <div class="results_pic" id="picture_${answer_key}"></div>
           <div id="play_button_${answer_key}" class="results_play_inset" style="display:none;"><a class="play_inset_link"><img src="/images/play_button_small.png"></a></div> 
-
-          <div class="results_text">${answer_text}</div>
+          <div class="results_text">{{ "{{if link}" }}}<a href="${link}">${answer_text}</a>{{ "{{else}" }}}${answer_text}{{ "{{/if}" }}}</div>
   </div><br />
 </script>
 
@@ -331,7 +330,7 @@
     <div class="card_inset">
           <div id="picture_${answer_key}"></div>
           <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><a class="play_inset_link"><img src="/images/play_button_small.png"></a></div>
-          <span class="answer_text">${answer_text}</span>
+          <span class="answer_text">{{ "{{if link}" }}}<a href="${link}">${answer_text}</a>{{ "{{else}" }}}${answer_text}{{ "{{/if}" }}}</span>
       <div id="count_inset_${answer_key}" class="count_inset"><div id="count_text_${answer_key}"  class="count_text"></div></div>
     </div>
   </div> <!-- answer_card-->
