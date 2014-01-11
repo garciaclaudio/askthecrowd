@@ -784,9 +784,9 @@ window.fbAsyncInit = function() {
 
         FB.getLoginStatus(function(response) {
             if (response.status === 'connected') {
-                //alert('connected, reload will happen, do not show content');
+                alert('connected, reload will happen, do not show content');
             } else {
-                //alert('not authorized or not loggeg in, reload will NOT happen, show content');
+                alert('not authorized or not logged in, reload will NOT happen, show content, this was the solution to the ugly flicker when rendering the page...');
                 $('#whole_page').show();
             } 
         });
