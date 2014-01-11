@@ -174,6 +174,7 @@ Public speaking
 Banquito para stand-up desk. Experimento. Cuantas veces subes y bajas, a cuantas calorías adicionales diarias equivale?
 
 Socialism: directly transfer 30% of PIB to all citizens. (in Mex: a minimum guaranteed income of 3,000 USD per year)
+http://www.rollingstone.com/politics/news/five-economic-reforms-millennials-should-be-fighting-for-20140103
 
 Sistema contra secuestro (y otros delitos graves): Recompensas anónimas en tarjetas de débito para soplones. Acompañado de una campaña publicitaria. El soplón hace la denuncia y recibe un número que le permite retirar dinero anónimamente en cualquier cajero / centro comercial. Tarjeta Soriana o similar. El número se activa cuando la denuncia lleva a la detención de uno o mas criminales.
 
@@ -321,6 +322,7 @@ Claudio García
 [DONE]        Style 'add link' links to not have underline.
 
         BUG: when logged out, the question page looks broken, the main page looks empty.
+        BUG: Start by fixing syntax errors and error: Resource interpreted as Image but transferred with MIME type image/jpg: "http://localhost:8080/image?answer_key=ag5kZXZ-Zml2ZS12b3Rlc3INCxIGQW5zd2VyGOgBDA". (http://localhost:8080/q47). This prevents .masonry from being called, it seems (control.inc: line 798). Not true actually, it gets called.
 
         Show links in welcome page.
     </music focus>
