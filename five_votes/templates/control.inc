@@ -749,6 +749,13 @@ window.fbAsyncInit = function() {
 
         {% if question is defined %}
             show_question_for_voting();
+
+            // call here to immediately center
+            $('#answers_div').masonry({
+                 itemSelector: '.answer_card',
+                 isFitWidth: true
+            });
+
             $('.answer_picture').imagesLoaded(
                 function(){ 
                      $('#answers_div').masonry({
@@ -784,31 +791,29 @@ window.fbAsyncInit = function() {
 
         FB.getLoginStatus(function(response) {
             if (response.status === 'connected') {
-                alert('connected, reload will happen, do not show content');
+//                alert('connected, reload will happen, do not show content');
             } else {
-                alert('not authorized or not logged in, reload will NOT happen, show content, this was the solution to the ugly flicker when rendering the page...');
+//                alert('not authorized or not logged in, reload will NOT happen, show content, this was the solution to the ugly flicker when rendering the page...');
                 $('#whole_page').show();
+
+                {% if question is defined %}
+                     show_question_for_welcome();
+                     $('.answer_picture').imagesLoaded(
+                     function(){ 
+                          $('#answers_div').masonry({
+                                           itemSelector: '.answer_card',
+                                           isFitWidth: true
+                           });
+                     });
+                {% else %}
+
+                    $('#main_container').html( $("#welcome_msg_tmpl").tmpl({}));
+
+                {% endif %}
+                FB.XFBML.parse( document.getElementById('welcome_msg') );
+                FB.XFBML.parse( document.getElementById('second_login_button') );
             } 
         });
-
-        {% if question is defined %}
-            show_question_for_welcome();
-            $('.answer_picture').imagesLoaded(
-                function(){ 
-                    $('#answers_div').masonry({
-                                       itemSelector: '.answer_card',
-                                       isFitWidth: true
-                    });
-                }
-            );
-        {% else %}
-
-            $('#main_container').html( $("#welcome_msg_tmpl").tmpl({}));
-
-        {% endif %}
-   
-        FB.XFBML.parse( document.getElementById('welcome_msg') );
-        FB.XFBML.parse( document.getElementById('second_login_button') );
 
     {% endif %}
 };

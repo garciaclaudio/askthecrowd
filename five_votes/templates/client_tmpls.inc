@@ -1,6 +1,6 @@
 <!-- JS TEMPLATES START -->
 
-<script id="country_popup_tmpl">
+<script id="country_popup_tmpl" type="text/html">
 <div class="country_popup_class">
     <p id="country_message">{% trans %}Select your country:{% endtrans %}</p>
     <p id="province_message" style="display:none;">{% trans %}Select your state:{% endtrans %}</p>
@@ -18,24 +18,24 @@
 </div>
 </script>
 
-<script id="country_popup_elem">
+<script id="country_popup_elem" type="text/html">
    <tr><td><a href="#" onclick="select_country('${cc1}');return false;"><img style="vertical-align:top" width="40" height="30" src="/images/flags/${cc1_lc}.png"><span>${name1}</span></a></td>
        <td><a href="#" onclick="select_country('${cc2}');return false;"><img style="vertical-align:top" width="40" height="30" src="/images/flags/${cc2_lc}.png">${name2}</a></td>
    </tr>
 </script>
 
-<script id="provinces_popup_elem">
+<script id="provinces_popup_elem" type="text/html">
    <tr><td><a href="#" onclick="select_province('${name1}');return false;">${name1}</a></td>
        <td><a href="#" onclick="select_province('${name2}');return false;">${name2}</a></td>
    </tr>
 </script>
 
 
-<script id="logged_in_faces_tmpl">
+<script id="logged_in_faces_tmpl" type="text/html">
 <fb:login-button show-faces="true"></fb:login-button>
 </script>
 
-<script id="welcome_msg_tmpl">
+<script id="welcome_msg_tmpl" type="text/html">
 <div class="mytube">
 <div id="welcome_msg"><p>{% trans %}To use this app, sign in with your facebook account:{% endtrans %}</p>
 <fb:login-button show-faces="true"></fb:login-button>
