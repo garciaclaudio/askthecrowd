@@ -810,7 +810,9 @@ window.fbAsyncInit = function() {
                     $('#main_container').html( $("#welcome_msg_tmpl").tmpl({}));
 
                 {% endif %}
-                FB.XFBML.parse( document.getElementById('welcome_msg') );
+//
+// disabled until made nicer
+//                FB.XFBML.parse( document.getElementById('welcome_msg') );
                 FB.XFBML.parse( document.getElementById('second_login_button') );
             } 
         });

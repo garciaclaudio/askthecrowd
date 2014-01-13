@@ -307,8 +307,6 @@ Claudio García
 
         Instead, allow links. The 'add link' link appears below the question title, even after a video or image has been added. The question name will become a link to the URL. If an image is present, the image also becomes clickable. Clicked links replace current window. (Allow links, so that clickable answer names take you to a new board (to create a 100 composers page linking to composer pages)).
 
-        Add links to results page.
-
         Allow users to add answers? (yes/no)
 
         Owner can edit added answers.
@@ -316,19 +314,18 @@ Claudio García
         Add play all videos / play top 10 videos link (only on results page)
 
         Mechanize/youtube API script to find artist videos on youtube. Sorting criteria: likes / views ratio. Outputs csv files that can be uploaded to create artist pages.
+        https://metacpan.org/pod/WebService::GData::YouTube#DEPENDENCIES
 
         Allow csv / structured file uploaded input.
 
+[DONE]        Add links to results page.
 [DONE]        Style 'add link' links to not have underline.
-
 [DONE]        BUG: when logged out, the question page looks broken, the main page looks empty.
 [DONE]        BUG: Start by fixing syntax errors and error: Resource interpreted as Image but transferred with MIME type image/jpg: "http://localhost:8080/image?answer_key=ag5kZXZ-Zml2ZS12b3Rlc3INCxIGQW5zd2VyGOgBDA". (http://localhost:8080/q47). This prevents .masonry from being called, it seems (control.inc: line 798). Not true actually, it gets called.
 [DONE]        BUG: recent questions (main landing pg) do not appear for logged-out users.
 [DONE]        BUG: test whole-page thing, can I leave it out?
-
-[HERE I AM]        Show links in welcome page.
-
-Make question page look nicer when user is logged out...
+[DONE]        Show links in welcome page.
+[DONE]        Make question page look nicer when user is logged out...
 
     </music focus>
 

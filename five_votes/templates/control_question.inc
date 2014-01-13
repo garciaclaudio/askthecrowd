@@ -147,6 +147,7 @@ function show_question_for_welcome() {
     {% for ans in answers %}
       $('#answers_div').append( $("#show_answer_for_welcome_tmpl").tmpl( {
          'answer_key' : '{{ans.answer_key}}',
+         'link' : '{{ans.link}}',
          'answer_text' : '{{ans.answer_text}}',
       }));
 

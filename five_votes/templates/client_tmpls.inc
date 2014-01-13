@@ -308,18 +308,17 @@
 <img class="answer_picture" src="image?answer_key=${answer_key}">
 </script>
 
-
 <script id="welcome_question_tmpl" type="text/html">
 <div class="mytube">
   <div> 
-      <div id="welcome_msg"><p>{% trans %}To vote on this question, sign in with your facebook account:{% endtrans %}</p> <fb:login-button show-faces="true"></fb:login-button>
+<!--      <div id="welcome_msg" class="add_ans_class"><p>{% trans %}To vote on this question, sign in with your facebook account:{% endtrans %}</p> <fb:login-button show-faces="true"></fb:login-button> -->
       </div>
       <div class="question_text">${question_text}</div>
 <br />
       <div id="answers_div">
       </div>
 
-      <div id="second_login_button" class="add_ans_class" style="padding:15px;font-size:110%;clear:both;">{%trans %}login to vote{% endtrans %} <br /><br /> <fb:login-button show-faces="true"></fb:login-button></div>
+      <div id="second_login_button" class="add_ans_class" style="padding:15px;font-size:110%;clear:both;">{% trans %}To vote on this question, sign in with your facebook account:{% endtrans %}<br /><br /> <fb:login-button show-faces="true"></fb:login-button></div>
   </div>
 </div>
 </script>
