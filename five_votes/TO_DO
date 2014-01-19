@@ -1,5 +1,35 @@
 
 
+<TODO>
+    Finish script to harvest videos for a search term, select on most liked ratio, output file for upload into Fivevotes.
+    Add upload file functionality. Allow nested pages???    
+
+    Escribir a Giraldo.
+</TODO>
+
+
+¡Hola Father!
+
+Muy elocuente la comparación del clima. Estoy en un café esperando que los niños salgan de la escuela de español, y veo como que un rayo de sol se asoma entre las nubes. ¡No me vaya a hacer daño! Je, je. La última semana de Febrero nos vamos a Roma y sus alrededores a ver si encontramos mas sol.
+
+A propósito de esto, este invierno les he estado dando vitamina D a los niños a diario, para compensar la falta de sol. Ya tendríamos que ir mudándonos de este sitio gris, je, je.
+
+Entre otras noticias a los dos chamacos los promovieron en el coro: Claudio ahora está en un coro con puros niños (el Jongenskoor), y Tere esta con otras mayorcitas y ensaya en el conservatorio, que es un edificio muy bonito junto al rio Ij. También siguen muy bien con el piano, y Claudio ha avanzado muy rápido, el maestro está muy contento, y es que pasa mucho rato cada dia practicando por puro gusto, es como su nintendo.
+
+Besos y abrazos!
+
+El Chango
+
+
+
+
+Hola Giraldo, ¡Que tal! Te escribo porqu 
+
+
+
+
+¡Hey! La idea que tengo es escribir sobre la manera en que la tecnología y el libre mercado han propiciado que la riqueza se concentre cada vez más y que no queden opciones de vida para la mayoría de la gente que la de ser empleados pobres de corporaciones como Walmart, McDonalds, el Oxxo, etc.. Y sobre esta base emitir recomendaciones. Una especie de librito, o manifiesto. ¿Te latería algo así? También podríamos programar algo, yo tengo un proyecto de programación que hago avanzar muy lentamnente, ya tengo unos dos años con él y ya lo siento como un lastre tremendo que quisiera sacarme de encima, ja ja. También tu si tienes alguna idea descabellada que quieras poner en práctica yo te ayudo. Si quieres te llamo pero dime cuando y a que número. Con la diferencia de horario yo estoy más disponible como a las 2 o 3 p.m. hora de México.
+
 
 
 From: http://www.entrepreneur.com/article/229813
@@ -238,6 +268,24 @@ Kind regards,
 
 Claudio García
 
+Interested in joining
+
+
+Dear Amsterdam Toastmasters,
+I would like to be considered for inclusion in your group. I would be happy to be invited to one of your meetings at your convenience.
+Kind regards,
+Claudio Garcia
+
+
+Hey Eduardo,
+
+¿Cómo estás? Espero que muy bien. Te escribo porque me parece que tu participas en un grupo de Toastmasters, y estoy interesado en unirme a los de aquí de Ámsterdam. ¿Podrías darme tus impresiones? 
+
+¡Muchos saludos!
+
+Claudio
+
+
 
 <IN_PROGRESS (classifications)>
 
@@ -292,7 +340,7 @@ Claudio García
             genre (clásica, pop, rock, folk/regional, jazz) default pop
 [NOPE]      language (default usr's lang)
             country (default usr's cc)
-        Only ask for video links in music video answers.
+[NOPE]        Only ask for video links in music video answers.
         Keep track of country-genre counts for index display (a summary table).
         Add Music landing page.
            1st version: it's a datatables table (loading all stuff not mobile friendly ...)
@@ -309,14 +357,18 @@ Claudio García
 
         Allow users to add answers? (yes/no)
 
-        Owner can edit added answers.
+        Owner can delete added answers.
 
         Add play all videos / play top 10 videos link (only on results page)
 
         Mechanize/youtube API script to find artist videos on youtube. Sorting criteria: likes / views ratio. Outputs csv files that can be uploaded to create artist pages.
         https://metacpan.org/pod/WebService::GData::YouTube#DEPENDENCIES
 
-        Allow csv / structured file uploaded input.
+        <Allow csv / structured file uploaded input.>
+            Add link "upload answers".
+            File format: 
+                "answer text|video_id|link\n"
+        </Allow csv / structured file uploaded input.>
 
 [DONE]        Add links to results page.
 [DONE]        Style 'add link' links to not have underline.
