@@ -367,7 +367,7 @@ Claudio
         <Allow csv / structured file uploaded input.>
             Add link "upload answers".
             File format: 
-                "answer text|video_id|link\n"
+                "answer text|description|video_id|link\n"
         </Allow csv / structured file uploaded input.>
 
 [DONE]        Add links to results page.
