@@ -13,12 +13,23 @@ $yt->query()->q("Chico Che")->limit(3,0);
  
 my $videos = $yt->search_video();
 
-#print Dumper( $videos );
-#__END__
+# ==100 composers, de golpe, y ahi te la llevas
+# El mapa de la música nueva y antigua de México (por mexicanos y extranjeros, en Español y otros idiomas) --
 
 #
-# XXX, check for embed permission?
+# Cómo generarlo / subirlo? JSON
+# un árbol es fácil: una lista de 100 nombres, con el título para la págia índice, se busca en youtube, se genera un JSON con los resultados.
+# En el servidor: Se crean las subpáginas, luego la página índice apuntando a cada una de las subpágs.
 #
+
+#
+# Una categorización: las páginas nodo deben compartir un identificador, que permita referenciarlas desde distintas categorías (e.g. Beethoven dirigido por Bernstein es apuntado por Beethoven en compositores y Bernstein en Directores). También las páginas índices deben tener un identificador, para no re-crearlas si ya existen. Se pone en una BDD. AQUI VOY.
+#
+# 
+#
+
+#
+# XXX, check for embed permission? [later if neeeded]
 #
 # XXX, discard too recent (may be struck down soon)?
 # Better implement cron job later to automatically clean up deceased videos
