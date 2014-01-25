@@ -24,7 +24,15 @@ my ($question, $question_desc) = split('\|', $first_line);
 
 print "QUESTION/DESC: $question / $question_desc\n";
 
-while( <$fh> ) {
+my %output;
+
+$output{question} = $question;
+$output{question_desc} = $question_desc;
+
+
+my $yt = new WebService::GData::YouTube();
+
+while( <$fh> ) { 
     chomp;
     next if ! $_;
 
@@ -34,13 +42,81 @@ while( <$fh> ) {
     $answer_desc ||= '';
 
     print "Search term/text/desc: $search_term / $answer_text / $answer_desc\n";
+
+    my %page;
+
+    $page{question} = $answer_text;
+    $page{question_desc} = $answer_desc;
+
+    $yt->query()->q($search_term)->limit(5,0);
+
+    my $videos = $yt->search_video();
+
+    my @sorted
+    
+    = map{ $_->[0] } 
+    
+    sort { $a->[1] <=> $b->[1] }
+    
+    map { 
+        my $view_count = $_->view_count;
+        my $num_likes = $_->rating->num_likes;
+        my $num_dislikes = $_->rating->num_dislikes;
+        my $score = ( $num_likes - $num_dislikes ) / $view_count;
+        [ $_, $score ]
+    }
+    
+    grep { $_->view_count > 100 }
+    
+    grep { $_->genre eq 'Music' }
+    
+    @$videos;
+
+
+    my @answers = map{
+        { video_id => $_->video_id,
+          answer_text => $_->title,
+          answer_desc => $_->description,
+        }
+    }
+    @sorted;
+    
+    $page{answers} = \@answers;
+
+    foreach my $v ( @sorted ) {
+        my $title = $v->title;
+        my $video_id = $v->video_id;
+        my $duration = $v->duration;
+        my $description = $v->description;
+        my $view_count = $v->view_count;
+        my $num_likes = $v->rating->num_likes;
+        my $num_dislikes = $v->rating->num_dislikes || 0;
+        my $genre = $v->genre;
+        my $score = ( $num_likes - $num_dislikes ) / $view_count;
+        my $category = $v->category;
+        my $uploaded = $v->uploaded;        
+        print "    TITLE: $title\n";
+        print "    Score: $score\n";
+        print "    Duration: $duration\n";
+        print "    Views: $view_count\n";
+        print "    Num likes: $num_likes\n";
+        print "    Num dislikes: $num_dislikes\n";
+        print "    video id: $video_id\n";
+        print "    Desc: $description\n";    
+#        print Dumper( $uploaded );
+        print "    Genre: $genre\n\n";
+    }
+
+    push( @{ $output{answers} }, \%page );
 }
+
+print Dumper( \%output );
 
 __END__
 
 
 my $yt = new WebService::GData::YouTube();
- 
+
 $yt->query()->q("Chico Che")->limit(3,0);
  
 #or set your own query object
