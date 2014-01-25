@@ -1,4 +1,16 @@
 
+Hackathon project:
+
+Nearby holiday finder:
+   A predefined set of departure ufis in a drop down (10 big cities in Europe from bookers)
+       For each of these, come up with all possible names (and countries) for Transaction.booker_city.
+   A maximum radius (or unlimited).
+   Number of day into the past to search (or hardcode to 3 days).
+   Checkin-checkout dates for availability checks.
+Output:
+   A list of cities, with visitor counts and clickable links to Booking.com (with check-in/out dates).
+
+
 
 <TODO>
     Finish script to harvest videos for a search term, select on most liked ratio, output file for upload into Fivevotes.

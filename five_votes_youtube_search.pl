@@ -3,7 +3,42 @@ use strict;
 
 use Data::Dumper;
 use WebService::GData::YouTube;
- 
+
+#
+#1st line:
+#question text|question desc
+#Following lines:
+#search term|answer text|description (opt)
+#
+
+my $input_file = $ARGV[0];
+
+print "Reading from $input_file\n";
+
+die "no input" if ! $input_file;
+
+open(my $fh, '<', $input_file ) or die $!;
+
+my $first_line = <$fh>; chomp $first_line;
+my ($question, $question_desc) = split('\|', $first_line);
+
+print "QUESTION/DESC: $question / $question_desc\n";
+
+while( <$fh> ) {
+    chomp;
+    next if ! $_;
+
+    my ($search_term, $answer_text, $answer_desc) = split( '\|', $_ );
+
+    $answer_text ||= $search_term;
+    $answer_desc ||= '';
+
+    print "Search term/text/desc: $search_term / $answer_text / $answer_desc\n";
+}
+
+__END__
+
+
 my $yt = new WebService::GData::YouTube();
  
 $yt->query()->q("Chico Che")->limit(3,0);
@@ -13,8 +48,16 @@ $yt->query()->q("Chico Che")->limit(3,0);
  
 my $videos = $yt->search_video();
 
+#
 # ==100 composers, de golpe, y ahi te la llevas
 # El mapa de la música nueva y antigua de México (por mexicanos y extranjeros, en Español y otros idiomas) --
+#
+#
+#1st line:
+#question text|question desc
+#Following lines:
+#search term|question text|description (opt)
+#
 
 #
 # Cómo generarlo / subirlo? JSON
