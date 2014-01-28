@@ -543,11 +543,14 @@ class MainPage2(BaseHandler2):
         if self.current_user:
             user_name = self.current_user['name']
 
-        print >> sys.stderr, '############ CURR USR'
         pprint.pprint( self.current_user, sys.stderr);
-        print >> sys.stderr, '############ CURR USR2'
+
+        show_uploader = 0
+        if self.request.get('show_uploader') == '1':
+            show_uploader = 1
 
         self.render(u'index3',
+                    show_uploader=str(show_uploader),
                     main_page=1,
                     user_name=user_name)
     def post(self):

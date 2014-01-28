@@ -130,6 +130,7 @@
 
 <div style="text-align:center;"><strong>{% trans %}Create a question{% endtrans %}</strong></div>
 
+SHOW UPLOADS: {{show_uploader}}
 
               <p>{% trans %}Question:{% endtrans %}<input name="question" id="question" type="text" style="width:100%"></p>
 

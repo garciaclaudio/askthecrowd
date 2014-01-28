@@ -3,17 +3,18 @@ use strict;
 
 use Data::Dumper;
 use WebService::GData::YouTube;
+use JSON qw(to_json);
 
 #
-#1st line:
-#question text|question desc
-#Following lines:
-#search term|answer text|description (opt)
+# 1st line:
+# question text|question desc
+# Following lines:
+# search term|answer text|description (opt)
 #
 
 my $input_file = $ARGV[0];
 
-print "Reading from $input_file\n";
+print STDERR "Reading from $input_file\n";
 
 die "no input" if ! $input_file;
 
@@ -22,7 +23,7 @@ open(my $fh, '<', $input_file ) or die $!;
 my $first_line = <$fh>; chomp $first_line;
 my ($question, $question_desc) = split('\|', $first_line);
 
-print "QUESTION/DESC: $question / $question_desc\n";
+print STDERR "QUESTION/DESC: $question / $question_desc\n";
 
 my %output;
 
@@ -41,7 +42,7 @@ while( <$fh> ) {
     $answer_text ||= $search_term;
     $answer_desc ||= '';
 
-    print "Search term/text/desc: $search_term / $answer_text / $answer_desc\n";
+    print STDERR "Search term/text/desc: $search_term / $answer_text / $answer_desc\n";
 
     my %page;
 
@@ -72,7 +73,6 @@ while( <$fh> ) {
     
     @$videos;
 
-
     my @answers = map{
         { video_id => $_->video_id,
           answer_text => $_->title,
@@ -95,22 +95,24 @@ while( <$fh> ) {
         my $score = ( $num_likes - $num_dislikes ) / $view_count;
         my $category = $v->category;
         my $uploaded = $v->uploaded;        
-        print "    TITLE: $title\n";
-        print "    Score: $score\n";
-        print "    Duration: $duration\n";
-        print "    Views: $view_count\n";
-        print "    Num likes: $num_likes\n";
-        print "    Num dislikes: $num_dislikes\n";
-        print "    video id: $video_id\n";
-        print "    Desc: $description\n";    
-#        print Dumper( $uploaded );
-        print "    Genre: $genre\n\n";
+        print STDERR "    TITLE: $title\n";
+#        print STDERR "    Score: $score\n";
+#        print STDERR "    Duration: $duration\n";
+#        print STDERR "    Views: $view_count\n";
+#        print STDERR "    Num likes: $num_likes\n";
+#        print STDERR "    Num dislikes: $num_dislikes\n";
+#        print STDERR "    video id: $video_id\n";
+#        print STDERR "    Desc: $description\n";    
+#        print STDERR Dumper( $uploaded );
+#        print STDERR "    Genre: $genre\n\n";
     }
 
     push( @{ $output{answers} }, \%page );
 }
 
-print Dumper( \%output );
+print to_json( \%output );
+
+#print STDERR Dumper( \%output );
 
 __END__
 
