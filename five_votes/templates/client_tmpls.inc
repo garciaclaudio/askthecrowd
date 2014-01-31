@@ -130,14 +130,14 @@
 
 <div style="text-align:center;"><strong>{% trans %}Create a question{% endtrans %}</strong></div>
 
-SHOW UPLOADS: {{show_uploader}}
-
+{{ "{{if show_uploader}" }}}
+              <p><input type="file" name="upload_file"></p>
+{{ "{{else}" }}}
               <p>{% trans %}Question:{% endtrans %}<input name="question" id="question" type="text" style="width:100%"></p>
-
               <p>{% trans %}Description (optional):{% endtrans %}
               <textarea name="question_desc" id="question_desc" rows=2 style="width:100%"></textarea>
               </p>
-
+{{ "{{/if}" }}}
               <div style="text-align:center;">
                   <button type="submit" id="create_question_button" class="my_button">{% trans %}create{% endtrans %}</button>
              </div>

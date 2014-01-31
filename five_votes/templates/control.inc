@@ -191,7 +191,9 @@ function get_and_display_user_questions() {
 }
 
 function show_new_question() {
-    $('#main_container').html( $("#new_question_tmpl").tmpl({}));
+    $('#main_container').html( $("#new_question_tmpl").tmpl({
+       'show_uploader': {{show_uploader}},
+}));
     $('#main_container').fadeIn('fast');
     $('#question_form').ajaxForm({
          dataType:  'json', 
