@@ -614,6 +614,11 @@ class GetImage(BaseHandler2):
 class AjaxHandler(BaseHandler2):
 
     def handle_new_question(self):
+        upload_file = self.request.get("upload_file")
+        if upload_file:
+            print >> sys.stderr, 'UPLOADED...' + str( upload_file )
+            return { 'error' : 0 }
+
         question_text =  sanitize_html( self.request.get('question') )
         question_desc =  sanitize_html( self.request.get('question_desc') )
         error = ''
@@ -927,7 +932,6 @@ class AjaxHandler(BaseHandler2):
 
             results['friend_'+str(fv.user_id)].append([ str(fv.answer.key()), fv.num_votes ])
 
-
         loc_summaries = LocationSummary.gql( 'where question = :1', question )
 
         cc1_totals = {}
@@ -1115,6 +1119,9 @@ class AjaxHandler(BaseHandler2):
 
         if( action == 'vote' ):
             result_struct = self.handle_vote()
+
+        if( action == 'create_question' ):
+            result_struct = self.handle_new_question()
 
         self.response.headers['Content-Type'] = 'application/json'
         seri = json.dumps( result_struct )
