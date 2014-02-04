@@ -616,7 +616,28 @@ class AjaxHandler(BaseHandler2):
     def handle_new_question(self):
         upload_file = self.request.get("upload_file")
         if upload_file:
-            print >> sys.stderr, 'UPLOADED...' + str( upload_file )
+            file_data = json.loads( upload_file )
+#            pprint.pprint( file_data, sys.stderr);
+
+# HERE I AM:
+#
+#     Create top question
+#            Create sub question
+#                add answers to sub question
+#            Add sub question as answer to top question
+#
+# Modify js side to clear form and reload questions...
+# that's it
+
+            print >> sys.stderr, 'TOP QUESTION:...' + unicode( file_data['question'] )
+            print >> sys.stderr, 'TOP QUESTION DESC:...' + unicode( file_data['question_desc'] )
+
+            for page in file_data['answers']:
+                print >> sys.stderr, 'DOING...' + unicode( page['question'] )
+                for answer in page['answers']:
+                    print >> sys.stderr, '    ANS...' + unicode( answer['answer_text'] )
+                    
+
             return { 'error' : 0 }
 
         question_text =  sanitize_html( self.request.get('question') )
