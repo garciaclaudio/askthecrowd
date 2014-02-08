@@ -17,6 +17,19 @@ jQuery.fn.idle = function(time){
 };
 
 
+jQuery.extend({
+    handleError: function( s, xhr, status, e ) {
+        // If a local callback was specified, fire it
+        if ( s.error )
+            s.error( xhr, status, e );
+        // If we have some XML response text (e.g. from an AJAX call) then log it in the console
+        else if(xhr.responseText)
+            alert('why is form generating an error?' + xhr.responseText );
+//            console.log(xhr.responseText);
+    }
+});
+
+
 // XXX, change this when going live
 {% if IN_DEV_SERVER %}
 var images_base_url = 'http://localhost:8080';
@@ -195,6 +208,7 @@ function show_new_question() {
        'show_uploader': {{show_uploader}},
 }));
     $('#main_container').fadeIn('fast');
+
     $('#question_form').ajaxForm({
          dataType:  'json', 
          success: function(data) { 

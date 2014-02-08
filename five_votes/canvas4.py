@@ -632,6 +632,23 @@ class AjaxHandler(BaseHandler2):
             print >> sys.stderr, 'TOP QUESTION:...' + unicode( file_data['question'] )
             print >> sys.stderr, 'TOP QUESTION DESC:...' + unicode( file_data['question_desc'] )
 
+            new_question_id = Counter.get_next_question_id()
+            new_question = Question(
+                key_name = str(new_question_id),
+                user_id=self.current_user['id'],
+                question_text = unicode( file_data['question'] ),
+                question_desc = unicode( file_data['question_desc'] ),
+                language_code=str(self.selected_lang),
+            )
+            new_question.put()
+
+            result = { 'error' : 0,
+                       'file_uploaded_fine' : 1,
+                       'no_error' : 'request went fine, please reload',
+                       }
+
+            return result
+
             for page in file_data['answers']:
                 print >> sys.stderr, 'DOING...' + unicode( page['question'] )
                 for answer in page['answers']:
