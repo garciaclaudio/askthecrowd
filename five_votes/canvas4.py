@@ -633,25 +633,53 @@ class AjaxHandler(BaseHandler2):
             print >> sys.stderr, 'TOP QUESTION DESC:...' + unicode( file_data['question_desc'] )
 
             new_question_id = Counter.get_next_question_id()
-            new_question = Question(
+            top_question = Question(
                 key_name = str(new_question_id),
                 user_id=self.current_user['id'],
                 question_text = unicode( file_data['question'] ),
                 question_desc = unicode( file_data['question_desc'] ),
                 language_code=str(self.selected_lang),
             )
-            new_question.put()
+            top_question.put()
 
-            result = { 'error' : 0,
-                       'file_uploaded_fine' : 1,
-                       'no_error' : 'request went fine, please reload',
-                       }
-
-            return result
+#            result = { 'error' : 0,
+#                       'file_uploaded_fine' : 1,
+#                       'no_error' : 'request went fine, please reload',
+#                       }
+#
+#            return result
 
             for page in file_data['answers']:
+
+                new_question_id = Counter.get_next_question_id()
+                sub_question = Question(
+                    key_name = str(new_question_id),
+                    user_id=self.current_user['id'],
+                    question_text = unicode( page['question'] ),
+                    question_desc = unicode( page['question_desc'] ),
+                    language_code=str(self.selected_lang),
+                    )
+                sub_question.put()
+
+                # add sub_question as answer to top_question, with link
+                sub_ans = Answer(
+                    question=top_question,
+                    user_id=self.current_user['id'],
+                    answer_text = unicode(page['question']),
+                    link = '/q' + str(new_question_id)
+                    )
+                sub_ans.save()
+                
                 print >> sys.stderr, 'DOING...' + unicode( page['question'] )
                 for answer in page['answers']:
+                    sub_ans = Answer(
+                        question=sub_question,
+                        user_id=self.current_user['id'],
+                        answer_text = unicode(answer['answer_text']),
+                        video_id = answer['video_id'],
+                        )
+                    sub_ans.save()
+
                     print >> sys.stderr, '    ANS...' + unicode( answer['answer_text'] )
                     
 
