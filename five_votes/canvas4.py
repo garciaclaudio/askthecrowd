@@ -629,8 +629,8 @@ class AjaxHandler(BaseHandler2):
 # Modify js side to clear form and reload questions...
 # that's it
 
-            print >> sys.stderr, 'TOP QUESTION:...' + unicode( file_data['question'] )
-            print >> sys.stderr, 'TOP QUESTION DESC:...' + unicode( file_data['question_desc'] )
+#            print >> sys.stderr, 'TOP QUESTION:...' + unicode( file_data['question'].encode('utf-8') )
+#            print >> sys.stderr, 'TOP QUESTION DESC:...' + unicode( file_data['question_desc'].encode('utf-8') )
 
             new_question_id = Counter.get_next_question_id()
             top_question = Question(
@@ -670,7 +670,7 @@ class AjaxHandler(BaseHandler2):
                     )
                 sub_ans.save()
                 
-                print >> sys.stderr, 'DOING...' + unicode( page['question'] )
+#                print >> sys.stderr, 'DOING...' + unicode( page['question'] )
                 for answer in page['answers']:
                     sub_ans = Answer(
                         question=sub_question,
@@ -680,7 +680,7 @@ class AjaxHandler(BaseHandler2):
                         )
                     sub_ans.save()
 
-                    print >> sys.stderr, '    ANS...' + unicode( answer['answer_text'] )
+#                    print >> sys.stderr, '    ANS...' + unicode( answer['answer_text'] )
                     
 
             return { 'error' : 0 }

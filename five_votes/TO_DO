@@ -1,4 +1,76 @@
 
+
+TO-DO, before promoting...
+  Remover comentarios de FB.
+  Sustituir por comentarios por pág.
+  <comentarios>
+  </comentarios>
+  <Volver mas social>
+  </Volver mas social>
+  <mejoras UI>
+     Fotos cliqueables
+     Fotos de ancho de la tarjeta.
+     Botón reproducir todos los videos
+
+     Allow users to add answers? (yes/no)
+
+     Owner can delete added answers.
+
+  </mejoras UI>
+
+  <populate>
+      Crawl youtube to make list of search terms yourself.
+  </populate>
+
+  <bugs>
+     If no answer is added, and an answer is added in the question page, the "add new answer" link disappears behind the first answer card.
+     File upload answers get links pointing to /None.
+  </bugs>
+
+  <test>
+    Test multiple users
+    Test on ipad...
+    Clean up prints to STDERR
+  <test>
+
+HERE I AM
+
+    *  Remove comments side bar from questions page, move it to own page, add link to it from the footer.
+    * Agregar: "X número de respuestas, X número de votos" a preguntas recientes.
+    *  Add setting the following at question creation time:.
+       Category (from pinterest, modified: música, literatura, entretenimiento, etc.)
+    * Allow comments in answers, as in Pinterest. (En Pág de preguntas, permitir comentarios de los usuarios en cada respuesta (con checkbox "compartir en FB").
+    * Implement: click to see photo.
+    * URLs in questions and answers should be clickable.
+    * In results page: bundle all friends together, make it a sub-selector, like with provinces.
+    * BUG: when adding picture from prev-questions view, "add youtube link" does not go away.
+    * Video questions can have a link "view as playlist" to watch all vids in playlist.
+    * Show "my votes" tab in results page, allow modifying votes.
+    * Show "change my votes" link under "my votes" tab in results page. 
+    * La liga al website desde los comentarios lleva a "http://five-votes.appspot.com/q22"...
+    * La pág. de resultados no debe decir "cero votos", debe volver a decir "five votes".
+    * Photos should be stored as images (they load slowly).
+    * Questions from all users should be replaced by the planned recent-questions landing page.
+    * Photos in results page look distorted (square).
+    * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
+    * BUG: deleting an answer from prev. questions, will not rearrange cards.
+    * Once tested for a while, SUBMIT app details on FB so that it gets promoted / listed.
+
+<POSTP>
+</POSTP>
+
+
+======================================================================
+
+DEPLOYING (files to change)
+
+conf/settings.py
+
+
+======================================================================
+
+
+
 Hackathon project:
 
 Nearby holiday finder:
@@ -11,12 +83,10 @@ Output:
    A list of cities, with visitor counts and clickable links to Booking.com (with check-in/out dates).
 
 
-
 <TODO>
-    Finish script to harvest videos for a search term, select on most liked ratio, output file for upload into Fivevotes.
-    Add upload file functionality. Allow nested pages???    
-
-    Escribir a Giraldo.
+[DONE]    Finish script to harvest videos for a search term, select on most liked ratio, output file for upload into Fivevotes.
+[DONE]    Add upload file functionality. Allow nested pages???    
+    Escribir a Giraldo?
 </TODO>
 
 
@@ -304,9 +374,6 @@ Claudio
 </IN_PROGRESS>
 
 
-<bugs>
-    If no answer is added, and an answer is added in the question page, the "add new answer" link disappears behind the first answer card.
-</bugs>
 
 
 1. Finish "as is"
@@ -365,22 +432,18 @@ Claudio
 
 [DONE]  Remove music-video page form (revert commits?)
 
-        Instead, allow links. The 'add link' link appears below the question title, even after a video or image has been added. The question name will become a link to the URL. If an image is present, the image also becomes clickable. Clicked links replace current window. (Allow links, so that clickable answer names take you to a new board (to create a 100 composers page linking to composer pages)).
-
-        Allow users to add answers? (yes/no)
-
-        Owner can delete added answers.
+[DONE]        Instead, allow links. The 'add link' link appears below the question title, even after a video or image has been added. The question name will become a link to the URL. If an image is present, the image also becomes clickable. Clicked links replace current window. (Allow links, so that clickable answer names take you to a new board (to create a 100 composers page linking to composer pages)).
 
         Add play all videos / play top 10 videos link (only on results page)
 
-        Mechanize/youtube API script to find artist videos on youtube. Sorting criteria: likes / views ratio. Outputs csv files that can be uploaded to create artist pages.
+[DONE]        Mechanize/youtube API script to find artist videos on youtube. Sorting criteria: likes / views ratio. Outputs csv files that can be uploaded to create artist pages.
         https://metacpan.org/pod/WebService::GData::YouTube#DEPENDENCIES
 
-        <Allow csv / structured file uploaded input.>
-            Add link "upload answers".
-            File format: 
-                "answer text|description|video_id|link\n"
-        </Allow csv / structured file uploaded input.>
+[DONE]        <Allow csv / structured file uploaded input.>
+[DONE]            Add link "upload answers".
+[DONE]            File format: 
+[DONE]                "answer text|description|video_id|link\n"
+[DONE]        </Allow csv / structured file uploaded input.>
 
 [DONE]        Add links to results page.
 [DONE]        Style 'add link' links to not have underline.
@@ -393,7 +456,6 @@ Claudio
 
     </music focus>
 
-    Test on ipad...
 
     <proyecto: "las canciones mas famosas de mi país">
         Landing page. Comisionar personas en cada país del mundo para seleccionar las canciones.
@@ -410,26 +472,6 @@ Claudio
         Questions you have voted on, but that have new votes from your friends
     </social_discovery>
 
-    *  Remove comments side bar from questions page, move it to own page, add link to it from the footer.
-    * Agregar: "X número de respuestas, X número de votos" a preguntas recientes.
-    *  Add setting the following at question creation time:.
-       Category (from pinterest, modified: música, literatura, entretenimiento, etc.)
-    * Allow comments in answers, as in Pinterest. (En Pág de preguntas, permitir comentarios de los usuarios en cada respuesta (con checkbox "compartir en FB").
-    * Implement: click to see photo.
-    * URLs in questions and answers should be clickable.
-    * In results page: bundle all friends together, make it a sub-selector, like with provinces.
-    * BUG: when adding picture from prev-questions view, "add youtube link" does not go away.
-    * Video questions can have a link "view as playlist" to watch all vids in playlist.
-    * Show "my votes" tab in results page, allow modifying votes.
-    * Show "change my votes" link under "my votes" tab in results page. 
-    * La liga al website desde los comentarios lleva a "http://five-votes.appspot.com/q22"...
-    * La pág. de resultados no debe decir "cero votos", debe volver a decir "five votes".
-    * Photos should be stored as images (they load slowly).
-    * Questions from all users should be replaced by the planned recent-questions landing page.
-    * Photos in results page look distorted (square).
-    * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
-    * BUG: deleting an answer from prev. questions, will not rearrange cards.
-    * Once tested for a while, SUBMIT app details on FB so that it gets promoted / listed.
 </TODO>
 
 
@@ -1435,15 +1477,6 @@ Mas ideas:
 
     8. Best of...
        (people can add authors/musicians and lists (with links) to their works, and vote for the best works. E.g. Best of what composer page.
-
-
-======================================================================
-
-DEPLOYING (files to change)
-
-index.html
-tabbed_letter2.html
-ajax.py
 
 
 ======================================================================
