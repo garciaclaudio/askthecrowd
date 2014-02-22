@@ -1,21 +1,28 @@
 
 
+(El modelo alemán, como reproducirlo en México)
+
 TO-DO, before promoting...
-  Remover comentarios de FB.
-  Sustituir por comentarios por pág.
   <comentarios>
+      Remover comentarios de FB.
+      Sustituir por comentarios por pág.
+      Muy simple: columna centrada, de un ancho mínimo de X pixels. RET manda el comentario. CB publicar en FB premarcada.
   </comentarios>
+
   <Volver mas social>
   </Volver mas social>
+
   <mejoras UI>
-     Fotos cliqueables
+    * Video questions can have a link "view as playlist" to watch all vids in playlist.
+     Fotos cliqueables (Implement: click to see photo)
+     * Photos should be stored as images (they load slowly).
      Fotos de ancho de la tarjeta.
      Botón reproducir todos los videos
-
      Allow users to add answers? (yes/no)
-
      Owner can delete added answers.
-
+     Remove comments side bar from questions page
+     * Show "my votes" tab in results page
+     * La pág. de resultados no debe decir "cero votos", debe volver a decir "five votes".
   </mejoras UI>
 
   <populate>
@@ -23,8 +30,11 @@ TO-DO, before promoting...
   </populate>
 
   <bugs>
+     * BUG: when adding picture from prev-questions view, "add youtube link" does not go away.
      If no answer is added, and an answer is added in the question page, the "add new answer" link disappears behind the first answer card.
      File upload answers get links pointing to /None.
+    * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
+    * BUG: deleting an answer from prev. questions, will not rearrange cards.
   </bugs>
 
   <test>
@@ -33,31 +43,24 @@ TO-DO, before promoting...
     Clean up prints to STDERR
   <test>
 
-HERE I AM
 
-    *  Remove comments side bar from questions page, move it to own page, add link to it from the footer.
+  <POSTP>
+    * Questions from all users should be replaced by the planned recent-questions landing page.
+    * Add pagination to recent questions landing page.
+    * URLs in questions and answers should be clickable.
     * Agregar: "X número de respuestas, X número de votos" a preguntas recientes.
     *  Add setting the following at question creation time:.
-       Category (from pinterest, modified: música, literatura, entretenimiento, etc.)
-    * Allow comments in answers, as in Pinterest. (En Pág de preguntas, permitir comentarios de los usuarios en cada respuesta (con checkbox "compartir en FB").
-    * Implement: click to see photo.
-    * URLs in questions and answers should be clickable.
-    * In results page: bundle all friends together, make it a sub-selector, like with provinces.
-    * BUG: when adding picture from prev-questions view, "add youtube link" does not go away.
-    * Video questions can have a link "view as playlist" to watch all vids in playlist.
-    * Show "my votes" tab in results page, allow modifying votes.
-    * Show "change my votes" link under "my votes" tab in results page. 
-    * La liga al website desde los comentarios lleva a "http://five-votes.appspot.com/q22"...
-    * La pág. de resultados no debe decir "cero votos", debe volver a decir "five votes".
-    * Photos should be stored as images (they load slowly).
-    * Questions from all users should be replaced by the planned recent-questions landing page.
-    * Photos in results page look distorted (square).
-    * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
-    * BUG: deleting an answer from prev. questions, will not rearrange cards.
-    * Once tested for a while, SUBMIT app details on FB so that it gets promoted / listed.
+       Category (from pinterest, modified: música, literatura, entretenimiento, etc.) --may not do
+    * Allow comments in answers, as in Pinterest. (En Pág de preguntas, permitir comentarios de los usuarios en cada respuesta (con checkbox "compartir en FB"). --comments are per page
+    * In results page: bundle all friends together, make it a sub-selector, like with provinces (All my friends)
+    * allow modifying own votes in results page (Show "change my votes" link under "my votes" tab in results page).
+[NOT NEEDED?] * La liga al website desde los comentarios lleva a "http://five-votes.appspot.com/q22"... (not needed, FB comments ate going away).
+  </POSTP>
 
-<POSTP>
-</POSTP>
+HERE I AM
+
+[DONE]    * Photos in results page look distorted (square).
+[DONE]    * Once tested for a while, SUBMIT app details on FB so that it gets promoted / listed.
 
 
 ======================================================================

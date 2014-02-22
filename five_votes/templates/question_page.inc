@@ -1,12 +1,15 @@
 <div id="main_container">
 </div> <!-- main container -->
 
-<div class="comments_box">
-          <div style="float:left;padding-top:20px;"><div class="fb-comments" data-href="{{BASE_URL}}/q{{question_key_name}}" data-num-posts="4" data-width="450"></div></div>
+<br />
 
-<!-- <div style="clear:both;float:left;margin-left:10px;padding:10px;" id="faces_div"></div> -->
-
+<div class="vote_link add_ans_class add_ans_link">
+      <div class="mytube">
+        <a href="#" onclick="add_ans_link_func();return false;">{% trans %}comment{% endtrans %}</a>
+      </div>
 </div>
+
+<br />
 
 <div class="vote_link add_ans_class add_ans_link" style="margin-bottom:20px;">
     <div class="mytube">
