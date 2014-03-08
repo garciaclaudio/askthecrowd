@@ -158,3 +158,7 @@ function show_question_for_welcome() {
 }
 
 
+function add_comment_func() {
+
+         alert('here I am, hide link, show form, etc.');
+}
