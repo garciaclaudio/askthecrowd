@@ -159,6 +159,6 @@ function show_question_for_welcome() {
 
 
 function add_comment_func() {
-
-         alert('here I am, hide link, show form, etc.');
+    $('#add_comment').show();
+    $('#comment_link').hide();
 }

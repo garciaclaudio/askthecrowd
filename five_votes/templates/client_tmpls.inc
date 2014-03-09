@@ -176,6 +176,8 @@
 
 <br />
 
+    {% include "templates/comments.inc" %}
+
     <div class="vote_link add_ans_class add_ans_link">
       <div class="mytube">
         <a href="#" onclick="add_ans_link_func();return false;">{% trans %}suggest new answer{% endtrans %}</a>
