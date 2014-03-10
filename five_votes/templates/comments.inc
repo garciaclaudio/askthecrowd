@@ -1,13 +1,13 @@
 
 <div id="comments_div">
 
-    <div class="results_card" style="width: 450px;"> 
+    <div class="results_card comments_card" style="width: 450px;"> 
         <div class="results_text">
 A comment
         </div>  
     </div>  
 
-    <div class="results_card" style="width:450px;"> 
+    <div class="results_card comments_card" style="width:450px;"> 
         <div class="results_text">
 A comment
         </div>  

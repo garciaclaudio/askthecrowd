@@ -372,7 +372,7 @@ function dynamicSort(ans_hash) {
 }
 
 function _set_results_width() {
-//    var parent_width = $(window).width();
+
     var parent_width = $('#main_container').width();
     if( parent_width > 400 ) {
        $('.results_card').width(450);
@@ -502,49 +502,6 @@ function show_province_selector( data, results, id, text, selected ) {
 
           show_data( data, results );
      } );
-}
-
-
-
-function show_results( data ) {
-    $('#main_container').fadeOut('fast');
-
-    $('#main_container').html( $("#show_results_tmpl").tmpl({
-            'owner_id' : data.owner_id,
-            'owner_name' : data.owner_name,
-            'question_text': data.question_text,
-            'question_desc': data.question_desc,
-            'question_key_name': data.question_key_name,
-          }));
-
-    show_selector(data, data.results['all'], 'all', '{% trans %}All{% endtrans %}', 1 );
-    show_selector(data, data.results['female'], 'female', '{% trans %}Women{% endtrans %}', 0 );
-    show_selector(data, data.results['male'], 'male', '{% trans %}Men{% endtrans %}', 0 );
-
-//    for (var i = 0; i < 20; i++) {
-//        show_selector(data, data.results['male'], 'male_'+i , '{% trans %}Men{% endtrans %}', 0 );
-//    }
-
-    for (var cc1 in data.results['country']) {
-       show_selector(data, data.results['country'][cc1], 'cc1_' + cc1, data.patronimics[cc1], 0 );
-    }
-
-
-    for (var i = 0; i < data.friends_with_votes.length; i++) {
-        friend_id = 'friend_' + data.friends_with_votes[i].user_id;
-        show_selector(data, data.results[friend_id], friend_id, data.friends_with_votes[i].name, 0 );
-    }
-
-    show_data( data, data.results['all'] );
-
-// foreach all, women, men, friend list
-//   add and bind a result_selector link
-//   "all" is selected by default
-//   have a global var keeping track of what's selected
-//   when something new is selected:
-//      (hide link, show span) of new, unselect previous (hide span, show link)
-
-    $('#main_container').fadeIn('fast');
 }
 
 
@@ -767,6 +724,7 @@ window.fbAsyncInit = function() {
 
         {% if question is defined %}
             show_question_for_voting();
+            show_comments();
 
             // call here to immediately center
             $('#answers_div').masonry({
@@ -816,6 +774,8 @@ window.fbAsyncInit = function() {
 
                 {% if question is defined %}
                      show_question_for_welcome();
+                     show_comments();
+
                      $('.answer_picture').imagesLoaded(
                      function(){ 
                           $('#answers_div').masonry({

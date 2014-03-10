@@ -539,7 +539,7 @@ a.video_link:hover {text-decoration:underline;}  /* mouse over link */
 
 #comments_div {
     padding:0px;
-/*    display:table; */
+    display:table;
     text-align: center;
     margin-left:auto; 
     margin-right:auto;
