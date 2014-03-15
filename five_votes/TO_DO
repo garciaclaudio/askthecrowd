@@ -14,6 +14,8 @@ TO-DO, before promoting...
       Remover comentarios de FB.
       Sustituir por comentarios por pág.
       Muy simple: columna centrada, de un ancho mínimo de X pixels. RET manda el comentario. CB publicar en FB premarcada.
+==> HR I'M ==>   Forma del mismo ancho que los comentarios. Centrada, aparece siempre. Con CB "compartir en Facebook" pre-marcado. Comentarios con tacha en esquina sup-der para borrar.
+
   </comentarios>
 
   <Volver mas social>
@@ -37,11 +39,13 @@ TO-DO, before promoting...
   </populate>
 
   <bugs>
-     * BUG: when adding picture from prev-questions view, "add youtube link" does not go away.
+    * BUG: when adding picture from prev-questions view, "add youtube link" does not go away.
      If no answer is added, and an answer is added in the question page, the "add new answer" link disappears behind the first answer card.
      File upload answers get links pointing to /None.
     * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
     * BUG: deleting an answer from prev. questions, will not rearrange cards.
+    * For just-added user-suggested answer, voting does not show whirly thing. Reloading makes it work.
+    * Make sure users can remove their user-added answers.
   </bugs>
 
   <test>

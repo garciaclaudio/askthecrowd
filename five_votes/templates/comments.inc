@@ -6,17 +6,31 @@
 A comment
         </div>  
     </div>  
+<br/>
+    <div class="results_card comments_card" style="width:450px;">
+        <div class="delete_answer_div"><a class="delete_comment_link" href="#"><b>x</b></a></div>
 
-    <div class="results_card comments_card" style="width:450px;"> 
-        <div class="results_text">
-A comment
+        <div class="comments_text">
+            <a href="#">Claudio Garcia:</a> A comment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment. (date here in gray, not now...)
         </div>  
+    </div>  
+<br/>
+    <div class="results_card comments_card" style="width:450px;text-align:center;"> 
+      <div class="mytube">
+         <form id="comment_form" action="/ajax.html" method="get">
+            <input type="hidden" name="question_key_name" value="${question_key_name}">
+            <input type="hidden" name="action" value="add_comment">
+
+<textarea rows=1 id="new_answer" name="comment_text"></textarea>
+
+&nbsp;<button type="submit">{% trans %}comment{% endtrans %}</button>
+         </form>
+      </div>  
     </div>  
 
 </div>
 
-
-<div id="add_comment" class="add_ans_class" style="display:none;">
+<div id="add_comment" class="add_ans_class" style="display:none;width:450px;">
       <div class="mytube">
          <form id="comment_form" action="/ajax.html" method="get">
             <input type="hidden" name="question_key_name" value="${question_key_name}">
