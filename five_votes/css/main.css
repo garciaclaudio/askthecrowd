@@ -552,5 +552,8 @@ a.video_link:hover {text-decoration:underline;}  /* mouse over link */
   margin: 10px;
 }
 
+.comments_card {
+padding: 10px;
+}
 
 

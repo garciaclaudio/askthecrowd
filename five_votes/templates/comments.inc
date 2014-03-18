@@ -12,20 +12,19 @@ A comment
 
         <div class="comments_text">
             <a href="#">Claudio Garcia:</a> A comment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment. (date here in gray, not now...)
-        </div>  
+        </div>
     </div>  
 <br/>
-    <div class="results_card comments_card" style="width:450px;text-align:center;"> 
-      <div class="mytube">
+    <div class="results_card comments_card" style="width:450px;"> 
          <form id="comment_form" action="/ajax.html" method="get">
             <input type="hidden" name="question_key_name" value="${question_key_name}">
             <input type="hidden" name="action" value="add_comment">
 
-<textarea rows=1 id="new_answer" name="comment_text"></textarea>
-
-&nbsp;<button type="submit">{% trans %}comment{% endtrans %}</button>
+<textarea rows=2 id="comment_box" name="comment_text" style="width:97%"></textarea>
+<input type="checkbox" name="post_to_fb" value="post_to_fb" checked>{% trans %}Share on Facebook{% endtrans %}<br/>
+<button type="submit">{% trans %}comment{% endtrans %}</button>
          </form>
-      </div>  
+
     </div>  
 
 </div>
