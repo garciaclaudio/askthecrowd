@@ -4,7 +4,7 @@
         <div class="delete_answer_div"><a class="delete_comment_link" href="#"><b>x</b></a></div>
 
         <div class="comments_text">
-            <a href="#">Claudio Garcia:</a> A comment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment. (date here in gray, not now...)
+            <a href="#">Claudio Garcia:</a> Dummy! A comment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment. (date here in gray, not now...)
         </div>
     </div>
 <br/>
@@ -12,7 +12,7 @@
         <div class="delete_answer_div"><a class="delete_comment_link" href="#"><b>x</b></a></div>
 
         <div class="comments_text">
-            <a href="#">Claudio Garcia:</a> A comment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment. (date here in gray, not now...)
+            <a href="#">Claudio Garcia:</a> Dummy! A comment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment. (date here in gray, not now...)
         </div>
     </div>
 </div>
