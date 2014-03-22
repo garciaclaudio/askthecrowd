@@ -274,6 +274,15 @@ class ResultsSummary(db.Model):
     female_votes = db.IntegerProperty()
 
 
+class MyComment(db.Model):
+    question = db.ReferenceProperty(Question)
+    user_id = db.StringProperty(required=True)
+    comment_text = db.StringProperty(multiline=True)
+    created = db.DateTimeProperty(auto_now_add=True)
+    def owner(self):
+        return User.gql(u'WHERE user_id = :1', self.user_id).fetch(1)[0]
+
+
 class QuestionException(Exception):
     pass
 
@@ -618,9 +627,6 @@ class AjaxHandler(BaseHandler2):
         if upload_file:
             file_data = json.loads( upload_file )
 #            pprint.pprint( file_data, sys.stderr);
-
-# HERE I AM:
-#
 #     Create top question
 #            Create sub question
 #                add answers to sub question
@@ -628,7 +634,6 @@ class AjaxHandler(BaseHandler2):
 #
 # Modify js side to clear form and reload questions...
 # that's it
-
 #            print >> sys.stderr, 'TOP QUESTION:...' + unicode( file_data['question'].encode('utf-8') )
 #            print >> sys.stderr, 'TOP QUESTION DESC:...' + unicode( file_data['question_desc'].encode('utf-8') )
 
@@ -1172,6 +1177,36 @@ class AjaxHandler(BaseHandler2):
         return result
 
 
+    def handle_new_comment(self):
+        comment_text = sanitize_html( self.request.get('comment_text') )
+        error = ''
+        if comment_text == "":
+            error = '* ' + _("Comment text cannot be empty.");
+
+        question = Question.get_by_key_name( self.request.get('question_key_name') );
+
+        if( question is None ): 
+            error_msg = _("Question not found. Should not happen.")
+            return { 'error_msg' : error_msg }
+
+        if error:
+            result = { 'error' : error }
+        else:
+            new_comment = MyComment(
+                question=question,
+                user_id=self.current_user['id'],
+                comment_text = unicode(comment_text),
+            )
+            new_comment.save()
+            result = { 'error' : 0,
+                       'comment_text' : unicode(comment_text),
+                       'answer_key' : str(new_comment.key()),
+                       'owner_name' : unicode(self.current_user['name']),
+                       'owner_id' : self.current_user['id'],
+                       'video_id' : u'None',
+                       }
+        return result
+
     def post(self):
         print >> sys.stderr, '========  AT AJAX HANDLER POST==============='
         result_struct = { 'error' : '1' }
@@ -1230,11 +1265,12 @@ class AjaxHandler(BaseHandler2):
         if( action == 'set_cc_and_province' ):
             result_struct = self.handle_set_cc_and_province()
 
+        if( action == 'add_comment' ):
+            result_struct = self.handle_new_comment()
 
         self.response.headers['Content-Type'] = 'application/json'
         seri = json.dumps( result_struct )
         self.response.out.write(seri)
-
 
 
 class QuestionHandler(BaseHandler2):

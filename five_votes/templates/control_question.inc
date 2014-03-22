@@ -1,24 +1,9 @@
 
-function show_comments() {
-
-// call this from show_question_for_voting / show_question_for_welcome
-
-//
-// load comments after page is done, with an ajax call 
-//
-// if there are comments, add them using template calls, and show the comment form, hide the link
-//
-// (if user owns the comment, show delete link)
-//
-// if there are no comments, show the link, hide the comment form
-//
-// (if called from welcome view, do not allow form submission)
-
-}
-
 var answers = {};
 
 function show_question_for_voting() {
+
+     show_comments();
 
      if( '{{votes_left}}' == 0 ) {
         $.getJSON("ajax.html?action=get_results;question_key_name={{question_key_name}}",
@@ -240,4 +225,35 @@ function show_comments() {
     $(window).on("debouncedresize", function( event ) {
         _set_comments_width();
     });
+
+    $('#comment_link').show();
+
+    // bind "comment" click
+    $('#comment_form').ajaxForm({
+         dataType:  'json', 
+         success: function(data) { 
+             if( data.error ) {
+                 alert( data.error );
+             } else {
+                //clean comment form
+                $('#comment_box').val('');
+                alert('add comment to page');
+             }
+         }
+    });
+
+
+// call this from show_question_for_voting / show_question_for_welcome
+//
+// load comments after page is done, with an ajax call 
+//
+// if there are comments, add them using template calls, and show the comment form, hide the link
+//
+// (if user owns the comment, show delete link)
+//
+// if there are no comments, show the link, hide the comment form
+//
+// (if called from welcome view, do not allow form submission)
+
 }
+

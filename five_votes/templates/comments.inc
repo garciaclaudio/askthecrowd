@@ -1,5 +1,6 @@
 
 <div id="comments_div">
+
     <div class="results_card comments_card" style="width:450px;">
         <div class="delete_answer_div"><a class="delete_comment_link" href="#"><b>x</b></a></div>
 
@@ -28,7 +29,7 @@
          </form>
 </div>  
 
-<div id="comment_link" class="vote_link add_ans_class">
+<div id="comment_link" class="vote_link add_ans_class" style="display:none;">
       <div class="mytube">
         <a href="#" onclick="add_comment_func();return false;">{% trans %}comment{% endtrans %}</a>
       </div>
