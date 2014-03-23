@@ -222,9 +222,24 @@ function _set_comments_width() {
 function show_comments() {
 
     _set_comments_width();
+
     $(window).on("debouncedresize", function( event ) {
         _set_comments_width();
     });
+
+
+    // load comments after page is done, with an ajax call 
+    $.getJSON("ajax.html?action=get_comments;question_key_name={{question_key_name}}",
+         function(data){
+
+    for (var i = 0; i < data.comments.length; i++) {
+        comment_text = data.comments[i].comment_text;
+        alert(comment_text);
+        alert(data.comments[i].owner_name);
+    }
+
+          }
+    );
 
     $('#comment_link').show();
 
@@ -245,7 +260,6 @@ function show_comments() {
 
 // call this from show_question_for_voting / show_question_for_welcome
 //
-// load comments after page is done, with an ajax call 
 //
 // if there are comments, add them using template calls, and show the comment form, hide the link
 //

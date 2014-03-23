@@ -224,7 +224,7 @@ class Answer(db.Model):
     video_id = db.StringProperty()
     link = db.StringProperty()
     def owner(self):
-        return User.gql(u'WHERE user_id = :1', self.user_id).fetch(1)[0]
+        return User.gql(u'WHERE id = :1', self.user_id).fetch(1)[0]
 
 
 class UserVotedQuestions(db.Model):
@@ -280,8 +280,7 @@ class MyComment(db.Model):
     comment_text = db.StringProperty(multiline=True)
     created = db.DateTimeProperty(auto_now_add=True)
     def owner(self):
-        return User.gql(u'WHERE user_id = :1', self.user_id).fetch(1)[0]
-
+        return User.gql(u'WHERE id = :1', self.user_id).fetch(1)[0]
 
 class QuestionException(Exception):
     pass
@@ -967,6 +966,27 @@ class AjaxHandler(BaseHandler2):
         result_struct = { 'answer_key': answer_key, 'new_count' : my_vote.num_votes, 'votes_left' : votes_left }
         return result_struct
 
+    def handle_get_comments(self):
+        question = Question.get_by_key_name( self.request.get('question_key_name') );
+        comments = MyComment.gql( 'where question = :1', question )
+
+        comm_struct = []
+        for comment in comments:
+
+            owner_name = unicode( comment.owner().name )
+
+            comm_data = {
+                'owner_name' : owner_name,
+                'comment_key' : str(comment.key()),
+                'comment_text' : unicode(comment.comment_text),
+                }
+
+            comm_struct.append( comm_data )
+
+        result_struct = { 'comments': comm_struct }
+        return result_struct
+
+
     def handle_get_results(self):
         friends = {}
         friend_ids = []
@@ -1267,6 +1287,10 @@ class AjaxHandler(BaseHandler2):
 
         if( action == 'add_comment' ):
             result_struct = self.handle_new_comment()
+
+        if( action == 'get_comments' ):
+            result_struct = self.handle_get_comments()
+
 
         self.response.headers['Content-Type'] = 'application/json'
         seri = json.dumps( result_struct )
