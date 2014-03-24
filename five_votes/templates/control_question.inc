@@ -231,14 +231,13 @@ function show_comments() {
     // load comments after page is done, with an ajax call 
     $.getJSON("ajax.html?action=get_comments;question_key_name={{question_key_name}}",
          function(data){
-
-    for (var i = 0; i < data.comments.length; i++) {
-        comment_text = data.comments[i].comment_text;
-        alert(comment_text);
-        alert(data.comments[i].owner_name);
-    }
-
-          }
+             for (var i = 0; i < data.comments.length; i++) {
+                 comment_text = data.comments[i].comment_text;
+                 alert(comment_text);
+                 alert(data.comments[i].by_user);
+                 alert(data.comments[i].owner_name);
+             }
+         }
     );
 
     $('#comment_link').show();

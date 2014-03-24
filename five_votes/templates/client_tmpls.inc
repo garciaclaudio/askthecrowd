@@ -499,3 +499,17 @@
     </div>
 </script>
 
+
+<script id="show_comment_tmpl" type="text/html">
+
+XXX, here I AM
+
+    <div class="results_card comments_card" style="width:450px;">
+        <div class="delete_answer_div"><a class="delete_comment_link" href="#"><b>x</b></a></div>
+
+        <div class="comments_text">
+            <a href="#">Claudio Garcia:</a> Dummy! A comment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment, a commment. (date here in gray, not now...)
+        </div>
+    </div>
+
+</script>

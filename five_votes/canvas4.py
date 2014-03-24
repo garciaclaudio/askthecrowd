@@ -975,7 +975,12 @@ class AjaxHandler(BaseHandler2):
 
             owner_name = unicode( comment.owner().name )
 
+            by_user = 0
+            if comment.user_id == self.current_user['id']:
+                by_user = 1
+
             comm_data = {
+                'by_user' : by_user,
                 'owner_name' : owner_name,
                 'comment_key' : str(comment.key()),
                 'comment_text' : unicode(comment.comment_text),
