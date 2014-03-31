@@ -167,9 +167,6 @@ def select_random(lst, limit):
     return final
 
 
-
-
-_USER_FIELDS = u'name,created,updated,profile_url,access_token'
 class User(db.Model):
     id = db.StringProperty(required=True)
     created = db.DateTimeProperty(auto_now_add=True)
@@ -579,6 +576,7 @@ class RecentQuestions(BaseHandler2):
         questions_dict = {}
         for q in questions.run(limit=5):
            questions_dict[ q.key().name() ] = 1
+
            questions_struct.append( {
                     'question_key_name' : str(q.key().name()),
                     'question_text' : unicode(q.question_text),

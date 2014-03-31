@@ -1,9 +1,15 @@
 
 
+diff /home/claudio/tmp/new_appengine/google_appengine/google/appengine/api/urlfetch_stub.py /home/claudio/google_appengine/google/appengine/api/urlfetch_stub.py
+http://en.kioskea.net/faq/2279-installing-a-light-http-proxy-server-tinyproxy
+
+
 <TODO>
     P2P lending using Facebook friends as moral recommenders. Un sistema de puntos.
     Ver como funcionan sistemas existentes... Pedir un préstamo para saldar Santander, Wells, y ventanas.
     Can it work?
+    ALSO: Seguro Médico para perros y gatos.
+        Credencial, inscripción en línea, etc..
 </TODO>
 
 
@@ -395,10 +401,6 @@ Hey Eduardo,
 Claudio
 
 
-
-<IN_PROGRESS (classifications)>
-
-</IN_PROGRESS>
 
 
 

@@ -5,22 +5,28 @@ import jinja2
 import os, sys
 import pprint
 
-from google.appengine.api import urlfetch
+import urllib2
 
-os.environ['http_proxy'] = 'http://webproxy.corp.booking.com:3128'
-os.environ['https_proxy'] = 'http://webproxy.corp.booking.com:3128'
+#from google.appengine.api import urlfetch
 
 config = {}
 
 class HomeHandler(webapp2.RequestHandler):
     def get(self):
-        print >> sys.stderr, '=============== HERE I AM =============='
+        print >> sys.stderr, '=============== HERE I AM, FETCHING URL =============='
         template = jinja_environment.get_template('test_app.html')
 
-        result = urlfetch.fetch('http://www.google.com')
+#        proxy = urllib2.ProxyHandler({'https': 'localhost:8888'})
+#        opener = urllib2.build_opener(proxy)
+#        urllib2.install_opener(opener)
+        response = urllib2.urlopen("https://www.google.nl").read()
+
+#        print >> sys.stderr, '===============' + str(response)
+#        result = urlfetch.fetch('http://www.google.com')
 
         self.response.out.write(template.render(dict(
-            some_variable=result.content
+            some_variable=str(response)
+#            some_variable=result.content
         )))
 
 
