@@ -1223,10 +1223,9 @@ class AjaxHandler(BaseHandler2):
             new_comment.save()
             result = { 'error' : 0,
                        'comment_text' : unicode(comment_text),
-                       'answer_key' : str(new_comment.key()),
+                       'comment_key' : str(new_comment.key()),
                        'owner_name' : unicode(self.current_user['name']),
                        'owner_id' : self.current_user['id'],
-                       'video_id' : u'None',
                        }
         return result
 
