@@ -529,8 +529,17 @@ def get_access_token_from_code(code, redirect_uri, app_id, app_secret):
     }
     # We would use GraphAPI.request() here, except for that the fact
     # that the response is a key-value pair, and not JSON.
+
+#
+# CG: MAYBE replace for dev
     response = urllib.urlopen("https://graph.facebook.com/oauth/access_token" +
                               "?" + urllib.urlencode(args)).read()
+
+#    proxy = urllib2.ProxyHandler({'https': 'localhost:8888'})
+#    opener = urllib2.build_opener(proxy)
+#    urllib2.install_opener(opener)
+#    response = urllib2.urlopen("https://graph.facebook.com/oauth/access_token" + "?" + urllib.urlencode(args)).read()
+
     query_str = parse_qs(response)
     if "access_token" in query_str:
         result = {"access_token": query_str["access_token"][0]}

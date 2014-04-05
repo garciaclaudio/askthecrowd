@@ -228,20 +228,6 @@ function show_comments() {
     });
 
 
-    // load comments after page is done, with an ajax call 
-    $.getJSON("ajax.html?action=get_comments;question_key_name={{question_key_name}}",
-         function(data){
-             for (var i = 0; i < data.comments.length; i++) {
-                 comment_text = data.comments[i].comment_text;
-                 alert(comment_text);
-                 alert(data.comments[i].by_user);
-                 alert(data.comments[i].owner_name);
-             }
-         }
-    );
-
-    $('#comment_link').show();
-
     // bind "comment" click
     $('#comment_form').ajaxForm({
          dataType:  'json', 
@@ -256,6 +242,25 @@ function show_comments() {
          }
     });
 
+    // load comments after page is done, with an ajax call 
+    $.getJSON("ajax.html?action=get_comments;question_key_name={{question_key_name}}",
+         function(data){
+             for (var i = 0; i < data.comments.length; i++) {
+                 $('#comments_div').append( $("#show_comment_tmpl").tmpl({
+                     'owner_id' : data.comments[i].by_user,
+                     'owner_name' : data.comments[i].owner_name,
+                     'comment_text': data.comments[i].comment_text,
+                     'comment_key' : data.comments[i].comment_key,
+                 }));
+             }
+
+             if( data.comments.length > 0 ) {
+                  add_comment_func();
+             } else {
+                 $('#comment_link').show();
+             }
+         }
+    );
 
 // call this from show_question_for_voting / show_question_for_welcome
 //

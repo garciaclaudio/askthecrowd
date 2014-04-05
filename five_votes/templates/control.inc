@@ -724,7 +724,6 @@ window.fbAsyncInit = function() {
 
         {% if question is defined %}
             show_question_for_voting();
-            show_comments();
 
             // call here to immediately center
             $('#answers_div').masonry({
