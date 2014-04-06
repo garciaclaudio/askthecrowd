@@ -255,7 +255,7 @@ function show_comments() {
          function(data){
              for (var i = 0; i < data.comments.length; i++) {
                  $('#comments_div').append( $("#show_comment_tmpl").tmpl({
-                     'owner_id' : data.comments[i].by_user,
+                     'by_user' : data.comments[i].by_user,
                      'owner_name' : data.comments[i].owner_name,
                      'comment_text': data.comments[i].comment_text,
                      'comment_key' : data.comments[i].comment_key,
@@ -270,6 +270,15 @@ function show_comments() {
          }
     );
 
+    // catch delete clicks
+    $('#comments_div').on("click", ".delete_comment_link", function() {
+        $.getJSON("ajax.html?action=delete_comment;comment_key=" + $(this).attr('comment_key'),
+            function(data){
+alert('hello, delete me truly, here I am ' + data.deleted_comment_key);
+            }
+        );
+    });
+
 // call this from show_question_for_voting / show_question_for_welcome
 //
 //
@@ -282,4 +291,3 @@ function show_comments() {
 // (if called from welcome view, do not allow form submission)
 
 }
-

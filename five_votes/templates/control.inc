@@ -197,7 +197,6 @@ function get_and_display_user_questions() {
                          question_key_name_to_delete = key;
                          $('#confirm_delete_question_div').html(existing_usr_questions[key]);
                          $( "#dialog-confirm" ).dialog('open');
-
                  });
              }
     );

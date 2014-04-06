@@ -990,6 +990,16 @@ class AjaxHandler(BaseHandler2):
         return result_struct
 
 
+    def handle_delete_comment(self):
+        comment = MyComment.get_by_key_name( self.request.get('comment_key') )
+
+        result = { 'error' : 0,
+                   'deleted_comment_key' : str(self.request.get('comment_key')),
+                   }
+
+        return result
+
+
     def handle_get_results(self):
         friends = {}
         friend_ids = []
@@ -1293,6 +1303,8 @@ class AjaxHandler(BaseHandler2):
         if( action == 'get_comments' ):
             result_struct = self.handle_get_comments()
 
+        if( action == 'delete_comment' ):
+            result_struct = self.handle_delete_comment()
 
         self.response.headers['Content-Type'] = 'application/json'
         seri = json.dumps( result_struct )
