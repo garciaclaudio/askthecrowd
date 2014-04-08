@@ -52,6 +52,7 @@ TO-DO, before promoting...
     * BUG: deleting an answer from prev. questions, will not rearrange cards.
     * For just-added user-suggested answer, voting does not show whirly thing. Reloading makes it work.
     * Make sure users can remove their user-added answers.
+    * removing a question shouls remove question comments
   </bugs>
 
   <test>

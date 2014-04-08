@@ -991,7 +991,11 @@ class AjaxHandler(BaseHandler2):
 
 
     def handle_delete_comment(self):
-        comment = MyComment.get_by_key_name( self.request.get('comment_key') )
+        comment = MyComment.get( self.request.get('comment_key') )
+
+        # is the owner deleting this?
+        if comment.user_id == self.current_user['id']:
+            comment.delete();
 
         result = { 'error' : 0,
                    'deleted_comment_key' : str(self.request.get('comment_key')),

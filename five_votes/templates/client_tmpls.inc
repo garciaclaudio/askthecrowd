@@ -501,7 +501,7 @@
 
 
 <script id="show_comment_tmpl" type="text/html">
-    <br />
+   <div id="comment_${comment_key}">
     <div class="results_card comments_card" style="width:450px;">
 {{ "{{if by_user}" }}}
     <div class="delete_answer_div"><a class="delete_comment_link" comment_key=${comment_key} href="#"><b>x</b></a></div>
@@ -510,6 +510,7 @@
             <a href="#">${owner_name}:</a> ${comment_text}
         </div>
     </div>
+  </div>
 </script>
 
 

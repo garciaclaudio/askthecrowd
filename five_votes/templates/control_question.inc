@@ -274,7 +274,7 @@ function show_comments() {
     $('#comments_div').on("click", ".delete_comment_link", function() {
         $.getJSON("ajax.html?action=delete_comment;comment_key=" + $(this).attr('comment_key'),
             function(data){
-alert('hello, delete me truly, here I am ' + data.deleted_comment_key);
+                $('#comment_' + data.deleted_comment_key).hide();
             }
         );
     });
