@@ -1,5 +1,6 @@
 
 var answers = {};
+var pic_key_for_posting = '';
 
 function show_question_for_voting() {
 
@@ -104,6 +105,7 @@ function show_question_for_voting() {
 
       {% if ans.has_pic %}
           $('#picture_' + '{{ans.answer_key}}').html( $("#show_pic_tmpl").tmpl({'answer_key': '{{ans.answer_key}}'} ));
+          pic_key_for_posting = '{{ans.answer_key}}';
       {% endif %}
 
       {% if ans.video_id != 'None' %}
@@ -227,9 +229,6 @@ function show_comments() {
         _set_comments_width();
     });
 
-
-    $('#add_comment').show();
-
     // bind "comment" click
     $('#comment_form').ajaxForm({
          dataType:  'json', 
@@ -239,13 +238,55 @@ function show_comments() {
              } else {
                 //clean comment form
                 $('#comment_box').val('');
-                alert('add comment to page, HERE I AM');
                  $('#comments_div').append( $("#show_comment_tmpl").tmpl({
                      'owner_id' : data.owner_id,
                      'owner_name' : data.owner_name,
                      'comment_text': data.comment_text,
                      'comment_key' : data.comment_key,
                  }));
+
+
+
+
+        // post to fb if requested
+        if( $('input[name=post_comment_to_fb]').is(':checked') ) {
+            var pic_link = logo_pic_link
+            if( pic_key_for_posting ) {
+                pic_link = images_base_url + '/image?answer_key=' + pic_key_for_posting
+            }
+
+alert('pic link: ' + pic_link );
+alert('question _key _name ???');
+
+            name = data.comment_text;
+            caption = "{{user_name}} " + ' {% trans %}commented on Five Votes.{% endtrans %}';
+            var desc = '{% trans %}Your opinion is needed!{% endtrans %} ';
+
+            var obj = {
+              method: 'feed',
+              link: '{{BASE_URL}}' + '/q' + 'data.question_key_name',
+              picture: pic_link,
+              name: name,
+              caption: caption,
+              description: desc,
+            };
+            FB.ui(obj);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
              }
          }
     });

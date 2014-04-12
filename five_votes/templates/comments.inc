@@ -24,7 +24,7 @@
             <input type="hidden" name="action" value="add_comment">
 
 <textarea rows=2 id="comment_box" name="comment_text" style="width:97%"></textarea>
-<input type="checkbox" name="post_to_fb" value="post_to_fb" checked>{% trans %}Share on Facebook{% endtrans %}<br/>
+<input type="checkbox" name="post_comment_to_fb" value="post_comment_to_fb" checked>{% trans %}Share on Facebook{% endtrans %}<br/>
 <button type="submit">{% trans %}comment{% endtrans %}</button>
          </form>
 </div>  

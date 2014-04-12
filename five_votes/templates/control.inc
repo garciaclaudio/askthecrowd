@@ -89,6 +89,7 @@ function bind_delete_and_uploader(data) {
 
                     // save for feed posting
                     if( ! new_question_selected_pic_key ) {
+alert('pic:' + data.answer_key);
                          new_question_selected_pic_key = data.answer_key;
                     }
                 },
