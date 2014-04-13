@@ -239,55 +239,35 @@ function show_comments() {
                 //clean comment form
                 $('#comment_box').val('');
                  $('#comments_div').append( $("#show_comment_tmpl").tmpl({
+                     'by_user' : 1,
                      'owner_id' : data.owner_id,
                      'owner_name' : data.owner_name,
                      'comment_text': data.comment_text,
                      'comment_key' : data.comment_key,
                  }));
 
+                 // post to fb if requested
+                 if( $('input[name=post_comment_to_fb]').is(':checked') ) {
+                     var pic_link = logo_pic_link
+                     if( pic_key_for_posting ) {
+                         pic_link = images_base_url + '/image?answer_key=' + pic_key_for_posting
+                     }
 
+                     name = data.comment_text;
+                     caption = "{{user_name}} " + ' {% trans %}commented on Five Votes.{% endtrans %}';
+                     var desc = '{% trans %}Your opinion is needed!{% endtrans %} ';
 
-
-        // post to fb if requested
-        if( $('input[name=post_comment_to_fb]').is(':checked') ) {
-            var pic_link = logo_pic_link
-            if( pic_key_for_posting ) {
-                pic_link = images_base_url + '/image?answer_key=' + pic_key_for_posting
-            }
-
-alert('pic link: ' + pic_link );
-alert('question _key _name ???');
-
-            name = data.comment_text;
-            caption = "{{user_name}} " + ' {% trans %}commented on Five Votes.{% endtrans %}';
-            var desc = '{% trans %}Your opinion is needed!{% endtrans %} ';
-
-            var obj = {
-              method: 'feed',
-              link: '{{BASE_URL}}' + '/q' + 'data.question_key_name',
-              picture: pic_link,
-              name: name,
-              caption: caption,
-              description: desc,
-            };
-            FB.ui(obj);
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-             }
+                     var obj = {
+                       method: 'feed',
+                       link: '{{BASE_URL}}' + '/q' + 'data.question_key_name',
+                       picture: pic_link,
+                       name: name,
+                       caption: caption,
+                       description: desc,
+                     };
+                     FB.ui(obj);
+                 }
+              }
          }
     });
 

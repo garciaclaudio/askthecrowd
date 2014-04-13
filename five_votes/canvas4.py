@@ -1235,6 +1235,7 @@ class AjaxHandler(BaseHandler2):
                 comment_text = unicode(comment_text),
             )
             new_comment.save()
+
             result = { 'error' : 0,
                        'comment_text' : unicode(comment_text),
                        'comment_key' : str(new_comment.key()),
