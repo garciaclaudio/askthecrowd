@@ -679,6 +679,7 @@ class AjaxHandler(BaseHandler2):
                         user_id=self.current_user['id'],
                         answer_text = unicode(answer['answer_text']),
                         video_id = answer['video_id'],
+                        link = ''
                         )
                     sub_ans.save()
 

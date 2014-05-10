@@ -89,7 +89,6 @@ function bind_delete_and_uploader(data) {
 
                     // save for feed posting
                     if( ! new_question_selected_pic_key ) {
-alert('pic:' + data.answer_key);
                          new_question_selected_pic_key = data.answer_key;
                     }
                 },
@@ -603,7 +602,11 @@ function add_ans_link_func() {
              } else {
                 //clean answer form
                 $('#new_answer').val('');
+
                 show_answer_for_voting_and_editing(data);
+                $('#answer_' + data.answer_key).parent().masonry({itemSelector: '.answer_card', isFitWidth: true
+                });
+
                 $('#add_new_ans').hide();
                 $('.add_ans_link').show();
              }
