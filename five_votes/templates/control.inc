@@ -650,7 +650,6 @@ function add_link_func( ans_key ) {
              } else {
                 $('#link_form_div_' + ans_key).hide();
                 $('#ans_txt_' + data.answer_key).html( '<a href="' + data.link + '">' + data.answer_text + '</a>' );
-                alert('saved link: ' + data.link);
              }
          }
     });

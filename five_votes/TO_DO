@@ -16,27 +16,13 @@ http://en.kioskea.net/faq/2279-installing-a-light-http-proxy-server-tinyproxy
 
 
 TO-DO, before promoting...
-  <comentarios>
-      Remover comentarios de FB.
-      Sustituir por comentarios por pág.
-      Muy simple: columna centrada, de un ancho mínimo de X pixels. RET manda el comentario. CB publicar en FB premarcada.
-==> HR I'M ==>   Forma del mismo ancho que los comentarios. Centrada, aparece siempre. Con CB "compartir en Facebook" pre-marcado. Comentarios con tacha en esquina sup-der para borrar.
 
-  </comentarios>
-
-  <Volver mas social>
-  </Volver mas social>
+  <Volver mas social?>
+  </Volver mas social?>
 
   <mejoras UI>
     * Video questions can have a link "view as playlist" to watch all vids in playlist.
-     Fotos cliqueables (Implement: click to see photo)
-     * Photos should be stored as images (they load slowly).
-     Fotos de ancho de la tarjeta.
      Botón reproducir todos los videos
-     Allow users to add answers? (yes/no)
-     Owner can delete added answers.
-     Remove comments side bar from questions page
-     * Show "my votes" tab in results page
      * La pág. de resultados no debe decir "cero votos", debe volver a decir "five votes".
   </mejoras UI>
 
@@ -45,14 +31,15 @@ TO-DO, before promoting...
   </populate>
 
   <bugs>
-    * BUG: when adding picture from prev-questions view, "add youtube link" does not go away.
-     If no answer is added, and an answer is added in the question page, the "add new answer" link disappears behind the first answer card.
+[DONE]    * BUG: when adding picture from prev-questions view, "add youtube link" does not go away.
+    * If no answer is added, and an answer is added in the question page, the "add new answer" link disappears behind the first answer card.
      File upload answers get links pointing to /None.
     * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
     * BUG: deleting an answer from prev. questions, will not rearrange cards.
     * For just-added user-suggested answer, voting does not show whirly thing. Reloading makes it work.
     * Make sure users can remove their user-added answers.
-    * removing a question shouls remove question comments
+    * removing a question should remove question comments
+    * remove comments column from add question page.
   </bugs>
 
   <test>
@@ -63,6 +50,14 @@ TO-DO, before promoting...
 
 
   <POSTP>
+[POSTP]     Owner can delete added answers.
+[POSTP]     * Show "my votes" tab in results page
+[POSTP]     Allow users to add answers? (yes/no)
+[POSTP]     Fotos cliqueables (Implement: click to see photo)
+[POSTP]     * Photos should be stored as images (they load slowly).
+[POSTP]     Fotos de ancho de la tarjeta.
+[POSTP]     Remove comments side bar from questions page
+[POSTP]     * Show "my votes" tab in results page
     * Questions from all users should be replaced by the planned recent-questions landing page.
     * Add pagination to recent questions landing page.
     * URLs in questions and answers should be clickable.
@@ -75,7 +70,6 @@ TO-DO, before promoting...
 [NOT NEEDED?] * La liga al website desde los comentarios lleva a "http://five-votes.appspot.com/q22"... (not needed, FB comments ate going away).
   </POSTP>
 
-HERE I AM
 
 [DONE]    * Photos in results page look distorted (square).
 [DONE]    * Once tested for a while, SUBMIT app details on FB so that it gets promoted / listed.
@@ -419,6 +413,13 @@ Claudio
 [DONE] == PUT LIVE ==
 
 <TODO (prioritize)>
+
+  <comentarios>
+[DONE]      Remover comentarios de FB.
+[DONE]      Sustituir por comentarios por pág.
+[DONE]      Muy simple: columna centrada, de un ancho mínimo de X pixels. RET manda el comentario. CB publicar en FB premarcada.
+[DONE]      Forma del mismo ancho que los comentarios. Centrada, aparece siempre. Con CB "compartir en Facebook" pre-marcado. Comentarios con tacha en esquina sup-der para borrar.
+  </comentarios>
 
     <focus question page>         (make more beautiful)
 [DONE]        whirly thing not centered
