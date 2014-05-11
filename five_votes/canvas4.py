@@ -779,6 +779,11 @@ class AjaxHandler(BaseHandler2):
         answers = Answer.gql( 'where question = :1', question )
         for ans in answers:
             self.del_answer( ans.key() )
+
+        comments = MyComment.gql( 'where question = :1', question )
+        for comm in comments:
+            comm.delete()
+
         question.delete()
         error = ''
         if error:

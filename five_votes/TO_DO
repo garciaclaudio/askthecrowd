@@ -34,16 +34,17 @@ TO-DO, before promoting...
 [DONE]    * BUG: when adding picture from prev-questions view, "add youtube link" does not go away.
 [DONE]    * If no answer is added, and an answer is added in the question page, the "add new answer" link disappears behind the first answer card.
 [DONE]    * File upload answers get links pointing to /None.
-    * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
-    * BUG: deleting an answer from prev. questions, will not rearrange cards.
-    * For just-added user-suggested answer, voting does not show whirly thing. Reloading makes it work.
-    * Make sure users can remove their user-added answers.
-    * removing a question should remove question comments
-    * remove comments column from add question page.
+[DONE]    * removing a question should remove question comments
+[DONE]    * remove comments column from add question page.
+
+[MINOR]    * Make sure users can remove their user-added answers.
+[MINOR]    * BUG: When an answer has more than 10 votes, it's count shows out of the box (in prev questions section).
+[MINOR]    * For just-added user-suggested answer, voting does not show whirly thing. Reloading makes it work.
+[MINOR]    * BUG: deleting an answer from prev. questions, will not rearrange cards.
   </bugs>
 
   <test>
-    Test multiple users
+[DONE]    Test multiple users
     Test on ipad...
     Clean up prints to STDERR
   <test>

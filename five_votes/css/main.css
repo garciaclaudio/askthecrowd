@@ -192,6 +192,9 @@ p.centered_paragraph {display: table-cell; vertical-align: middle; text-align:ce
 }
 
 
+#prev_questions {
+margin:10px;
+}
 
 .prev_questions_count_inset {
   opacity: .78;
@@ -329,15 +332,15 @@ float: left;
 width: 100%;
 }
 
-#contentcolumn{
-margin-right: 330px; /*Set right margin to RightColumnWidth*/
-}
+
 
 #rightcolumn{
 float: left;
 width: 330px; /*Width of right column in pixels*/
 margin-left: -330px; /*Set left margin to -(RightColumnWidth) */
 }
+
+
 
 #footer{
     clear: left;
@@ -352,11 +355,6 @@ margin-left: -330px; /*Set left margin to -(RightColumnWidth) */
 
 #footer a{
   font-size: 1.6em;
-}
-
-.innertube{
-margin: 5px; /*Margins for inner DIV inside each column (to provide padding)*/
-margin-top: 0px;
 }
 
 .toptube{
