@@ -167,6 +167,11 @@
     <div class="question_card" style="max-width:80%;padding-top:10px;">
             <div style="font-size: 130%;margin-bottom:10px;">${question_text}</div>
             <div class="question_desc">${question_desc}</div>
+           <div class="vote_link">(
+
+<a class="fancybox-media" id="video_link_0Bu1fkgUM7s" href="http://www.youtube.com/watch?v=0Bu1fkgUM7s">play all</a>
+
+)</div>
     </div>
 
     <div class="author_link" style="margin-bottom:10px;"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans %}by{% endtrans %} ${owner_name}</a></div>
@@ -278,6 +283,7 @@
     <div class="question_card" style="max-width:80%;padding:15px;">
         <div style="font-size: 130%;margin-bottom:10px;">${question_text}</div>
         <div class="question_desc">${question_desc}</div>
+        (<div class="vote_link"><a href="">play all</a></div>)
     </div>
     <div class="author_link" style="margin-bottom:10px;"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans %}by{% endtrans %} ${owner_name}</a></div>
 
