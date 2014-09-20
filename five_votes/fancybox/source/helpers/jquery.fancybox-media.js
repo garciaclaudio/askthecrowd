@@ -180,6 +180,10 @@
 
 					url = $.type( item.url ) === "function" ? item.url.call( this, rez, params, obj ) : format( item.url, rez, params );
 
+                                        if( obj.element.attr("playlist") ) {
+                                            url = url + '&playlist=' + obj.element.attr("playlist");
+                                        }
+
 					break;
 				}
 			}

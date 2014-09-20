@@ -161,7 +161,6 @@
 </div>
 </script>
 
-
 <script id="answer_question_tmpl" type="text/html">
 
     <div class="question_card" style="max-width:80%;padding-top:10px;">
@@ -169,7 +168,7 @@
             <div class="question_desc">${question_desc}</div>
            <div class="vote_link">(
 
-<a class="fancybox-media" id="video_link_0Bu1fkgUM7s" href="http://www.youtube.com/watch?v=0Bu1fkgUM7s">play all</a>
+<a class="fancybox-media" id="video_link_0Bu1fkgUM7s" playlist="-l4PPTfeYk8,3ACwBBdU6TI,wz7V0Pvu7JQ" href="https://www.youtube.com/v/9LBXIvxI2oU?version=3&loop=1&autoplay=1;playlist=-l4PPTfeYk8,3ACwBBdU6TI,wz7V0Pvu7JQ">play all</a>
 
 )</div>
     </div>
