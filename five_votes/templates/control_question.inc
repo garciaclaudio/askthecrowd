@@ -4,11 +4,6 @@ var pic_key_for_posting = '';
 
 function show_question_for_voting() {
 
-
-     alert('playlist is: {{playlist}}');
-
-     alert('first video id is: {{first_video_id}}');
-
      if( '{{votes_left}}' == 0 ) {
         $.getJSON("ajax.html?action=get_results;question_key_name={{question_key_name}}",
              function(data){
@@ -24,6 +19,8 @@ function show_question_for_voting() {
              'owner_name': "{{owner_name}}",
              'owner_id': "{{owner_id}}",
              'question_key_name': "{{question_key_name}}",
+              "playlist": '{{playlist}}',
+              "first_video_id": '{{first_video_id}}',
 	     }));
 
     $('#new_answer').autosize();
@@ -177,6 +174,8 @@ function show_results( data ) {
             'question_text': data.question_text,
             'question_desc': data.question_desc,
             'question_key_name': data.question_key_name,
+            "playlist": '{{playlist}}',
+            "first_video_id": '{{first_video_id}}',
           }));
 
     show_selector(data, data.results['all'], 'all', '{% trans %}All{% endtrans %}', 1 );

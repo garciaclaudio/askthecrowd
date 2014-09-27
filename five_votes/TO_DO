@@ -36,6 +36,8 @@ TO-DO, before promoting...
   </populate>
 
   <bugs>
+
+* Botón "ver resultados", que aparece cuando se termina de votar, debe mostrarse arriba de los comentarios, no al final.
 [DONE]    * BUG: when adding picture from prev-questions view, "add youtube link" does not go away.
 [DONE]    * If no answer is added, and an answer is added in the question page, the "add new answer" link disappears behind the first answer card.
 [DONE]    * File upload answers get links pointing to /None.

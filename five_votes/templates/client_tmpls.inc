@@ -161,16 +161,17 @@
 </div>
 </script>
 
+
 <script id="answer_question_tmpl" type="text/html">
 
     <div class="question_card" style="max-width:80%;padding-top:10px;">
             <div style="font-size: 130%;margin-bottom:10px;">${question_text}</div>
             <div class="question_desc">${question_desc}</div>
-           <div class="vote_link">(
 
-<a class="fancybox-media" id="video_link_0Bu1fkgUM7s" playlist="{{playlist}}" href="https://www.youtube.com/v/9LBXIvxI2oU?version=3&loop=1&autoplay=1;playlist=-l4PPTfeYk8,3ACwBBdU6TI,wz7V0Pvu7JQ">{% trans %}play all{% endtrans %}</a>
+{{ "{{if playlist}" }}}
+     <div class="vote_link">(<a class="fancybox-media" playlist="${playlist}" href="https://www.youtube.com/v/${first_video_id}?version=3&loop=1&autoplay=1">{% trans %}play all{% endtrans %}</a>)</div>
+{{ "{{/if}" }}}
 
-)</div>
     </div>
 
     <div class="author_link" style="margin-bottom:10px;"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans %}by{% endtrans %} ${owner_name}</a></div>
@@ -282,7 +283,9 @@
     <div class="question_card" style="max-width:80%;padding:15px;">
         <div style="font-size: 130%;margin-bottom:10px;">${question_text}</div>
         <div class="question_desc">${question_desc}</div>
-        (<div class="vote_link"><a href="">play all</a></div>)
+{{ "{{if playlist}" }}}
+     <div class="vote_link">(<a class="fancybox-media" playlist="${playlist}" href="https://www.youtube.com/v/${first_video_id}?version=3&loop=1&autoplay=1">{% trans %}play all{% endtrans %}</a>)</div>
+{{ "{{/if}" }}}
     </div>
     <div class="author_link" style="margin-bottom:10px;"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans %}by{% endtrans %} ${owner_name}</a></div>
 

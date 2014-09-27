@@ -1349,6 +1349,8 @@ class QuestionHandler(BaseHandler2):
                 tot_votes += vote.num_votes
 
         ans_struct = []
+        playlist = ''
+        first_video_id = ''
         for ans in answers:
             if ans.picture:
                 has_pic = 1
@@ -1376,6 +1378,15 @@ class QuestionHandler(BaseHandler2):
 
             ans_struct.append( ans_data )
 
+            if ans.video_id:
+                if first_video_id:
+                    if playlist:
+                        playlist = playlist + ',' + ans.video_id
+                    else:
+                        playlist = ans.video_id
+                else:
+                    first_video_id = ans.video_id
+
         self.render(u'index3',
                     user_is_male=user_is_male,
                     user_name=user_name,
@@ -1386,8 +1397,8 @@ class QuestionHandler(BaseHandler2):
                     answers=ans_struct,
                     votes_left= 5-tot_votes,
                     question_page=1,
-                    playlist = u'-l4PPTfeYk8,3ACwBBdU6TI,wz7V0Pvu7JQ',
-                    first_video_id = u'9LBXIvxI2oU',
+                    playlist = playlist,
+                    first_video_id = first_video_id,
                     )
 
     def post(self, question_key_name):
