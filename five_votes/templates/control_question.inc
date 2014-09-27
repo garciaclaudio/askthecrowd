@@ -4,6 +4,11 @@ var pic_key_for_posting = '';
 
 function show_question_for_voting() {
 
+
+     alert('playlist is: {{playlist}}');
+
+     alert('first video id is: {{first_video_id}}');
+
      if( '{{votes_left}}' == 0 ) {
         $.getJSON("ajax.html?action=get_results;question_key_name={{question_key_name}}",
              function(data){
@@ -109,6 +114,7 @@ function show_question_for_voting() {
       {% endif %}
 
       {% if ans.video_id != 'None' %}
+
           $('#picture_' + '{{ans.answer_key}}' ).html( $("#show_video_tmpl").tmpl({'answer_key': '{{ans.answer_key}}', 'video_id':'{{ans.video_id}}' }));
           $('#play_button_' + '{{ans.answer_key}}' ).show();
           $('#play_button_' + '{{ans.answer_key}}' + ' > a').attr('video_id', '{{ans.video_id}}');

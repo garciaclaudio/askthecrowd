@@ -1385,7 +1385,9 @@ class QuestionHandler(BaseHandler2):
                     question_key_name=str(question.key().name()),
                     answers=ans_struct,
                     votes_left= 5-tot_votes,
-                    question_page=1
+                    question_page=1,
+                    playlist = u'-l4PPTfeYk8,3ACwBBdU6TI,wz7V0Pvu7JQ',
+                    first_video_id = u'9LBXIvxI2oU',
                     )
 
     def post(self, question_key_name):

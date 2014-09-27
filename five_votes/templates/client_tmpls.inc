@@ -168,7 +168,7 @@
             <div class="question_desc">${question_desc}</div>
            <div class="vote_link">(
 
-<a class="fancybox-media" id="video_link_0Bu1fkgUM7s" playlist="-l4PPTfeYk8,3ACwBBdU6TI,wz7V0Pvu7JQ" href="https://www.youtube.com/v/9LBXIvxI2oU?version=3&loop=1&autoplay=1;playlist=-l4PPTfeYk8,3ACwBBdU6TI,wz7V0Pvu7JQ">play all</a>
+<a class="fancybox-media" id="video_link_0Bu1fkgUM7s" playlist="{{playlist}}" href="https://www.youtube.com/v/9LBXIvxI2oU?version=3&loop=1&autoplay=1;playlist=-l4PPTfeYk8,3ACwBBdU6TI,wz7V0Pvu7JQ">{% trans %}play all{% endtrans %}</a>
 
 )</div>
     </div>
