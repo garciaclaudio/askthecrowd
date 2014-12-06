@@ -76,7 +76,7 @@ while( <$fh> ) {
     my @answers = map{
         { video_id => $_->video_id,
           answer_text => $_->title,
-          answer_desc => $_->description,
+          answer_desc => ref $_->description ? '' : $_->description,
         }
     }
     @sorted;
@@ -109,6 +109,8 @@ while( <$fh> ) {
 
     push( @{ $output{answers} }, \%page );
 }
+
+#print Dumper(\%output);
 
 print to_json( \%output );
 

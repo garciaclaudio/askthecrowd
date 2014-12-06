@@ -87,7 +87,6 @@ def read_cc_data():
     if not country_data:
         json_data=open('data/countries.json')
 #        pprint.pprint( json_data, sys.stderr);
-        global country_data
         country_data = json.load(json_data)
         json_data.close()
 
@@ -433,14 +432,10 @@ class BaseHandler2(I18NRequestHandler2):
     @property
     def current_user(self):
 
-        print >> sys.stderr, '################### AT CURRENT_USR 1'
-
         if self.session.get("user"):
             # User is logged in
-            print >> sys.stderr, '################### AT CURRENT_USR 2'
             return self.session.get("user")
         else:
-            print >> sys.stderr, '################### AT CURRENT_USR 3'
             # Either used just logged in or just saw the first page
             # We'll see here
             cookie = facebook.get_user_from_cookie(self.request.cookies,
@@ -497,7 +492,6 @@ class BaseHandler2(I18NRequestHandler2):
         try:
             webapp2.RequestHandler.dispatch(self)
         finally:
-            print >> sys.stderr, '############ SAVING SESSION #######'
             self.session_store.save_sessions(self.response)
 
     @webapp2.cached_property
@@ -548,7 +542,7 @@ class MainPage2(BaseHandler2):
         if self.current_user:
             user_name = self.current_user['name']
 
-        pprint.pprint( self.current_user, sys.stderr);
+#        pprint.pprint( self.current_user, sys.stderr);
 
         show_uploader = 0
         if self.request.get('show_uploader') == '1':
@@ -568,7 +562,14 @@ class RecentQuestions(BaseHandler2):
 #        print >> sys.stderr, '=========> USR: ' + str(user_id)
         self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
 
-#        print >> sys.stderr, '=========> USR NAM: ' + unicode(user.name)
+        url = "http://gdata.youtube.com/feeds/api/videos/KQEOBZLx-Z8?alt=json&v=2"
+        result = urlfetch.fetch(url)
+        if result.status_code == 200:
+#            print >> sys.stderr, '=========> USR NAM: ' + unicode(result.content)
+            json_in = json.loads( result.content )
+            title = json_in['entry']['title']['$t']
+            print >> sys.stderr, '=========> TITLE: ' + unicode(title)
+
         questions = Question.all()
         questions.order('-created')
 
@@ -887,7 +888,7 @@ class AjaxHandler(BaseHandler2):
 
         votes_cast=0
         for vote in all_my_voted_ideas:
-            print >> sys.stderr, 'in handle_vote 2-5:' + str(vote.key())
+#            print >> sys.stderr, 'in handle_vote 2-5:' + str(vote.key())
             votes_cast += int(vote.num_votes)
 
 #        print >> sys.stderr, 'in handle_vote 3:' + str(vote_val)
@@ -1019,7 +1020,7 @@ class AjaxHandler(BaseHandler2):
         for friend in select_random(User.get_by_key_name(usr.friends), 600):
             friends[friend.user_id] = { 'name' : friend.name, 'user_id' : friend.user_id }
             friend_ids.append( str(friend.user_id) )
-            print >> sys.stderr, 'ADDING FRIEND ID: ' + str(friend.user_id)
+#            print >> sys.stderr, 'ADDING FRIEND ID: ' + str(friend.user_id)
 
         question = Question.get_by_key_name( self.request.get('question_key_name') );
 
@@ -1212,8 +1213,8 @@ class AjaxHandler(BaseHandler2):
             province=user.province,
             )
 
-        print >> sys.stderr, '############ CURR USR SET??????'
-        pprint.pprint( self.session.get("user"), sys.stderr );
+#        print >> sys.stderr, '############ CURR USR SET??????'
+#        pprint.pprint( self.session.get("user"), sys.stderr );
 
         result = { 'error' : 0 }
 
@@ -1251,7 +1252,7 @@ class AjaxHandler(BaseHandler2):
         return result
 
     def post(self):
-        print >> sys.stderr, '========  AT AJAX HANDLER POST==============='
+#        print >> sys.stderr, '========  AT AJAX HANDLER POST==============='
         result_struct = { 'error' : '1' }
         action = self.request.get('action')
 
@@ -1273,7 +1274,7 @@ class AjaxHandler(BaseHandler2):
 
 
     def get(self):
-        print >> sys.stderr, '========  AT AJAX HANDLER ==============='
+#        print >> sys.stderr, '========  AT AJAX HANDLER ==============='
         result_struct = { 'error' : '1' }
 
         action = self.request.get('action')

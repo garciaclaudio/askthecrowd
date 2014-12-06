@@ -1,5 +1,62 @@
 
 
+LA COSA PERSONAL
+
+== BE DECISIVE, LIKE AQUILES ==
+
+Terminar forma hackathon. 
+
+Buscar chamba (Austin, San Antonio, etc.?) vs. poner negocio en Mty.
+
+<BUSINESS en MTY>
+    Electric scooters maker? (http://techcrunch.com/2014/12/03/flipkarts-founders-lead-1m-investment-in-electric-scooter-startup-ather/)
+    What is the largest idea you can think of?
+    Soda de sabores. Marca: "Lo que sea", de varios sabores, en lata, pero la etiqueta no revela el sabor.
+    Sociedad de debates (publicar en youtube)
+    Early nutrition and literacy, from 1st day of pregancy, to age 10 (tablet, SMS, etc.): http://www.nytimes.com/2014/11/15/us/to-help-language-skills-of-children-a-study-finds-text-their-parents-with-tips.html  ==Business model? Sell through pediatricians.
+       http://www.nytimes.com/2014/11/20/opinion/nicholas-kristof-do-politicians-love-kids.html?_r=0
+    Employee owned supermarket, to compete with Soriana. Study what WinCo's model is.
+    Utopian city, Mexico-US free labor area.
+    Use networking effects +internet to lower price of something.
+    P2P lending
+    Rooftop solar panels, "financial innovation". <== Financial innovation
+    Seguro para mascotas. Previa investigación.
+    Regadera ecológica, recirculante.
+    Olla ecológica, con aislante (al vacío/o textil). Mercadear por televisión. (https://www.youtube.com/watch?v=TRu-WrhXGPc, http://www.amazon.co.uk/Wonderbag-Portable-Slow-Cooker-Recipe/dp/B00DM4OUM0/ref=pd_sim_sbs_kh_2?ie=UTF8&refRID=027XJD9SPHMERANC2PQZ). Empacado como sleeping bag con correas para comprimirle.
+    Friction drive for bikes.
+    Electric motors for bikes.    
+    Consolas "old style" para reproducir lps, mp3, etc. Raspberry PI, bocinas y woofer de computadora.
+    Chocolates héroes y villanos. Como los chocolates "Mozart".
+    Toallas billetes viejos.
+    Poster de compositores.
+    Sistema recompensa contra secuestros. Would it dissuade people?
+    Toastmasters
+    AntTrade
+    Oxxo-pay together with p2p lending.
+    Oxxo deliver (compete with amazon).
+    Hotel en Homún
+    Amsterdam (desarrollo inmobiliario con canal enmedio)
+    Amsterdam (ciudad hecha para la bicicleta)
+    Deportivo para clase media, financiado con socios.
+    Clon de la salsa sriracha, pero mas picante
+    Microcervecería (cd. de México)
+    Libro: como criar un hijo
+    Libro: lo que México necesita
+    Fábrica de Ayran
+    Fábrica de resbaladerotes
+    Escuela de programación, alternativa a la universidad. "Aprender haciendo".
+    Heladería La Tropical, con pista de baile y música de Rigo Tovar y Chico Ché.
+    Licores de anís, o de limón, estilo italiano.
+</BUSINESS
+
+
+Para que appcfg jale:
+http://stackoverflow.com/questions/25387063/google-app-engine-deploy-failing-with-error-1-unauthorised
+(I went here: https://www.google.com/settings/security/lesssecureapps
+and selected "Enable" less secure devices and apps to access your data. When I tried to Deploy - it worked.)
+./appcfg.py --email=cgarciatrevino@gmail.com update five_votes
+
+
 http://www.youtube.com/embed/9LBXIvxI2oU?autoplay=1&autohide=1&fs=1&rel=0&hd=1&wmode=opaque&enablejsapi=1;playlist=-l4PPTfeYk8,3ACwBBdU6TI,wz7V0Pvu7JQ
 
 https://www.youtube.com/v/9LBXIvxI2oU?version=3&loop=1&autoplay=1;playlist=-l4PPTfeYk8,3ACwBBdU6TI,wz7V0Pvu7JQ
@@ -37,6 +94,7 @@ TO-DO, before promoting...
 
   <bugs>
 
+* Author link is hardcoded (git grep u1234) en templates/recent_page.inc
 * Botón "ver resultados", que aparece cuando se termina de votar, debe mostrarse arriba de los comentarios, no al final.
 [DONE]    * BUG: when adding picture from prev-questions view, "add youtube link" does not go away.
 [DONE]    * If no answer is added, and an answer is added in the question page, the "add new answer" link disappears behind the first answer card.
@@ -55,6 +113,8 @@ TO-DO, before promoting...
 [DONE]    Test multiple users
     Test on ipad...
     Clean up prints to STDERR
+    Translate to Spanish
+    Deploy 1st version
   <test>
 
 
@@ -235,6 +295,11 @@ A 250 KPH, de México a Monterrey se harían 4 horas, del centro al centro de am
 Pasos para reducir la desigualdad en México, EXHORTO
 ================================================================================
 
+Data driven approach to crime fighting:
+http://opinionator.blogs.nytimes.com/2014/11/20/colombias-data-driven-fight-against-crime/?_r=0
+
+The comments are gold:
+http://www.nytimes.com/2014/12/02/opinion/david-brooks-class-prejudice-resurgent.html?_r=0
 
 http://www.nytimes.com/2014/04/03/opinion/were-not-no-1-were-not-no-1.html?_r=0
 
@@ -246,8 +311,16 @@ http://www.economist.com/blogs/freeexchange/2014/03/inequality
 # same topic
 http://www.nytimes.com/2014/03/10/opinion/krugman-liberty-equality-efficiency.html?_r=0
 
-Oxxo-pay together with p2p lending.
 
+
+Ver comentario de James Demers:
+http://www.nytimes.com/2014/10/06/opinion/paul-krugman-voodoo-economics-the-next-generation.html?_r=0
+Taxes are not "contractionary" -- that's the bogus assumption at the heart of voodoo economics. Tax receipts are not buried in a hole in the ground - they are returned to the economy when the government purchases goods and services, just as any other economic player does.
+Contrast this to what happens when the already-rich are given tax breaks, so that they can get even richer, faster. Aside from the purchase of (more) enormous yachts, there is little evidence that the added income goes toward the GOP's favorite illusion, "job creation." It flows mostly into stock portfolios, overseas accounts, and trust funds. Republicans are in complete denial regarding which of these outcomes is actually "contractionary".
+
+Also: (IMF recommends wealth redistribution)
+http://www.washingtonpost.com/blogs/wonkblog/wp/2014/02/26/communists-have-seized-the-imf/
+Much appears to depend on how the redistribution is accomplished. If taxes are raised and the money simply distributed to the less affluent, about the only effect is to increase consumption, although if famine is a problem this may still be be beneficial/necessary IN THE SHORT TERM. If the upper income sectors taxes are significantly raised and the taxes are used to improve education/training, public health, infrastructure (power, roads, utilities, etc.), SME creation/finance, etc. historically not only are the less affluent be helped because of increased income due to expanded employment, the aggregate "quality of life" for the entire nation improves. This however will not occur in a "vacuum." Internal and external trade policies must be adjusted, and internal socioeconomic structure must be modified for any lasting effect, for example not only economic but political power must be redistributed to reflect the current socioeconomic contributions made by each sector. In too many cases the distribution of power/privilage has been largely frozen for several centuries and is no longer operational in this era of globalization and post-industrial economic reality.
 
 ===========
 PROPUESTA?
@@ -310,8 +383,6 @@ Escribir a favor de la bici en Mty: http://www.bostonglobe.com/metro/2013/09/21/
 Abrir México a la inmigración por inteligencia. En los consulados y embajadas mexicanos, que cualquiera pueda tomar un exámen equivalente al GRE y recibir un pasaporte mexicano por altos puntajes.
 
 Lotería holandesa. Como la lotería mexicana, con dibujitos similares, pero con objetos / personajes holandeses. Para vender en tiendas de souvenirs y jugueterías. Con una calidad y empaque excepcionales.
-
-Teléfono de plan (Simyo).
 
 Plan para resbaladerote en el westerpark con costales de yute o henequén. (http://s531.photobucket.com/user/FerminTellez/media/Capulina/ElReydeMonterrey105.jpg.html?sort=3&o=4)
 
@@ -1935,7 +2006,6 @@ Next steps: 1. Uploading minifb.py and testing calling FB servers. Define author
 Users
    Question
       Idea
-
 
 
 1. Writing a Google-appengine app.
