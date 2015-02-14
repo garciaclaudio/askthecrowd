@@ -201,6 +201,8 @@ class Question(db.Model):
     question_text = db.StringProperty()
     question_desc = db.StringProperty(multiline=True)
     language_code = db.StringProperty()
+    youtube_video_page = db.IntegerProperty()
+    anyone_can_add_anwers = db.IntegerProperty()
 
     def owner(self):
         return User.gql(u'WHERE id = :1', self.user_id).fetch(1)[0]
@@ -562,14 +564,6 @@ class RecentQuestions(BaseHandler2):
 #        print >> sys.stderr, '=========> USR: ' + str(user_id)
         self.response.headers['Content-Type'] = 'text/html; charset=utf-8'
 
-        url = "http://gdata.youtube.com/feeds/api/videos/KQEOBZLx-Z8?alt=json&v=2"
-        result = urlfetch.fetch(url)
-        if result.status_code == 200:
-#            print >> sys.stderr, '=========> USR NAM: ' + unicode(result.content)
-            json_in = json.loads( result.content )
-            title = json_in['entry']['title']['$t']
-            print >> sys.stderr, '=========> TITLE: ' + unicode(title)
-
         questions = Question.all()
         questions.order('-created')
 
@@ -691,6 +685,8 @@ class AjaxHandler(BaseHandler2):
 
         question_text =  sanitize_html( self.request.get('question') )
         question_desc =  sanitize_html( self.request.get('question_desc') )
+        youtube_video_page =  int(self.request.get('youtube_video_page')) or 0
+        anyone_can_add_answers =  int(self.request.get('anyone_can_add_answers')) or 0
         error = ''
         if question_text == "":
             error = '* ' + _("Question text cannot be empty.");
@@ -704,12 +700,15 @@ class AjaxHandler(BaseHandler2):
                 question_text = unicode(question_text),
                 question_desc = unicode(question_desc),
                 language_code=str(self.selected_lang),
+                youtube_video_page = youtube_video_page,
+                anyone_can_add_answers = anyone_can_add_answers
             )
             new_question.put()
             result = { 'error' : 0,
                        'question_text' : unicode(question_text),
                        'question_desc' : unicode(question_desc),
-                       'question_key_name' : str(new_question.key().name())
+                       'question_key_name' : str(new_question.key().name()),
+                       'youtube_video_page' : youtube_video_page
                        }
         return result
 
@@ -717,13 +716,39 @@ class AjaxHandler(BaseHandler2):
         answer_text = sanitize_html( self.request.get('answer_text') )
         error = ''
         if answer_text == "":
-            error = '* ' + _("Answer text cannot be empty.");
+            error = _("Answer text cannot be empty.");
 
         question = Question.get_by_key_name( self.request.get('question_key_name') );
 
         if( question is None ): 
             error_msg = _("Question not found. Should not happen.")
             return { 'error_msg' : error_msg }
+
+        video_id = 0
+
+        if( not error and question.youtube_video_page == 1 ):
+            try:
+                url_data = urlparse.urlparse( answer_text )
+                query = urlparse.parse_qs(url_data.query)
+                video_id = query["v"][0]
+            except:
+                error = _("Malformed Youtube URL");
+                video_id = 0
+
+            if video_id == 0:
+                error = _("Malformed Youtube URL");
+
+            if not error:
+                # get URL data here
+                url = "http://gdata.youtube.com/feeds/api/videos/" + video_id + "?alt=json&v=2"
+                result = urlfetch.fetch(url)
+                if result.status_code == 200:
+#            print >> sys.stderr, '=========> USR NAM: ' + unicode(result.content)
+                    json_in = json.loads( result.content )
+                    answer_text = json_in['entry']['title']['$t']
+#                    print >> sys.stderr, '=========> TITLE: ' + unicode(answer_text)
+                else:
+                    error = _("Could not retrieve youtube video.");
 
         if error:
             result = { 'error' : error }
@@ -732,6 +757,7 @@ class AjaxHandler(BaseHandler2):
                 question=question,
                 user_id=self.current_user['id'],
                 answer_text = unicode(answer_text),
+                video_id = unicode(video_id),
             )
             new_ans.save()
             result = { 'error' : 0,
@@ -739,7 +765,7 @@ class AjaxHandler(BaseHandler2):
                        'answer_key' : str(new_ans.key()),
                        'owner_name' : unicode(self.current_user['name']),
                        'owner_id' : self.current_user['id'],
-                       'video_id' : u'None',
+                       'video_id' : unicode(video_id),
                        }
         return result
 
@@ -1367,7 +1393,7 @@ class QuestionHandler(BaseHandler2):
             ans_data = {
                 'answer_key' : str(ans.key()),
                 'answer_text' : unicode(ans.answer_text),
-                'link':  ans.link,
+                'link':  '' if ans.link is None else ans.link,
                 'show_owner' : show_owner,
                 'owner_name' : owner_name,
                 'owner_id' : ans.user_id,

@@ -16,6 +16,7 @@ function show_question_for_voting() {
     $('#main_container').html( $("#answer_question_tmpl").tmpl({
              'question_text': "{{question.question_text}}",
              'question_desc': "{{question.question_desc}}",
+             'youtube_video_page': "{{question.youtube_video_page}}",
              'owner_name': "{{owner_name}}",
              'owner_id': "{{owner_id}}",
              'question_key_name': "{{question_key_name}}",

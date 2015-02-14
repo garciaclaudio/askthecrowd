@@ -174,6 +174,7 @@ function get_and_display_user_questions() {
                                    'video_id': ans[j].video_id,
                                    'num_votes': ans[j].num_votes,
                                    'visible': (ans[j].num_votes>0) ? '' : 'invisible',
+                                   'show_add_link': ! ans[j].link && ! ans[j].video_id,
                               }));
                           bind_delete_and_uploader(ans[j]);
                          if( ans[j].has_pic ) {
@@ -234,6 +235,17 @@ function show_answer(data) {
        'answer_text': data.answer_text,
     }));
 
+    if(data.video_id != 0) {
+        $('#add_link_' + data.answer_key ).hide();
+        $('#picture_' + data.answer_key ).html( $("#show_video_tmpl").tmpl({'answer_key': data.answer_key, 'video_id':data.video_id}));
+        $('#play_button_' + data.answer_key ).show();
+        $('#play_button_' + data.answer_key + ' > a').attr('video_id', data.video_id);
+        $('#play_button_' + data.answer_key + ' > a').click(  function() { 
+            var vid_id = $(this).attr('video_id');
+            $('#video_link_' + vid_id).trigger('click');
+        });
+    }
+
     bind_delete_and_uploader(data);
 
     $('#answers_div').masonry('reload');
@@ -247,11 +259,13 @@ function show_created_question(data) {
     new_question_key_name = data.question_key_name;
 
     $('#main_container').fadeOut('fast');
+
     $('#main_container').html( $("#question_created_tmpl").tmpl(
        {
          'question_text': data.question_text,
          'question_desc': data.question_desc,
          'question_key_name': data.question_key_name,
+         'youtube_video_page': data.youtube_video_page,
        }));
 
      $('#new_answer').autosize();
@@ -582,6 +596,17 @@ function show_answer_for_voting_and_editing(data) {
     });
 
     $('#answers_div').append( new_elem );
+
+    if(data.video_id != 0) {
+        $('#add_link_' + data.answer_key ).hide();
+        $('#picture_' + data.answer_key ).html( $("#show_video_tmpl").tmpl({'answer_key': data.answer_key, 'video_id':data.video_id}));
+        $('#play_button_' + data.answer_key ).show();
+        $('#play_button_' + data.answer_key + ' > a').attr('video_id', data.video_id);
+        $('#play_button_' + data.answer_key + ' > a').click(  function() { 
+            var vid_id = $(this).attr('video_id');
+            $('#video_link_' + vid_id).trigger('click');
+        });
+    }
 
     $('#answers_div').masonry('reload');
 

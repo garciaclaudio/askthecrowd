@@ -105,7 +105,13 @@
          <form id="new_answer_form" action="/ajax.html" method="get">
             <input type="hidden" name="question_key_name" value="${question_key_name}">
             <input type="hidden" name="action" value="add_answer">
+
+{{ "{{if youtube_video_page}" }}}
+            {% trans %}Youtube video URL:{% endtrans %}<input id="new_answer" name="answer_text" class="text" type="text" size=20>
+{{ "{{else}" }}}
             <textarea rows=2 id="new_answer" name="answer_text"></textarea>
+{{ "{{/if}" }}}
+
             &nbsp;<button type="submit">{% trans %}add{% endtrans %}</button>
          </form>
     </div>
@@ -138,6 +144,17 @@
               <textarea name="question_desc" id="question_desc" rows=2 style="width:100%"></textarea>
               </p>
 {{ "{{/if}" }}}
+
+              <p>
+               <input type="radio" name="youtube_video_page" value="1" /> {% trans %}Youtube video page{% endtrans %}
+               <input type="radio" name="youtube_video_page" checked="checked"  value="0" />{% trans %}Normal page{% endtrans %}
+              </p>
+
+              <p>
+               <input type="radio" name="anyone_can_add_answers" value="0" /> {% trans %}Only I can add answers{% endtrans %}
+               <input type="radio" name="anyone_can_add_answers" checked="checked"  value="1" />{% trans %}Anyone can add answers{% endtrans %}
+              </p>
+
               <div style="text-align:center;">
                   <button type="submit" id="create_question_button" class="my_button">{% trans %}create{% endtrans %}</button>
              </div>
@@ -185,7 +202,8 @@
 
     <div class="vote_link add_ans_class add_ans_link">
       <div class="mytube">
-        <a href="#" onclick="add_ans_link_func();return false;">{% trans %}suggest new answer{% endtrans %}</a>
+        <a href="#" onclick="add_ans_link_func();return false;">{{ "{{if youtube_video_page}" }}}{% trans %}suggest new video{% endtrans %}</a>{{ "{{else}" }}}{% trans %}suggest new answer{% endtrans %}</a>
+{{ "{{/if}" }}}
       </div>
     </div>
 
@@ -195,7 +213,11 @@
             <input type="hidden" name="question_key_name" value="${question_key_name}">
             <input type="hidden" name="action" value="add_answer">
 
-<textarea rows=1 id="new_answer" name="answer_text"></textarea>
+{{ "{{if youtube_video_page}" }}}
+            {% trans %}Youtube video URL:{% endtrans %}<input id="new_answer" name="answer_text" class="text" type="text" size=20>
+{{ "{{else}" }}}
+            <textarea rows=2 id="new_answer" name="answer_text"></textarea>
+{{ "{{/if}" }}}
 
 &nbsp;<button type="submit">{% trans %}add{% endtrans %}</button>
          </form>
@@ -210,21 +232,6 @@
     </div>
 
 </div>
-</script>
-
-<script id="suggest_another_answer_tmpl" type="text/html">
-    <p>{% trans %}Suggest another answer{% endtrans %}</p>
-
-    <div id="answers_form_div">
-         <form id="new_answer_form" action="/ajax.html" method="get">
-            <input type="hidden" name="question_key_name" value="${question_key_name}">
-            <input type="hidden" name="action" value="add_answer">
-
-            <input id="new_answer" name="answer_text" class="text" type="text" size=30>
-&nbsp;<button id="new_answer" type="submit">{% trans %}add{% endtrans %}</button>
-
-         </form>
-    </div>
 </script>
 
 </body>
@@ -466,7 +473,7 @@
           </div>
         <span class="answer_text" id="ans_txt_${answer_key}">{{ "{{if link}" }}}<a href="${link}">${answer_text}</a>{{ "{{else}" }}}${answer_text}{{ "{{/if}" }}}</span>
 
-    {{ "{{if link}" }}}{{ "{{else}" }}}
+    {{ "{{if show_add_link}" }}}
         <div id="add_link_${answer_key}"><a href="#" class="video_link" onclick="add_link_func('${answer_key}');return false;">{% trans %}add link{% endtrans %}</a></div>
 
 
