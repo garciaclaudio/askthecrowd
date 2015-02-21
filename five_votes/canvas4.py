@@ -136,7 +136,7 @@ def sanitize_html(value):
 def htmlescape(text):
     """Escape text for use as HTML"""
     return cgi.escape(
-        text, True).replace("'", '&#39;').encode('ascii', 'xmlcharrefreplace')
+        text, True).replace("'", '&#39;').replace('"', '&quot;').encode('ascii', 'xmlcharrefreplace')
 
 
 @register.filter(name=u'get_name')
@@ -672,7 +672,7 @@ class AjaxHandler(BaseHandler2):
                     sub_ans = Answer(
                         question=sub_question,
                         user_id=self.current_user['id'],
-                        answer_text = unicode(answer['answer_text']),
+                        answer_text = unicode( htmlescape( answer['answer_text'] )),
                         video_id = answer['video_id'],
                         link = ''
                         )
@@ -761,7 +761,7 @@ class AjaxHandler(BaseHandler2):
             )
             new_ans.save()
             result = { 'error' : 0,
-                       'answer_text' : unicode(answer_text),
+                       'answer_text' : unicode( htmlescape( answer_text ) ),
                        'answer_key' : str(new_ans.key()),
                        'owner_name' : unicode(self.current_user['name']),
                        'owner_id' : self.current_user['id'],
@@ -862,7 +862,7 @@ class AjaxHandler(BaseHandler2):
 
         result =  {'success': success,
                    'error': error,
-                   'answer_text' : unicode(ans.answer_text),
+                   'answer_text' : unicode(  htmlescape(  ans.answer_text ) ),
                    'answer_key': self.request.get('answer_key'),
                    'link': unicode( link_link ),
                   }
@@ -1119,7 +1119,7 @@ class AjaxHandler(BaseHandler2):
                 has_pic = 0
             ans_data = {
                 'answer_key' : str(ans.key()),
-                'answer_text' : unicode(ans.answer_text),
+                'answer_text' : unicode(htmlescape( ans.answer_text )),
                 'link': ans.link,
                 'has_pic' : has_pic,
                 'video_id' : str(ans.video_id),
@@ -1180,7 +1180,7 @@ class AjaxHandler(BaseHandler2):
                     n_votes = votes_per_answer[ans.key()]
                 ans_data = {
                     'answer_key' : str(ans.key()),
-                    'answer_text' : unicode(ans.answer_text),
+                    'answer_text' : unicode( htmlescape( ans.answer_text ) ),
                     'link':  ans.link,
                     'has_pic' : has_pic,
                     'video_id' : str(ans.video_id),
@@ -1392,7 +1392,7 @@ class QuestionHandler(BaseHandler2):
 
             ans_data = {
                 'answer_key' : str(ans.key()),
-                'answer_text' : unicode(ans.answer_text),
+                'answer_text' : unicode( htmlescape( ans.answer_text )),
                 'link':  '' if ans.link is None else ans.link,
                 'show_owner' : show_owner,
                 'owner_name' : owner_name,

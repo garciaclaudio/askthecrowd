@@ -1,5 +1,24 @@
 
 
+Hello Karim!
+
+I hope you had a nice trip back. It was great meeting you and the team last week. As discussed, here is a sample of work I have done in the company, past and recent, for your consideration.
+
+The first is a script called uct_gather_new_tasks.pl. This is the heart of our translations system. It looks at untranslated hotel and room descriptions and names, and translations needing update (whose English source has been updated), assigns a priority to them and puts them in a queue for translation. This queue is then used by another set of scripts that manages the assignment of work to freelancers, by bundling together pending translations, and uploading and downloading into a third party tool that our freelancers use to perform their work (Google Translation Toolkit). There is a lot to keep track of, for example, the word counts per translator per months, used for invoicing. About 1000 translators currently use the system.
+
+The second script, uct_autotrans_duplicates.pl, is complementary to the above. We had a problem: some English texts were common to many hotels, and we were paying translators to translate each of them separately. This script will automatically copy over translations already existing in other hotels, preventing duplicate translation. A big success, we save thousands of euros per month with this.
+
+Third example is the XPhoto class (and companion classes), that I made about a year ago. We had a problem: designers were requesting new photo types ever more frequently, and adding new types was cumbersome. Every time, a new ORM class had to be made, with a corresponding database table, that had to be tested and rolled out to the image-gen servers. Most of these classes were very similar, they implemented the same API for image-gen servers to use, and were different only in what aspect ratios and derived sizes had to be used for them, values that were set as a hardcoded data structure in the ORM file. Thus the need for XPhoto, which moves the description of new photo types to the database, allowing creation of new photo types by doing a few inserts to the database. Another benefit of this is that features added to XPhoto automatically become available to all past and future photo types, for example rotation (users can correct the angle of photos they upload), and moderation (user uploaded photos can be reviewed and approved by photo editors in a tool in the intranet). From the moment I finished implementing this about a year ago, all new photo types have been XPhotos, about 12 to date.
+
+Fourth example, similar to XPhoto, are the AttributeType and AttributeValue classes. We had a problem: as our systems grew in complexity, more and more attributes were being added to our Hotel and Room objects, and the way we were storing them was by each time altering a side table called "HotelFlags". With time, this table was becoming unmanageable, too many columns were being added to it and the process was cumbersome, requiring DBA tickets and ORM class changes each time. With AttributeType/AttributeValue, I moved the description of attributes to a database table, making it super easy to add new attributes, and access them via the "set_attr" and "get_attr" methods in hotel and room objects. Given the wide audience of developers I was expecting for this feature, I requested feedback on the design from others in our technical mailing list. The end product incorporates suggestions from many devs, and allows many kinds of values to be stored as attributes (see documentation in AttributeType.pm for details). In just 10 months of use, 33 attributes have been added by many devs.
+
+So, thanks for your attention and sorry for the long email! 
+
+I want to reiterate you my willingness to move to Seattle, and that I would work hard there. I can also ask co workers to provide recommendations if you want. Also, Brendan is enthusiastic about the possibility of my move there (or he was when I mentioned it to him on BAM). That said, I will understand any decision you make about this.
+
+
+
+
 Thanks, Rob  I have a long history in the company (employee number: 114), and originally implemented or improved many of the content tools that we still use (review processing, translations, editing, photos). I also did a lot with maps at the very beginning, having implemented an in-house maps server similar to Google maps, that we used from 2003 to 2007. :)
 
 Forest: I look forward to meeting with you. I sit on the far left room (facing to the outside) of the Rembrandtplein side of the building, feel free to drop by or let me know where to find you.
@@ -480,7 +499,7 @@ Algunos cambios que beneficiarían a México (un librito de unas 70 páginas)
 
 El contraste entre nacer hijo de un peón, o de quién recoge la basura, vs. un médico, empresario o profesionista exitoso. La conservación del privilegio, el accidente de nacer en una familia "bien", vs. en la pobreza. La disparidad de trayectorias.
 
-* Que porcentaje de las ganancias se debe regresar a la sociedad?
+* Qué porcentaje de las ganancias se debe regresar a la sociedad?
 
 * "You didn't build it" el discurso de Elizabeth Warren acerca de cómo las empresas se benefician de la infraestructura (y sistemas de educación pública) para progresar. La riqueza creada no es moralmente suya.
 
@@ -550,7 +569,7 @@ Buscar chamba (Austin, San Antonio, etc.?) vs. poner negocio en Mty.
     Electric scooters maker? (http://techcrunch.com/2014/12/03/flipkarts-founders-lead-1m-investment-in-electric-scooter-startup-ather/)
     Soda de sabores. Marca: "Lo que sea", de varios sabores, en lata, pero la etiqueta no revela el sabor.
     Sociedad de debates (publicar en youtube)
-    Early nutrition and literacy, from 1st day of pregancy, to age 10 (tablet, SMS, etc.): http://www.nytimes.com/2014/11/15/us/to-help-language-skills-of-children-a-study-finds-text-their-parents-with-tips.html  ==Business model? Sell through pediatricians. OTRO: http://www.nytimes.com/2015/01/18/upshot/helping-the-poor-in-higher-education-the-power-of-a-simple-nudge.html?_r=0&abt=0002&abg=0
+    Early nutrition and literacy, from 1st day of pregancy, to age 10 (tablet, SMS, etc.): http://www.nytimes.com/2014/11/15/us/to-help-language-skills-of-children-a-study-finds-text-their-parents-with-tips.html  ==Business model? Sell through pediatricians. OTRO: http://www.nytimes.com/2015/01/18/upshot/helping-the-poor-in-higher-education-the-power-of-a-simple-nudge.html?_r=0&abt=0002&abg=0  =======> WHAT IS THE MVP?
        http://www.nytimes.com/2014/11/20/opinion/nicholas-kristof-do-politicians-love-kids.html?_r=0
     Employee owned supermarket, to compete with Soriana. Study what WinCo's model is.
     Utopian city, Mexico-US free labor area. (incluir en librito)
