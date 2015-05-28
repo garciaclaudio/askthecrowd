@@ -202,7 +202,7 @@ class Question(db.Model):
     question_desc = db.StringProperty(multiline=True)
     language_code = db.StringProperty()
     youtube_video_page = db.IntegerProperty()
-    anyone_can_add_anwers = db.IntegerProperty()
+    anyone_can_add_answers = db.IntegerProperty()
 
     def owner(self):
         return User.gql(u'WHERE id = :1', self.user_id).fetch(1)[0]
@@ -740,12 +740,15 @@ class AjaxHandler(BaseHandler2):
 
             if not error:
                 # get URL data here
-                url = "http://gdata.youtube.com/feeds/api/videos/" + video_id + "?alt=json&v=2"
+#                url = "http://gdata.youtube.com/feeds/api/videos/" + video_id + "?alt=json&v=2"
+
+                url = "https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + video_id + "&key=AIzaSyBzj4Hgfmhlrm_bVeSNnpb5U9zUnLBJup8"
+
                 result = urlfetch.fetch(url)
                 if result.status_code == 200:
 #            print >> sys.stderr, '=========> USR NAM: ' + unicode(result.content)
                     json_in = json.loads( result.content )
-                    answer_text = json_in['entry']['title']['$t']
+                    answer_text = json_in['items'][0]['snippet']['title']
 #                    print >> sys.stderr, '=========> TITLE: ' + unicode(answer_text)
                 else:
                     error = _("Could not retrieve youtube video.");
@@ -1357,14 +1360,17 @@ class QuestionHandler(BaseHandler2):
         tot_votes = 0
         votes_count_hash = {}
 
+        show_add_ans = ''
+        if question.anyone_can_add_answers == 1:
+            show_add_ans = 1
         user_name = ''
         user_is_male = 0
         if self.current_user:
+            if question.owner().id == self.current_user['id']:
+                show_add_ans = 1
             user_name = self.current_user['name']
-
 #            print >> sys.stderr, '======= CURRENT USR ==================='
 #            pprint.pprint( self.current_user, sys.stderr);
-
             if self.current_user['gender'] == 'male':
                 user_is_male = 1
             # obtain votes by this user to this questions
@@ -1417,14 +1423,15 @@ class QuestionHandler(BaseHandler2):
         self.render(u'index3',
                     user_is_male=user_is_male,
                     user_name=user_name,
+                    show_add_ans=show_add_ans,
                     question=question,
                     owner_name=unicode(question.owner().name),
-                    owner_id= question.owner().id,
+                    owner_id=question.owner().id,
                     question_key_name=str(question.key().name()),
                     answers=ans_struct,
                     votes_left= 5-tot_votes,
                     question_page=1,
-                    playlist = playlist,
+                    playlist=playlist,
                     first_video_id = first_video_id,
                     )
 

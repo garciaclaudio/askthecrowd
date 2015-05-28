@@ -21,6 +21,7 @@ function show_question_for_voting() {
              'owner_id': "{{owner_id}}",
              'question_key_name': "{{question_key_name}}",
               "playlist": '{{playlist}}',
+              "show_add_ans": '{{show_add_ans}}',
               "first_video_id": '{{first_video_id}}',
 	     }));
 

@@ -398,12 +398,29 @@ function show_data( data, results ) {
 
     $('#result_answers_div').html('');
 
+    // add answers with zero votes to results
+    // make hash with result keys
+    var results_hash = {};
+    for (var i = 0; i < results.length; i++) {
+        ans_key = results[i][0];
+        results_hash[ans_key] = 1;
+    }
+    // go through all answers in data.answers_hash 
+    for (var ans_key in data.answers_hash) {
+        if (data.answers_hash.hasOwnProperty(ans_key)) {
+            if( results_hash[ans_key] != 1 ) {
+                results.push( [ans_key, 0] );
+            }
+        }
+    }
+
     results.sort( dynamicSort(data.answers_hash) );
 
     for (var i = 0; i < results.length; i++) {
         ans_key = results[i][0];
         num_votes = results[i][1];
         ans = data.answers_hash[ans_key];
+
 
         $('#result_answers_div').append( $("#show_answer_for_results_tmpl").tmpl( {
             'link' : ans.link,

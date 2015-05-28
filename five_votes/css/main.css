@@ -228,6 +228,21 @@ margin:10px;
   font-weight:bold; */
 }
 
+
+.results_count_inset {
+  opacity: .78;
+  padding:2px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  position:absolute;top:10px;right:10px;"
+  display:table-cell;
+  width:85px;
+  height:30px;
+  background-color: #FFFFFF;
+}
+
+
 .whirly_box {
   margin-top:7px;
   margin-left:15px;
@@ -260,9 +275,8 @@ margin:10px;
 
 .results_count_text {
   color: #FF0000;
-  float:right;
+  text-align:center;
   font-size: 25px;
-  margin:10px;
 }
 
 

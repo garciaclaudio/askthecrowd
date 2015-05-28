@@ -200,12 +200,13 @@
 
     {% include "templates/comments.inc" %}
 
+{{ "{{if show_add_ans}" }}}
     <div class="vote_link add_ans_class add_ans_link">
       <div class="mytube">
-        <a href="#" onclick="add_ans_link_func();return false;">{{ "{{if youtube_video_page}" }}}{% trans %}suggest new video{% endtrans %}</a>{{ "{{else}" }}}{% trans %}suggest new answer{% endtrans %}</a>
-{{ "{{/if}" }}}
+        <a href="#" onclick="add_ans_link_func();return false;">{{ "{{if youtube_video_page}" }}}{% trans %}suggest new video{% endtrans %}</a>{{ "{{else}" }}}{% trans %}suggest new answer{% endtrans %}</a>{{ "{{/if}" }}}
       </div>
     </div>
+{{ "{{/if}" }}}
 
     <div id="add_new_ans" class="add_ans_class" style="display:none;">
       <div class="mytube">
@@ -308,17 +309,36 @@
 </div>
 </script>
 
-<script id="res_selector_tmpl" type="text/html">
-    <div id="selector_${id}" class="result_selector ${selected_result}"><span id="selector_text_${id}" class="${text_visible}">${text}</span><span id="selector_link_${id}" class="vote_link ${link_visible}"><a href="#" onclick="return false;">${text}</a></span></div>
-</script>
+
 
 <script id="show_answer_for_results_tmpl" type="text/html">
-  <div class="results_card" id="answer_${answer_key}">
-          <div class="results_count_text">${num_votes} &#10003;</div>
-          <div class="results_pic" id="picture_${answer_key}"></div>
-          <div id="play_button_${answer_key}" class="results_play_inset" style="display:none;"><a class="play_inset_link"><img src="/images/play_button_small.png"></a></div> 
-          <div class="results_text">{{ "{{if link}" }}}<a href="${link}">${answer_text}</a>{{ "{{else}" }}}${answer_text}{{ "{{/if}" }}}</div>
-  </div><br />
+  <div class="answer_card" id="answer_${answer_key}">
+
+  <div class="card_inset">
+        <div id="picture_${answer_key}"></div>
+        <div id="play_button_${answer_key}" class="play_inset" style="display:none;"><a class="play_inset_link"><img src="/images/play_button_small.png"></a></div>
+
+        <div class="answer_text">{{ "{{if link}" }}}<a href="${link}">${answer_text}</a>{{ "{{else}" }}}${answer_text}{{ "{{/if}" }}}</div>
+
+        <div class="results_count_inset">
+
+
+            <div class="results_count_text">${num_votes} &#10003;</div>
+
+
+        </div>
+
+    {{ "{{html by_link}" }}}
+
+  </div>
+
+  </div> <!-- answer_card-->
+</script>
+
+
+
+<script id="res_selector_tmpl" type="text/html">
+    <div id="selector_${id}" class="result_selector ${selected_result}"><span id="selector_text_${id}" class="${text_visible}">${text}</span><span id="selector_link_${id}" class="vote_link ${link_visible}"><a href="#" onclick="return false;">${text}</a></span></div>
 </script>
 
 
