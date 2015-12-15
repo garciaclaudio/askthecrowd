@@ -32,6 +32,7 @@ import time
 import pprint
 import urlparse
 import traceback
+import random
 
 os.environ['DJANGO_SETTINGS_MODULE'] = 'conf.settings'
 
@@ -740,8 +741,6 @@ class AjaxHandler(BaseHandler2):
 
             if not error:
                 # get URL data here
-#                url = "http://gdata.youtube.com/feeds/api/videos/" + video_id + "?alt=json&v=2"
-
                 url = "https://www.googleapis.com/youtube/v3/videos?part=snippet&id=" + video_id + "&key=AIzaSyBzj4Hgfmhlrm_bVeSNnpb5U9zUnLBJup8"
 
                 result = urlfetch.fetch(url)
@@ -1382,6 +1381,7 @@ class QuestionHandler(BaseHandler2):
                 tot_votes += vote.num_votes
 
         ans_struct = []
+        videos_list = []
         playlist = ''
         first_video_id = ''
         for ans in answers:
@@ -1412,6 +1412,7 @@ class QuestionHandler(BaseHandler2):
             ans_struct.append( ans_data )
 
             if ans.video_id:
+                videos_list.append(ans.video_id)
                 if first_video_id:
                     if playlist:
                         playlist = playlist + ',' + ans.video_id
@@ -1419,6 +1420,10 @@ class QuestionHandler(BaseHandler2):
                         playlist = ans.video_id
                 else:
                     first_video_id = ans.video_id
+
+        random.shuffle(videos_list)
+        shuffle_first_video_id = videos_list.pop()
+        playlist_shuffle = ','.join(videos_list)
 
         self.render(u'index3',
                     user_is_male=user_is_male,
@@ -1432,7 +1437,9 @@ class QuestionHandler(BaseHandler2):
                     votes_left= 5-tot_votes,
                     question_page=1,
                     playlist=playlist,
+                    playlist_shuffle=playlist_shuffle,
                     first_video_id = first_video_id,
+                    shuffle_first_video_id = shuffle_first_video_id,
                     )
 
     def post(self, question_key_name):

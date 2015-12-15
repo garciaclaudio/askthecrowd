@@ -21,8 +21,10 @@ function show_question_for_voting() {
              'owner_id': "{{owner_id}}",
              'question_key_name': "{{question_key_name}}",
               "playlist": '{{playlist}}',
+              "playlist_shuffle": '{{playlist_shuffle}}',
               "show_add_ans": '{{show_add_ans}}',
               "first_video_id": '{{first_video_id}}',
+              "shuffle_first_video_id": '{{shuffle_first_video_id}}',
 	     }));
 
     $('#new_answer').autosize();
@@ -177,7 +179,9 @@ function show_results( data ) {
             'question_desc': data.question_desc,
             'question_key_name': data.question_key_name,
             "playlist": '{{playlist}}',
+            "playlist_shuffle": '{{playlist_shuffle}}',
             "first_video_id": '{{first_video_id}}',
+            "shuffle_first_video_id": '{{shuffle_first_video_id}}',
           }));
 
     show_selector(data, data.results['all'], 'all', '{% trans %}All{% endtrans %}', 1 );

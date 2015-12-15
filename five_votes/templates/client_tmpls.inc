@@ -187,6 +187,7 @@
 
 {{ "{{if playlist}" }}}
      <div class="vote_link">(<a class="fancybox-media" playlist="${playlist}" href="https://www.youtube.com/v/${first_video_id}?version=3&loop=1&autoplay=1">{% trans %}play all{% endtrans %}</a>)</div>
+     <div class="vote_link">(<a class="fancybox-media" playlist="${playlist_shuffle}" href="https://www.youtube.com/v/${shuffle_first_video_id}?version=3&loop=1&autoplay=1">{% trans %}play shuffle{% endtrans %}</a>)</div>
 {{ "{{/if}" }}}
 
     </div>
@@ -292,7 +293,7 @@
         <div style="font-size: 130%;margin-bottom:10px;">${question_text}</div>
         <div class="question_desc">${question_desc}</div>
 {{ "{{if playlist}" }}}
-     <div class="vote_link">(<a class="fancybox-media" playlist="${playlist}" href="https://www.youtube.com/v/${first_video_id}?version=3&loop=1&autoplay=1">{% trans %}play all{% endtrans %}</a>)</div>
+     <div class="vote_link"><a class="fancybox-media" playlist="${playlist}" href="https://www.youtube.com/v/${first_video_id}?version=3&loop=1&autoplay=1">{% trans %}play all{% endtrans %}</a> / <a class="fancybox-media" playlist="${playlist_shuffle}" href="https://www.youtube.com/v/${shuffle_first_video_id}?version=3&loop=1&autoplay=1">{% trans %}play shuffle{% endtrans %}</a></div>
 {{ "{{/if}" }}}
     </div>
     <div class="author_link" style="margin-bottom:10px;"><a href="{{BASE_URL}}/u${owner_id}" target="_top">{% trans %}by{% endtrans %} ${owner_name}</a></div>
